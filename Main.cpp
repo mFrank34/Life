@@ -29,6 +29,6 @@ int main()
     world.get_cell(200, -50).set_type('#');
     std::cout << "World cell at 200, -50 type: "
               << world.get_cell(200, -50).get_type() << "\n";
-
+              
     return 0;
 };

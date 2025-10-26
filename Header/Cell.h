@@ -6,7 +6,6 @@ class Cell
 private:
     char type; // type of node
     bool node; // is it a node or not
-
 public:
     Cell();
 

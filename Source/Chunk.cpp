@@ -38,3 +38,15 @@ int Chunk::get_chunk_y() const
 {
     return chunk_y;
 }
+
+void Chunk::print_chunk()
+{
+    for (int y = 0; y < CHUNK_SIZE; ++y)
+    {
+        for (int x = 0; x < CHUNK_SIZE; ++x)
+        {
+            // prints data that is stored within said chunk
+            std::cout << get_cell(x, y).get_type();
+        }
+    }
+}

@@ -13,7 +13,8 @@ Chunk &Map::generate_chunk(int chunk_x, int chunk_y)
     if (chunks.find(key) == chunks.end())
     {
         chunks.emplace(key, Chunk(chunk_x, chunk_y));
-    };
+        chunks.at(key).print_chunk();
+    };  
     // creates chunk
     return chunks.at(key);
 }

@@ -2,12 +2,13 @@
 #define CHUNK_H
 
 #include "Cell.h"
+#include <iostream>
 
 class Chunk
 {
 public:
+    // chunk size be size of chunk
     static const int CHUNK_SIZE = 32;
-
     // make class
     Chunk() {};
 
@@ -20,6 +21,9 @@ public:
     // Get chunk position in chunk grid
     int get_chunk_x() const;
     int get_chunk_y() const;
+
+    // Tools
+    void print_chunk();
 
 private:
     // location cords
