@@ -1,8 +1,6 @@
 #include <Point.h>
-#include <iostream>
 #include <format>
 #include <vector>
-// #include <hash_map>
 
 Point::Point(int x, int y)
 {
@@ -28,11 +26,7 @@ std::string Point::to_string()
     return coords;
 }
 
-std::vector<Point> Point::neighbours()
-/*
-this finds the titles around the current point 
-and helps to find where it can move to? if that makes sence?
-*/
+std::vector<Point> Point::neighbors()
 {
     return {
         {x - 1, y - 1},
@@ -44,6 +38,10 @@ and helps to find where it can move to? if that makes sence?
         {x + 1, y},
         {x + 1, y + 1}
     };
+    /*
+    this finds the titles around the current point
+    and helps to find where it can move to? if that makes sense?
+    */
 }
 
 Point::~Point() {};

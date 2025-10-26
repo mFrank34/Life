@@ -1,27 +1,34 @@
 #include <iostream>
-#include <hash_map>
+#include <vector>
+
+// custom class
 #include "Cell.h"
+#include "Chunk.h"
+#include "Map.h"
 #include "Point.h"
+// #include "App.h"
+
+/*
+NOTES: 
+    - so far created a map system that can hold two types of data bool and char file type in 
+        class from cell that holds a bool and char, and coors.
+    - next steps to create a system for viewing the map
+    - 
+*/
 
 int main()
 {
-    // creating a space for a game board 
+    // world you know
+    Map world;
+
+    world.get_cell(100, 50).set_type('w');
     
-    Cell cell;
+    std::cout << "World cell at 100, 50 type: "
+              << world.get_cell(100, 50).get_type() << "\n";
 
-    Point point(2,1);
-    Point point2(2,1);
+    world.get_cell(200, -50).set_type('#');
+    std::cout << "World cell at 200, -50 type: "
+              << world.get_cell(200, -50).get_type() << "\n";
 
-    if (point == point2)
-    {
-        //code code
-        std::cout << "Points match \n";
-    }
-    else
-    {
-        std::cout << "Points don't match \n";
-    }
-
-    std::cout << "hello world \n";
     return 0;
-}
+};

@@ -19,7 +19,7 @@ public:
 
     std::string to_string();
 
-    std::vector<Point> neighbours();
+    std::vector<Point> neighbors();
 
     ~Point();
 };
