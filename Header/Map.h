@@ -13,6 +13,11 @@ public:
     // get chunk a reference to chunk using global coors
     Chunk &get_chunk(int global_x, int global_y);
 
+    int number_live(int global_x, int global_y);
+
+    // debuging information about chunk, cell, type
+    void debug_position(int global_x, int global_y);
+
 private:
     // finds or generated a chunk
     Chunk &generate_chunk(int chunk_x, int chunk_y);

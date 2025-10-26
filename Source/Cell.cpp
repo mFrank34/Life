@@ -15,23 +15,23 @@ char Cell::get_type()
     return type;
 };
 
-bool Cell::get_node()
+bool Cell::is_alive()
 {
-    // sends back the node type
-    return node;
+    // sends back the alive type
+    return alive;
 };
 
 void Cell::set_type(char new_type)
 {
-    // setting the type of node
+    // setting the type of alive
     this->type = new_type;
     update_cell();
 }
 
-void Cell::set_node(bool new_node)
+void Cell::is_alive(bool is_alive)
 {
-    // setting the node state
-    this->node = new_node;
+    // setting the alive state
+    this->alive = is_alive;
 }
 
 void Cell::update_cell()
@@ -39,13 +39,13 @@ void Cell::update_cell()
     switch (type)
     {
     case '0':
-        node = false;
+        alive = false;
         break; // empty cell
     case 'w':
-        node = true;
+        alive = true;
         break; // white cell
     default:
-        node = false;
+        alive = false;
         break; // default cell type
     }
 }

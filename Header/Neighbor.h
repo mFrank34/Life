@@ -8,10 +8,10 @@
 class Neighbor
 {
 private:
-    int x, y;
+    int global_x, global_y;
 
 public:
-    Neighbor(int x, int y);
+    Neighbor(int global_x, int global_y);
 
     bool operator==(const Neighbor &self) const;
 
@@ -19,7 +19,7 @@ public:
 
     std::string to_string();
 
-    std::vector<Neighbor> neighbors();
+    std::vector<Neighbor> neighbors_cords();
 
     ~Neighbor();
 };

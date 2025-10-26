@@ -2,41 +2,41 @@
 #include <format>
 #include <vector>
 
-Neighbor::Neighbor(int x, int y)
+Neighbor::Neighbor(int global_x, int global_y)
 {
-    this->x = x;
-    this->y = y;
+    this -> global_x = global_x;
+    this -> global_y = global_y;
 }
 
 bool Neighbor::operator==(const Neighbor &self) const // its looking at it self
 {
-    return x == self.x && y == self.y;
+    return global_x == self.global_x && global_y == self.global_y;
     // takes two value and see if they match and returns true and false
 }
 
 int Neighbor::hash_code()
 {
-    return (x * 3) + (y * 5);
+    return (global_x * 3) + (global_y * 5);
 }
 
 std::string Neighbor::to_string()
 {
-    // we want to return this as string (x,y)
-    std::string coords = std::format("({},{})", x, y);
+    // we want to return this as string (x,global_y)
+    std::string coords = std::format("({},{})", global_x, global_y);
     return coords;
 }
 
-std::vector<Neighbor> Neighbor::neighbors()
+std::vector<Neighbor> Neighbor::neighbors_cords()
 {
     return {
-        {x - 1, y - 1},
-        {x - 1, y},
-        {x - 1, y + 1},
-        {x, y - 1},
-        {x, y + 1},
-        {x + 1, y - 1},
-        {x + 1, y},
-        {x + 1, y + 1}
+        {global_x- 1, global_y - 1},
+        {global_x - 1, global_y},
+        {global_x - 1, global_y + 1},
+        {global_x, global_y - 1},
+        {global_x, global_y + 1},
+        {global_x + 1, global_y - 1},
+        {global_x + 1, global_y},
+        {global_x + 1, global_y + 1}
     };
     /*
     this finds the titles around the current Neighbor

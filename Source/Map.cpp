@@ -13,24 +13,20 @@ Chunk &Map::generate_chunk(int chunk_x, int chunk_y)
     if (chunks.find(key) == chunks.end())
     {
         chunks.emplace(key, Chunk(chunk_x, chunk_y));
-    };  
+    };
     // creates chunk
     return chunks.at(key);
 }
 
-Cell& Map::get_cell(int global_x, int global_y)
+Cell &Map::get_cell(int global_x, int global_y)
 {
     int chunk_x = global_x / Chunk::CHUNK_SIZE;
     int chunk_y = global_y / Chunk::CHUNK_SIZE;
 
-    // // ensure negative coordinates but we don't care to much about
-    // if (global_x < 0) chunk_x--;
-    // if (global_y < 0) chunk_y--;
-
     // generating chunk
-    Chunk& chunk = generate_chunk(chunk_x, chunk_y);
+    Chunk &chunk = generate_chunk(chunk_x, chunk_y);
 
-    // cords maths for x and y 
+    // cords maths for x and y
     int local_x = global_x - chunk_x * Chunk::CHUNK_SIZE;
     int local_y = global_y - chunk_y * Chunk::CHUNK_SIZE;
 
@@ -38,12 +34,47 @@ Cell& Map::get_cell(int global_x, int global_y)
     return chunk.get_cell(local_x, local_y);
 }
 
-Chunk& Map::get_chunk(int global_x, int global_y)
+Chunk &Map::get_chunk(int global_x, int global_y)
 {
     // reversed the cell function to return chunk as well
     int chunk_x = global_x / Chunk::CHUNK_SIZE;
     int chunk_y = global_y / Chunk::CHUNK_SIZE;
-
     // return the chunk
     return generate_chunk(chunk_x, chunk_y);
+}
+
+void Map::debug_position(int global_x, int global_y)
+{
+    // grabs the current chunk
+    Chunk &chunk = get_chunk(global_x, global_y);
+
+    // cords maths for x and y
+    int local_x = global_x - chunk.get_chunk_x() * Chunk::CHUNK_SIZE;
+    int local_y = global_y - chunk.get_chunk_y() * Chunk::CHUNK_SIZE;
+
+    Cell &cell = chunk.get_cell(local_x, local_y);
+    // read-out
+    std::cout << "Global: (" << global_x << ", " << global_y << ")\n";
+    std::cout << "Chunk:  (" << chunk.get_chunk_x() << ", " << chunk.get_chunk_y() << ")\n";
+    std::cout << "Local:  (" << local_x << ", " << local_y << ")\n";
+    std::cout << "Cell Type: '" << cell.get_type() << "'\n";
+}
+
+int Map::number_live(int global_x, int global_y)
+{
+    // offset for cords
+    static const int offsets[8][2] = {{-1, -1}, {0, -1}, {1, -1}, {-1, 0}, {1, 0}, {-1, 1}, {0, 1}, {1, 1}};
+    int count;
+
+    for (const auto& offset : offsets) // connects 
+    {   
+        // gets the surrounding cell coors
+        Cell& neighbor = get_cell(global_x + offset[0], global_y + offset[1]);
+        if (neighbor.is_alive())
+        {   
+            // counting the alive cells
+            count++;
+        }
+        return count;
+    }
 }

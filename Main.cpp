@@ -26,19 +26,17 @@ int main()
 {
     Map world;
 
-    world.get_cell(8, 8).set_type('w');
+    int x = 50;
+    int y = 50;
+
+    world.get_cell(x, y).set_type('w');
     
-    std::cout << "World cell at 8, 8 type: "
+    std::cout << "World cell at " << x << " " << y << " Type: "
               << world.get_cell(8, 8).get_type() << "\n";
 
-    world.get_chunk(8,8).print_chunk();
+    world.get_chunk(x,y).print_chunk();
 
-    world.get_cell(48, 48).set_type('#');
-
-    std::cout << "World cell at 48, 48 type: "
-              << world.get_cell(48, 48).get_type() << "\n";
-
-    world.get_chunk(48, 48).print_chunk();
+    world.debug_position(x,y);
               
     return 0;
 };

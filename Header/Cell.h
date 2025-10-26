@@ -5,7 +5,7 @@ class Cell
 {
 private:
     char type; // type of node
-    bool node; // is it a node or not
+    bool alive; // it's alive
 public:
     Cell();
 
@@ -13,11 +13,11 @@ public:
 
     char get_type();
 
-    bool get_node();
+    bool is_alive();
 
     void set_type(char new_type);
 
-    void set_node(bool new_node);
+    void is_alive(bool is_alive);
 
     void update_cell();
 
