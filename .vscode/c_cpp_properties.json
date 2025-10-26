@@ -1,37 +1,17 @@
 {
-    "version": 4,
     "configurations": [
         {
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/Header",
-                "${workspaceFolder}/Source",
-                "/usr/include",
-                "/usr/lib64/wx/include/gtk3-unicode-3.2",
-                "/usr/include/wx-3.2",
-                "/usr/lib64/wx/include/gtk3-unicode-3.2",
-                "/usr/include/wx-3.2"
+                "${workspaceFolder}/**"
             ],
-            "defines": [
-                "_FILE_OFFSET_BITS=64",
-                "_LARGEFILE_SOURCE=",
-                "WXUSINGDLL",
-                "__WXGTK__"
-            ],
+            "defines": [],
             "compilerPath": "/usr/bin/g++",
             "cStandard": "c11",
             "cppStandard": "c++20",
-            "intelliSenseMode": "linux-gcc-x64",
-            "browse": {
-                "path": [
-                    "${workspaceFolder}/Header",
-                    "${workspaceFolder}/Source",
-                    "/usr/include",
-                    "/usr/lib64/wx/include/gtk3-unicode-3.2",
-                    "/usr/include/wx-3.2"
-                ],
-                "limitSymbolsToIncludedHeaders": true
-            }
+            "intelliSenseMode": "linux-gcc-x64"
         }
-    ]
+    ],
+    "version": 4
 }

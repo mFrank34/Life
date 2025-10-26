@@ -21,14 +21,19 @@ int main()
     // world you know
     Map world;
 
-    world.get_cell(100, 50).set_type('w');
+    world.get_cell(8, 8).set_type('w');
     
-    std::cout << "World cell at 100, 50 type: "
-              << world.get_cell(100, 50).get_type() << "\n";
+    std::cout << "World cell at 8, 8 type: "
+              << world.get_cell(8, 8).get_type() << "\n";
 
-    world.get_cell(200, -50).set_type('#');
-    std::cout << "World cell at 200, -50 type: "
-              << world.get_cell(200, -50).get_type() << "\n";
+    world.get_chunk(8,8).print_chunk();
+
+    world.get_cell(48, 48).set_type('#');
+
+    std::cout << "World cell at 48, 48 type: "
+              << world.get_cell(48, 48).get_type() << "\n";
+
+    world.get_chunk(48, 48).print_chunk();
               
     return 0;
 };

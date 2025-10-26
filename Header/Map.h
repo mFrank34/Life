@@ -10,6 +10,9 @@ public:
     // gets a reference to a cell using global coordinates
     Cell &get_cell(int global_x, int global_y);
 
+    // get chunk a reference to chunk using global coors
+    Chunk &get_chunk(int global_x, int global_y);
+
 private:
     // finds or generated a chunk
     Chunk &generate_chunk(int chunk_x, int chunk_y);

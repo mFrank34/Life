@@ -11,7 +11,7 @@ Chunk::Chunk(int chunk_x, int chunk_y) : chunk_x(chunk_x), chunk_y(chunk_y)
         for (int x = 0; x < CHUNK_SIZE; x++)
         {
             // generates x
-            cells[y][x] = Cell('.');
+            cells[y][x] = Cell('0');
         }
     }
 }
@@ -48,5 +48,11 @@ void Chunk::print_chunk()
             // prints data that is stored within said chunk
             std::cout << get_cell(x, y).get_type();
         }
+        std::cout << "\n";
     }
+    std::cout << "\n";
 }
+
+
+
+

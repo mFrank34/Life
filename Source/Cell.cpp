@@ -38,7 +38,7 @@ void Cell::update_cell()
 {
     switch (type)
     {
-    case '.':
+    case '0':
         node = false;
         break; // empty cell
     case 'w':

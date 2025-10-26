@@ -13,7 +13,6 @@ Chunk &Map::generate_chunk(int chunk_x, int chunk_y)
     if (chunks.find(key) == chunks.end())
     {
         chunks.emplace(key, Chunk(chunk_x, chunk_y));
-        chunks.at(key).print_chunk();
     };  
     // creates chunk
     return chunks.at(key);
@@ -37,4 +36,14 @@ Cell& Map::get_cell(int global_x, int global_y)
 
     // return the cell
     return chunk.get_cell(local_x, local_y);
+}
+
+Chunk& Map::get_chunk(int global_x, int global_y)
+{
+    // reversed the cell function to return chunk as well
+    int chunk_x = global_x / Chunk::CHUNK_SIZE;
+    int chunk_y = global_y / Chunk::CHUNK_SIZE;
+
+    // return the chunk
+    return generate_chunk(chunk_x, chunk_y);
 }
