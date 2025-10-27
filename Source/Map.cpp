@@ -1,4 +1,5 @@
 #include "Map.h"
+#include "Debug.h"
 
 long long Map::generate_key(int chunk_x, int chunk_y) const
 {

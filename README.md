@@ -1,6 +1,6 @@
 # Conway's Game of Life 
-
-### Final Year Project 
+### Final Year Project By Michael Franks
+---
 
 ## Requirements
 - Create Map system for storing information 

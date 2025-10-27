@@ -3,7 +3,7 @@
 
 #include <unordered_map>
 #include "Chunk.h"
-
+#include "Debug.h"
 
 class Map 
 {
@@ -31,6 +31,9 @@ private:
 
     // Packs (chunk_x, chunk_y) into single 64-bit key
     long long generate_key(int chunk_x, int chunk_y) const;
+
+    // adding debugging 
+    Debug debug;
 };
 
 #endif
