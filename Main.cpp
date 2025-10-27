@@ -36,22 +36,22 @@ int main()
 
     world.get_cell(100, 100).set_type('0'); // test
 
-    world.debug_position(x,y);
+    world.debug.positions(world, x, y);
 
-    world.print_all_chunks();
+    world.debug.all_chunks(world.get_world());
 
     std::cout << "Unloading... \n";
               
     //debugging 
     world.unload();
 
-    world.debug_position(x,y);
+    
 
     std::cout << "\n";
 
     std::cout << "Printing Chunks in unodered map\n";
 
-    world.print_all_chunks();
+    
 
     return 0;
 };
