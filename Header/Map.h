@@ -18,6 +18,10 @@ public:
     // debuging information about chunk, cell, type
     void debug_position(int global_x, int global_y);
 
+    void unload();
+
+    void print_all_chunks();
+
 private:
     // finds or generated a chunk
     Chunk &generate_chunk(int chunk_x, int chunk_y);

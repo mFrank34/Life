@@ -29,7 +29,7 @@ std::string Neighbor::to_string()
 std::vector<Neighbor> Neighbor::neighbors_cords()
 {
     return {
-        {global_x- 1, global_y - 1},
+        {global_x - 1, global_y - 1},
         {global_x - 1, global_y},
         {global_x - 1, global_y + 1},
         {global_x, global_y - 1},

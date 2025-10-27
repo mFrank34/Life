@@ -3,6 +3,7 @@
 
 #include "Cell.h"
 #include <iostream>
+#include <iomanip>
 
 class Chunk
 {
@@ -10,7 +11,7 @@ public:
     // chunk size be size of chunk
     static const int CHUNK_SIZE = 16;
     // make class
-    Chunk() {};
+    Chunk();
 
     Chunk(int chunk_x, int chunk_y);
 
@@ -22,8 +23,16 @@ public:
     int get_chunk_x() const;
     int get_chunk_y() const;
 
-    // print chunk
+    // debugging chunks
     void print_chunk();
+
+    // find the amount of populated
+    int populated_chunk();
+
+    // true if chunk contains alive cell
+    bool is_populated();
+
+    ~Chunk();
 
 private:
     // location cords

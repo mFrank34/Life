@@ -46,13 +46,45 @@ void Chunk::print_chunk()
         for (int x = 0; x < CHUNK_SIZE; ++x)
         {
             // prints data that is stored within said chunk
-            std::cout << get_cell(x, y).get_type();
+            std::cout << std::setw(2) << get_cell(x, y).get_type();
         }
         std::cout << "\n";
     }
     std::cout << "\n";
 }
 
+int Chunk::populated_chunk()
+{
+    int lives_cell;
+    for (int y = 0; y < CHUNK_SIZE; ++y)
+    {
+        for (int x = 0; x < CHUNK_SIZE; ++x)
+        {
+            if (get_cell(x, y).is_alive())
+            {
+                lives_cell++;
+            }
+        }
+    }
+    return lives_cell;
+}
 
+bool Chunk::is_populated()
+{
+    // search
+    for (int y = 0; y < CHUNK_SIZE; ++y)
+    {
+        for (int x = 0; x < CHUNK_SIZE; ++x)
+        {
+            if (get_cell(x, y).is_alive())
+            {
+                // if a live cell within chunk don't matter where returns true
+                return true;
+            }
+        }
+    }
+    // if none are alive returns false 
+    return false;
+}
 
-
+Chunk::~Chunk() {};

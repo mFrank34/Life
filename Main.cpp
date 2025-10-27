@@ -32,11 +32,27 @@ int main()
     world.get_cell(x, y).set_type('w');
     
     std::cout << "World cell at " << x << " " << y << " Type: "
-              << world.get_cell(8, 8).get_type() << "\n";
+              << world.get_cell(x,y).get_type() << "\n";
 
-    world.get_chunk(x,y).print_chunk();
+    world.get_cell(100, 100).set_type('0'); // test
 
     world.debug_position(x,y);
+
+    world.print_all_chunks();
+
+    std::cout << "Unloading... \n";
               
+    //debugging 
+    world.unload();
+
+    world.debug_position(x,y);
+
+    std::cout << "\n";
+
+    std::cout << "Printing Chunks in unodered map\n";
+
+    world.print_all_chunks();
+
+
     return 0;
 };

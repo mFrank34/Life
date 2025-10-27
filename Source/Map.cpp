@@ -56,8 +56,9 @@ void Map::debug_position(int global_x, int global_y)
     // read-out
     std::cout << "Global: (" << global_x << ", " << global_y << ")\n";
     std::cout << "Chunk:  (" << chunk.get_chunk_x() << ", " << chunk.get_chunk_y() << ")\n";
+    std::cout << "Alive Cells (" << chunk.populated_chunk() << ") \n";
     std::cout << "Local:  (" << local_x << ", " << local_y << ")\n";
-    std::cout << "Cell Type: '" << cell.get_type() << "'\n";
+    std::cout << "Cell Type: '" << cell.get_type() << "'\n\n";
 }
 
 int Map::number_live(int global_x, int global_y)
@@ -66,15 +67,53 @@ int Map::number_live(int global_x, int global_y)
     static const int offsets[8][2] = {{-1, -1}, {0, -1}, {1, -1}, {-1, 0}, {1, 0}, {-1, 1}, {0, 1}, {1, 1}};
     int count;
 
-    for (const auto& offset : offsets) // connects 
-    {   
+    for (const auto &offset : offsets) // connects
+    {
         // gets the surrounding cell coors
-        Cell& neighbor = get_cell(global_x + offset[0], global_y + offset[1]);
+        Cell &neighbor = get_cell(global_x + offset[0], global_y + offset[1]);
         if (neighbor.is_alive())
-        {   
+        {
             // counting the alive cells
             count++;
+        };
+    };
+    return count;
+}
+
+void Map::unload()
+{
+    // get the map data
+    std::unordered_map<long long, Chunk>::iterator selected = chunks.begin();
+    while (selected != chunks.end())
+    {
+        // gets key & chunk
+        long long key = selected->first;
+        Chunk &chunk = selected->second;
+
+        // finds if data is stored with in
+        if (!chunk.is_populated()) // if not populated
+        {
+            selected = chunks.erase(selected);
         }
-        return count;
+        else
+        {
+            ++selected;
+        }
+    }
+}
+
+void Map::print_all_chunks()
+{
+    for (std::pair<long long, Chunk> selected : chunks)
+    {
+        // debugging tool
+        long long key = selected.first;
+        Chunk chunk = selected.second;
+        // readout
+
+        std::cout << "Chunk key:" << key << " " << "\n";
+        std::cout << "Chunk:  (" << chunk.get_chunk_x() << ", " << chunk.get_chunk_y() << ")\n";
+        chunk.print_chunk();
+        std::cout << "\n";
     }
 }
