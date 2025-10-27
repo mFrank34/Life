@@ -1,5 +1,7 @@
 # Conway's Game of Life 
 
+### Final Year Project 
+
 ## Requirements
 - Create Map system for storing information 
 - Create Interaction for Cell's and World
