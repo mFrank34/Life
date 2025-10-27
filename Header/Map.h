@@ -4,7 +4,8 @@
 #include <unordered_map>
 #include "Chunk.h"
 
-class Map
+
+class Map 
 {
 public:
     // gets a reference to a cell using global coordinates
@@ -15,10 +16,9 @@ public:
 
     int number_live(int global_x, int global_y);
 
-    // debuging information about chunk, cell, type
-    void debug_position(int global_x, int global_y);
-
     void unload();
+
+    void debug_position(int global_x, int global_y);
 
     void print_all_chunks();
 

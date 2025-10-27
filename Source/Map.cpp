@@ -43,24 +43,6 @@ Chunk &Map::get_chunk(int global_x, int global_y)
     return generate_chunk(chunk_x, chunk_y);
 }
 
-void Map::debug_position(int global_x, int global_y)
-{
-    // grabs the current chunk
-    Chunk &chunk = get_chunk(global_x, global_y);
-
-    // cords maths for x and y
-    int local_x = global_x - chunk.get_chunk_x() * Chunk::CHUNK_SIZE;
-    int local_y = global_y - chunk.get_chunk_y() * Chunk::CHUNK_SIZE;
-
-    Cell &cell = chunk.get_cell(local_x, local_y);
-    // read-out
-    std::cout << "Global: (" << global_x << ", " << global_y << ")\n";
-    std::cout << "Chunk:  (" << chunk.get_chunk_x() << ", " << chunk.get_chunk_y() << ")\n";
-    std::cout << "Alive Cells (" << chunk.populated_chunk() << ") \n";
-    std::cout << "Local:  (" << local_x << ", " << local_y << ")\n";
-    std::cout << "Cell Type: '" << cell.get_type() << "'\n\n";
-}
-
 int Map::number_live(int global_x, int global_y)
 {
     // offset for cords
@@ -78,6 +60,40 @@ int Map::number_live(int global_x, int global_y)
         };
     };
     return count;
+}
+
+void Map::debug_position(int global_x, int global_y)
+{
+    // grabs the current chunk
+    Chunk &chunk = get_chunk(global_x, global_y);
+
+    // cords maths for x and y
+    int local_x = global_x - chunk.get_x() * Chunk::CHUNK_SIZE;
+    int local_y = global_y - chunk.get_y() * Chunk::CHUNK_SIZE;
+
+    Cell &cell = chunk.get_cell(local_x, local_y);
+    // read-out
+    std::cout << "Global: (" << global_x << ", " << global_y << ")\n";
+    std::cout << "Chunk:  (" << chunk.get_x() << ", " << chunk.get_y() << ")\n";
+    std::cout << "Alive Cells (" << chunk.populated_chunk() << ") \n";
+    std::cout << "Local:  (" << local_x << ", " << local_y << ")\n";
+    std::cout << "Cell Type: '" << cell.get_type() << "'\n\n";
+}
+
+void Map::print_all_chunks()
+{
+    for (std::pair<long long, Chunk> selected : chunks)
+    {
+        // debugging tool
+        long long key = selected.first;
+        Chunk chunk = selected.second;
+        // readout
+
+        std::cout << "Chunk key:" << key << " " << "\n";
+        std::cout << "Chunk:  (" << chunk.get_x() << ", " << chunk.get_y() << ")\n";
+        chunk.print_chunk();
+        std::cout << "\n";
+    }
 }
 
 void Map::unload()
@@ -99,21 +115,5 @@ void Map::unload()
         {
             ++selected;
         }
-    }
-}
-
-void Map::print_all_chunks()
-{
-    for (std::pair<long long, Chunk> selected : chunks)
-    {
-        // debugging tool
-        long long key = selected.first;
-        Chunk chunk = selected.second;
-        // readout
-
-        std::cout << "Chunk key:" << key << " " << "\n";
-        std::cout << "Chunk:  (" << chunk.get_chunk_x() << ", " << chunk.get_chunk_y() << ")\n";
-        chunk.print_chunk();
-        std::cout << "\n";
     }
 }

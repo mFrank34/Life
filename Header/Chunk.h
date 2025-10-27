@@ -19,9 +19,10 @@ public:
     Cell &get_cell(int x, int y);
     const Cell &get_cell(int x, int y) const;
 
-    // Get chunk position in chunk grid
-    int get_chunk_x() const;
-    int get_chunk_y() const;
+    // Gets Chunk X
+    int get_x() const;
+    // Gets Chunk Y
+    int get_y() const;
 
     // debugging chunks
     void print_chunk();

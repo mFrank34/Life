@@ -28,13 +28,14 @@ const Cell &Chunk::get_cell(int x, int y) const
     return cells[x][y];
 }
 
-// chuck coordinates getters
-int Chunk::get_chunk_x() const
+/* Gets Chunk X*/
+int Chunk::get_x() const
 {
     return chunk_x;
 }
 
-int Chunk::get_chunk_y() const
+/* Gets Chunk Y*/
+int Chunk::get_y() const
 {
     return chunk_y;
 }
