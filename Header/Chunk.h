@@ -25,7 +25,7 @@ public:
     int get_y() const;
 
     // debugging chunks
-    void print_chunk();
+    void print_chunk() const;
 
     // find the amount of populated
     int populated_chunk();

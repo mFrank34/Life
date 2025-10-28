@@ -2,19 +2,27 @@
 #ifndef DEBUG_H
 #define DEBUG_H
 
+#pragma once
+#include <iostream>
+#include <unordered_map>
+
+class Map;   // forward declare
+class Chunk; // forward declare
+
 class Debug
 {
 public:
-    Debug();
+    Debug() = default;
 
-    void positions(Map &map, int global_x, int global_y);
+    // link Debug to its owning Map
+    void set(Map *map_ptr);
 
-    void all_chunks(std::unordered_map<long long, Chunk> chunks);
-
-    ~Debug();
+    // print data
+    void positions(int global_x, int global_y);
+    void all_chunks(const std::unordered_map<long long, Chunk> chunks);
 
 private:
-    
+    Map *map = nullptr;
 };
 
 #endif

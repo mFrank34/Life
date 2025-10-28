@@ -1,3 +1,4 @@
+#pragma once
 #include "Chunk.h"
 #include "Cell.h"
 
@@ -40,7 +41,7 @@ int Chunk::get_y() const
     return chunk_y;
 }
 
-void Chunk::print_chunk()
+void Chunk::print_chunk() const
 {
     for (int y = 0; y < CHUNK_SIZE; ++y)
     {

@@ -11,7 +11,7 @@ public:
 
     Cell(char type);
 
-    char get_type();
+    char get_type() const;
 
     bool is_alive();
 

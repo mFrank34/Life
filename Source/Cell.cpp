@@ -9,7 +9,7 @@ Cell::Cell(char type) : type(type)
     update_cell();
 };
 
-char Cell::get_type()
+char Cell::get_type() const
 {
     // returns the type of current cell
     return type;
