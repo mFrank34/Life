@@ -1,31 +1,44 @@
 cmake_minimum_required(VERSION 3.10)
+
+# Project name and language
 project(Life LANGUAGES CXX)
 
-# Modern C++
+# Use modern C++20
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Default to Debug if nothing is set
+# Default build type
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
 endif()
 
-# Include headers
-include_directories(${CMAKE_SOURCE_DIR}/Header)
-
-# Gather all source files from Body and Source
+# Gather all source files
 file(GLOB_RECURSE SOURCES
     "${CMAKE_SOURCE_DIR}/Body/*.cpp"
     "${CMAKE_SOURCE_DIR}/Source/*.cpp"
 )
 
-# Output binary to Bin/
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/Bin)
-
 # Create executable
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-# Compiler warnings + debug symbols
-target_compile_options(${PROJECT_NAME} PRIVATE
-    -Wall -Wextra -Wpedantic -Wshadow -g
+# Include directories (modern target-based)
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${CMAKE_SOURCE_DIR}/Header
+)
+
+# Compiler warnings and debug symbols
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    target_compile_options(${PROJECT_NAME} PRIVATE
+        -Wall -Wextra -Wpedantic -Wshadow -g
+    )
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    target_compile_options(${PROJECT_NAME} PRIVATE
+        /W4 /WX /Zi
+    )
+endif()
+
+# Output binary to Bin/
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/Bin
 )

@@ -58,8 +58,7 @@ void Map::unload()
     std::unordered_map<long long, Chunk>::iterator selected = chunks.begin();
     while (selected != chunks.end())
     {
-        // gets key & chunk
-        long long key = selected->first;
+        // gets chunk
         Chunk &chunk = selected->second;
 
         // finds if data is stored with in

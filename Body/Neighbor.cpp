@@ -2,10 +2,10 @@
 #include <format>
 #include <vector>
 
-Neighbor::Neighbor(int global_x, int global_y)
+Neighbor::Neighbor(int input_x, int input_y)
 {
-    this -> global_x = global_x;
-    this -> global_y = global_y;
+    this->global_x = input_x;
+    this->global_y = input_y;
 }
 
 bool Neighbor::operator==(const Neighbor &self) const // its looking at it self
@@ -36,8 +36,7 @@ std::vector<Neighbor> Neighbor::neighbors_cords()
         {global_x, global_y + 1},
         {global_x + 1, global_y - 1},
         {global_x + 1, global_y},
-        {global_x + 1, global_y + 1}
-    };
+        {global_x + 1, global_y + 1}};
     /*
     this finds the titles around the current Neighbor
     and helps to find where it can move to? if that makes sense?

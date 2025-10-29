@@ -19,7 +19,7 @@ NOTES:
 Miles Stones:
     - Map system created, able to view a single cell and chunk with global coors.
     - next to make way for node to interact with map, partly done with with cell type and active note.
-
+    - 
 */
 
 int main()
@@ -50,16 +50,16 @@ int main()
     world.debug.all_chunks(world.get_world());
 
     // creating a box within map system
-    std::cout << "Printing to chunks from 200 200 \n";
-    
     int square_x = 96;
     int square_y = 96;
 
-    for (int x = 0; x < square_x; ++x)
+    std::cout << "Printing to chunks from " << square_x << " " << square_y << "\n";
+
+    for (int sx = 0; sx < square_x; ++x)
     {
-        for (int y = 0; y < square_y; ++y)
+        for (int sy = 0; sy < square_y; ++y)
         {
-            world.get_cell(x, y).set_type('w');
+            world.get_cell(sx, sy).set_type('w');
         }
     }
 

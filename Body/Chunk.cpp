@@ -2,7 +2,7 @@
 #include "Cell.h"
 
 // creates class    | sets the cords for chunk
-Chunk::Chunk(int chunk_x, int chunk_y) : chunk_x(chunk_x), chunk_y(chunk_y)
+Chunk::Chunk(int input_x, int input_y) : chunk_x(input_x), chunk_y(input_y)
 {
     // initialize all cells
     for (int y = 0; y < CHUNK_SIZE; y++)

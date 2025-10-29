@@ -4,7 +4,7 @@
 // constructor
 Cell::Cell() {};
 
-Cell::Cell(char type) : type(type) 
+Cell::Cell(char input_type) : type(input_type) 
 {
     update_cell();
 };
