@@ -23,10 +23,6 @@
         {
             "name": "Bin",
             "path": "Bin"
-        },
-        {
-            "name": "build",
-            "path": "build"
         }
     ],
     "settings": {
