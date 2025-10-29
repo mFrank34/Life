@@ -53,7 +53,7 @@ int main()
     int square_x = 32;
     int square_y = 32;
 
-    std::cout << "Printing to chunks from " << square_x << " " << square_y << "\n";
+    std::cout << "Printing to chunks from " << square_x << " " << square_y << "\n\n";
 
     for (int sx = 0; sx < square_x; ++sx)
     {
@@ -71,6 +71,8 @@ int main()
     // unload chunks that not full
     std::cout << "Unloading... \n";
     world.unload();
+
+    std::cout << "print currents chunks in memory\n\n";
 
     // display chunks again
     world.debug.all_chunks(world.get_world());
