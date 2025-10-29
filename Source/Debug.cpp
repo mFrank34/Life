@@ -11,7 +11,7 @@ void Debug::positions(int global_x, int global_y)
 {
     if (!map)
     {
-        std::cerr << "Debug error: no Map set!\n";
+        std::cerr << "Debug error: no Map set!\n"; // error handling 
         return;
     }
 
@@ -40,9 +40,23 @@ void Debug::all_chunks(const std::unordered_map<long long, Chunk> chunks)
         long long key = selected.first;
         const Chunk &chunk = selected.second; // note the '&'
 
+        // printing out
         std::cout << "Chunk key: " << key << "\n";
         std::cout << "Chunk: (" << chunk.get_x() << ", " << chunk.get_y() << ")\n";
         chunk.print_chunk();
         std::cout << "\n";
     }
 }
+
+int Debug::active_chunks(const std::unordered_map<long long, Chunk> chunks)
+{
+    int active = 0;
+    for (const auto &selected : chunks)
+    {   
+        Chunk chunk = selected.second;
+        if (chunk.is_populated())
+            active++; // you forget you can do it like this...
+    }
+    return active;
+}
+

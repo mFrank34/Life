@@ -10,7 +10,7 @@ class Chunk
 {
 public:
     // chunk size be size of chunk
-    static const int CHUNK_SIZE = 16;
+    static const int CHUNK_SIZE = 32;
     // make class
     Chunk();
 

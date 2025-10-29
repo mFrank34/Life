@@ -51,19 +51,32 @@ int main()
 
     // creating a box within map system
     std::cout << "Printing to chunks from 200 200 \n";
-    for (int x = 0; x < 200; ++x)
+    
+    int square_x = 96;
+    int square_y = 96;
+
+    for (int x = 0; x < square_x; ++x)
     {
-        for (int y = 0; y < 200; ++y)
+        for (int y = 0; y < square_y; ++y)
         {
             world.get_cell(x, y).set_type('w');
         }
     }
+
+    // active chunks amount
+    std::cout << "Active Chunks: " << world.debug.active_chunks(world.get_world()) << "\n";
 
     world.debug.all_chunks(world.get_world());
 
     // unload chunks that not full
     std::cout << "Unloading... \n";
     world.unload();
+
+    // display chunks again
+    world.debug.all_chunks(world.get_world());
+
+    // active chunks amount
+    std::cout << "Active Chunks: " << world.debug.active_chunks(world.get_world()) << "\n";
 
     return 0;
 };
