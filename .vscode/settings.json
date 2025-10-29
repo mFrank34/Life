@@ -102,5 +102,8 @@
     },
     "cSpell.words": [
         "CHUNKVIEW"
-    ]
+    ],
+    "files.autoSave": "onFocusChange",
+    "editor.defaultFormatter": "ms-vscode.cpptools",
+    "files.autoGuessEncoding": true
 }

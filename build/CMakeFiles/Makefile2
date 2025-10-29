@@ -54,20 +54,20 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/frank/Documents/vs_code_git/conway/Conway-s-Game-of-Life
+CMAKE_SOURCE_DIR = /home/frank/Documents/vs_code_git/Life
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/frank/Documents/vs_code_git/conway/Conway-s-Game-of-Life/build
+CMAKE_BINARY_DIR = /home/frank/Documents/vs_code_git/Life/build
 
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all:
+all: CMakeFiles/LIFE.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
-codegen:
+codegen: CMakeFiles/LIFE.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -75,8 +75,40 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean:
+clean: CMakeFiles/LIFE.dir/clean
 .PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/LIFE.dir
+
+# All Build rule for target.
+CMakeFiles/LIFE.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/frank/Documents/vs_code_git/Life/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target LIFE"
+.PHONY : CMakeFiles/LIFE.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/LIFE.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/frank/Documents/vs_code_git/Life/build/CMakeFiles 8
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/LIFE.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/frank/Documents/vs_code_git/Life/build/CMakeFiles 0
+.PHONY : CMakeFiles/LIFE.dir/rule
+
+# Convenience name for target.
+LIFE: CMakeFiles/LIFE.dir/rule
+.PHONY : LIFE
+
+# codegen rule for target.
+CMakeFiles/LIFE.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/frank/Documents/vs_code_git/Life/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Finished codegen for target LIFE"
+.PHONY : CMakeFiles/LIFE.dir/codegen
+
+# clean rule for target.
+CMakeFiles/LIFE.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/clean
+.PHONY : CMakeFiles/LIFE.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
