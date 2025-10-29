@@ -1,3 +1,7 @@
 {
-    "cmake.buildBeforeRun": true
+    "cmake.sourceDirectory": "${workspaceFolder}",
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+    "cmake.buildBeforeRun": true,
+    "cmake.generator": "Unix Makefiles",
+    "cmake.configureOnOpen": true
 }

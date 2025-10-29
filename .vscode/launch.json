@@ -5,14 +5,15 @@
             "name": "Launch Life",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/Bin/Life", 
+            "program": "${workspaceFolder}/Bin/Life",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": true,
             "MIMode": "gdb",
-            "miDebuggerPath": "/usr/bin/gdb"
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "Build Life"
         }
     ]
 }
