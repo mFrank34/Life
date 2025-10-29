@@ -1,0 +1,2 @@
+/home/frank/Documents/vs_code_git/conway/Conway-s-Game-of-Life/build/CMakeFiles/edit_cache.dir
+/home/frank/Documents/vs_code_git/conway/Conway-s-Game-of-Life/build/CMakeFiles/rebuild_cache.dir
