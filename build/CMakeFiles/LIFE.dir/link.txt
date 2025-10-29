@@ -1,1 +1,0 @@
-/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/LIFE.dir/link.d CMakeFiles/LIFE.dir/Main.cpp.o CMakeFiles/LIFE.dir/Source/Cell.cpp.o CMakeFiles/LIFE.dir/Source/Chunk.cpp.o CMakeFiles/LIFE.dir/Source/Debug.cpp.o CMakeFiles/LIFE.dir/Source/Map.cpp.o CMakeFiles/LIFE.dir/Source/Neighbor.cpp.o CMakeFiles/LIFE.dir/CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.cpp.o -o LIFE

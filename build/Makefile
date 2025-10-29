@@ -117,185 +117,161 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named LIFE
+# Target rules for targets named Life
 
 # Build rule for target.
-LIFE: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 LIFE
-.PHONY : LIFE
+Life: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Life
+.PHONY : Life
 
 # fast build rule for target.
-LIFE/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/build
-.PHONY : LIFE/fast
+Life/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/build
+.PHONY : Life/fast
 
-CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.o: CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.cpp.o
-.PHONY : CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.o
-
-# target to build an object file
-CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.cpp.o
-.PHONY : CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.cpp.o
-
-CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.i: CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.cpp.i
-.PHONY : CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.i
-
-# target to preprocess a source file
-CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.cpp.i
-.PHONY : CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.cpp.i
-
-CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.s: CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.cpp.s
-.PHONY : CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.s
-
-# target to generate assembly for a file
-CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.cpp.s
-.PHONY : CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.cpp.s
-
-Main.o: Main.cpp.o
-.PHONY : Main.o
+Body/Cell.o: Body/Cell.cpp.o
+.PHONY : Body/Cell.o
 
 # target to build an object file
-Main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/Main.cpp.o
-.PHONY : Main.cpp.o
+Body/Cell.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/Body/Cell.cpp.o
+.PHONY : Body/Cell.cpp.o
 
-Main.i: Main.cpp.i
-.PHONY : Main.i
+Body/Cell.i: Body/Cell.cpp.i
+.PHONY : Body/Cell.i
 
 # target to preprocess a source file
-Main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/Main.cpp.i
-.PHONY : Main.cpp.i
+Body/Cell.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/Body/Cell.cpp.i
+.PHONY : Body/Cell.cpp.i
 
-Main.s: Main.cpp.s
-.PHONY : Main.s
+Body/Cell.s: Body/Cell.cpp.s
+.PHONY : Body/Cell.s
 
 # target to generate assembly for a file
-Main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/Main.cpp.s
-.PHONY : Main.cpp.s
+Body/Cell.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/Body/Cell.cpp.s
+.PHONY : Body/Cell.cpp.s
 
-Source/Cell.o: Source/Cell.cpp.o
-.PHONY : Source/Cell.o
+Body/Chunk.o: Body/Chunk.cpp.o
+.PHONY : Body/Chunk.o
 
 # target to build an object file
-Source/Cell.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/Source/Cell.cpp.o
-.PHONY : Source/Cell.cpp.o
+Body/Chunk.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/Body/Chunk.cpp.o
+.PHONY : Body/Chunk.cpp.o
 
-Source/Cell.i: Source/Cell.cpp.i
-.PHONY : Source/Cell.i
+Body/Chunk.i: Body/Chunk.cpp.i
+.PHONY : Body/Chunk.i
 
 # target to preprocess a source file
-Source/Cell.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/Source/Cell.cpp.i
-.PHONY : Source/Cell.cpp.i
+Body/Chunk.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/Body/Chunk.cpp.i
+.PHONY : Body/Chunk.cpp.i
 
-Source/Cell.s: Source/Cell.cpp.s
-.PHONY : Source/Cell.s
+Body/Chunk.s: Body/Chunk.cpp.s
+.PHONY : Body/Chunk.s
 
 # target to generate assembly for a file
-Source/Cell.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/Source/Cell.cpp.s
-.PHONY : Source/Cell.cpp.s
+Body/Chunk.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/Body/Chunk.cpp.s
+.PHONY : Body/Chunk.cpp.s
 
-Source/Chunk.o: Source/Chunk.cpp.o
-.PHONY : Source/Chunk.o
+Body/Debug.o: Body/Debug.cpp.o
+.PHONY : Body/Debug.o
 
 # target to build an object file
-Source/Chunk.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/Source/Chunk.cpp.o
-.PHONY : Source/Chunk.cpp.o
+Body/Debug.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/Body/Debug.cpp.o
+.PHONY : Body/Debug.cpp.o
 
-Source/Chunk.i: Source/Chunk.cpp.i
-.PHONY : Source/Chunk.i
+Body/Debug.i: Body/Debug.cpp.i
+.PHONY : Body/Debug.i
 
 # target to preprocess a source file
-Source/Chunk.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/Source/Chunk.cpp.i
-.PHONY : Source/Chunk.cpp.i
+Body/Debug.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/Body/Debug.cpp.i
+.PHONY : Body/Debug.cpp.i
 
-Source/Chunk.s: Source/Chunk.cpp.s
-.PHONY : Source/Chunk.s
+Body/Debug.s: Body/Debug.cpp.s
+.PHONY : Body/Debug.s
 
 # target to generate assembly for a file
-Source/Chunk.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/Source/Chunk.cpp.s
-.PHONY : Source/Chunk.cpp.s
+Body/Debug.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/Body/Debug.cpp.s
+.PHONY : Body/Debug.cpp.s
 
-Source/Debug.o: Source/Debug.cpp.o
-.PHONY : Source/Debug.o
+Body/Map.o: Body/Map.cpp.o
+.PHONY : Body/Map.o
 
 # target to build an object file
-Source/Debug.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/Source/Debug.cpp.o
-.PHONY : Source/Debug.cpp.o
+Body/Map.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/Body/Map.cpp.o
+.PHONY : Body/Map.cpp.o
 
-Source/Debug.i: Source/Debug.cpp.i
-.PHONY : Source/Debug.i
+Body/Map.i: Body/Map.cpp.i
+.PHONY : Body/Map.i
 
 # target to preprocess a source file
-Source/Debug.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/Source/Debug.cpp.i
-.PHONY : Source/Debug.cpp.i
+Body/Map.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/Body/Map.cpp.i
+.PHONY : Body/Map.cpp.i
 
-Source/Debug.s: Source/Debug.cpp.s
-.PHONY : Source/Debug.s
+Body/Map.s: Body/Map.cpp.s
+.PHONY : Body/Map.s
 
 # target to generate assembly for a file
-Source/Debug.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/Source/Debug.cpp.s
-.PHONY : Source/Debug.cpp.s
+Body/Map.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/Body/Map.cpp.s
+.PHONY : Body/Map.cpp.s
 
-Source/Map.o: Source/Map.cpp.o
-.PHONY : Source/Map.o
+Body/Neighbor.o: Body/Neighbor.cpp.o
+.PHONY : Body/Neighbor.o
 
 # target to build an object file
-Source/Map.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/Source/Map.cpp.o
-.PHONY : Source/Map.cpp.o
+Body/Neighbor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/Body/Neighbor.cpp.o
+.PHONY : Body/Neighbor.cpp.o
 
-Source/Map.i: Source/Map.cpp.i
-.PHONY : Source/Map.i
+Body/Neighbor.i: Body/Neighbor.cpp.i
+.PHONY : Body/Neighbor.i
 
 # target to preprocess a source file
-Source/Map.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/Source/Map.cpp.i
-.PHONY : Source/Map.cpp.i
+Body/Neighbor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/Body/Neighbor.cpp.i
+.PHONY : Body/Neighbor.cpp.i
 
-Source/Map.s: Source/Map.cpp.s
-.PHONY : Source/Map.s
+Body/Neighbor.s: Body/Neighbor.cpp.s
+.PHONY : Body/Neighbor.s
 
 # target to generate assembly for a file
-Source/Map.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/Source/Map.cpp.s
-.PHONY : Source/Map.cpp.s
+Body/Neighbor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/Body/Neighbor.cpp.s
+.PHONY : Body/Neighbor.cpp.s
 
-Source/Neighbor.o: Source/Neighbor.cpp.o
-.PHONY : Source/Neighbor.o
+Source/Main.o: Source/Main.cpp.o
+.PHONY : Source/Main.o
 
 # target to build an object file
-Source/Neighbor.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/Source/Neighbor.cpp.o
-.PHONY : Source/Neighbor.cpp.o
+Source/Main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/Source/Main.cpp.o
+.PHONY : Source/Main.cpp.o
 
-Source/Neighbor.i: Source/Neighbor.cpp.i
-.PHONY : Source/Neighbor.i
+Source/Main.i: Source/Main.cpp.i
+.PHONY : Source/Main.i
 
 # target to preprocess a source file
-Source/Neighbor.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/Source/Neighbor.cpp.i
-.PHONY : Source/Neighbor.cpp.i
+Source/Main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/Source/Main.cpp.i
+.PHONY : Source/Main.cpp.i
 
-Source/Neighbor.s: Source/Neighbor.cpp.s
-.PHONY : Source/Neighbor.s
+Source/Main.s: Source/Main.cpp.s
+.PHONY : Source/Main.s
 
 # target to generate assembly for a file
-Source/Neighbor.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIFE.dir/build.make CMakeFiles/LIFE.dir/Source/Neighbor.cpp.s
-.PHONY : Source/Neighbor.cpp.s
+Source/Main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/Source/Main.cpp.s
+.PHONY : Source/Main.cpp.s
 
 # Help Target
 help:
@@ -305,28 +281,25 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... LIFE"
-	@echo "... CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.o"
-	@echo "... CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.i"
-	@echo "... CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.s"
-	@echo "... Main.o"
-	@echo "... Main.i"
-	@echo "... Main.s"
-	@echo "... Source/Cell.o"
-	@echo "... Source/Cell.i"
-	@echo "... Source/Cell.s"
-	@echo "... Source/Chunk.o"
-	@echo "... Source/Chunk.i"
-	@echo "... Source/Chunk.s"
-	@echo "... Source/Debug.o"
-	@echo "... Source/Debug.i"
-	@echo "... Source/Debug.s"
-	@echo "... Source/Map.o"
-	@echo "... Source/Map.i"
-	@echo "... Source/Map.s"
-	@echo "... Source/Neighbor.o"
-	@echo "... Source/Neighbor.i"
-	@echo "... Source/Neighbor.s"
+	@echo "... Life"
+	@echo "... Body/Cell.o"
+	@echo "... Body/Cell.i"
+	@echo "... Body/Cell.s"
+	@echo "... Body/Chunk.o"
+	@echo "... Body/Chunk.i"
+	@echo "... Body/Chunk.s"
+	@echo "... Body/Debug.o"
+	@echo "... Body/Debug.i"
+	@echo "... Body/Debug.s"
+	@echo "... Body/Map.o"
+	@echo "... Body/Map.i"
+	@echo "... Body/Map.s"
+	@echo "... Body/Neighbor.o"
+	@echo "... Body/Neighbor.i"
+	@echo "... Body/Neighbor.s"
+	@echo "... Source/Main.o"
+	@echo "... Source/Main.i"
+	@echo "... Source/Main.s"
 .PHONY : help
 
 

@@ -1,3 +1,5 @@
+Note's for life
+
     // creating a space for a game board
 
     Cell cell;

@@ -1,0 +1,38 @@
+[
+{
+  "directory": "/home/frank/Documents/vs_code_git/Life/build",
+  "command": "/usr/bin/g++ -I/home/frank/Documents/vs_code_git/Life/Header -g -std=gnu++20 -Wall -Wextra -Wpedantic -Wshadow -g -o CMakeFiles/Life.dir/Body/Cell.cpp.o -c /home/frank/Documents/vs_code_git/Life/Body/Cell.cpp",
+  "file": "/home/frank/Documents/vs_code_git/Life/Body/Cell.cpp",
+  "output": "CMakeFiles/Life.dir/Body/Cell.cpp.o"
+},
+{
+  "directory": "/home/frank/Documents/vs_code_git/Life/build",
+  "command": "/usr/bin/g++ -I/home/frank/Documents/vs_code_git/Life/Header -g -std=gnu++20 -Wall -Wextra -Wpedantic -Wshadow -g -o CMakeFiles/Life.dir/Body/Chunk.cpp.o -c /home/frank/Documents/vs_code_git/Life/Body/Chunk.cpp",
+  "file": "/home/frank/Documents/vs_code_git/Life/Body/Chunk.cpp",
+  "output": "CMakeFiles/Life.dir/Body/Chunk.cpp.o"
+},
+{
+  "directory": "/home/frank/Documents/vs_code_git/Life/build",
+  "command": "/usr/bin/g++ -I/home/frank/Documents/vs_code_git/Life/Header -g -std=gnu++20 -Wall -Wextra -Wpedantic -Wshadow -g -o CMakeFiles/Life.dir/Body/Debug.cpp.o -c /home/frank/Documents/vs_code_git/Life/Body/Debug.cpp",
+  "file": "/home/frank/Documents/vs_code_git/Life/Body/Debug.cpp",
+  "output": "CMakeFiles/Life.dir/Body/Debug.cpp.o"
+},
+{
+  "directory": "/home/frank/Documents/vs_code_git/Life/build",
+  "command": "/usr/bin/g++ -I/home/frank/Documents/vs_code_git/Life/Header -g -std=gnu++20 -Wall -Wextra -Wpedantic -Wshadow -g -o CMakeFiles/Life.dir/Body/Map.cpp.o -c /home/frank/Documents/vs_code_git/Life/Body/Map.cpp",
+  "file": "/home/frank/Documents/vs_code_git/Life/Body/Map.cpp",
+  "output": "CMakeFiles/Life.dir/Body/Map.cpp.o"
+},
+{
+  "directory": "/home/frank/Documents/vs_code_git/Life/build",
+  "command": "/usr/bin/g++ -I/home/frank/Documents/vs_code_git/Life/Header -g -std=gnu++20 -Wall -Wextra -Wpedantic -Wshadow -g -o CMakeFiles/Life.dir/Body/Neighbor.cpp.o -c /home/frank/Documents/vs_code_git/Life/Body/Neighbor.cpp",
+  "file": "/home/frank/Documents/vs_code_git/Life/Body/Neighbor.cpp",
+  "output": "CMakeFiles/Life.dir/Body/Neighbor.cpp.o"
+},
+{
+  "directory": "/home/frank/Documents/vs_code_git/Life/build",
+  "command": "/usr/bin/g++ -I/home/frank/Documents/vs_code_git/Life/Header -g -std=gnu++20 -Wall -Wextra -Wpedantic -Wshadow -g -o CMakeFiles/Life.dir/Source/Main.cpp.o -c /home/frank/Documents/vs_code_git/Life/Source/Main.cpp",
+  "file": "/home/frank/Documents/vs_code_git/Life/Source/Main.cpp",
+  "output": "CMakeFiles/Life.dir/Source/Main.cpp.o"
+}
+]

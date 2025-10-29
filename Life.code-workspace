@@ -1,12 +1,34 @@
 {
 	"folders": [
-	{ "path": "Bin" },
-    { "path": "Header" },
-    { "path": "Body" },
-    { "path": "Source" },
-	{ "path": "build" },
-	{ "path": "." }
-  ],
+		{
+			"name": "vscode",
+			"path": ".vscode"
+		},
+		{
+			"name": "Bin",
+			"path": "Bin"
+		},
+		{
+			"name": "Header",
+			"path": "Header"
+		},
+		{
+			"name": "Body",
+			"path": "Body"
+		},
+		{
+			"name": "Source",
+			"path": "Source"
+		},
+		{
+			"name": "build",
+			"path": "build"
+		},
+		{
+			"name": "Life",
+			"path": "."
+		}
+	],
 	"settings": {
 		"files.associations": {
 			"format": "cpp",
