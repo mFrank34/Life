@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/frank/Documents/vs_code_git/Life/Bin/Life"
-  "/home/frank/Documents/vs_code_git/Life/Bin/Life.pdb"
+  "/home/frank/Documents/VsCode/Life/Bin/Life"
+  "/home/frank/Documents/VsCode/Life/Bin/Life.pdb"
   "CMakeFiles/Life.dir/link.d"
   "CMakeFiles/Life.dir/Body/Cell.cpp.o"
   "CMakeFiles/Life.dir/Body/Cell.cpp.o.d"

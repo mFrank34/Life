@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/frank/Documents/vs_code_git/Life
+CMAKE_SOURCE_DIR = /home/frank/Documents/VsCode/Life
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/frank/Documents/vs_code_git/Life/build
+CMAKE_BINARY_DIR = /home/frank/Documents/VsCode/Life/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Life.dir/depend.make
@@ -73,88 +73,88 @@ CMakeFiles/Life.dir/codegen:
 .PHONY : CMakeFiles/Life.dir/codegen
 
 CMakeFiles/Life.dir/Body/Cell.cpp.o: CMakeFiles/Life.dir/flags.make
-CMakeFiles/Life.dir/Body/Cell.cpp.o: /home/frank/Documents/vs_code_git/Life/Body/Cell.cpp
+CMakeFiles/Life.dir/Body/Cell.cpp.o: /home/frank/Documents/VsCode/Life/Body/Cell.cpp
 CMakeFiles/Life.dir/Body/Cell.cpp.o: CMakeFiles/Life.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/frank/Documents/vs_code_git/Life/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Life.dir/Body/Cell.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Life.dir/Body/Cell.cpp.o -MF CMakeFiles/Life.dir/Body/Cell.cpp.o.d -o CMakeFiles/Life.dir/Body/Cell.cpp.o -c /home/frank/Documents/vs_code_git/Life/Body/Cell.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/frank/Documents/VsCode/Life/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Life.dir/Body/Cell.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Life.dir/Body/Cell.cpp.o -MF CMakeFiles/Life.dir/Body/Cell.cpp.o.d -o CMakeFiles/Life.dir/Body/Cell.cpp.o -c /home/frank/Documents/VsCode/Life/Body/Cell.cpp
 
 CMakeFiles/Life.dir/Body/Cell.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Life.dir/Body/Cell.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frank/Documents/vs_code_git/Life/Body/Cell.cpp > CMakeFiles/Life.dir/Body/Cell.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frank/Documents/VsCode/Life/Body/Cell.cpp > CMakeFiles/Life.dir/Body/Cell.cpp.i
 
 CMakeFiles/Life.dir/Body/Cell.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Life.dir/Body/Cell.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frank/Documents/vs_code_git/Life/Body/Cell.cpp -o CMakeFiles/Life.dir/Body/Cell.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frank/Documents/VsCode/Life/Body/Cell.cpp -o CMakeFiles/Life.dir/Body/Cell.cpp.s
 
 CMakeFiles/Life.dir/Body/Chunk.cpp.o: CMakeFiles/Life.dir/flags.make
-CMakeFiles/Life.dir/Body/Chunk.cpp.o: /home/frank/Documents/vs_code_git/Life/Body/Chunk.cpp
+CMakeFiles/Life.dir/Body/Chunk.cpp.o: /home/frank/Documents/VsCode/Life/Body/Chunk.cpp
 CMakeFiles/Life.dir/Body/Chunk.cpp.o: CMakeFiles/Life.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/frank/Documents/vs_code_git/Life/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Life.dir/Body/Chunk.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Life.dir/Body/Chunk.cpp.o -MF CMakeFiles/Life.dir/Body/Chunk.cpp.o.d -o CMakeFiles/Life.dir/Body/Chunk.cpp.o -c /home/frank/Documents/vs_code_git/Life/Body/Chunk.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/frank/Documents/VsCode/Life/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Life.dir/Body/Chunk.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Life.dir/Body/Chunk.cpp.o -MF CMakeFiles/Life.dir/Body/Chunk.cpp.o.d -o CMakeFiles/Life.dir/Body/Chunk.cpp.o -c /home/frank/Documents/VsCode/Life/Body/Chunk.cpp
 
 CMakeFiles/Life.dir/Body/Chunk.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Life.dir/Body/Chunk.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frank/Documents/vs_code_git/Life/Body/Chunk.cpp > CMakeFiles/Life.dir/Body/Chunk.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frank/Documents/VsCode/Life/Body/Chunk.cpp > CMakeFiles/Life.dir/Body/Chunk.cpp.i
 
 CMakeFiles/Life.dir/Body/Chunk.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Life.dir/Body/Chunk.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frank/Documents/vs_code_git/Life/Body/Chunk.cpp -o CMakeFiles/Life.dir/Body/Chunk.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frank/Documents/VsCode/Life/Body/Chunk.cpp -o CMakeFiles/Life.dir/Body/Chunk.cpp.s
 
 CMakeFiles/Life.dir/Body/Debug.cpp.o: CMakeFiles/Life.dir/flags.make
-CMakeFiles/Life.dir/Body/Debug.cpp.o: /home/frank/Documents/vs_code_git/Life/Body/Debug.cpp
+CMakeFiles/Life.dir/Body/Debug.cpp.o: /home/frank/Documents/VsCode/Life/Body/Debug.cpp
 CMakeFiles/Life.dir/Body/Debug.cpp.o: CMakeFiles/Life.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/frank/Documents/vs_code_git/Life/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Life.dir/Body/Debug.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Life.dir/Body/Debug.cpp.o -MF CMakeFiles/Life.dir/Body/Debug.cpp.o.d -o CMakeFiles/Life.dir/Body/Debug.cpp.o -c /home/frank/Documents/vs_code_git/Life/Body/Debug.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/frank/Documents/VsCode/Life/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Life.dir/Body/Debug.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Life.dir/Body/Debug.cpp.o -MF CMakeFiles/Life.dir/Body/Debug.cpp.o.d -o CMakeFiles/Life.dir/Body/Debug.cpp.o -c /home/frank/Documents/VsCode/Life/Body/Debug.cpp
 
 CMakeFiles/Life.dir/Body/Debug.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Life.dir/Body/Debug.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frank/Documents/vs_code_git/Life/Body/Debug.cpp > CMakeFiles/Life.dir/Body/Debug.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frank/Documents/VsCode/Life/Body/Debug.cpp > CMakeFiles/Life.dir/Body/Debug.cpp.i
 
 CMakeFiles/Life.dir/Body/Debug.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Life.dir/Body/Debug.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frank/Documents/vs_code_git/Life/Body/Debug.cpp -o CMakeFiles/Life.dir/Body/Debug.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frank/Documents/VsCode/Life/Body/Debug.cpp -o CMakeFiles/Life.dir/Body/Debug.cpp.s
 
 CMakeFiles/Life.dir/Body/Map.cpp.o: CMakeFiles/Life.dir/flags.make
-CMakeFiles/Life.dir/Body/Map.cpp.o: /home/frank/Documents/vs_code_git/Life/Body/Map.cpp
+CMakeFiles/Life.dir/Body/Map.cpp.o: /home/frank/Documents/VsCode/Life/Body/Map.cpp
 CMakeFiles/Life.dir/Body/Map.cpp.o: CMakeFiles/Life.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/frank/Documents/vs_code_git/Life/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Life.dir/Body/Map.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Life.dir/Body/Map.cpp.o -MF CMakeFiles/Life.dir/Body/Map.cpp.o.d -o CMakeFiles/Life.dir/Body/Map.cpp.o -c /home/frank/Documents/vs_code_git/Life/Body/Map.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/frank/Documents/VsCode/Life/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Life.dir/Body/Map.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Life.dir/Body/Map.cpp.o -MF CMakeFiles/Life.dir/Body/Map.cpp.o.d -o CMakeFiles/Life.dir/Body/Map.cpp.o -c /home/frank/Documents/VsCode/Life/Body/Map.cpp
 
 CMakeFiles/Life.dir/Body/Map.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Life.dir/Body/Map.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frank/Documents/vs_code_git/Life/Body/Map.cpp > CMakeFiles/Life.dir/Body/Map.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frank/Documents/VsCode/Life/Body/Map.cpp > CMakeFiles/Life.dir/Body/Map.cpp.i
 
 CMakeFiles/Life.dir/Body/Map.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Life.dir/Body/Map.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frank/Documents/vs_code_git/Life/Body/Map.cpp -o CMakeFiles/Life.dir/Body/Map.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frank/Documents/VsCode/Life/Body/Map.cpp -o CMakeFiles/Life.dir/Body/Map.cpp.s
 
 CMakeFiles/Life.dir/Body/Neighbor.cpp.o: CMakeFiles/Life.dir/flags.make
-CMakeFiles/Life.dir/Body/Neighbor.cpp.o: /home/frank/Documents/vs_code_git/Life/Body/Neighbor.cpp
+CMakeFiles/Life.dir/Body/Neighbor.cpp.o: /home/frank/Documents/VsCode/Life/Body/Neighbor.cpp
 CMakeFiles/Life.dir/Body/Neighbor.cpp.o: CMakeFiles/Life.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/frank/Documents/vs_code_git/Life/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Life.dir/Body/Neighbor.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Life.dir/Body/Neighbor.cpp.o -MF CMakeFiles/Life.dir/Body/Neighbor.cpp.o.d -o CMakeFiles/Life.dir/Body/Neighbor.cpp.o -c /home/frank/Documents/vs_code_git/Life/Body/Neighbor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/frank/Documents/VsCode/Life/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Life.dir/Body/Neighbor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Life.dir/Body/Neighbor.cpp.o -MF CMakeFiles/Life.dir/Body/Neighbor.cpp.o.d -o CMakeFiles/Life.dir/Body/Neighbor.cpp.o -c /home/frank/Documents/VsCode/Life/Body/Neighbor.cpp
 
 CMakeFiles/Life.dir/Body/Neighbor.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Life.dir/Body/Neighbor.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frank/Documents/vs_code_git/Life/Body/Neighbor.cpp > CMakeFiles/Life.dir/Body/Neighbor.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frank/Documents/VsCode/Life/Body/Neighbor.cpp > CMakeFiles/Life.dir/Body/Neighbor.cpp.i
 
 CMakeFiles/Life.dir/Body/Neighbor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Life.dir/Body/Neighbor.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frank/Documents/vs_code_git/Life/Body/Neighbor.cpp -o CMakeFiles/Life.dir/Body/Neighbor.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frank/Documents/VsCode/Life/Body/Neighbor.cpp -o CMakeFiles/Life.dir/Body/Neighbor.cpp.s
 
 CMakeFiles/Life.dir/Source/Main.cpp.o: CMakeFiles/Life.dir/flags.make
-CMakeFiles/Life.dir/Source/Main.cpp.o: /home/frank/Documents/vs_code_git/Life/Source/Main.cpp
+CMakeFiles/Life.dir/Source/Main.cpp.o: /home/frank/Documents/VsCode/Life/Source/Main.cpp
 CMakeFiles/Life.dir/Source/Main.cpp.o: CMakeFiles/Life.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/frank/Documents/vs_code_git/Life/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Life.dir/Source/Main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Life.dir/Source/Main.cpp.o -MF CMakeFiles/Life.dir/Source/Main.cpp.o.d -o CMakeFiles/Life.dir/Source/Main.cpp.o -c /home/frank/Documents/vs_code_git/Life/Source/Main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/frank/Documents/VsCode/Life/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Life.dir/Source/Main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Life.dir/Source/Main.cpp.o -MF CMakeFiles/Life.dir/Source/Main.cpp.o.d -o CMakeFiles/Life.dir/Source/Main.cpp.o -c /home/frank/Documents/VsCode/Life/Source/Main.cpp
 
 CMakeFiles/Life.dir/Source/Main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Life.dir/Source/Main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frank/Documents/vs_code_git/Life/Source/Main.cpp > CMakeFiles/Life.dir/Source/Main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frank/Documents/VsCode/Life/Source/Main.cpp > CMakeFiles/Life.dir/Source/Main.cpp.i
 
 CMakeFiles/Life.dir/Source/Main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Life.dir/Source/Main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frank/Documents/vs_code_git/Life/Source/Main.cpp -o CMakeFiles/Life.dir/Source/Main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frank/Documents/VsCode/Life/Source/Main.cpp -o CMakeFiles/Life.dir/Source/Main.cpp.s
 
 # Object files for target Life
 Life_OBJECTS = \
@@ -168,20 +168,20 @@ Life_OBJECTS = \
 # External object files for target Life
 Life_EXTERNAL_OBJECTS =
 
-/home/frank/Documents/vs_code_git/Life/Bin/Life: CMakeFiles/Life.dir/Body/Cell.cpp.o
-/home/frank/Documents/vs_code_git/Life/Bin/Life: CMakeFiles/Life.dir/Body/Chunk.cpp.o
-/home/frank/Documents/vs_code_git/Life/Bin/Life: CMakeFiles/Life.dir/Body/Debug.cpp.o
-/home/frank/Documents/vs_code_git/Life/Bin/Life: CMakeFiles/Life.dir/Body/Map.cpp.o
-/home/frank/Documents/vs_code_git/Life/Bin/Life: CMakeFiles/Life.dir/Body/Neighbor.cpp.o
-/home/frank/Documents/vs_code_git/Life/Bin/Life: CMakeFiles/Life.dir/Source/Main.cpp.o
-/home/frank/Documents/vs_code_git/Life/Bin/Life: CMakeFiles/Life.dir/build.make
-/home/frank/Documents/vs_code_git/Life/Bin/Life: CMakeFiles/Life.dir/compiler_depend.ts
-/home/frank/Documents/vs_code_git/Life/Bin/Life: CMakeFiles/Life.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/frank/Documents/vs_code_git/Life/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable /home/frank/Documents/vs_code_git/Life/Bin/Life"
+/home/frank/Documents/VsCode/Life/Bin/Life: CMakeFiles/Life.dir/Body/Cell.cpp.o
+/home/frank/Documents/VsCode/Life/Bin/Life: CMakeFiles/Life.dir/Body/Chunk.cpp.o
+/home/frank/Documents/VsCode/Life/Bin/Life: CMakeFiles/Life.dir/Body/Debug.cpp.o
+/home/frank/Documents/VsCode/Life/Bin/Life: CMakeFiles/Life.dir/Body/Map.cpp.o
+/home/frank/Documents/VsCode/Life/Bin/Life: CMakeFiles/Life.dir/Body/Neighbor.cpp.o
+/home/frank/Documents/VsCode/Life/Bin/Life: CMakeFiles/Life.dir/Source/Main.cpp.o
+/home/frank/Documents/VsCode/Life/Bin/Life: CMakeFiles/Life.dir/build.make
+/home/frank/Documents/VsCode/Life/Bin/Life: CMakeFiles/Life.dir/compiler_depend.ts
+/home/frank/Documents/VsCode/Life/Bin/Life: CMakeFiles/Life.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/frank/Documents/VsCode/Life/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable /home/frank/Documents/VsCode/Life/Bin/Life"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Life.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/Life.dir/build: /home/frank/Documents/vs_code_git/Life/Bin/Life
+CMakeFiles/Life.dir/build: /home/frank/Documents/VsCode/Life/Bin/Life
 .PHONY : CMakeFiles/Life.dir/build
 
 CMakeFiles/Life.dir/clean:
@@ -189,6 +189,6 @@ CMakeFiles/Life.dir/clean:
 .PHONY : CMakeFiles/Life.dir/clean
 
 CMakeFiles/Life.dir/depend:
-	cd /home/frank/Documents/vs_code_git/Life/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/frank/Documents/vs_code_git/Life /home/frank/Documents/vs_code_git/Life /home/frank/Documents/vs_code_git/Life/build /home/frank/Documents/vs_code_git/Life/build /home/frank/Documents/vs_code_git/Life/build/CMakeFiles/Life.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/frank/Documents/VsCode/Life/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/frank/Documents/VsCode/Life /home/frank/Documents/VsCode/Life /home/frank/Documents/VsCode/Life/build /home/frank/Documents/VsCode/Life/build /home/frank/Documents/VsCode/Life/build/CMakeFiles/Life.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/Life.dir/depend
 
