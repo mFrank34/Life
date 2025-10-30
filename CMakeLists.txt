@@ -27,6 +27,16 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_SOURCE_DIR}/Header
 )
 
+# --- GTK4 INTEGRATION ---
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GTK4 REQUIRED gtk4)
+
+target_include_directories(${PROJECT_NAME} PRIVATE ${GTK4_INCLUDE_DIRS})
+target_link_directories(${PROJECT_NAME} PRIVATE ${GTK4_LIBRARY_DIRS})
+target_compile_options(${PROJECT_NAME} PRIVATE ${GTK4_CSFLAG_OTHER})
+target_link_libraries(${PROJECT_NAME} PRIVATE ${GTK4_LIBRARIES})
+# --- END GTK4 SECTION ---
+
 # Compiler warnings and debug symbols
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     target_compile_options(${PROJECT_NAME} PRIVATE

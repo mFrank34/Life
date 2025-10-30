@@ -29,6 +29,10 @@
         "files.associations": {
             "*.cpp": "cpp",
             "*.h": "cpp"
-        }
+        },
+        "cSpell.words": [
+            "CFLAGS",
+            "STREQUAL"
+        ]
     }
 }

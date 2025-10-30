@@ -200,6 +200,48 @@ Life_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 Life_SOURCE_DIR:STATIC=/home/frank/Documents/vs_code_git/Life
 
+//Arguments to supply to pkg-config
+PKG_CONFIG_ARGN:STRING=
+
+//pkg-config executable
+PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
+
+//Path to a library.
+pkgcfg_lib_GTK4_cairo:FILEPATH=/usr/lib64/libcairo.so
+
+//Path to a library.
+pkgcfg_lib_GTK4_cairo-gobject:FILEPATH=/usr/lib64/libcairo-gobject.so
+
+//Path to a library.
+pkgcfg_lib_GTK4_gdk_pixbuf-2.0:FILEPATH=/usr/lib64/libgdk_pixbuf-2.0.so
+
+//Path to a library.
+pkgcfg_lib_GTK4_gio-2.0:FILEPATH=/usr/lib64/libgio-2.0.so
+
+//Path to a library.
+pkgcfg_lib_GTK4_glib-2.0:FILEPATH=/usr/lib64/libglib-2.0.so
+
+//Path to a library.
+pkgcfg_lib_GTK4_gobject-2.0:FILEPATH=/usr/lib64/libgobject-2.0.so
+
+//Path to a library.
+pkgcfg_lib_GTK4_graphene-1.0:FILEPATH=/usr/lib64/libgraphene-1.0.so
+
+//Path to a library.
+pkgcfg_lib_GTK4_gtk-4:FILEPATH=/usr/lib64/libgtk-4.so
+
+//Path to a library.
+pkgcfg_lib_GTK4_harfbuzz:FILEPATH=/usr/lib64/libharfbuzz.so
+
+//Path to a library.
+pkgcfg_lib_GTK4_pango-1.0:FILEPATH=/usr/lib64/libpango-1.0.so
+
+//Path to a library.
+pkgcfg_lib_GTK4_pangocairo-1.0:FILEPATH=/usr/lib64/libpangocairo-1.0.so
+
+//Path to a library.
+pkgcfg_lib_GTK4_vulkan:FILEPATH=/usr/lib64/libvulkan.so
+
 
 ########################
 # INTERNAL cache entries
@@ -334,8 +376,76 @@ CMAKE_TAPI-ADVANCED:INTERNAL=1
 CMAKE_UNAME:INTERNAL=/usr/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//Details about finding PkgConfig
+FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v2.3.0()]
+GTK4_CFLAGS:INTERNAL=-I/usr/include/gtk-4.0;-I/usr/include/pango-1.0;-I/usr/include/fribidi;-I/usr/include;-I/usr/include/harfbuzz;-I/usr/include/gdk-pixbuf-2.0;-I/usr/include/webp;-I/usr/include/cairo;-I/usr/include/libxml2;-I/usr/include/freetype2;-I/usr/include/libpng16;-I/usr/include/pixman-1;-I/usr/include/graphene-1.0;-I/usr/lib64/graphene-1.0/include;-mfpmath=sse;-msse;-msse2;-I/usr/include/glib-2.0;-I/usr/lib64/glib-2.0/include;-DWITH_GZFILEOP;-I/usr/include/libmount;-I/usr/include/blkid;-I/usr/include/sysprof-6;-pthread
+GTK4_CFLAGS_I:INTERNAL=
+GTK4_CFLAGS_OTHER:INTERNAL=-mfpmath=sse;-msse;-msse2;-DWITH_GZFILEOP;-pthread
+GTK4_FOUND:INTERNAL=1
+GTK4_INCLUDEDIR:INTERNAL=/usr/include
+GTK4_INCLUDE_DIRS:INTERNAL=/usr/include/gtk-4.0;/usr/include/pango-1.0;/usr/include/fribidi;/usr/include;/usr/include/harfbuzz;/usr/include/gdk-pixbuf-2.0;/usr/include/webp;/usr/include/cairo;/usr/include/libxml2;/usr/include/freetype2;/usr/include/libpng16;/usr/include/pixman-1;/usr/include/graphene-1.0;/usr/lib64/graphene-1.0/include;/usr/include/glib-2.0;/usr/lib64/glib-2.0/include;/usr/include/libmount;/usr/include/blkid;/usr/include/sysprof-6
+GTK4_LDFLAGS:INTERNAL=-L/usr/lib64;-lgtk-4;-lpangocairo-1.0;-lpango-1.0;-lharfbuzz;-lgdk_pixbuf-2.0;-lcairo-gobject;-lcairo;-lvulkan;-lgraphene-1.0;-lgio-2.0;-lgobject-2.0;-lglib-2.0
+GTK4_LDFLAGS_OTHER:INTERNAL=
+GTK4_LIBDIR:INTERNAL=/usr/lib64
+GTK4_LIBRARIES:INTERNAL=gtk-4;pangocairo-1.0;pango-1.0;harfbuzz;gdk_pixbuf-2.0;cairo-gobject;cairo;vulkan;graphene-1.0;gio-2.0;gobject-2.0;glib-2.0
+GTK4_LIBRARY_DIRS:INTERNAL=/usr/lib64
+GTK4_LIBS:INTERNAL=
+GTK4_LIBS_L:INTERNAL=
+GTK4_LIBS_OTHER:INTERNAL=
+GTK4_LIBS_PATHS:INTERNAL=
+GTK4_MODULE_NAME:INTERNAL=gtk4
+GTK4_PREFIX:INTERNAL=/usr
+GTK4_STATIC_CFLAGS:INTERNAL=-I/usr/include/gtk-4.0;-I/usr/include/pango-1.0;-I/usr/include/fribidi;-I/usr/include;-I/usr/include/harfbuzz;-I/usr/include/gdk-pixbuf-2.0;-I/usr/include/webp;-I/usr/include/cairo;-I/usr/include/libxml2;-I/usr/include/freetype2;-I/usr/include/libpng16;-I/usr/include/pixman-1;-I/usr/include/graphene-1.0;-I/usr/lib64/graphene-1.0/include;-mfpmath=sse;-msse;-msse2;-I/usr/include/glib-2.0;-I/usr/lib64/glib-2.0/include;-DWITH_GZFILEOP;-I/usr/include/libmount;-I/usr/include/blkid;-I/usr/include/sysprof-6;-pthread;-DLERC_STATIC;-DLZMA_API_STATIC
+GTK4_STATIC_CFLAGS_I:INTERNAL=
+GTK4_STATIC_CFLAGS_OTHER:INTERNAL=-mfpmath=sse;-msse;-msse2;-DWITH_GZFILEOP;-pthread;-DLERC_STATIC;-DLZMA_API_STATIC
+GTK4_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/gtk-4.0;/usr/include/pango-1.0;/usr/include/fribidi;/usr/include;/usr/include/harfbuzz;/usr/include/gdk-pixbuf-2.0;/usr/include/webp;/usr/include/cairo;/usr/include/libxml2;/usr/include/freetype2;/usr/include/libpng16;/usr/include/pixman-1;/usr/include/graphene-1.0;/usr/lib64/graphene-1.0/include;/usr/include/glib-2.0;/usr/lib64/glib-2.0/include;/usr/include/libmount;/usr/include/blkid;/usr/include/sysprof-6
+GTK4_STATIC_LDFLAGS:INTERNAL=-L/usr/lib64;-lgtk-4;-lpangocairo-1.0;-lm;-lpangoft2-1.0;-lm;-lpango-1.0;-lm;-lfribidi;-lthai;-ldatrie;-lXft;-lharfbuzz-gobject;-lgdk_pixbuf-2.0;-lm;-ltiff;-ljbig;-lz;-lm;-lwebp;-lm;-lsharpyuv;-lm;-lzstd;-pthread;-lLerc;-ljpeg;-lcairo-gobject;-lm;-ldl;-lcairo;-lm;-ldl;-lfontconfig;-pthread;-lm;-lxml2;-lm;-llzma;-pthread;-lpthread;-lfreetype;-lbz2;-lpng16;-lm;-lm;-lharfbuzz;-pthread;-lm;-lgraphite2;-lbrotlidec;-lbrotlicommon;-lXext;-lXrender;-lX11;-lpthread;-lxcb-render;-lxcb-shm;-lxcb;-lXau;-lpixman-1;-lm;-pthread;-lvulkan;-lgraphene-1.0;-lm;-lgio-2.0;-lgobject-2.0;-L/usr/lib64/../lib64;-lffi;-lgmodule-2.0;-pthread;-lglib-2.0;-lm;-lz;-lmount;-lblkid;-lselinux;-lsepol;-lpcre2-8;-lsysprof-capture-4;-pthread
+GTK4_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread;-pthread;-pthread;-pthread;-pthread;-pthread;-pthread
+GTK4_STATIC_LIBDIR:INTERNAL=
+GTK4_STATIC_LIBRARIES:INTERNAL=gtk-4;pangocairo-1.0;m;pangoft2-1.0;m;pango-1.0;m;fribidi;thai;datrie;Xft;harfbuzz-gobject;gdk_pixbuf-2.0;m;tiff;jbig;z;m;webp;m;sharpyuv;m;zstd;Lerc;jpeg;cairo-gobject;m;dl;cairo;m;dl;fontconfig;m;xml2;m;lzma;pthread;freetype;bz2;png16;m;m;harfbuzz;m;graphite2;brotlidec;brotlicommon;Xext;Xrender;X11;pthread;xcb-render;xcb-shm;xcb;Xau;pixman-1;m;vulkan;graphene-1.0;m;gio-2.0;gobject-2.0;ffi;gmodule-2.0;glib-2.0;m;z;mount;blkid;selinux;sepol;pcre2-8;sysprof-capture-4
+GTK4_STATIC_LIBRARY_DIRS:INTERNAL=/usr/lib64;/usr/lib64/../lib64
+GTK4_STATIC_LIBS:INTERNAL=
+GTK4_STATIC_LIBS_L:INTERNAL=
+GTK4_STATIC_LIBS_OTHER:INTERNAL=
+GTK4_STATIC_LIBS_PATHS:INTERNAL=
+GTK4_VERSION:INTERNAL=4.18.6
+GTK4_gtk4_INCLUDEDIR:INTERNAL=
+GTK4_gtk4_LIBDIR:INTERNAL=
+GTK4_gtk4_PREFIX:INTERNAL=
+GTK4_gtk4_VERSION:INTERNAL=
+//ADVANCED property for variable: PKG_CONFIG_ARGN
+PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
+PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 //linker supports push/pop state
 _CMAKE_CXX_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE
 //linker supports push/pop state
 _CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE
+__pkg_config_arguments_GTK4:INTERNAL=REQUIRED;gtk4
+__pkg_config_checked_GTK4:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK4_cairo
+pkgcfg_lib_GTK4_cairo-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK4_cairo-gobject
+pkgcfg_lib_GTK4_cairo-gobject-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK4_gdk_pixbuf-2.0
+pkgcfg_lib_GTK4_gdk_pixbuf-2.0-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK4_gio-2.0
+pkgcfg_lib_GTK4_gio-2.0-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK4_glib-2.0
+pkgcfg_lib_GTK4_glib-2.0-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK4_gobject-2.0
+pkgcfg_lib_GTK4_gobject-2.0-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK4_graphene-1.0
+pkgcfg_lib_GTK4_graphene-1.0-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK4_gtk-4
+pkgcfg_lib_GTK4_gtk-4-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK4_harfbuzz
+pkgcfg_lib_GTK4_harfbuzz-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK4_pango-1.0
+pkgcfg_lib_GTK4_pango-1.0-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK4_pangocairo-1.0
+pkgcfg_lib_GTK4_pangocairo-1.0-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK4_vulkan
+pkgcfg_lib_GTK4_vulkan-ADVANCED:INTERNAL=1
+prefix_result:INTERNAL=/usr/lib64
 

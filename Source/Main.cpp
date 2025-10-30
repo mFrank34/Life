@@ -50,8 +50,8 @@ int main()
     world.debug.all_chunks(world.get_world());
 
     // creating a box within map system
-    int square_x = 32;
-    int square_y = 32;
+    int square_x = 16;
+    int square_y = 16;
 
     std::cout << "Printing to chunks from " << square_x << " " << square_y << "\n\n";
 

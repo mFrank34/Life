@@ -1042,6 +1042,438 @@
 			"value" : "FALSE"
 		},
 		{
+			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Details about finding PkgConfig"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "[/usr/bin/pkg-config][v2.3.0()]"
+		},
+		{
+			"name" : "GTK4_CFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-I/usr/include/gtk-4.0;-I/usr/include/pango-1.0;-I/usr/include/fribidi;-I/usr/include;-I/usr/include/harfbuzz;-I/usr/include/gdk-pixbuf-2.0;-I/usr/include/webp;-I/usr/include/cairo;-I/usr/include/libxml2;-I/usr/include/freetype2;-I/usr/include/libpng16;-I/usr/include/pixman-1;-I/usr/include/graphene-1.0;-I/usr/lib64/graphene-1.0/include;-mfpmath=sse;-msse;-msse2;-I/usr/include/glib-2.0;-I/usr/lib64/glib-2.0/include;-DWITH_GZFILEOP;-I/usr/include/libmount;-I/usr/include/blkid;-I/usr/include/sysprof-6;-pthread"
+		},
+		{
+			"name" : "GTK4_CFLAGS_I",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK4_CFLAGS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-mfpmath=sse;-msse;-msse2;-DWITH_GZFILEOP;-pthread"
+		},
+		{
+			"name" : "GTK4_FOUND",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "1"
+		},
+		{
+			"name" : "GTK4_INCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/usr/include"
+		},
+		{
+			"name" : "GTK4_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/usr/include/gtk-4.0;/usr/include/pango-1.0;/usr/include/fribidi;/usr/include;/usr/include/harfbuzz;/usr/include/gdk-pixbuf-2.0;/usr/include/webp;/usr/include/cairo;/usr/include/libxml2;/usr/include/freetype2;/usr/include/libpng16;/usr/include/pixman-1;/usr/include/graphene-1.0;/usr/lib64/graphene-1.0/include;/usr/include/glib-2.0;/usr/lib64/glib-2.0/include;/usr/include/libmount;/usr/include/blkid;/usr/include/sysprof-6"
+		},
+		{
+			"name" : "GTK4_LDFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-L/usr/lib64;-lgtk-4;-lpangocairo-1.0;-lpango-1.0;-lharfbuzz;-lgdk_pixbuf-2.0;-lcairo-gobject;-lcairo;-lvulkan;-lgraphene-1.0;-lgio-2.0;-lgobject-2.0;-lglib-2.0"
+		},
+		{
+			"name" : "GTK4_LDFLAGS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK4_LIBDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/usr/lib64"
+		},
+		{
+			"name" : "GTK4_LIBRARIES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "gtk-4;pangocairo-1.0;pango-1.0;harfbuzz;gdk_pixbuf-2.0;cairo-gobject;cairo;vulkan;graphene-1.0;gio-2.0;gobject-2.0;glib-2.0"
+		},
+		{
+			"name" : "GTK4_LIBRARY_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/usr/lib64"
+		},
+		{
+			"name" : "GTK4_LIBS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK4_LIBS_L",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK4_LIBS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK4_LIBS_PATHS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK4_MODULE_NAME",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "gtk4"
+		},
+		{
+			"name" : "GTK4_PREFIX",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/usr"
+		},
+		{
+			"name" : "GTK4_STATIC_CFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-I/usr/include/gtk-4.0;-I/usr/include/pango-1.0;-I/usr/include/fribidi;-I/usr/include;-I/usr/include/harfbuzz;-I/usr/include/gdk-pixbuf-2.0;-I/usr/include/webp;-I/usr/include/cairo;-I/usr/include/libxml2;-I/usr/include/freetype2;-I/usr/include/libpng16;-I/usr/include/pixman-1;-I/usr/include/graphene-1.0;-I/usr/lib64/graphene-1.0/include;-mfpmath=sse;-msse;-msse2;-I/usr/include/glib-2.0;-I/usr/lib64/glib-2.0/include;-DWITH_GZFILEOP;-I/usr/include/libmount;-I/usr/include/blkid;-I/usr/include/sysprof-6;-pthread;-DLERC_STATIC;-DLZMA_API_STATIC"
+		},
+		{
+			"name" : "GTK4_STATIC_CFLAGS_I",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK4_STATIC_CFLAGS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-mfpmath=sse;-msse;-msse2;-DWITH_GZFILEOP;-pthread;-DLERC_STATIC;-DLZMA_API_STATIC"
+		},
+		{
+			"name" : "GTK4_STATIC_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/usr/include/gtk-4.0;/usr/include/pango-1.0;/usr/include/fribidi;/usr/include;/usr/include/harfbuzz;/usr/include/gdk-pixbuf-2.0;/usr/include/webp;/usr/include/cairo;/usr/include/libxml2;/usr/include/freetype2;/usr/include/libpng16;/usr/include/pixman-1;/usr/include/graphene-1.0;/usr/lib64/graphene-1.0/include;/usr/include/glib-2.0;/usr/lib64/glib-2.0/include;/usr/include/libmount;/usr/include/blkid;/usr/include/sysprof-6"
+		},
+		{
+			"name" : "GTK4_STATIC_LDFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-L/usr/lib64;-lgtk-4;-lpangocairo-1.0;-lm;-lpangoft2-1.0;-lm;-lpango-1.0;-lm;-lfribidi;-lthai;-ldatrie;-lXft;-lharfbuzz-gobject;-lgdk_pixbuf-2.0;-lm;-ltiff;-ljbig;-lz;-lm;-lwebp;-lm;-lsharpyuv;-lm;-lzstd;-pthread;-lLerc;-ljpeg;-lcairo-gobject;-lm;-ldl;-lcairo;-lm;-ldl;-lfontconfig;-pthread;-lm;-lxml2;-lm;-llzma;-pthread;-lpthread;-lfreetype;-lbz2;-lpng16;-lm;-lm;-lharfbuzz;-pthread;-lm;-lgraphite2;-lbrotlidec;-lbrotlicommon;-lXext;-lXrender;-lX11;-lpthread;-lxcb-render;-lxcb-shm;-lxcb;-lXau;-lpixman-1;-lm;-pthread;-lvulkan;-lgraphene-1.0;-lm;-lgio-2.0;-lgobject-2.0;-L/usr/lib64/../lib64;-lffi;-lgmodule-2.0;-pthread;-lglib-2.0;-lm;-lz;-lmount;-lblkid;-lselinux;-lsepol;-lpcre2-8;-lsysprof-capture-4;-pthread"
+		},
+		{
+			"name" : "GTK4_STATIC_LDFLAGS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-pthread;-pthread;-pthread;-pthread;-pthread;-pthread;-pthread"
+		},
+		{
+			"name" : "GTK4_STATIC_LIBDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK4_STATIC_LIBRARIES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "gtk-4;pangocairo-1.0;m;pangoft2-1.0;m;pango-1.0;m;fribidi;thai;datrie;Xft;harfbuzz-gobject;gdk_pixbuf-2.0;m;tiff;jbig;z;m;webp;m;sharpyuv;m;zstd;Lerc;jpeg;cairo-gobject;m;dl;cairo;m;dl;fontconfig;m;xml2;m;lzma;pthread;freetype;bz2;png16;m;m;harfbuzz;m;graphite2;brotlidec;brotlicommon;Xext;Xrender;X11;pthread;xcb-render;xcb-shm;xcb;Xau;pixman-1;m;vulkan;graphene-1.0;m;gio-2.0;gobject-2.0;ffi;gmodule-2.0;glib-2.0;m;z;mount;blkid;selinux;sepol;pcre2-8;sysprof-capture-4"
+		},
+		{
+			"name" : "GTK4_STATIC_LIBRARY_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/usr/lib64;/usr/lib64/../lib64"
+		},
+		{
+			"name" : "GTK4_STATIC_LIBS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK4_STATIC_LIBS_L",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK4_STATIC_LIBS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK4_STATIC_LIBS_PATHS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK4_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "4.18.6"
+		},
+		{
+			"name" : "GTK4_gtk4_INCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK4_gtk4_LIBDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK4_gtk4_PREFIX",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK4_gtk4_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
 			"name" : "Life_BINARY_DIR",
 			"properties" : 
 			[
@@ -1078,6 +1510,38 @@
 			"value" : "/home/frank/Documents/vs_code_git/Life"
 		},
 		{
+			"name" : "PKG_CONFIG_ARGN",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Arguments to supply to pkg-config"
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "PKG_CONFIG_EXECUTABLE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "pkg-config executable"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/usr/bin/pkg-config"
+		},
+		{
 			"name" : "_CMAKE_CXX_LINKER_PUSHPOP_STATE_SUPPORTED",
 			"properties" : 
 			[
@@ -1100,6 +1564,234 @@
 			],
 			"type" : "INTERNAL",
 			"value" : "TRUE"
+		},
+		{
+			"name" : "__pkg_config_arguments_GTK4",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "REQUIRED;gtk4"
+		},
+		{
+			"name" : "__pkg_config_checked_GTK4",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "1"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK4_cairo",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/usr/lib64/libcairo.so"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK4_cairo-gobject",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/usr/lib64/libcairo-gobject.so"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK4_gdk_pixbuf-2.0",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/usr/lib64/libgdk_pixbuf-2.0.so"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK4_gio-2.0",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/usr/lib64/libgio-2.0.so"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK4_glib-2.0",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/usr/lib64/libglib-2.0.so"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK4_gobject-2.0",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/usr/lib64/libgobject-2.0.so"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK4_graphene-1.0",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/usr/lib64/libgraphene-1.0.so"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK4_gtk-4",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/usr/lib64/libgtk-4.so"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK4_harfbuzz",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/usr/lib64/libharfbuzz.so"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK4_pango-1.0",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/usr/lib64/libpango-1.0.so"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK4_pangocairo-1.0",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/usr/lib64/libpangocairo-1.0.so"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK4_vulkan",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/usr/lib64/libvulkan.so"
+		},
+		{
+			"name" : "prefix_result",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/usr/lib64"
 		}
 	],
 	"kind" : "cache",

@@ -2,5 +2,11 @@
     "cmake.sourceDirectory": "${workspaceFolder}",
     "cmake.buildDirectory": "${workspaceFolder}/build",
     "cmake.buildBeforeRun": true,
-    "cmake.configureOnOpen": true
+    "cmake.configureOnOpen": true,
+    "cSpell.words": [
+        "MSVC",
+        "Wextra",
+        "Wpedantic",
+        "Wshadow"
+    ]
 }
