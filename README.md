@@ -13,3 +13,10 @@
 ## Goal 
 Recreate the game of life, that allows for custom cell type that have different rule set to other cell.
 Creating a eco-system that would all for different cells to protect, hunt, hide.
+
+---
+## Note's
+- Map complete add function to class for debugging tools or extra features 
+- add UI system to view the map (good Luck frank)
+- understand how to make system to interact with map/simulation manager.
+- something something intresting to type

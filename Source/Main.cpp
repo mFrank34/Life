@@ -13,7 +13,7 @@ NOTES:
     - so far created a map system that can hold two types of data bool and char file type in
         class from cell that holds a bool and char, and coors.
     - next steps to create a system for viewing the map
-    -
+    - add UI elements for map viewing 
 */
 
 /*
