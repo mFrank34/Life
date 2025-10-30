@@ -1,11 +1,14 @@
-# CMake build folders
+# Build artifacts
 /build/
-/CMakeFiles/
+CMakeFiles/
 CMakeCache.txt
-.vscode/
-*.ninja
-*.o
-*.obj
-*.pdb
-*.exe
+cmake_install.cmake
+Makefile
 
+# VS Code
+.vscode/
+*.code-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
