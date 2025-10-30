@@ -8,13 +8,13 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/frank/Documents/VsCode/Life/Body/Cell.cpp" "CMakeFiles/Life.dir/Body/Cell.cpp.o" "gcc" "CMakeFiles/Life.dir/Body/Cell.cpp.o.d"
-  "/home/frank/Documents/VsCode/Life/Body/Chunk.cpp" "CMakeFiles/Life.dir/Body/Chunk.cpp.o" "gcc" "CMakeFiles/Life.dir/Body/Chunk.cpp.o.d"
-  "/home/frank/Documents/VsCode/Life/Body/Debug.cpp" "CMakeFiles/Life.dir/Body/Debug.cpp.o" "gcc" "CMakeFiles/Life.dir/Body/Debug.cpp.o.d"
-  "/home/frank/Documents/VsCode/Life/Body/Map.cpp" "CMakeFiles/Life.dir/Body/Map.cpp.o" "gcc" "CMakeFiles/Life.dir/Body/Map.cpp.o.d"
-  "/home/frank/Documents/VsCode/Life/Body/Neighbor.cpp" "CMakeFiles/Life.dir/Body/Neighbor.cpp.o" "gcc" "CMakeFiles/Life.dir/Body/Neighbor.cpp.o.d"
-  "/home/frank/Documents/VsCode/Life/Source/Main.cpp" "CMakeFiles/Life.dir/Source/Main.cpp.o" "gcc" "CMakeFiles/Life.dir/Source/Main.cpp.o.d"
-  "" "/home/frank/Documents/VsCode/Life/Bin/Life" "gcc" "CMakeFiles/Life.dir/link.d"
+  "/home/frank/vscode/Life/body/Cell.cpp" "CMakeFiles/Life.dir/body/Cell.cpp.o" "gcc" "CMakeFiles/Life.dir/body/Cell.cpp.o.d"
+  "/home/frank/vscode/Life/body/Chunk.cpp" "CMakeFiles/Life.dir/body/Chunk.cpp.o" "gcc" "CMakeFiles/Life.dir/body/Chunk.cpp.o.d"
+  "/home/frank/vscode/Life/body/Debug.cpp" "CMakeFiles/Life.dir/body/Debug.cpp.o" "gcc" "CMakeFiles/Life.dir/body/Debug.cpp.o.d"
+  "/home/frank/vscode/Life/body/Map.cpp" "CMakeFiles/Life.dir/body/Map.cpp.o" "gcc" "CMakeFiles/Life.dir/body/Map.cpp.o.d"
+  "/home/frank/vscode/Life/body/Neighbor.cpp" "CMakeFiles/Life.dir/body/Neighbor.cpp.o" "gcc" "CMakeFiles/Life.dir/body/Neighbor.cpp.o.d"
+  "/home/frank/vscode/Life/source/Main.cpp" "CMakeFiles/Life.dir/source/Main.cpp.o" "gcc" "CMakeFiles/Life.dir/source/Main.cpp.o.d"
+  "" "/home/frank/vscode/Life/bin/Life" "gcc" "CMakeFiles/Life.dir/link.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
