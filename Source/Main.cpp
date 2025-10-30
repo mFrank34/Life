@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <gtk/gtk.h>
 
 // custom class
 #include "Cell.h"
@@ -24,61 +25,5 @@ Miles Stones:
 
 int main()
 {
-    Map world;
 
-    int x = 50;
-    int y = 50;
-
-    world.get_cell(x, y).set_type('w');
-
-    std::cout << "World cell at " << x << " " << y << " Type: "
-              << world.get_cell(x, y).get_type() << "\n";
-
-    world.get_cell(100, 100).set_type('0'); // test
-
-    world.debug.positions(x, y);
-
-    world.debug.all_chunks(world.get_world());
-
-    std::cout << "Unloading... \n";
-
-    // debugging
-    world.unload();
-
-    std::cout << "Printing Chunks in unodered map\n";
-
-    world.debug.all_chunks(world.get_world());
-
-    // creating a box within map system
-    int square_x = 16;
-    int square_y = 16;
-
-    std::cout << "Printing to chunks from " << square_x << " " << square_y << "\n\n";
-
-    for (int sx = 0; sx < square_x; ++sx)
-    {
-        for (int sy = 0; sy < square_y; ++sy)
-        {
-            world.get_cell(sx, sy).set_type('w');
-        }
-    }
-
-    // active chunks amount
-    std::cout << "Active Chunks: " << world.debug.active_chunks(world.get_world()) << "\n";
-
-    world.debug.all_chunks(world.get_world());
-
-    // unload chunks that not full
-    std::cout << "Unloading... \n";
-    world.unload();
-
-    std::cout << "print currents chunks in memory\n\n";
-
-    // display chunks again
-    world.debug.all_chunks(world.get_world());
-
-    // active chunks amount
-    std::cout << "Active Chunks: " << world.debug.active_chunks(world.get_world()) << "\n";
-
-    return 0;
 };
