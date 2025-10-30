@@ -14,9 +14,7 @@ NOTES:
         class from cell that holds a bool and char, and coors.
     - next steps to create a system for viewing the map
     - add UI elements for map viewing
-*/
 
-/*
 Miles Stones:
     - Map system created, able to view a single cell and chunk with global coors.
     - next to make way for node to interact with map, partly done with with cell type and active note.
@@ -35,7 +33,7 @@ int main()
     std::cout << "World cell at " << x << " " << y << " Type: "
               << world.get_cell(x, y).get_type() << "\n";
 
-    world.get_cell(100, 100).set_type('0'); // test
+    world.get_cell(100, 100).set_type('0');
 
     world.debug.positions(x, y);
 
@@ -81,7 +79,7 @@ int main()
     // active chunks amount
     std::cout << "Active Chunks: " << world.debug.active_chunks(world.get_world()) << "\n";
 
-    std::cout << "End Program \n";
+    std::cout << "End Program 1\n";
 
     return 0;
 }
