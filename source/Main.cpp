@@ -1,4 +1,4 @@
-//#include <gtk/gtk.h>
+#include <gtk/gtk.h>
 #include <iostream>
 #include <vector>
 
@@ -23,6 +23,7 @@ Miles Stones:
 
 int main()
 {
+    
     Map world;
 
     int x = 50;
