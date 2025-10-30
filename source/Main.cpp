@@ -1,4 +1,4 @@
-#include <gtk/gtk.h>
+//#include <gtk/gtk.h>
 #include <iostream>
 #include <vector>
 
@@ -13,7 +13,7 @@ NOTES:
     - so far created a map system that can hold two types of data bool and char file type in
         class from cell that holds a bool and char, and coors.
     - next steps to create a system for viewing the map
-    - add UI elements for map viewing 
+    - add UI elements for map viewing
 */
 
 /*
@@ -23,25 +23,63 @@ Miles Stones:
     -
 */
 
-static void activate(GtkApplication *app, gpointer user_data) 
+int main()
 {
-    GtkWidget *window;
+    Map world;
 
-    window = gtk_application_window_new(app);
-    gtk_window_set_title(GTK_WINDOW(window), "Window");
-    gtk_window_set_default_size(GTK_WINDOW(window), 200, 200);
-    gtk_window_present(GTK_WINDOW(window));
-}
+    int x = 50;
+    int y = 50;
 
-int main(int argc, char **argv)
-{
-    GtkApplication *app;
-    int status;
+    world.get_cell(x, y).set_type('w');
 
-    app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
-    g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
-    status = g_application_run(G_APPLICATION(app), argc, argv);
-    g_object_unref(app);
+    std::cout << "World cell at " << x << " " << y << " Type: "
+              << world.get_cell(x, y).get_type() << "\n";
 
-    return status;
+    world.get_cell(100, 100).set_type('0'); // test
+
+    world.debug.positions(x, y);
+
+    world.debug.all_chunks(world.get_world());
+
+    std::cout << "Unloading... \n";
+
+    // debugging
+    world.unload();
+
+    std::cout << "Printing Chunks in unodered map\n";
+
+    world.debug.all_chunks(world.get_world());
+
+    // creating a box within map system
+    int square_x = 16;
+    int square_y = 16;
+
+    std::cout << "Printing to chunks from " << square_x << " " << square_y << "\n\n";
+
+    for (int sx = 0; sx < square_x; ++sx)
+    {
+        for (int sy = 0; sy < square_y; ++sy)
+        {
+            world.get_cell(sx, sy).set_type('w');
+        }
+    }
+
+    // active chunks amount
+    std::cout << "Active Chunks: " << world.debug.active_chunks(world.get_world()) << "\n";
+
+    world.debug.all_chunks(world.get_world());
+
+    // unload chunks that not full
+    std::cout << "Unloading... \n";
+    world.unload();
+
+    std::cout << "print currents chunks in memory\n\n";
+
+    // display chunks again
+    world.debug.all_chunks(world.get_world());
+
+    // active chunks amount
+    std::cout << "Active Chunks: " << world.debug.active_chunks(world.get_world()) << "\n";
+
+    return 0;
 }
