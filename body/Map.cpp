@@ -20,8 +20,8 @@ Cell &Map::get_cell(int global_x, int global_y)
     Chunk &chunk = generate_chunk(chunk_x, chunk_y);
 
     // cords maths for x and y
-    int local_x = global_x - chunk_x * Chunk::CHUNK_SIZE;
-    int local_y = global_y - chunk_y * Chunk::CHUNK_SIZE;
+    int local_x = chunk.local_x(global_x);
+    int local_y = chunk.local_y(global_y);
 
     // return the cell
     return chunk.get_cell(local_x, local_y);

@@ -1,6 +1,5 @@
 #include "Debug.h"
 #include "Map.h"
-#include "Chunk.h" // if needed
 
 void Debug::set(Map *map_ptr)
 {
@@ -11,7 +10,7 @@ void Debug::positions(int global_x, int global_y)
 {
     if (!map)
     {
-        std::cerr << "Debug error: no Map set!\n"; // error handling 
+        std::cerr << "Debug error: no Map set!\n"; // error handling
         return;
     }
 
@@ -19,8 +18,8 @@ void Debug::positions(int global_x, int global_y)
     Chunk &chunk = map->get_chunk(global_x, global_y);
 
     // coordinate math
-    int local_x = global_x - chunk.get_x() * Chunk::CHUNK_SIZE;
-    int local_y = global_y - chunk.get_y() * Chunk::CHUNK_SIZE;
+    int local_x = chunk.local_x(global_x);
+    int local_y = chunk.local_y(global_y);
 
     // get cell
     Cell &cell = chunk.get_cell(local_x, local_y);
@@ -54,11 +53,10 @@ int Debug::active_chunks()
     const std::unordered_map<long long, Chunk> chunks = map->get_world();
     int active = 0;
     for (const auto &selected : chunks)
-    {   
+    {
         Chunk chunk = selected.second;
         if (chunk.is_populated())
             active++; // you forget you can do it like this...
     }
     return active;
 }
-

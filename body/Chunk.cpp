@@ -40,6 +40,18 @@ int Chunk::get_y() const
     return chunk_y;
 }
 
+/* Gets Local X*/
+int Chunk::local_x(int global_x)
+{
+    return global_x - get_x() * Chunk::CHUNK_SIZE;
+}
+
+/* Gets Local Y*/
+int Chunk::local_y(int global_y)
+{
+    return global_y - get_y() * Chunk::CHUNK_SIZE;
+}
+
 void Chunk::print_chunk() const
 {
     for (int y = 0; y < CHUNK_SIZE; ++y)

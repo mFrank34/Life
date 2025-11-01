@@ -25,6 +25,12 @@ public:
     // Gets Chunk Y
     int get_y() const;
 
+    // Local X
+    int local_x(int global_x);
+
+    // local Y 
+    int local_y(int global_y);
+
     // debugging chunks
     void print_chunk() const;
 

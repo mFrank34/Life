@@ -81,5 +81,7 @@ int main()
 
     std::cout << "End Program 1\n";
 
+    world.debug.all_chunks();
+
     return 0;
 }
