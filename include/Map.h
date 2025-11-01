@@ -27,6 +27,8 @@ public:
 
     void unload();
 
+    void update(Life &rules);
+
 private:
     // finds or generated a chunk
     Chunk &generate_chunk(int chunk_x, int chunk_y);

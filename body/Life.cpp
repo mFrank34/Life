@@ -13,7 +13,7 @@ bool Life::underpopulation(int c)
 // Any live cell with two or three live neighbours lives on to the next generation.
 bool Life::survival(int c)
 {
-    if (c < min || c < limit)
+    if (c == min || c == limit)
         return true;
     return false;
 }

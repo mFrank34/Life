@@ -18,7 +18,7 @@ NOTES:
 Miles Stones:
     - Map system created, able to view a single cell and chunk with global coors.
     - next to make way for node to interact with map, partly done with with cell type and active note.
-    - 
+    -
 */
 
 int main()
@@ -79,9 +79,9 @@ int main()
     // active chunks amount
     std::cout << "Active Chunks: " << world.debug.active_chunks() << "\n";
 
-    std::cout << "End Program 1\n";
-
     world.debug.all_chunks();
+
+    std::cout << "End Program\n";
 
     return 0;
 }

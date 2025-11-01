@@ -6,6 +6,7 @@ class Life
 public:
     Life();
 
+    // 
     bool underpopulation(int c);
 
     bool survival(int c);
@@ -20,7 +21,6 @@ private:
     // limits 
     int limit = 3;
     int min = 2;
-    
 };
 
 #endif

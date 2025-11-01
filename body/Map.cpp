@@ -1,5 +1,6 @@
 #include "Map.h"
 #include "Debug.h"
+#include "Life.h"
 
 Map::Map()
 {
@@ -74,6 +75,11 @@ void Map::unload()
             ++selected;
         }
     }
+}
+
+void Map::update(Life &rules)
+{
+
 }
 
 Chunk &Map::generate_chunk(int chunk_x, int chunk_y)

@@ -1,5 +1,6 @@
 #include "Chunk.h"
 #include "Cell.h"
+#include "Life.h"
 
 // creates class    | sets the cords for chunk
 Chunk::Chunk(int input_x, int input_y) : chunk_x(input_x), chunk_y(input_y)
@@ -96,8 +97,9 @@ bool Chunk::is_populated()
             }
         }
     }
-    // if none are alive returns false 
+    // if none are alive returns false
     return false;
 }
+
 
 Chunk::~Chunk() {};
