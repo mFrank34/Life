@@ -6,18 +6,21 @@ class Life
 public:
     Life();
 
-    bool dies();
+    bool underpopulation(int c);
 
-    bool lives();
+    bool survival(int c);
 
-    bool overpopulation();
+    bool overpopulation(int c);
 
-    bool reproduction();
+    bool reproduction(int c);
 
     ~Life();
 
 private:
-    // private stuff though
+    // limits 
+    int limit = 3;
+    int min = 2;
+    
 };
 
 #endif
