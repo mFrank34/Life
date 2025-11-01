@@ -23,7 +23,6 @@ Miles Stones:
 
 int main()
 {
-    
     Map world;
 
     int x = 50;
@@ -38,7 +37,7 @@ int main()
 
     world.debug.positions(x, y);
 
-    world.debug.all_chunks(world.get_world());
+    world.debug.all_chunks();
 
     std::cout << "Unloading... \n";
 
@@ -47,7 +46,7 @@ int main()
 
     std::cout << "Printing Chunks in unodered map\n";
 
-    world.debug.all_chunks(world.get_world());
+    world.debug.all_chunks();
 
     // creating a box within map system
     int square_x = 16;
@@ -64,9 +63,9 @@ int main()
     }
 
     // active chunks amount
-    std::cout << "Active Chunks: " << world.debug.active_chunks(world.get_world()) << "\n";
+    std::cout << "Active Chunks: " << world.debug.active_chunks() << "\n";
 
-    world.debug.all_chunks(world.get_world());
+    world.debug.all_chunks();
 
     // unload chunks that not full
     std::cout << "Unloading... \n";
@@ -75,10 +74,10 @@ int main()
     std::cout << "print currents chunks in memory\n\n";
 
     // display chunks again
-    world.debug.all_chunks(world.get_world());
+    world.debug.all_chunks();
 
     // active chunks amount
-    std::cout << "Active Chunks: " << world.debug.active_chunks(world.get_world()) << "\n";
+    std::cout << "Active Chunks: " << world.debug.active_chunks() << "\n";
 
     std::cout << "End Program 1\n";
 

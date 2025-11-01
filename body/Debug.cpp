@@ -33,8 +33,9 @@ void Debug::positions(int global_x, int global_y)
     std::cout << "Cell Type: '" << cell.get_type() << "'\n\n";
 }
 
-void Debug::all_chunks(const std::unordered_map<long long, Chunk> chunks)
+void Debug::all_chunks()
 {
+    const std::unordered_map<long long, Chunk> chunks = map->get_world();
     for (const auto &selected : chunks)
     {
         long long key = selected.first;
@@ -48,8 +49,9 @@ void Debug::all_chunks(const std::unordered_map<long long, Chunk> chunks)
     }
 }
 
-int Debug::active_chunks(const std::unordered_map<long long, Chunk> chunks)
+int Debug::active_chunks()
 {
+    const std::unordered_map<long long, Chunk> chunks = map->get_world();
     int active = 0;
     for (const auto &selected : chunks)
     {   

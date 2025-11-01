@@ -1,7 +1,10 @@
 #include "Map.h"
 #include "Debug.h"
 
-Map::Map() {};
+Map::Map()
+{
+    debug.set(this);
+};
 
 std::unordered_map<long long, Chunk> Map::get_world()
 {

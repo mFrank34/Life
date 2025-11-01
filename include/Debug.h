@@ -18,10 +18,10 @@ public:
 
     // print data
     void positions(int global_x, int global_y);
-    void all_chunks(const std::unordered_map<long long, Chunk> chunks);
+    void all_chunks();
 
     // find active chunks within map system
-    int active_chunks(const std::unordered_map<long long, Chunk> chunks);
+    int active_chunks();
 
 private:
     Map *map = nullptr;
