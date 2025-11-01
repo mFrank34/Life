@@ -82,6 +82,7 @@
   CMakeFiles/Life.dir/body/Cell.cpp.o \
   CMakeFiles/Life.dir/body/Chunk.cpp.o \
   CMakeFiles/Life.dir/body/Debug.cpp.o \
+  CMakeFiles/Life.dir/body/Manager.cpp.o \
   CMakeFiles/Life.dir/body/Map.cpp.o \
   CMakeFiles/Life.dir/body/Neighbor.cpp.o \
   CMakeFiles/Life.dir/source/Main.cpp.o
@@ -753,6 +754,14 @@ CMakeFiles/Life.dir/body/Debug.cpp.o: /home/frank/vscode/Life/body/Debug.cpp \
   /usr/include/wctype.h \
   /usr/lib/gcc/x86_64-redhat-linux/15/include/stdarg.h \
   /usr/lib/gcc/x86_64-redhat-linux/15/include/stddef.h
+
+CMakeFiles/Life.dir/body/Life.cpp.o: /home/frank/vscode/Life/body/Life.cpp \
+  /home/frank/vscode/Life/include/Life.h \
+  /usr/include/stdc-predef.h
+
+CMakeFiles/Life.dir/body/Manager.cpp.o: /home/frank/vscode/Life/body/Manager.cpp \
+  /home/frank/vscode/Life/include/Manager.h \
+  /usr/include/stdc-predef.h
 
 CMakeFiles/Life.dir/body/Map.cpp.o: /home/frank/vscode/Life/body/Map.cpp \
   /home/frank/vscode/Life/include/Cell.h \
@@ -2313,6 +2322,10 @@ CMakeFiles/Life.dir/source/Main.cpp.o: /home/frank/vscode/Life/source/Main.cpp \
 
 /usr/include/pango-1.0/pango/pango-language.h:
 
+/usr/include/pango-1.0/pango/pango-glyph.h:
+
+/usr/include/pango-1.0/pango/pango-glyph-item.h:
+
 /usr/include/c++/15/bits/concept_check.h:
 
 /usr/include/gtk-4.0/gtk/gtkshortcutcontroller.h:
@@ -2372,10 +2385,6 @@ CMakeFiles/Life.dir/source/Main.cpp.o: /home/frank/vscode/Life/source/Main.cpp \
 /usr/include/c++/15/bits/stl_iterator_base_funcs.h:
 
 /usr/include/glib-2.0/gio/gio-autocleanups.h:
-
-/usr/include/glib-2.0/gio/gsimpleactiongroup.h:
-
-/usr/lib64/libharfbuzz.so:
 
 /usr/include/glib-2.0/gio/gicon.h:
 
@@ -2615,6 +2624,8 @@ CMakeFiles/Life.dir/source/Main.cpp.o: /home/frank/vscode/Life/source/Main.cpp \
 
 /home/frank/vscode/Life/body/Map.cpp:
 
+/home/frank/vscode/Life/body/Life.cpp:
+
 /home/frank/vscode/Life/body/Cell.cpp:
 
 /usr/include/glib-2.0/gio/gconverterinputstream.h:
@@ -2630,8 +2641,6 @@ CMakeFiles/Life.dir/source/Main.cpp.o: /home/frank/vscode/Life/source/Main.cpp \
 /usr/include/glib-2.0/gio/gdbusinterfaceskeleton.h:
 
 /home/frank/vscode/Life/include/Map.h:
-
-/usr/include/glib-2.0/gio/gsettingsschema.h:
 
 /usr/include/graphene-1.0/graphene-quad.h:
 
@@ -2725,10 +2734,6 @@ CMakeFiles/Life.dir/source/Main.cpp.o: /home/frank/vscode/Life/source/Main.cpp \
 
 /usr/include/gtk-4.0/gtk/gtkaccessible.h:
 
-/usr/include/glib-2.0/gio/gsettings.h:
-
-/usr/include/c++/15/optional:
-
 /usr/include/gtk-4.0/gtk/deprecated/gtktreemodelsort.h:
 
 /usr/include/glib-2.0/gio/gdbusnamewatching.h:
@@ -2743,9 +2748,17 @@ CMakeFiles/Life.dir/source/Main.cpp.o: /home/frank/vscode/Life/source/Main.cpp \
 
 /usr/include/gtk-4.0/gdk/gdktoplevellayout.h:
 
+/usr/include/c++/15/x86_64-redhat-linux/bits/c++allocator.h:
+
 /usr/include/glib-2.0/gio/gdtlsconnection.h:
 
 /usr/include/bits/flt-eval-method.h:
+
+/usr/include/pango-1.0/pango/pango-fontset.h:
+
+/usr/include/c++/15/tr1/modified_bessel_func.tcc:
+
+/usr/lib64/libepoxy.so.0:
 
 /usr/lib64/libbrotlicommon.so.1:
 
@@ -2813,7 +2826,13 @@ CMakeFiles/Life.dir/source/Main.cpp.o: /home/frank/vscode/Life/source/Main.cpp \
 
 /usr/include/c++/15/string:
 
+/usr/include/bits/wctype-wchar.h:
+
 /usr/include/glib-2.0/gio/giostream.h:
+
+/usr/include/c++/15/optional:
+
+/usr/include/glib-2.0/gio/gsettings.h:
 
 /usr/include/asm-generic/errno.h:
 
@@ -2854,8 +2873,6 @@ CMakeFiles/Life.dir/source/Main.cpp.o:
 /usr/include/glib-2.0/gio/gvolumemonitor.h:
 
 /usr/include/graphene-1.0/graphene-triangle.h:
-
-/usr/include/cairo/cairo-deprecated.h:
 
 CMakeFiles/Life.dir/body/Map.cpp.o:
 
@@ -2929,6 +2946,10 @@ CMakeFiles/Life.dir/body/Debug.cpp.o:
 
 /usr/include/c++/15/bits/hash_bytes.h:
 
+/usr/lib64/libharfbuzz.so:
+
+/usr/include/glib-2.0/gio/gsimpleactiongroup.h:
+
 /usr/lib64/libXrender.so.1:
 
 /lib64/libgcc_s.so.1:
@@ -2954,6 +2975,10 @@ CMakeFiles/Life.dir/body/Debug.cpp.o:
 /usr/include/c++/15/bits/ranges_cmp.h:
 
 /usr/include/glib-2.0/gio/gsimpleproxyresolver.h:
+
+/usr/include/pango-1.0/pango/pango-gravity.h:
+
+/usr/lib64/libLerc.so.4:
 
 /usr/lib64/libpangocairo-1.0.so:
 
@@ -3005,6 +3030,10 @@ CMakeFiles/Life.dir/body/Debug.cpp.o:
 
 /usr/include/c++/15/x86_64-redhat-linux/bits/gthr-default.h:
 
+/usr/include/bits/stdint-intn.h:
+
+/usr/include/gtk-4.0/gtk/deprecated/gtktreemodel.h:
+
 /usr/include/bits/stdlib-float.h:
 
 /usr/lib64/libXau.so.6:
@@ -3040,6 +3069,10 @@ CMakeFiles/Life.dir/body/Cell.cpp.o:
 /usr/include/bits/locale.h:
 
 /lib64/ld-linux-x86-64.so.2:
+
+/usr/include/gtk-4.0/gtk/gtkheaderbar.h:
+
+/usr/lib64/libpango-1.0.so:
 
 /usr/include/c++/15/bits/istream.tcc:
 
@@ -3231,6 +3264,8 @@ CMakeFiles/Life.dir/body/Chunk.cpp.o:
 
 /usr/lib64/libmount.so.1:
 
+/usr/include/cairo/cairo-deprecated.h:
+
 /usr/include/graphene-1.0/graphene.h:
 
 /usr/include/features.h:
@@ -3319,12 +3354,6 @@ CMakeFiles/Life.dir/body/Chunk.cpp.o:
 
 /usr/include/c++/15/ostream:
 
-/usr/include/bits/wctype-wchar.h:
-
-/usr/include/gtk-4.0/gtk/deprecated/gtktreemodel.h:
-
-/usr/include/bits/stdint-intn.h:
-
 /usr/lib64/libgraphite2.so.3:
 
 /usr/include/c++/15/bits/cpp_type_traits.h:
@@ -3373,14 +3402,6 @@ CMakeFiles/Life.dir/body/Chunk.cpp.o:
 
 /usr/include/c++/15/bits/iterator_concepts.h:
 
-/usr/include/gtk-4.0/gtk/gtkprintdialog.h:
-
-/usr/include/c++/15/tr1/bessel_function.tcc:
-
-/usr/include/glib-2.0/gio/gsimpleaction.h:
-
-/usr/include/gtk-4.0/gtk/deprecated/gtkshow.h:
-
 /usr/include/c++/15/bits/functional_hash.h:
 
 /usr/include/c++/15/ext/type_traits.h:
@@ -3426,6 +3447,8 @@ CMakeFiles/Life.dir/body/Chunk.cpp.o:
 /usr/include/c++/15/bits/ostream.h:
 
 /usr/include/c++/15/bits/ostream.tcc:
+
+/home/frank/vscode/Life/body/Manager.cpp:
 
 /usr/include/glib-2.0/glib/gsequence.h:
 
@@ -3547,7 +3570,15 @@ CMakeFiles/Life.dir/body/Chunk.cpp.o:
 
 /usr/include/glib-2.0/glib/garray.h:
 
-/usr/include/c++/15/x86_64-redhat-linux/bits/c++allocator.h:
+/usr/include/glib-2.0/gio/gsettingsschema.h:
+
+/usr/include/c++/15/tr1/bessel_function.tcc:
+
+/usr/include/glib-2.0/gio/gsimpleaction.h:
+
+/usr/include/gtk-4.0/gtk/deprecated/gtkshow.h:
+
+/usr/include/gtk-4.0/gtk/gtkprintdialog.h:
 
 /usr/include/glib-2.0/gio/gsocketaddress.h:
 
@@ -3851,8 +3882,6 @@ CMakeFiles/Life.dir/body/Chunk.cpp.o:
 
 /usr/include/gtk-4.0/gdk/gdkconfig.h:
 
-/usr/include/pango-1.0/pango/pango-glyph-item.h:
-
 /usr/include/glib-2.0/gio/gtestdbus.h:
 
 /usr/include/glib-2.0/gobject/gsignalgroup.h:
@@ -3872,6 +3901,8 @@ CMakeFiles/Life.dir/body/Chunk.cpp.o:
 /usr/include/glib-2.0/gobject/gtype.h:
 
 /usr/include/glib-2.0/gobject/gtypemodule.h:
+
+/home/frank/vscode/Life/include/Life.h:
 
 /usr/include/glib-2.0/gobject/gmarshal.h:
 
@@ -4021,6 +4052,8 @@ CMakeFiles/Life.dir/body/Neighbor.cpp.o:
 
 /usr/include/gtk-4.0/gdk/gdktexturedownloader.h:
 
+/home/frank/vscode/Life/include/Manager.h:
+
 /usr/include/gtk-4.0/gtk/gtkmediastream.h:
 
 /usr/include/gtk-4.0/gdk/gdktoplevel.h:
@@ -4085,6 +4118,10 @@ CMakeFiles/Life.dir/body/Neighbor.cpp.o:
 
 /usr/include/gtk-4.0/gtk/print/gtkprintsettings.h:
 
+/usr/include/pango-1.0/pango/pango-fontset-simple.h:
+
+/usr/include/gtk-4.0/gtk/deprecated/gtkcellareacontext.h:
+
 /usr/include/gtk-4.0/gtk/deprecated/gtkcelllayout.h:
 
 /usr/include/gtk-4.0/gtk/deprecated/gtkcellrenderer.h:
@@ -4094,8 +4131,6 @@ CMakeFiles/Life.dir/body/Neighbor.cpp.o:
 /usr/include/bits/timesize.h:
 
 /usr/include/gtk-4.0/gtk/deprecated/gtkcellrendererspinner.h:
-
-/usr/include/pango-1.0/pango/pango-glyph.h:
 
 /usr/include/gtk-4.0/gtk/deprecated/gtkcellrenderertext.h:
 
@@ -4237,9 +4272,9 @@ CMakeFiles/Life.dir/body/Neighbor.cpp.o:
 
 /usr/include/gtk-4.0/gtk/gtkexpander.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o:
-
 /usr/include/glib-2.0/gio/gio.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o:
 
 /usr/include/gtk-4.0/gtk/gtkexpression.h:
 
@@ -4300,10 +4335,6 @@ CMakeFiles/Life.dir/body/Neighbor.cpp.o:
 /usr/lib64/libsqlite3.so.0:
 
 /usr/include/gtk-4.0/gtk/gtkgridlayout.h:
-
-/usr/lib64/libpango-1.0.so:
-
-/usr/include/gtk-4.0/gtk/gtkheaderbar.h:
 
 /usr/include/gtk-4.0/gtk/gtktreelistrowsorter.h:
 
@@ -4533,18 +4564,6 @@ CMakeFiles/Life.dir/body/Neighbor.cpp.o:
 
 /usr/include/pango-1.0/pango/pango-engine.h:
 
+CMakeFiles/Life.dir/body/Manager.cpp.o:
+
 /usr/include/pango-1.0/pango/pango-features.h:
-
-/usr/include/gtk-4.0/gtk/deprecated/gtkcellareacontext.h:
-
-/usr/include/pango-1.0/pango/pango-fontset-simple.h:
-
-/usr/include/c++/15/tr1/modified_bessel_func.tcc:
-
-/usr/lib64/libepoxy.so.0:
-
-/usr/include/pango-1.0/pango/pango-fontset.h:
-
-/usr/lib64/libLerc.so.4:
-
-/usr/include/pango-1.0/pango/pango-gravity.h:

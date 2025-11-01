@@ -201,6 +201,54 @@ body/Debug.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Debug.cpp.s
 .PHONY : body/Debug.cpp.s
 
+body/Life.o: body/Life.cpp.o
+.PHONY : body/Life.o
+
+# target to build an object file
+body/Life.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Life.cpp.o
+.PHONY : body/Life.cpp.o
+
+body/Life.i: body/Life.cpp.i
+.PHONY : body/Life.i
+
+# target to preprocess a source file
+body/Life.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Life.cpp.i
+.PHONY : body/Life.cpp.i
+
+body/Life.s: body/Life.cpp.s
+.PHONY : body/Life.s
+
+# target to generate assembly for a file
+body/Life.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Life.cpp.s
+.PHONY : body/Life.cpp.s
+
+body/Manager.o: body/Manager.cpp.o
+.PHONY : body/Manager.o
+
+# target to build an object file
+body/Manager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Manager.cpp.o
+.PHONY : body/Manager.cpp.o
+
+body/Manager.i: body/Manager.cpp.i
+.PHONY : body/Manager.i
+
+# target to preprocess a source file
+body/Manager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Manager.cpp.i
+.PHONY : body/Manager.cpp.i
+
+body/Manager.s: body/Manager.cpp.s
+.PHONY : body/Manager.s
+
+# target to generate assembly for a file
+body/Manager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Manager.cpp.s
+.PHONY : body/Manager.cpp.s
+
 body/Map.o: body/Map.cpp.o
 .PHONY : body/Map.o
 
@@ -291,6 +339,12 @@ help:
 	@echo "... body/Debug.o"
 	@echo "... body/Debug.i"
 	@echo "... body/Debug.s"
+	@echo "... body/Life.o"
+	@echo "... body/Life.i"
+	@echo "... body/Life.s"
+	@echo "... body/Manager.o"
+	@echo "... body/Manager.i"
+	@echo "... body/Manager.s"
 	@echo "... body/Map.o"
 	@echo "... body/Map.i"
 	@echo "... body/Map.s"
