@@ -26,7 +26,7 @@ void Manager::update()
         if (chunk.is_populated())
         {
             // wanna update the map so like...
-            chunk.update(rules);
+            
         }
     }
 };

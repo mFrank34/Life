@@ -33,4 +33,13 @@ bool Life::reproduction(int c) {
     return false;
 };
 
+Chunk Life::step(Chunk chunk, std::vector<Chunk*> relevent_chunks)
+{
+    
+
+
+
+
+};
+
 Life::~Life() {};
