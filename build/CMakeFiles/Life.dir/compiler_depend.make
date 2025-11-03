@@ -82,8 +82,6 @@
   CMakeFiles/Life.dir/body/Cell.cpp.o \
   CMakeFiles/Life.dir/body/Chunk.cpp.o \
   CMakeFiles/Life.dir/body/Debug.cpp.o \
-  CMakeFiles/Life.dir/body/Life.cpp.o \
-  CMakeFiles/Life.dir/body/Manager.cpp.o \
   CMakeFiles/Life.dir/body/Map.cpp.o \
   CMakeFiles/Life.dir/body/Neighbor.cpp.o \
   CMakeFiles/Life.dir/source/Main.cpp.o
@@ -301,7 +299,6 @@ CMakeFiles/Life.dir/body/Cell.cpp.o: /home/frank/vscode/Life/body/Cell.cpp \
 CMakeFiles/Life.dir/body/Chunk.cpp.o: /home/frank/vscode/Life/body/Chunk.cpp \
   /home/frank/vscode/Life/include/Cell.h \
   /home/frank/vscode/Life/include/Chunk.h \
-  /home/frank/vscode/Life/include/Life.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/bitsperlong.h \
   /usr/include/asm-generic/errno-base.h \
@@ -428,15 +425,12 @@ CMakeFiles/Life.dir/body/Chunk.cpp.o: /home/frank/vscode/Life/body/Chunk.cpp \
   /usr/include/c++/15/bits/sstream.tcc \
   /usr/include/c++/15/bits/std_abs.h \
   /usr/include/c++/15/bits/stl_algobase.h \
-  /usr/include/c++/15/bits/stl_bvector.h \
   /usr/include/c++/15/bits/stl_construct.h \
   /usr/include/c++/15/bits/stl_function.h \
   /usr/include/c++/15/bits/stl_iterator.h \
   /usr/include/c++/15/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/15/bits/stl_iterator_base_types.h \
   /usr/include/c++/15/bits/stl_pair.h \
-  /usr/include/c++/15/bits/stl_uninitialized.h \
-  /usr/include/c++/15/bits/stl_vector.h \
   /usr/include/c++/15/bits/streambuf.tcc \
   /usr/include/c++/15/bits/streambuf_iterator.h \
   /usr/include/c++/15/bits/string_view.tcc \
@@ -444,7 +438,6 @@ CMakeFiles/Life.dir/body/Chunk.cpp.o: /home/frank/vscode/Life/body/Chunk.cpp \
   /usr/include/c++/15/bits/uses_allocator.h \
   /usr/include/c++/15/bits/uses_allocator_args.h \
   /usr/include/c++/15/bits/utility.h \
-  /usr/include/c++/15/bits/vector.tcc \
   /usr/include/c++/15/bits/version.h \
   /usr/include/c++/15/cctype \
   /usr/include/c++/15/cerrno \
@@ -485,7 +478,6 @@ CMakeFiles/Life.dir/body/Chunk.cpp.o: /home/frank/vscode/Life/body/Chunk.cpp \
   /usr/include/c++/15/tuple \
   /usr/include/c++/15/type_traits \
   /usr/include/c++/15/typeinfo \
-  /usr/include/c++/15/vector \
   /usr/include/c++/15/x86_64-redhat-linux/bits/atomic_word.h \
   /usr/include/c++/15/x86_64-redhat-linux/bits/c++allocator.h \
   /usr/include/c++/15/x86_64-redhat-linux/bits/c++config.h \
@@ -532,7 +524,6 @@ CMakeFiles/Life.dir/body/Debug.cpp.o: /home/frank/vscode/Life/body/Debug.cpp \
   /home/frank/vscode/Life/include/Cell.h \
   /home/frank/vscode/Life/include/Chunk.h \
   /home/frank/vscode/Life/include/Debug.h \
-  /home/frank/vscode/Life/include/Life.h \
   /home/frank/vscode/Life/include/Map.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/bitsperlong.h \
@@ -665,15 +656,12 @@ CMakeFiles/Life.dir/body/Debug.cpp.o: /home/frank/vscode/Life/body/Debug.cpp \
   /usr/include/c++/15/bits/sstream.tcc \
   /usr/include/c++/15/bits/std_abs.h \
   /usr/include/c++/15/bits/stl_algobase.h \
-  /usr/include/c++/15/bits/stl_bvector.h \
   /usr/include/c++/15/bits/stl_construct.h \
   /usr/include/c++/15/bits/stl_function.h \
   /usr/include/c++/15/bits/stl_iterator.h \
   /usr/include/c++/15/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/15/bits/stl_iterator_base_types.h \
   /usr/include/c++/15/bits/stl_pair.h \
-  /usr/include/c++/15/bits/stl_uninitialized.h \
-  /usr/include/c++/15/bits/stl_vector.h \
   /usr/include/c++/15/bits/streambuf.tcc \
   /usr/include/c++/15/bits/streambuf_iterator.h \
   /usr/include/c++/15/bits/string_view.tcc \
@@ -682,7 +670,6 @@ CMakeFiles/Life.dir/body/Debug.cpp.o: /home/frank/vscode/Life/body/Debug.cpp \
   /usr/include/c++/15/bits/uses_allocator.h \
   /usr/include/c++/15/bits/uses_allocator_args.h \
   /usr/include/c++/15/bits/utility.h \
-  /usr/include/c++/15/bits/vector.tcc \
   /usr/include/c++/15/bits/version.h \
   /usr/include/c++/15/cctype \
   /usr/include/c++/15/cerrno \
@@ -725,478 +712,6 @@ CMakeFiles/Life.dir/body/Debug.cpp.o: /home/frank/vscode/Life/body/Debug.cpp \
   /usr/include/c++/15/type_traits \
   /usr/include/c++/15/typeinfo \
   /usr/include/c++/15/unordered_map \
-  /usr/include/c++/15/vector \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/atomic_word.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/c++allocator.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/c++config.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/c++locale.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/cpu_defines.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/ctype_base.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/ctype_inline.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/error_constants.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/gthr-default.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/gthr.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/messages_members.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/os_defines.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/time_members.h \
-  /usr/include/ctype.h \
-  /usr/include/endian.h \
-  /usr/include/errno.h \
-  /usr/include/features-time64.h \
-  /usr/include/features.h \
-  /usr/include/gnu/stubs-64.h \
-  /usr/include/gnu/stubs.h \
-  /usr/include/libintl.h \
-  /usr/include/linux/errno.h \
-  /usr/include/linux/posix_types.h \
-  /usr/include/linux/sched/types.h \
-  /usr/include/linux/stddef.h \
-  /usr/include/linux/types.h \
-  /usr/include/locale.h \
-  /usr/include/pthread.h \
-  /usr/include/sched.h \
-  /usr/include/stdc-predef.h \
-  /usr/include/stdio.h \
-  /usr/include/stdlib.h \
-  /usr/include/sys/cdefs.h \
-  /usr/include/sys/select.h \
-  /usr/include/sys/single_threaded.h \
-  /usr/include/sys/types.h \
-  /usr/include/time.h \
-  /usr/include/wchar.h \
-  /usr/include/wctype.h \
-  /usr/lib/gcc/x86_64-redhat-linux/15/include/stdarg.h \
-  /usr/lib/gcc/x86_64-redhat-linux/15/include/stddef.h
-
-CMakeFiles/Life.dir/body/Life.cpp.o: /home/frank/vscode/Life/body/Life.cpp \
-  /home/frank/vscode/Life/include/Cell.h \
-  /home/frank/vscode/Life/include/Chunk.h \
-  /home/frank/vscode/Life/include/Life.h \
-  /usr/include/alloca.h \
-  /usr/include/asm-generic/bitsperlong.h \
-  /usr/include/asm-generic/errno-base.h \
-  /usr/include/asm-generic/errno.h \
-  /usr/include/asm-generic/int-ll64.h \
-  /usr/include/asm-generic/posix_types.h \
-  /usr/include/asm-generic/types.h \
-  /usr/include/asm/bitsperlong.h \
-  /usr/include/asm/errno.h \
-  /usr/include/asm/posix_types.h \
-  /usr/include/asm/posix_types_64.h \
-  /usr/include/asm/types.h \
-  /usr/include/bits/atomic_wide_counter.h \
-  /usr/include/bits/byteswap.h \
-  /usr/include/bits/cpu-set.h \
-  /usr/include/bits/endian.h \
-  /usr/include/bits/endianness.h \
-  /usr/include/bits/errno.h \
-  /usr/include/bits/floatn-common.h \
-  /usr/include/bits/floatn.h \
-  /usr/include/bits/libc-header-start.h \
-  /usr/include/bits/locale.h \
-  /usr/include/bits/long-double.h \
-  /usr/include/bits/pthread_stack_min-dynamic.h \
-  /usr/include/bits/pthreadtypes-arch.h \
-  /usr/include/bits/pthreadtypes.h \
-  /usr/include/bits/sched.h \
-  /usr/include/bits/select.h \
-  /usr/include/bits/setjmp.h \
-  /usr/include/bits/stdint-intn.h \
-  /usr/include/bits/stdio_lim.h \
-  /usr/include/bits/stdlib-float.h \
-  /usr/include/bits/struct_mutex.h \
-  /usr/include/bits/struct_rwlock.h \
-  /usr/include/bits/thread-shared-types.h \
-  /usr/include/bits/time.h \
-  /usr/include/bits/time64.h \
-  /usr/include/bits/timesize.h \
-  /usr/include/bits/timex.h \
-  /usr/include/bits/types.h \
-  /usr/include/bits/types/FILE.h \
-  /usr/include/bits/types/__FILE.h \
-  /usr/include/bits/types/__fpos64_t.h \
-  /usr/include/bits/types/__fpos_t.h \
-  /usr/include/bits/types/__locale_t.h \
-  /usr/include/bits/types/__mbstate_t.h \
-  /usr/include/bits/types/__sigset_t.h \
-  /usr/include/bits/types/clock_t.h \
-  /usr/include/bits/types/clockid_t.h \
-  /usr/include/bits/types/cookie_io_functions_t.h \
-  /usr/include/bits/types/error_t.h \
-  /usr/include/bits/types/locale_t.h \
-  /usr/include/bits/types/mbstate_t.h \
-  /usr/include/bits/types/sigset_t.h \
-  /usr/include/bits/types/struct_FILE.h \
-  /usr/include/bits/types/struct___jmp_buf_tag.h \
-  /usr/include/bits/types/struct_itimerspec.h \
-  /usr/include/bits/types/struct_sched_param.h \
-  /usr/include/bits/types/struct_timespec.h \
-  /usr/include/bits/types/struct_timeval.h \
-  /usr/include/bits/types/struct_tm.h \
-  /usr/include/bits/types/time_t.h \
-  /usr/include/bits/types/timer_t.h \
-  /usr/include/bits/types/wint_t.h \
-  /usr/include/bits/typesizes.h \
-  /usr/include/bits/uintn-identity.h \
-  /usr/include/bits/waitflags.h \
-  /usr/include/bits/waitstatus.h \
-  /usr/include/bits/wchar.h \
-  /usr/include/bits/wctype-wchar.h \
-  /usr/include/bits/wordsize.h \
-  /usr/include/c++/15/backward/binders.h \
-  /usr/include/c++/15/bit \
-  /usr/include/c++/15/bits/alloc_traits.h \
-  /usr/include/c++/15/bits/allocator.h \
-  /usr/include/c++/15/bits/basic_ios.h \
-  /usr/include/c++/15/bits/basic_ios.tcc \
-  /usr/include/c++/15/bits/basic_string.h \
-  /usr/include/c++/15/bits/basic_string.tcc \
-  /usr/include/c++/15/bits/char_traits.h \
-  /usr/include/c++/15/bits/charconv.h \
-  /usr/include/c++/15/bits/codecvt.h \
-  /usr/include/c++/15/bits/concept_check.h \
-  /usr/include/c++/15/bits/cpp_type_traits.h \
-  /usr/include/c++/15/bits/cxxabi_forced.h \
-  /usr/include/c++/15/bits/cxxabi_init_exception.h \
-  /usr/include/c++/15/bits/exception.h \
-  /usr/include/c++/15/bits/exception_defines.h \
-  /usr/include/c++/15/bits/exception_ptr.h \
-  /usr/include/c++/15/bits/functexcept.h \
-  /usr/include/c++/15/bits/functional_hash.h \
-  /usr/include/c++/15/bits/hash_bytes.h \
-  /usr/include/c++/15/bits/invoke.h \
-  /usr/include/c++/15/bits/ios_base.h \
-  /usr/include/c++/15/bits/istream.tcc \
-  /usr/include/c++/15/bits/iterator_concepts.h \
-  /usr/include/c++/15/bits/locale_classes.h \
-  /usr/include/c++/15/bits/locale_classes.tcc \
-  /usr/include/c++/15/bits/locale_conv.h \
-  /usr/include/c++/15/bits/locale_facets.h \
-  /usr/include/c++/15/bits/locale_facets.tcc \
-  /usr/include/c++/15/bits/locale_facets_nonio.h \
-  /usr/include/c++/15/bits/locale_facets_nonio.tcc \
-  /usr/include/c++/15/bits/localefwd.h \
-  /usr/include/c++/15/bits/max_size_type.h \
-  /usr/include/c++/15/bits/memory_resource.h \
-  /usr/include/c++/15/bits/memoryfwd.h \
-  /usr/include/c++/15/bits/move.h \
-  /usr/include/c++/15/bits/nested_exception.h \
-  /usr/include/c++/15/bits/new_allocator.h \
-  /usr/include/c++/15/bits/ostream.h \
-  /usr/include/c++/15/bits/ostream.tcc \
-  /usr/include/c++/15/bits/ostream_insert.h \
-  /usr/include/c++/15/bits/postypes.h \
-  /usr/include/c++/15/bits/predefined_ops.h \
-  /usr/include/c++/15/bits/ptr_traits.h \
-  /usr/include/c++/15/bits/quoted_string.h \
-  /usr/include/c++/15/bits/range_access.h \
-  /usr/include/c++/15/bits/ranges_base.h \
-  /usr/include/c++/15/bits/ranges_cmp.h \
-  /usr/include/c++/15/bits/ranges_util.h \
-  /usr/include/c++/15/bits/refwrap.h \
-  /usr/include/c++/15/bits/requires_hosted.h \
-  /usr/include/c++/15/bits/sstream.tcc \
-  /usr/include/c++/15/bits/std_abs.h \
-  /usr/include/c++/15/bits/stl_algobase.h \
-  /usr/include/c++/15/bits/stl_bvector.h \
-  /usr/include/c++/15/bits/stl_construct.h \
-  /usr/include/c++/15/bits/stl_function.h \
-  /usr/include/c++/15/bits/stl_iterator.h \
-  /usr/include/c++/15/bits/stl_iterator_base_funcs.h \
-  /usr/include/c++/15/bits/stl_iterator_base_types.h \
-  /usr/include/c++/15/bits/stl_pair.h \
-  /usr/include/c++/15/bits/stl_uninitialized.h \
-  /usr/include/c++/15/bits/stl_vector.h \
-  /usr/include/c++/15/bits/streambuf.tcc \
-  /usr/include/c++/15/bits/streambuf_iterator.h \
-  /usr/include/c++/15/bits/string_view.tcc \
-  /usr/include/c++/15/bits/stringfwd.h \
-  /usr/include/c++/15/bits/uses_allocator.h \
-  /usr/include/c++/15/bits/uses_allocator_args.h \
-  /usr/include/c++/15/bits/utility.h \
-  /usr/include/c++/15/bits/vector.tcc \
-  /usr/include/c++/15/bits/version.h \
-  /usr/include/c++/15/cctype \
-  /usr/include/c++/15/cerrno \
-  /usr/include/c++/15/clocale \
-  /usr/include/c++/15/compare \
-  /usr/include/c++/15/concepts \
-  /usr/include/c++/15/cstddef \
-  /usr/include/c++/15/cstdio \
-  /usr/include/c++/15/cstdlib \
-  /usr/include/c++/15/ctime \
-  /usr/include/c++/15/cwchar \
-  /usr/include/c++/15/cwctype \
-  /usr/include/c++/15/debug/assertions.h \
-  /usr/include/c++/15/debug/debug.h \
-  /usr/include/c++/15/exception \
-  /usr/include/c++/15/ext/alloc_traits.h \
-  /usr/include/c++/15/ext/atomicity.h \
-  /usr/include/c++/15/ext/numeric_traits.h \
-  /usr/include/c++/15/ext/string_conversions.h \
-  /usr/include/c++/15/ext/type_traits.h \
-  /usr/include/c++/15/initializer_list \
-  /usr/include/c++/15/iomanip \
-  /usr/include/c++/15/ios \
-  /usr/include/c++/15/iosfwd \
-  /usr/include/c++/15/iostream \
-  /usr/include/c++/15/istream \
-  /usr/include/c++/15/locale \
-  /usr/include/c++/15/new \
-  /usr/include/c++/15/numbers \
-  /usr/include/c++/15/ostream \
-  /usr/include/c++/15/pstl/pstl_config.h \
-  /usr/include/c++/15/sstream \
-  /usr/include/c++/15/stdexcept \
-  /usr/include/c++/15/streambuf \
-  /usr/include/c++/15/string \
-  /usr/include/c++/15/string_view \
-  /usr/include/c++/15/system_error \
-  /usr/include/c++/15/tuple \
-  /usr/include/c++/15/type_traits \
-  /usr/include/c++/15/typeinfo \
-  /usr/include/c++/15/vector \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/atomic_word.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/c++allocator.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/c++config.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/c++locale.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/cpu_defines.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/ctype_base.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/ctype_inline.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/error_constants.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/gthr-default.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/gthr.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/messages_members.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/os_defines.h \
-  /usr/include/c++/15/x86_64-redhat-linux/bits/time_members.h \
-  /usr/include/ctype.h \
-  /usr/include/endian.h \
-  /usr/include/errno.h \
-  /usr/include/features-time64.h \
-  /usr/include/features.h \
-  /usr/include/gnu/stubs-64.h \
-  /usr/include/gnu/stubs.h \
-  /usr/include/libintl.h \
-  /usr/include/linux/errno.h \
-  /usr/include/linux/posix_types.h \
-  /usr/include/linux/sched/types.h \
-  /usr/include/linux/stddef.h \
-  /usr/include/linux/types.h \
-  /usr/include/locale.h \
-  /usr/include/pthread.h \
-  /usr/include/sched.h \
-  /usr/include/stdc-predef.h \
-  /usr/include/stdio.h \
-  /usr/include/stdlib.h \
-  /usr/include/sys/cdefs.h \
-  /usr/include/sys/select.h \
-  /usr/include/sys/single_threaded.h \
-  /usr/include/sys/types.h \
-  /usr/include/time.h \
-  /usr/include/wchar.h \
-  /usr/include/wctype.h \
-  /usr/lib/gcc/x86_64-redhat-linux/15/include/stdarg.h \
-  /usr/lib/gcc/x86_64-redhat-linux/15/include/stddef.h
-
-CMakeFiles/Life.dir/body/Manager.cpp.o: /home/frank/vscode/Life/body/Manager.cpp \
-  /home/frank/vscode/Life/include/Cell.h \
-  /home/frank/vscode/Life/include/Chunk.h \
-  /home/frank/vscode/Life/include/Debug.h \
-  /home/frank/vscode/Life/include/Life.h \
-  /home/frank/vscode/Life/include/Manager.h \
-  /home/frank/vscode/Life/include/Map.h \
-  /usr/include/alloca.h \
-  /usr/include/asm-generic/bitsperlong.h \
-  /usr/include/asm-generic/errno-base.h \
-  /usr/include/asm-generic/errno.h \
-  /usr/include/asm-generic/int-ll64.h \
-  /usr/include/asm-generic/posix_types.h \
-  /usr/include/asm-generic/types.h \
-  /usr/include/asm/bitsperlong.h \
-  /usr/include/asm/errno.h \
-  /usr/include/asm/posix_types.h \
-  /usr/include/asm/posix_types_64.h \
-  /usr/include/asm/types.h \
-  /usr/include/bits/atomic_wide_counter.h \
-  /usr/include/bits/byteswap.h \
-  /usr/include/bits/cpu-set.h \
-  /usr/include/bits/endian.h \
-  /usr/include/bits/endianness.h \
-  /usr/include/bits/errno.h \
-  /usr/include/bits/floatn-common.h \
-  /usr/include/bits/floatn.h \
-  /usr/include/bits/libc-header-start.h \
-  /usr/include/bits/locale.h \
-  /usr/include/bits/long-double.h \
-  /usr/include/bits/pthread_stack_min-dynamic.h \
-  /usr/include/bits/pthreadtypes-arch.h \
-  /usr/include/bits/pthreadtypes.h \
-  /usr/include/bits/sched.h \
-  /usr/include/bits/select.h \
-  /usr/include/bits/setjmp.h \
-  /usr/include/bits/stdint-intn.h \
-  /usr/include/bits/stdio_lim.h \
-  /usr/include/bits/stdlib-float.h \
-  /usr/include/bits/struct_mutex.h \
-  /usr/include/bits/struct_rwlock.h \
-  /usr/include/bits/thread-shared-types.h \
-  /usr/include/bits/time.h \
-  /usr/include/bits/time64.h \
-  /usr/include/bits/timesize.h \
-  /usr/include/bits/timex.h \
-  /usr/include/bits/types.h \
-  /usr/include/bits/types/FILE.h \
-  /usr/include/bits/types/__FILE.h \
-  /usr/include/bits/types/__fpos64_t.h \
-  /usr/include/bits/types/__fpos_t.h \
-  /usr/include/bits/types/__locale_t.h \
-  /usr/include/bits/types/__mbstate_t.h \
-  /usr/include/bits/types/__sigset_t.h \
-  /usr/include/bits/types/clock_t.h \
-  /usr/include/bits/types/clockid_t.h \
-  /usr/include/bits/types/cookie_io_functions_t.h \
-  /usr/include/bits/types/error_t.h \
-  /usr/include/bits/types/locale_t.h \
-  /usr/include/bits/types/mbstate_t.h \
-  /usr/include/bits/types/sigset_t.h \
-  /usr/include/bits/types/struct_FILE.h \
-  /usr/include/bits/types/struct___jmp_buf_tag.h \
-  /usr/include/bits/types/struct_itimerspec.h \
-  /usr/include/bits/types/struct_sched_param.h \
-  /usr/include/bits/types/struct_timespec.h \
-  /usr/include/bits/types/struct_timeval.h \
-  /usr/include/bits/types/struct_tm.h \
-  /usr/include/bits/types/time_t.h \
-  /usr/include/bits/types/timer_t.h \
-  /usr/include/bits/types/wint_t.h \
-  /usr/include/bits/typesizes.h \
-  /usr/include/bits/uintn-identity.h \
-  /usr/include/bits/waitflags.h \
-  /usr/include/bits/waitstatus.h \
-  /usr/include/bits/wchar.h \
-  /usr/include/bits/wctype-wchar.h \
-  /usr/include/bits/wordsize.h \
-  /usr/include/c++/15/backward/binders.h \
-  /usr/include/c++/15/bit \
-  /usr/include/c++/15/bits/alloc_traits.h \
-  /usr/include/c++/15/bits/allocator.h \
-  /usr/include/c++/15/bits/basic_ios.h \
-  /usr/include/c++/15/bits/basic_ios.tcc \
-  /usr/include/c++/15/bits/basic_string.h \
-  /usr/include/c++/15/bits/basic_string.tcc \
-  /usr/include/c++/15/bits/char_traits.h \
-  /usr/include/c++/15/bits/charconv.h \
-  /usr/include/c++/15/bits/codecvt.h \
-  /usr/include/c++/15/bits/concept_check.h \
-  /usr/include/c++/15/bits/cpp_type_traits.h \
-  /usr/include/c++/15/bits/cxxabi_forced.h \
-  /usr/include/c++/15/bits/cxxabi_init_exception.h \
-  /usr/include/c++/15/bits/enable_special_members.h \
-  /usr/include/c++/15/bits/erase_if.h \
-  /usr/include/c++/15/bits/exception.h \
-  /usr/include/c++/15/bits/exception_defines.h \
-  /usr/include/c++/15/bits/exception_ptr.h \
-  /usr/include/c++/15/bits/functexcept.h \
-  /usr/include/c++/15/bits/functional_hash.h \
-  /usr/include/c++/15/bits/hash_bytes.h \
-  /usr/include/c++/15/bits/hashtable.h \
-  /usr/include/c++/15/bits/hashtable_policy.h \
-  /usr/include/c++/15/bits/invoke.h \
-  /usr/include/c++/15/bits/ios_base.h \
-  /usr/include/c++/15/bits/istream.tcc \
-  /usr/include/c++/15/bits/iterator_concepts.h \
-  /usr/include/c++/15/bits/locale_classes.h \
-  /usr/include/c++/15/bits/locale_classes.tcc \
-  /usr/include/c++/15/bits/locale_conv.h \
-  /usr/include/c++/15/bits/locale_facets.h \
-  /usr/include/c++/15/bits/locale_facets.tcc \
-  /usr/include/c++/15/bits/locale_facets_nonio.h \
-  /usr/include/c++/15/bits/locale_facets_nonio.tcc \
-  /usr/include/c++/15/bits/localefwd.h \
-  /usr/include/c++/15/bits/max_size_type.h \
-  /usr/include/c++/15/bits/memory_resource.h \
-  /usr/include/c++/15/bits/memoryfwd.h \
-  /usr/include/c++/15/bits/move.h \
-  /usr/include/c++/15/bits/nested_exception.h \
-  /usr/include/c++/15/bits/new_allocator.h \
-  /usr/include/c++/15/bits/node_handle.h \
-  /usr/include/c++/15/bits/ostream.h \
-  /usr/include/c++/15/bits/ostream.tcc \
-  /usr/include/c++/15/bits/ostream_insert.h \
-  /usr/include/c++/15/bits/postypes.h \
-  /usr/include/c++/15/bits/predefined_ops.h \
-  /usr/include/c++/15/bits/ptr_traits.h \
-  /usr/include/c++/15/bits/quoted_string.h \
-  /usr/include/c++/15/bits/range_access.h \
-  /usr/include/c++/15/bits/ranges_base.h \
-  /usr/include/c++/15/bits/ranges_cmp.h \
-  /usr/include/c++/15/bits/ranges_util.h \
-  /usr/include/c++/15/bits/refwrap.h \
-  /usr/include/c++/15/bits/requires_hosted.h \
-  /usr/include/c++/15/bits/sstream.tcc \
-  /usr/include/c++/15/bits/std_abs.h \
-  /usr/include/c++/15/bits/stl_algobase.h \
-  /usr/include/c++/15/bits/stl_bvector.h \
-  /usr/include/c++/15/bits/stl_construct.h \
-  /usr/include/c++/15/bits/stl_function.h \
-  /usr/include/c++/15/bits/stl_iterator.h \
-  /usr/include/c++/15/bits/stl_iterator_base_funcs.h \
-  /usr/include/c++/15/bits/stl_iterator_base_types.h \
-  /usr/include/c++/15/bits/stl_pair.h \
-  /usr/include/c++/15/bits/stl_uninitialized.h \
-  /usr/include/c++/15/bits/stl_vector.h \
-  /usr/include/c++/15/bits/streambuf.tcc \
-  /usr/include/c++/15/bits/streambuf_iterator.h \
-  /usr/include/c++/15/bits/string_view.tcc \
-  /usr/include/c++/15/bits/stringfwd.h \
-  /usr/include/c++/15/bits/unordered_map.h \
-  /usr/include/c++/15/bits/uses_allocator.h \
-  /usr/include/c++/15/bits/uses_allocator_args.h \
-  /usr/include/c++/15/bits/utility.h \
-  /usr/include/c++/15/bits/vector.tcc \
-  /usr/include/c++/15/bits/version.h \
-  /usr/include/c++/15/cctype \
-  /usr/include/c++/15/cerrno \
-  /usr/include/c++/15/clocale \
-  /usr/include/c++/15/compare \
-  /usr/include/c++/15/concepts \
-  /usr/include/c++/15/cstddef \
-  /usr/include/c++/15/cstdio \
-  /usr/include/c++/15/cstdlib \
-  /usr/include/c++/15/ctime \
-  /usr/include/c++/15/cwchar \
-  /usr/include/c++/15/cwctype \
-  /usr/include/c++/15/debug/assertions.h \
-  /usr/include/c++/15/debug/debug.h \
-  /usr/include/c++/15/exception \
-  /usr/include/c++/15/ext/aligned_buffer.h \
-  /usr/include/c++/15/ext/alloc_traits.h \
-  /usr/include/c++/15/ext/atomicity.h \
-  /usr/include/c++/15/ext/numeric_traits.h \
-  /usr/include/c++/15/ext/string_conversions.h \
-  /usr/include/c++/15/ext/type_traits.h \
-  /usr/include/c++/15/initializer_list \
-  /usr/include/c++/15/iomanip \
-  /usr/include/c++/15/ios \
-  /usr/include/c++/15/iosfwd \
-  /usr/include/c++/15/iostream \
-  /usr/include/c++/15/istream \
-  /usr/include/c++/15/locale \
-  /usr/include/c++/15/new \
-  /usr/include/c++/15/numbers \
-  /usr/include/c++/15/ostream \
-  /usr/include/c++/15/pstl/pstl_config.h \
-  /usr/include/c++/15/sstream \
-  /usr/include/c++/15/stdexcept \
-  /usr/include/c++/15/streambuf \
-  /usr/include/c++/15/string \
-  /usr/include/c++/15/string_view \
-  /usr/include/c++/15/system_error \
-  /usr/include/c++/15/tuple \
-  /usr/include/c++/15/type_traits \
-  /usr/include/c++/15/typeinfo \
-  /usr/include/c++/15/unordered_map \
-  /usr/include/c++/15/vector \
   /usr/include/c++/15/x86_64-redhat-linux/bits/atomic_word.h \
   /usr/include/c++/15/x86_64-redhat-linux/bits/c++allocator.h \
   /usr/include/c++/15/x86_64-redhat-linux/bits/c++config.h \
@@ -1243,7 +758,6 @@ CMakeFiles/Life.dir/body/Map.cpp.o: /home/frank/vscode/Life/body/Map.cpp \
   /home/frank/vscode/Life/include/Cell.h \
   /home/frank/vscode/Life/include/Chunk.h \
   /home/frank/vscode/Life/include/Debug.h \
-  /home/frank/vscode/Life/include/Life.h \
   /home/frank/vscode/Life/include/Map.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/bitsperlong.h \
@@ -1376,15 +890,12 @@ CMakeFiles/Life.dir/body/Map.cpp.o: /home/frank/vscode/Life/body/Map.cpp \
   /usr/include/c++/15/bits/sstream.tcc \
   /usr/include/c++/15/bits/std_abs.h \
   /usr/include/c++/15/bits/stl_algobase.h \
-  /usr/include/c++/15/bits/stl_bvector.h \
   /usr/include/c++/15/bits/stl_construct.h \
   /usr/include/c++/15/bits/stl_function.h \
   /usr/include/c++/15/bits/stl_iterator.h \
   /usr/include/c++/15/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/15/bits/stl_iterator_base_types.h \
   /usr/include/c++/15/bits/stl_pair.h \
-  /usr/include/c++/15/bits/stl_uninitialized.h \
-  /usr/include/c++/15/bits/stl_vector.h \
   /usr/include/c++/15/bits/streambuf.tcc \
   /usr/include/c++/15/bits/streambuf_iterator.h \
   /usr/include/c++/15/bits/string_view.tcc \
@@ -1393,7 +904,6 @@ CMakeFiles/Life.dir/body/Map.cpp.o: /home/frank/vscode/Life/body/Map.cpp \
   /usr/include/c++/15/bits/uses_allocator.h \
   /usr/include/c++/15/bits/uses_allocator_args.h \
   /usr/include/c++/15/bits/utility.h \
-  /usr/include/c++/15/bits/vector.tcc \
   /usr/include/c++/15/bits/version.h \
   /usr/include/c++/15/cctype \
   /usr/include/c++/15/cerrno \
@@ -1436,7 +946,6 @@ CMakeFiles/Life.dir/body/Map.cpp.o: /home/frank/vscode/Life/body/Map.cpp \
   /usr/include/c++/15/type_traits \
   /usr/include/c++/15/typeinfo \
   /usr/include/c++/15/unordered_map \
-  /usr/include/c++/15/vector \
   /usr/include/c++/15/x86_64-redhat-linux/bits/atomic_word.h \
   /usr/include/c++/15/x86_64-redhat-linux/bits/c++allocator.h \
   /usr/include/c++/15/x86_64-redhat-linux/bits/c++config.h \
@@ -1720,7 +1229,6 @@ CMakeFiles/Life.dir/source/Main.cpp.o: /home/frank/vscode/Life/source/Main.cpp \
   /home/frank/vscode/Life/include/Cell.h \
   /home/frank/vscode/Life/include/Chunk.h \
   /home/frank/vscode/Life/include/Debug.h \
-  /home/frank/vscode/Life/include/Life.h \
   /home/frank/vscode/Life/include/Map.h \
   /home/frank/vscode/Life/include/Neighbor.h \
   /usr/include/alloca.h \
@@ -2805,9 +2313,9 @@ CMakeFiles/Life.dir/source/Main.cpp.o: /home/frank/vscode/Life/source/Main.cpp \
 
 /usr/include/pango-1.0/pango/pango-language.h:
 
-/usr/include/pango-1.0/pango/pango-glyph.h:
+/usr/include/c++/15/bits/concept_check.h:
 
-/usr/include/pango-1.0/pango/pango-glyph-item.h:
+/usr/include/gtk-4.0/gtk/gtkshortcutcontroller.h:
 
 /usr/lib64/libpixman-1.so.0:
 
@@ -2864,6 +2372,10 @@ CMakeFiles/Life.dir/source/Main.cpp.o: /home/frank/vscode/Life/source/Main.cpp \
 /usr/include/c++/15/bits/stl_iterator_base_funcs.h:
 
 /usr/include/glib-2.0/gio/gio-autocleanups.h:
+
+/usr/include/glib-2.0/gio/gsimpleactiongroup.h:
+
+/usr/lib64/libharfbuzz.so:
 
 /usr/include/glib-2.0/gio/gicon.h:
 
@@ -3041,6 +2553,10 @@ CMakeFiles/Life.dir/source/Main.cpp.o: /home/frank/vscode/Life/source/Main.cpp \
 
 /home/frank/vscode/Life/source/Main.cpp:
 
+/usr/include/c++/15/vector:
+
+/usr/include/graphene-1.0/graphene-simd4x4f.h:
+
 /usr/include/gtk-4.0/gtk/gtkbox.h:
 
 /usr/include/bits/signum-arch.h:
@@ -3081,6 +2597,8 @@ CMakeFiles/Life.dir/source/Main.cpp.o: /home/frank/vscode/Life/source/Main.cpp \
 
 /usr/include/c++/15/bits/unicode.h:
 
+/usr/include/c++/15/x86_64-redhat-linux/bits/ctype_inline.h:
+
 /usr/include/c++/15/bits/stl_tempbuf.h:
 
 /usr/include/c++/15/bits/stl_algo.h:
@@ -3096,8 +2614,6 @@ CMakeFiles/Life.dir/source/Main.cpp.o: /home/frank/vscode/Life/source/Main.cpp \
 /home/frank/vscode/Life/body/Neighbor.cpp:
 
 /home/frank/vscode/Life/body/Map.cpp:
-
-/home/frank/vscode/Life/body/Life.cpp:
 
 /home/frank/vscode/Life/body/Cell.cpp:
 
@@ -3115,9 +2631,7 @@ CMakeFiles/Life.dir/source/Main.cpp.o: /home/frank/vscode/Life/source/Main.cpp \
 
 /home/frank/vscode/Life/include/Map.h:
 
-/usr/include/c++/15/vector:
-
-/usr/include/graphene-1.0/graphene-simd4x4f.h:
+/usr/include/glib-2.0/gio/gsettingsschema.h:
 
 /usr/include/graphene-1.0/graphene-quad.h:
 
@@ -3126,8 +2640,6 @@ CMakeFiles/Life.dir/source/Main.cpp.o: /home/frank/vscode/Life/source/Main.cpp \
 /usr/include/gtk-4.0/gtk/deprecated/gtkmessagedialog.h:
 
 /usr/include/c++/15/ctime:
-
-/usr/include/c++/15/x86_64-redhat-linux/bits/ctype_inline.h:
 
 /usr/include/c++/15/istream:
 
@@ -3213,6 +2725,10 @@ CMakeFiles/Life.dir/source/Main.cpp.o: /home/frank/vscode/Life/source/Main.cpp \
 
 /usr/include/gtk-4.0/gtk/gtkaccessible.h:
 
+/usr/include/glib-2.0/gio/gsettings.h:
+
+/usr/include/c++/15/optional:
+
 /usr/include/gtk-4.0/gtk/deprecated/gtktreemodelsort.h:
 
 /usr/include/glib-2.0/gio/gdbusnamewatching.h:
@@ -3227,9 +2743,11 @@ CMakeFiles/Life.dir/source/Main.cpp.o: /home/frank/vscode/Life/source/Main.cpp \
 
 /usr/include/gtk-4.0/gdk/gdktoplevellayout.h:
 
-/usr/include/c++/15/x86_64-redhat-linux/bits/c++allocator.h:
+/usr/include/glib-2.0/gio/gdtlsconnection.h:
 
-/usr/include/glib-2.0/gio/gremoteactiongroup.h:
+/usr/include/bits/flt-eval-method.h:
+
+/usr/lib64/libbrotlicommon.so.1:
 
 /usr/include/glib-2.0/gio/gdbusproxy.h:
 
@@ -3295,13 +2813,7 @@ CMakeFiles/Life.dir/source/Main.cpp.o: /home/frank/vscode/Life/source/Main.cpp \
 
 /usr/include/c++/15/string:
 
-/usr/include/bits/wctype-wchar.h:
-
 /usr/include/glib-2.0/gio/giostream.h:
-
-/usr/include/c++/15/optional:
-
-/usr/include/glib-2.0/gio/gsettings.h:
 
 /usr/include/asm-generic/errno.h:
 
@@ -3325,10 +2837,6 @@ CMakeFiles/Life.dir/source/Main.cpp.o:
 
 /usr/include/gtk-4.0/gsk/gskrenderer.h:
 
-CMakeFiles/Life.dir/body/Map.cpp.o:
-
-/usr/include/gtk-4.0/gtk/deprecated/gtkrender.h:
-
 /usr/include/glib-2.0/gio/gcancellable.h:
 
 /usr/include/c++/15/bits/memoryfwd.h:
@@ -3347,7 +2855,11 @@ CMakeFiles/Life.dir/body/Map.cpp.o:
 
 /usr/include/graphene-1.0/graphene-triangle.h:
 
-CMakeFiles/Life.dir/body/Life.cpp.o:
+/usr/include/cairo/cairo-deprecated.h:
+
+CMakeFiles/Life.dir/body/Map.cpp.o:
+
+/usr/include/gtk-4.0/gtk/deprecated/gtkrender.h:
 
 CMakeFiles/Life.dir/body/Debug.cpp.o:
 
@@ -3417,25 +2929,9 @@ CMakeFiles/Life.dir/body/Debug.cpp.o:
 
 /usr/include/c++/15/bits/hash_bytes.h:
 
-/usr/lib64/libharfbuzz.so:
-
-/usr/include/glib-2.0/gio/gsimpleactiongroup.h:
-
 /usr/lib64/libXrender.so.1:
 
 /lib64/libgcc_s.so.1:
-
-/usr/include/glib-2.0/gio/gdtlsconnection.h:
-
-/usr/include/bits/flt-eval-method.h:
-
-/usr/include/pango-1.0/pango/pango-fontset.h:
-
-/usr/include/c++/15/tr1/modified_bessel_func.tcc:
-
-/usr/lib64/libepoxy.so.0:
-
-/usr/lib64/libbrotlicommon.so.1:
 
 /usr/include/c++/15/span:
 
@@ -3458,10 +2954,6 @@ CMakeFiles/Life.dir/body/Debug.cpp.o:
 /usr/include/c++/15/bits/ranges_cmp.h:
 
 /usr/include/glib-2.0/gio/gsimpleproxyresolver.h:
-
-/usr/include/pango-1.0/pango/pango-gravity.h:
-
-/usr/lib64/libLerc.so.4:
 
 /usr/lib64/libpangocairo-1.0.so:
 
@@ -3513,10 +3005,6 @@ CMakeFiles/Life.dir/body/Debug.cpp.o:
 
 /usr/include/c++/15/x86_64-redhat-linux/bits/gthr-default.h:
 
-/usr/include/bits/stdint-intn.h:
-
-/usr/include/gtk-4.0/gtk/deprecated/gtktreemodel.h:
-
 /usr/include/bits/stdlib-float.h:
 
 /usr/lib64/libXau.so.6:
@@ -3552,10 +3040,6 @@ CMakeFiles/Life.dir/body/Cell.cpp.o:
 /usr/include/bits/locale.h:
 
 /lib64/ld-linux-x86-64.so.2:
-
-/usr/include/gtk-4.0/gtk/gtkheaderbar.h:
-
-/usr/lib64/libpango-1.0.so:
 
 /usr/include/c++/15/bits/istream.tcc:
 
@@ -3747,11 +3231,11 @@ CMakeFiles/Life.dir/body/Chunk.cpp.o:
 
 /usr/lib64/libmount.so.1:
 
-/usr/include/cairo/cairo-deprecated.h:
-
 /usr/include/graphene-1.0/graphene.h:
 
 /usr/include/features.h:
+
+/usr/include/glib-2.0/gio/gremoteactiongroup.h:
 
 /usr/lib64/liblzma.so.5:
 
@@ -3817,10 +3301,6 @@ CMakeFiles/Life.dir/body/Chunk.cpp.o:
 
 /usr/include/graphene-1.0/graphene-matrix.h:
 
-/usr/include/c++/15/bits/concept_check.h:
-
-/usr/include/gtk-4.0/gtk/gtkshortcutcontroller.h:
-
 /usr/include/bits/waitflags.h:
 
 /usr/include/stdio.h:
@@ -3838,6 +3318,12 @@ CMakeFiles/Life.dir/body/Chunk.cpp.o:
 /usr/include/glib-2.0/glib/deprecated/gcache.h:
 
 /usr/include/c++/15/ostream:
+
+/usr/include/bits/wctype-wchar.h:
+
+/usr/include/gtk-4.0/gtk/deprecated/gtktreemodel.h:
+
+/usr/include/bits/stdint-intn.h:
 
 /usr/lib64/libgraphite2.so.3:
 
@@ -3887,6 +3373,14 @@ CMakeFiles/Life.dir/body/Chunk.cpp.o:
 
 /usr/include/c++/15/bits/iterator_concepts.h:
 
+/usr/include/gtk-4.0/gtk/gtkprintdialog.h:
+
+/usr/include/c++/15/tr1/bessel_function.tcc:
+
+/usr/include/glib-2.0/gio/gsimpleaction.h:
+
+/usr/include/gtk-4.0/gtk/deprecated/gtkshow.h:
+
 /usr/include/c++/15/bits/functional_hash.h:
 
 /usr/include/c++/15/ext/type_traits.h:
@@ -3932,8 +3426,6 @@ CMakeFiles/Life.dir/body/Chunk.cpp.o:
 /usr/include/c++/15/bits/ostream.h:
 
 /usr/include/c++/15/bits/ostream.tcc:
-
-/home/frank/vscode/Life/body/Manager.cpp:
 
 /usr/include/glib-2.0/glib/gsequence.h:
 
@@ -4055,15 +3547,7 @@ CMakeFiles/Life.dir/body/Chunk.cpp.o:
 
 /usr/include/glib-2.0/glib/garray.h:
 
-/usr/include/glib-2.0/gio/gsettingsschema.h:
-
-/usr/include/c++/15/tr1/bessel_function.tcc:
-
-/usr/include/glib-2.0/gio/gsimpleaction.h:
-
-/usr/include/gtk-4.0/gtk/deprecated/gtkshow.h:
-
-/usr/include/gtk-4.0/gtk/gtkprintdialog.h:
+/usr/include/c++/15/x86_64-redhat-linux/bits/c++allocator.h:
 
 /usr/include/glib-2.0/gio/gsocketaddress.h:
 
@@ -4367,6 +3851,8 @@ CMakeFiles/Life.dir/body/Chunk.cpp.o:
 
 /usr/include/gtk-4.0/gdk/gdkconfig.h:
 
+/usr/include/pango-1.0/pango/pango-glyph-item.h:
+
 /usr/include/glib-2.0/gio/gtestdbus.h:
 
 /usr/include/glib-2.0/gobject/gsignalgroup.h:
@@ -4386,8 +3872,6 @@ CMakeFiles/Life.dir/body/Chunk.cpp.o:
 /usr/include/glib-2.0/gobject/gtype.h:
 
 /usr/include/glib-2.0/gobject/gtypemodule.h:
-
-/home/frank/vscode/Life/include/Life.h:
 
 /usr/include/glib-2.0/gobject/gmarshal.h:
 
@@ -4537,8 +4021,6 @@ CMakeFiles/Life.dir/body/Neighbor.cpp.o:
 
 /usr/include/gtk-4.0/gdk/gdktexturedownloader.h:
 
-/home/frank/vscode/Life/include/Manager.h:
-
 /usr/include/gtk-4.0/gtk/gtkmediastream.h:
 
 /usr/include/gtk-4.0/gdk/gdktoplevel.h:
@@ -4603,10 +4085,6 @@ CMakeFiles/Life.dir/body/Neighbor.cpp.o:
 
 /usr/include/gtk-4.0/gtk/print/gtkprintsettings.h:
 
-/usr/include/pango-1.0/pango/pango-fontset-simple.h:
-
-/usr/include/gtk-4.0/gtk/deprecated/gtkcellareacontext.h:
-
 /usr/include/gtk-4.0/gtk/deprecated/gtkcelllayout.h:
 
 /usr/include/gtk-4.0/gtk/deprecated/gtkcellrenderer.h:
@@ -4616,6 +4094,8 @@ CMakeFiles/Life.dir/body/Neighbor.cpp.o:
 /usr/include/bits/timesize.h:
 
 /usr/include/gtk-4.0/gtk/deprecated/gtkcellrendererspinner.h:
+
+/usr/include/pango-1.0/pango/pango-glyph.h:
 
 /usr/include/gtk-4.0/gtk/deprecated/gtkcellrenderertext.h:
 
@@ -4757,9 +4237,9 @@ CMakeFiles/Life.dir/body/Neighbor.cpp.o:
 
 /usr/include/gtk-4.0/gtk/gtkexpander.h:
 
-/usr/include/glib-2.0/gio/gio.h:
-
 /usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o:
+
+/usr/include/glib-2.0/gio/gio.h:
 
 /usr/include/gtk-4.0/gtk/gtkexpression.h:
 
@@ -4820,6 +4300,10 @@ CMakeFiles/Life.dir/body/Neighbor.cpp.o:
 /usr/lib64/libsqlite3.so.0:
 
 /usr/include/gtk-4.0/gtk/gtkgridlayout.h:
+
+/usr/lib64/libpango-1.0.so:
+
+/usr/include/gtk-4.0/gtk/gtkheaderbar.h:
 
 /usr/include/gtk-4.0/gtk/gtktreelistrowsorter.h:
 
@@ -5049,6 +4533,18 @@ CMakeFiles/Life.dir/body/Neighbor.cpp.o:
 
 /usr/include/pango-1.0/pango/pango-engine.h:
 
-CMakeFiles/Life.dir/body/Manager.cpp.o:
-
 /usr/include/pango-1.0/pango/pango-features.h:
+
+/usr/include/gtk-4.0/gtk/deprecated/gtkcellareacontext.h:
+
+/usr/include/pango-1.0/pango/pango-fontset-simple.h:
+
+/usr/include/c++/15/tr1/modified_bessel_func.tcc:
+
+/usr/lib64/libepoxy.so.0:
+
+/usr/include/pango-1.0/pango/pango-fontset.h:
+
+/usr/lib64/libLerc.so.4:
+
+/usr/include/pango-1.0/pango/pango-gravity.h:
