@@ -7,7 +7,7 @@ Makefile
 Life
 
 # VS Code
-.vscode/
+#.vscode/
 *.code-workspace
 
 # OS files
