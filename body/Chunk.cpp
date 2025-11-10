@@ -101,5 +101,4 @@ bool Chunk::is_populated()
     return false;
 }
 
-
 Chunk::~Chunk() {};

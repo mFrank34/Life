@@ -53,7 +53,7 @@ Chunk Life::step(Chunk chunk, std::vector<Chunk *> relevent_chunks)
 
         // Check bottom edge
         for (int col = 0; col < Chunk::CHUNK_SIZE; ++col)
-            if (neighbor->get_cell(Chunk::CHUNK_SIZE - 1,col).is_alive())
+            if (neighbor->get_cell(Chunk::CHUNK_SIZE - 1, col).is_alive())
                 bottom = true;
 
         // Check left edge
@@ -69,6 +69,29 @@ Chunk Life::step(Chunk chunk, std::vector<Chunk *> relevent_chunks)
 
     // Now you know which edges have active neighbors
     // You can use this info to update `chunk`'s border cells
+
+    std::cout << "alive Cells in";
+    if (top)
+    {
+        std::cout << "top";
+    }
+
+    if (bottom)
+    {
+        std::cout << "bottom";
+    }
+
+    if (left)
+    {
+        std::cout << "left";
+    }
+
+    if (right)
+    {
+        std::cout << "right";
+    }
+
+    std::cout << '\n';
 
     return chunk;
 };

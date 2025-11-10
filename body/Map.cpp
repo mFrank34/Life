@@ -1,5 +1,8 @@
 #include "Map.h"
 
+#include <unordered_map>
+#include <vector>
+
 Map::Map()
 {
     debug.set(this);
