@@ -249,53 +249,29 @@ body/Manager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Manager.cpp.s
 .PHONY : body/Manager.cpp.s
 
-body/Map.o: body/Map.cpp.o
-.PHONY : body/Map.o
+body/Unordered.o: body/Unordered.cpp.o
+.PHONY : body/Unordered.o
 
 # target to build an object file
-body/Map.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Map.cpp.o
-.PHONY : body/Map.cpp.o
+body/Unordered.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Unordered.cpp.o
+.PHONY : body/Unordered.cpp.o
 
-body/Map.i: body/Map.cpp.i
-.PHONY : body/Map.i
-
-# target to preprocess a source file
-body/Map.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Map.cpp.i
-.PHONY : body/Map.cpp.i
-
-body/Map.s: body/Map.cpp.s
-.PHONY : body/Map.s
-
-# target to generate assembly for a file
-body/Map.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Map.cpp.s
-.PHONY : body/Map.cpp.s
-
-body/Neighbor.o: body/Neighbor.cpp.o
-.PHONY : body/Neighbor.o
-
-# target to build an object file
-body/Neighbor.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Neighbor.cpp.o
-.PHONY : body/Neighbor.cpp.o
-
-body/Neighbor.i: body/Neighbor.cpp.i
-.PHONY : body/Neighbor.i
+body/Unordered.i: body/Unordered.cpp.i
+.PHONY : body/Unordered.i
 
 # target to preprocess a source file
-body/Neighbor.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Neighbor.cpp.i
-.PHONY : body/Neighbor.cpp.i
+body/Unordered.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Unordered.cpp.i
+.PHONY : body/Unordered.cpp.i
 
-body/Neighbor.s: body/Neighbor.cpp.s
-.PHONY : body/Neighbor.s
+body/Unordered.s: body/Unordered.cpp.s
+.PHONY : body/Unordered.s
 
 # target to generate assembly for a file
-body/Neighbor.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Neighbor.cpp.s
-.PHONY : body/Neighbor.cpp.s
+body/Unordered.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Unordered.cpp.s
+.PHONY : body/Unordered.cpp.s
 
 source/Main.o: source/Main.cpp.o
 .PHONY : source/Main.o
@@ -345,12 +321,9 @@ help:
 	@echo "... body/Manager.o"
 	@echo "... body/Manager.i"
 	@echo "... body/Manager.s"
-	@echo "... body/Map.o"
-	@echo "... body/Map.i"
-	@echo "... body/Map.s"
-	@echo "... body/Neighbor.o"
-	@echo "... body/Neighbor.i"
-	@echo "... body/Neighbor.s"
+	@echo "... body/Unordered.o"
+	@echo "... body/Unordered.i"
+	@echo "... body/Unordered.s"
 	@echo "... source/Main.o"
 	@echo "... source/Main.i"
 	@echo "... source/Main.s"

@@ -1,6 +1,6 @@
 #pragma once
-#ifndef MAP_H
-#define MAP_H
+#ifndef UNORDERED_H
+#define UNORDERED_H
 
 #include <unordered_map>
 #include <vector>
@@ -8,12 +8,12 @@
 // custom classes
 #include "Chunk.h"
 #include "Debug.h"
-#include "Life.h"
+#include "World.h"
 
-class Map
+class Unordered : public World
 {
 public:
-    Map();
+    Unordered();
 
     // adding debugging
     Debug debug;
@@ -37,7 +37,7 @@ public:
     void unload();
 
     // a new function thats
-    void update(Life &rules);
+    //void update(Life &rules);
 
 private:
     static const int KEYLENGTH = 32; // length of key

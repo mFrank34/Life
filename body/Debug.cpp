@@ -1,7 +1,7 @@
 #include "Debug.h"
-#include "Map.h"
+#include "Unordered.h"
 
-void Debug::set(Map *map_ptr)
+void Debug::set(Unordered *map_ptr)
 {
     this->map = map_ptr;
 }

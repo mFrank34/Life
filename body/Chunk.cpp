@@ -2,7 +2,7 @@
 #include "Cell.h"
 #include "Life.h"
 
-// creates class    | sets the cords for chunk
+// creates class | sets the cords for chunk
 Chunk::Chunk(int input_x, int input_y) : chunk_x(input_x), chunk_y(input_y)
 {
     // initialize all cells

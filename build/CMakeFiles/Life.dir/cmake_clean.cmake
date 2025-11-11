@@ -12,10 +12,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Life.dir/body/Life.cpp.o.d"
   "CMakeFiles/Life.dir/body/Manager.cpp.o"
   "CMakeFiles/Life.dir/body/Manager.cpp.o.d"
-  "CMakeFiles/Life.dir/body/Map.cpp.o"
-  "CMakeFiles/Life.dir/body/Map.cpp.o.d"
-  "CMakeFiles/Life.dir/body/Neighbor.cpp.o"
-  "CMakeFiles/Life.dir/body/Neighbor.cpp.o.d"
+  "CMakeFiles/Life.dir/body/Unordered.cpp.o"
+  "CMakeFiles/Life.dir/body/Unordered.cpp.o.d"
   "CMakeFiles/Life.dir/source/Main.cpp.o"
   "CMakeFiles/Life.dir/source/Main.cpp.o.d"
 )

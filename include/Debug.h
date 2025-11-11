@@ -5,7 +5,7 @@
 #include <iostream>
 #include <unordered_map>
 
-class Map;   // forward declare
+class Unordered;   // forward declare
 class Chunk; // forward declare
 
 class Debug
@@ -13,8 +13,8 @@ class Debug
 public:
     Debug() = default;
 
-    // link Debug to its owning Map
-    void set(Map *map_ptr);
+    // link Debug to its owning Unordered
+    void set(Unordered *map_ptr);
 
     // print data
     void positions(int global_x, int global_y);
@@ -24,7 +24,7 @@ public:
     int active_chunks();
 
 private:
-    Map *map = nullptr;
+    Unordered *map = nullptr;
 };
 
 #endif

@@ -5,8 +5,8 @@
 // custom class
 #include "Cell.h"
 #include "Chunk.h"
-#include "Map.h"
-#include "Neighbor.h"
+#include "Unordered.h"
+#include ""
 
 /*
 NOTES:
@@ -16,7 +16,7 @@ NOTES:
     - add UI elements for map viewing
 
 Miles Stones:
-    - Map system created, able to view a single cell and chunk with global coors.
+    - Unordered system created, able to view a single cell and chunk with global coors.
     - next to make way for node to interact with map, partly done with with cell type and active note.
     -
 */

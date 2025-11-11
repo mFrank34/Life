@@ -28,7 +28,7 @@ void Cell::set_type(char new_type)
     update_cell();
 }
 
-void Cell::is_alive(bool is_alive)
+void Cell::set_alive(bool is_alive)
 {
     // setting the alive state
     this->alive = is_alive;

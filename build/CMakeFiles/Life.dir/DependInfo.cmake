@@ -13,8 +13,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/frank/vscode/Life/body/Debug.cpp" "CMakeFiles/Life.dir/body/Debug.cpp.o" "gcc" "CMakeFiles/Life.dir/body/Debug.cpp.o.d"
   "/home/frank/vscode/Life/body/Life.cpp" "CMakeFiles/Life.dir/body/Life.cpp.o" "gcc" "CMakeFiles/Life.dir/body/Life.cpp.o.d"
   "/home/frank/vscode/Life/body/Manager.cpp" "CMakeFiles/Life.dir/body/Manager.cpp.o" "gcc" "CMakeFiles/Life.dir/body/Manager.cpp.o.d"
-  "/home/frank/vscode/Life/body/Map.cpp" "CMakeFiles/Life.dir/body/Map.cpp.o" "gcc" "CMakeFiles/Life.dir/body/Map.cpp.o.d"
-  "/home/frank/vscode/Life/body/Neighbor.cpp" "CMakeFiles/Life.dir/body/Neighbor.cpp.o" "gcc" "CMakeFiles/Life.dir/body/Neighbor.cpp.o.d"
+  "/home/frank/vscode/Life/body/Unordered.cpp" "CMakeFiles/Life.dir/body/Unordered.cpp.o" "gcc" "CMakeFiles/Life.dir/body/Unordered.cpp.o.d"
   "/home/frank/vscode/Life/source/Main.cpp" "CMakeFiles/Life.dir/source/Main.cpp.o" "gcc" "CMakeFiles/Life.dir/source/Main.cpp.o.d"
   "" "/home/frank/vscode/Life/bin/Life" "gcc" "CMakeFiles/Life.dir/link.d"
   )
