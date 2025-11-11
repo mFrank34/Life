@@ -1,10 +1,9 @@
 #include "World.h"
 #include <vector>
 
-World::World(std::string world_type)
+World::World(std::string type)
 {
-    this->world_type = world_type;
-    debug->set(this);
+    this->world_type = type;
 }
 
 int World::neighbour_count(int global_x, int global_y) 

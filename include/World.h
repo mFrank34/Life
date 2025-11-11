@@ -7,12 +7,9 @@
 #include "Chunk.h"
 #include "Cell.h"
 
-class Debug;
-
 class World
 {
 public:
-    Debug* debug;
     // constructor's and deconstructor's
     World(std::string world_type);
     virtual ~World() = default;
