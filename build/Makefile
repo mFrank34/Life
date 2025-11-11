@@ -273,6 +273,30 @@ body/Unordered.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Unordered.cpp.s
 .PHONY : body/Unordered.cpp.s
 
+body/World.o: body/World.cpp.o
+.PHONY : body/World.o
+
+# target to build an object file
+body/World.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/World.cpp.o
+.PHONY : body/World.cpp.o
+
+body/World.i: body/World.cpp.i
+.PHONY : body/World.i
+
+# target to preprocess a source file
+body/World.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/World.cpp.i
+.PHONY : body/World.cpp.i
+
+body/World.s: body/World.cpp.s
+.PHONY : body/World.s
+
+# target to generate assembly for a file
+body/World.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/World.cpp.s
+.PHONY : body/World.cpp.s
+
 source/Main.o: source/Main.cpp.o
 .PHONY : source/Main.o
 
@@ -324,6 +348,9 @@ help:
 	@echo "... body/Unordered.o"
 	@echo "... body/Unordered.i"
 	@echo "... body/Unordered.s"
+	@echo "... body/World.o"
+	@echo "... body/World.i"
+	@echo "... body/World.s"
 	@echo "... source/Main.o"
 	@echo "... source/Main.i"
 	@echo "... source/Main.s"

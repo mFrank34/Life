@@ -2,17 +2,33 @@
 #include <unordered_map>
 #include <vector>
 
-Unordered::Unordered()
+Unordered::Unordered() : World("Unordered Map")
 {
     debug.set(this);
-};
-
-std::unordered_map<long long, Chunk> Unordered::get_world()
-{
-    return chunks;
 }
 
-Cell &Map::get_cell(int global_x, int global_y)
+void Unordered::unload()
+{
+    // get the map data
+    std::unordered_map<long long, Chunk>::iterator selected = chunks.begin();
+    while (selected != chunks.end())
+    {
+        // gets chunk
+        Chunk &chunk = selected->second;
+
+        // finds if data is stored with in
+        if (!chunk.is_populated()) // if not populated
+        {
+            selected = chunks.erase(selected);
+        }
+        else
+        {
+            ++selected;
+        }
+    }
+}
+
+Cell &Unordered::get_cell(int global_x, int global_y)
 {
     int chunk_x = global_x / Chunk::CHUNK_SIZE;
     int chunk_y = global_y / Chunk::CHUNK_SIZE;
@@ -37,69 +53,13 @@ Chunk &Unordered::get_chunk(int global_x, int global_y)
     return generate_chunk(chunk_x, chunk_y);
 }
 
-int Unordered::neighbour_count(int global_x, int global_y)
+void* Unordered::get_world()
 {
-    // offset for cords
-    static const int offsets[8][2] = {{-1, -1}, {0, -1}, {1, -1}, {-1, 0}, {1, 0}, {-1, 1}, {0, 1}, {1, 1}};
-    int count;
-
-    for (const auto &offset : offsets) // connects
-    {
-        // gets the surrounding cell coors
-        Cell &neighbor = get_cell(global_x + offset[0], global_y + offset[1]);
-        if (neighbor.is_alive())
-        {
-            // counting the alive cells
-            count++;
-        };
-    };
-    return count;
+    // i agree this looks bad!
+    return &chunks; // std::unordered_map<long long, Chunk>
 }
 
-std::vector<long long> Unordered::get_neighbor_key(long long key)
-{
-    std::pair<int, int> cords = decode_key(key); // x and y
-    int x = cords.first;
-    int y = cords.second;
-
-    std::vector<long long> neighbors;
-    neighbors.reserve(8);
-
-    // searching for keys to add
-    for (int dy = -1; dy <= 1; ++dy)
-    {
-        for (int dx = -1; dx <= 1; ++dx)
-        {
-            if (dx = 0 && dy == 0)
-                continue;
-            neighbors.push_back(generate_key(x + dx, y + dy));
-        }
-    }
-    return neighbors;
-}
-
-void Unordered::unload()
-{
-    // get the map data
-    std::unordered_map<long long, Chunk>::iterator selected = chunks.begin();
-    while (selected != chunks.end())
-    {
-        // gets chunk
-        Chunk &chunk = selected->second;
-
-        // finds if data is stored with in
-        if (!chunk.is_populated()) // if not populated
-        {
-            selected = chunks.erase(selected);
-        }
-        else
-        {
-            ++selected;
-        }
-    }
-}
-
-Chunk &Unordered::generate_chunk(int chunk_x, int chunk_y)
+Chunk& Unordered::generate_chunk(int chunk_x, int chunk_y)
 {
     long long key = generate_key(chunk_x, chunk_y);
     // if the chunk doesn't exist, create new chunk
@@ -109,17 +69,4 @@ Chunk &Unordered::generate_chunk(int chunk_x, int chunk_y)
     };
     // creates chunk
     return chunks.at(key);
-}
-
-long long Unordered::generate_key(int chunk_x, int chunk_y) const
-{
-    // packs two 32 bit ints into one 64-bit key for the map
-    return (static_cast<long long>(chunk_x) << 32) | (static_cast<unsigned int>(chunk_y));
-}
-
-inline std::pair<int, int> Unordered::decode_key(long long key)
-{
-    int chunk_x = static_cast<int>(key >> KEYLENGTH); // decode key 32bit
-    int chunk_y = static_cast<int>(key & 0xFFFFFFFF); // -1 32bit
-    return {chunk_x, chunk_y};
 }

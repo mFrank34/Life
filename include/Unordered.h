@@ -6,52 +6,29 @@
 #include <vector>
 
 // custom classes
-#include "Chunk.h"
-#include "Debug.h"
 #include "World.h"
+#include "Chunk.h"
+#include "Cell.h"
 
 class Unordered : public World
 {
 public:
     Unordered();
 
-    // adding debugging
-    Debug debug;
-
-    // gets unordered map of chunks
-    std::unordered_map<long long, Chunk> get_world();
-
-    // gets a reference to a cell using global coordinates
-    Cell &get_cell(int global_x, int global_y);
-
-    // get chunk a reference to chunk using global coors
-    Chunk &get_chunk(int global_x, int global_y);
-
-    // counts neighbour cells
-    int neighbour_count(int global_x, int global_y);
-
-    // get neighbor keys
-    std::vector<long long> get_neighbor_key(long long key);
-
-    // unloads chunks that are empty
+    // remove all empty chunks from world data
     void unload();
 
-    // a new function thats
-    //void update(Life &rules);
+    // world entities
+    Cell &get_cell(int global_x, int global_y) override;
+    Chunk &get_chunk(int global_x, int global_y) override;
+    
+    // world data
+    void* get_world() override;
 
 private:
-    static const int KEYLENGTH = 32; // length of key
+    Chunk& generate_chunk(int chunk_x, int chunk_y);
 
-    // finds or generated a chunk
-    Chunk &generate_chunk(int chunk_x, int chunk_y);
-
-    // data structure for storing chunks
     std::unordered_map<long long, Chunk> chunks;
-
-    // Packs (chunk_x, chunk_y) into single 64-bit key
-    long long generate_key(int chunk_x, int chunk_y) const;
-
-    std::pair<int, int> decode_key(long long key);
 };
 
 #endif
