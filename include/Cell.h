@@ -14,7 +14,7 @@ public:
 
     char get_type() const;
 
-    bool is_alive();
+    bool is_alive() const;
 
     void set_type(char new_type);
 

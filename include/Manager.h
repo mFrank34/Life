@@ -3,21 +3,15 @@
 #define MANAGER_H
 
 #include "Manager.h"
-#include "Unordered.h"
-#include "Life.h"
 
 class Manager
 {
 public:
-    Manager(Unordered *map, Life *rules);
-
-    void update();
+    Manager();
 
     ~Manager();
 
 private:
-    Unordered *map = nullptr; // hands over map
-    Life *rules = nullptr; // rules of the game
 
 };
 

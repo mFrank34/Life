@@ -2,17 +2,19 @@
 #ifndef WORLD_H
 #define WORLD_H
 
+#include <vector>
+
 #include "Chunk.h"
 #include "Cell.h"
-#include "Debug.h"
+
+class Debug;
 
 class World
 {
 public:
-    Debug debug;
-
+    Debug* debug;
     // constructor's and deconstructor's
-    World(std::string type);
+    World(std::string world_type);
     virtual ~World() = default;
 
     // Core functions for other map systems

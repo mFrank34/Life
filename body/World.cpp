@@ -1,6 +1,12 @@
 #include "World.h"
 #include <vector>
 
+World::World(std::string world_type)
+{
+    this->world_type = world_type;
+    debug->set(this);
+}
+
 int World::neighbour_count(int global_x, int global_y) 
 {
     // offset for cords

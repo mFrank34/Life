@@ -15,7 +15,7 @@ char Cell::get_type() const
     return type;
 };
 
-bool Cell::is_alive()
+bool Cell::is_alive() const
 {
     // sends back the alive type
     return alive;

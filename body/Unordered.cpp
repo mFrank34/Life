@@ -4,7 +4,7 @@
 
 Unordered::Unordered() : World("Unordered Map")
 {
-    debug.set(this);
+    
 }
 
 void Unordered::unload()

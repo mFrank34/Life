@@ -1,4 +1,5 @@
 #include "Debug.h"
+#include "World.h"
 #include "Chunk.h"
 #include "Cell.h"
 
