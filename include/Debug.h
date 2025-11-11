@@ -4,9 +4,7 @@
 
 #include <iostream>
 #include <unordered_map>
-
-class Unordered;   // forward declare
-class Chunk; // forward declare
+#include "World.h"
 
 class Debug
 {
@@ -14,17 +12,15 @@ public:
     Debug() = default;
 
     // link Debug to its owning Unordered
-    void set(Unordered *map_ptr);
+    void set(World *world_ptr);
 
     // print data
     void positions(int global_x, int global_y);
     void all_chunks();
-
-    // find active chunks within map system
     int active_chunks();
 
 private:
-    Unordered *map = nullptr;
+    World *world = nullptr;
 };
 
 #endif

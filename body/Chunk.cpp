@@ -67,7 +67,7 @@ void Chunk::print_chunk() const
     std::cout << "\n";
 }
 
-int Chunk::populated_chunk()
+int Chunk::populated_chunk() const 
 {
     int lives_cell;
     for (int y = 0; y < CHUNK_SIZE; ++y)
@@ -83,7 +83,7 @@ int Chunk::populated_chunk()
     return lives_cell;
 }
 
-bool Chunk::is_populated()
+bool Chunk::is_populated() const
 {
     // search
     for (int y = 0; y < CHUNK_SIZE; ++y)

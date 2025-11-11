@@ -35,10 +35,10 @@ public:
     void print_chunk() const;
 
     // find the amount of populated
-    int populated_chunk();
+    int populated_chunk() const; 
 
     // true if chunk contains alive cell
-    bool is_populated();
+    bool is_populated() const;
 
     ~Chunk();
 

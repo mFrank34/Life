@@ -1,30 +1,25 @@
 #include "Debug.h"
-#include "Unordered.h"
+#include "Chunk.h"
+#include "Cell.h"
 
-void Debug::set(Unordered *map_ptr)
+void Debug::set(World* world_ptr)
 {
-    this->map = map_ptr;
+    this->world = world_ptr;
 }
 
 void Debug::positions(int global_x, int global_y)
 {
-    if (!map)
+    if (!world)
     {
-        std::cerr << "Debug error: no Map set!\n"; // error handling
+        std::cerr << "Debug error: no World set!\n";
         return;
     }
 
-    // get chunk from Map
-    Chunk &chunk = map->get_chunk(global_x, global_y);
-
-    // coordinate math
+    Chunk& chunk = world->get_chunk(global_x, global_y);
     int local_x = chunk.local_x(global_x);
     int local_y = chunk.local_y(global_y);
+    Cell& cell = chunk.get_cell(local_x, local_y);
 
-    // get cell
-    Cell &cell = chunk.get_cell(local_x, local_y);
-
-    // debug output
     std::cout << "Global: (" << global_x << ", " << global_y << ")\n";
     std::cout << "Chunk:  (" << chunk.get_x() << ", " << chunk.get_y() << ")\n";
     std::cout << "Alive Cells: " << chunk.populated_chunk() << "\n";
@@ -34,13 +29,19 @@ void Debug::positions(int global_x, int global_y)
 
 void Debug::all_chunks()
 {
-    const std::unordered_map<long long, Chunk> chunks = map->get_world();
-    for (const auto &selected : chunks)
+    if (!world)
+    {
+        std::cerr << "Debug error: no World set!\n";
+        return;
+    }
+
+    // `get_world()` returns void*, so cast it back to the real type
+    auto* chunks = static_cast<std::unordered_map<long long, Chunk>*>(world->get_world());
+    for (const auto& selected : *chunks)
     {
         long long key = selected.first;
-        const Chunk &chunk = selected.second; // note the '&'
+        const Chunk& chunk = selected.second;
 
-        // printing out
         std::cout << "Chunk key: " << key << "\n";
         std::cout << "Chunk: (" << chunk.get_x() << ", " << chunk.get_y() << ")\n";
         chunk.print_chunk();
@@ -50,13 +51,18 @@ void Debug::all_chunks()
 
 int Debug::active_chunks()
 {
-    const std::unordered_map<long long, Chunk> chunks = map->get_world();
-    int active = 0;
-    for (const auto &selected : chunks)
+    if (!world)
     {
-        Chunk chunk = selected.second;
-        if (chunk.is_populated())
-            active++; // you forget you can do it like this...
+        std::cerr << "Debug error: no World set!\n";
+        return 0;
+    }
+
+    auto* chunks = static_cast<std::unordered_map<long long, Chunk>*>(world->get_world());
+    int active = 0;
+    for (const auto& selected : *chunks)
+    {
+        if (selected.second.is_populated())
+            active++;
     }
     return active;
 }
