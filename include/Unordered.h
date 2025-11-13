@@ -23,11 +23,9 @@ public:
     Chunk &get_chunk(int global_x, int global_y) override;
     
     // world data
-    void* get_world() override;
+    virtual std::unordered_map<long long, Chunk>* get_world() override;
 
 private:
-    Chunk& generate_chunk(int chunk_x, int chunk_y);
-
     std::unordered_map<long long, Chunk> chunks;
 };
 

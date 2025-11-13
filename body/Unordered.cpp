@@ -4,37 +4,24 @@
 
 Unordered::Unordered() : World("Unordered Map")
 {
-    
+
 }
 
 void Unordered::unload()
 {
-    // get the map data
-    std::unordered_map<long long, Chunk>::iterator selected = chunks.begin();
-    while (selected != chunks.end())
-    {
-        // gets chunk
-        Chunk &chunk = selected->second;
-
-        // finds if data is stored with in
-        if (!chunk.is_populated()) // if not populated
-        {
-            selected = chunks.erase(selected);
-        }
-        else
-        {
-            ++selected;
-        }
-    }
+    std::erase_if(chunks, [](auto &pair) 
+    { 
+        return !pair.second.is_populated(); 
+    });
 }
 
 Cell &Unordered::get_cell(int global_x, int global_y)
 {
     int chunk_x = global_x / Chunk::CHUNK_SIZE;
     int chunk_y = global_y / Chunk::CHUNK_SIZE;
-
+    long long key = generate_key(chunk_x, chunk_y);
     // generating chunk
-    Chunk &chunk = generate_chunk(chunk_x, chunk_y);
+    Chunk &chunk = chunks.try_emplace(key, chunk_x, chunk_y).first->second;
 
     // cords maths for x and y
     int local_x = chunk.local_x(global_x);
@@ -49,24 +36,13 @@ Chunk &Unordered::get_chunk(int global_x, int global_y)
     // reversed the cell function to return chunk as well
     int chunk_x = global_x / Chunk::CHUNK_SIZE;
     int chunk_y = global_y / Chunk::CHUNK_SIZE;
-    // return the chunk
-    return generate_chunk(chunk_x, chunk_y);
+    // key
+    long long key = generate_key(chunk_x, chunk_y);
+    return chunks.try_emplace(key, chunk_x, chunk_y).first->second;
 }
 
-void* Unordered::get_world()
+std::unordered_map<long long, Chunk> *Unordered::get_world()
 {
     // i agree this looks bad!
     return &chunks; // std::unordered_map<long long, Chunk>
-}
-
-Chunk& Unordered::generate_chunk(int chunk_x, int chunk_y)
-{
-    long long key = generate_key(chunk_x, chunk_y);
-    // if the chunk doesn't exist, create new chunk
-    if (chunks.find(key) == chunks.end())
-    {
-        chunks.emplace(key, Chunk(chunk_x, chunk_y));
-    };
-    // creates chunk
-    return chunks.at(key);
 }
