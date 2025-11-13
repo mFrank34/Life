@@ -8,7 +8,7 @@ World::World(std::string type)
 {
     this->world_type = type;
 
-    // register with debugger 
+    // register with debugger
     global_debug.register_world(this);
 }
 
@@ -49,6 +49,11 @@ std::vector<long long> World::get_neighbour_key(long long key) const
         }
     }
     return neighbors;
+}
+
+std::string World::get_type() const
+{
+    return world_type;
 }
 
 // protected

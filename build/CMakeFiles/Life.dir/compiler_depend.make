@@ -1767,8 +1767,11 @@ CMakeFiles/Life.dir/body/World.cpp.o: /home/frank/vscode/Life/body/World.cpp \
   /usr/lib/gcc/x86_64-redhat-linux/15/include/stddef.h
 
 CMakeFiles/Life.dir/source/Main.cpp.o: /home/frank/vscode/Life/source/Main.cpp \
+  /home/frank/vscode/Life/include/Cache.h \
   /home/frank/vscode/Life/include/Cell.h \
   /home/frank/vscode/Life/include/Chunk.h \
+  /home/frank/vscode/Life/include/Debug.h \
+  /home/frank/vscode/Life/include/Sparse.h \
   /home/frank/vscode/Life/include/Unordered.h \
   /home/frank/vscode/Life/include/World.h \
   /usr/include/alloca.h \
@@ -2887,13 +2890,7 @@ CMakeFiles/Life.dir/source/Main.cpp.o: /home/frank/vscode/Life/source/Main.cpp \
 
 /usr/include/gtk-4.0/gtk/print/gtkprintoperation.h:
 
-/usr/include/bits/struct_rwlock.h:
-
-/usr/include/bits/sched.h:
-
-/usr/include/glib-2.0/gio/giomodule.h:
-
-/usr/include/c++/15/bits/stl_iterator_base_funcs.h:
+/usr/include/gtk-4.0/gtk/print/gtkpapersize.h:
 
 /usr/include/glib-2.0/gio/gio-autocleanups.h:
 
@@ -3293,10 +3290,6 @@ CMakeFiles/Life.dir/body/Manager.cpp.o:
 
 /usr/include/c++/15/cwctype:
 
-/usr/include/glib-2.0/gio/gioscheduler.h:
-
-/usr/include/gtk-4.0/gtk/gtkwindowcontrols.h:
-
 /usr/include/bits/types/struct_sigstack.h:
 
 /usr/lib64/libgstbase-1.0.so.0:
@@ -3316,6 +3309,10 @@ CMakeFiles/Life.dir/body/Manager.cpp.o:
 /usr/include/c++/15/bits/stl_bvector.h:
 
 /usr/include/c++/15/bits/stl_pair.h:
+
+/usr/include/c++/15/bits/stl_iterator_base_funcs.h:
+
+/usr/include/glib-2.0/gio/giomodule.h:
 
 /usr/include/c++/15/bits/stl_function.h:
 
@@ -3795,6 +3792,14 @@ CMakeFiles/Life.dir/body/Cell.cpp.o:
 
 /usr/include/c++/15/bits/uses_allocator.h:
 
+/usr/include/bits/struct_rwlock.h:
+
+/usr/include/bits/sched.h:
+
+/usr/include/gtk-4.0/gtk/gtkwindowcontrols.h:
+
+/usr/include/glib-2.0/gio/gioscheduler.h:
+
 /usr/include/gtk-4.0/gdk/gdkglcontext.h:
 
 /usr/include/glib-2.0/gio/gdebugcontrollerdbus.h:
@@ -3935,6 +3940,10 @@ CMakeFiles/Life.dir/body/World.cpp.o:
 
 /usr/include/glib-2.0/gio/gdbusconnection.h:
 
+/usr/include/gtk-4.0/gtk/print/gtkprintcontext.h:
+
+/usr/include/c++/15/cctype:
+
 /usr/include/gtk-4.0/gdk/deprecated/gdkpixbuf.h:
 
 /usr/include/gtk-4.0/gtk/css/gtkcssenumtypes.h:
@@ -4037,8 +4046,6 @@ CMakeFiles/Life.dir/body/World.cpp.o:
 
 /usr/include/bits/types/struct_timespec.h:
 
-/usr/include/gtk-4.0/gtk/print/gtkpapersize.h:
-
 /usr/include/c++/15/bits/localefwd.h:
 
 /usr/include/glib-2.0/glib/guri.h:
@@ -4066,6 +4073,8 @@ CMakeFiles/Life.dir/body/World.cpp.o:
 /usr/include/bits/wordsize.h:
 
 /usr/include/c++/15/bits/string_view.tcc:
+
+/home/frank/vscode/Life/include/Sparse.h:
 
 /usr/include/glib-2.0/gio/gdtlsserverconnection.h:
 
@@ -4386,6 +4395,8 @@ CMakeFiles/Life.dir/body/World.cpp.o:
 /usr/include/gtk-4.0/gtk/deprecated/gtkfilechooser.h:
 
 /usr/include/glib-2.0/glib/ghook.h:
+
+/home/frank/vscode/Life/include/Cache.h:
 
 /usr/include/glib-2.0/glib/giochannel.h:
 
@@ -4942,10 +4953,6 @@ CMakeFiles/Life.dir/body/World.cpp.o:
 /usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o:
 
 /usr/include/gtk-4.0/gtk/gtkexpression.h:
-
-/usr/include/c++/15/cctype:
-
-/usr/include/gtk-4.0/gtk/print/gtkprintcontext.h:
 
 /usr/include/gtk-4.0/gtk/gtkfiledialog.h:
 

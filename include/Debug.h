@@ -25,5 +25,4 @@ public:
     void list_worlds();
 };
 
-
 #endif

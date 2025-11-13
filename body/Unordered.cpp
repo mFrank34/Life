@@ -43,6 +43,5 @@ Chunk &Unordered::get_chunk(int global_x, int global_y)
 
 std::unordered_map<long long, Chunk> *Unordered::get_world()
 {
-    // i agree this looks bad!
     return &chunks; // std::unordered_map<long long, Chunk>
 }

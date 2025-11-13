@@ -15,10 +15,11 @@ void Debug::set_active(int index)
     if (index >= 0 && index < (int)worlds.size())
     {
         active_index = index;
-        std::cout << "Switched active world to index " << index << "\n";
+        std::cout << "Switched active world to index: " << index << "\n";
     }
     else
         std::cerr << "Invalid world index!\n";
+    std::cout << '\n';
 }
 
 void Debug::list_worlds()
@@ -26,8 +27,9 @@ void Debug::list_worlds()
     std::cout << "Registered worlds:\n";
     for (size_t i = 0; i < worlds.size(); ++i)
     {
-        std::cout << "  [" << i << "] " << typeid(*worlds[i]).name() << "\n";
+        std::cout << "  [" << i << "] " << worlds[i]->get_type() << "\n";
     }
+    std::cout << '\n';
 }
 
 void Debug::positions(int global_x, int global_y)
