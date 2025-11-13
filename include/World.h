@@ -7,6 +7,8 @@
 #include "Chunk.h"
 #include "Cell.h"
 
+class Debug;
+
 class World
 {
 public:
@@ -34,6 +36,9 @@ protected:
     std::pair<int, int> decode_key(long long key) const;
 
     std::string world_type;
+
+public:
+    static Debug* debugger;
 };
 
 #endif

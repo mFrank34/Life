@@ -1,12 +1,18 @@
 #include "World.h"
+#include "Debug.h"
 #include <vector>
+
+extern Debug global_debug;
 
 World::World(std::string type)
 {
     this->world_type = type;
+
+    // register with debugger 
+    global_debug.register_world(this);
 }
 
-int World::neighbour_count(int global_x, int global_y) 
+int World::neighbour_count(int global_x, int global_y)
 {
     // offset for cords
     static const int offsets[8][2] = {{-1, -1}, {0, -1}, {1, -1}, {-1, 0}, {1, 0}, {-1, 1}, {0, 1}, {1, 1}};
@@ -27,7 +33,7 @@ int World::neighbour_count(int global_x, int global_y)
 
 std::vector<long long> World::get_neighbour_key(long long key) const
 {
-    auto[x,y] = decode_key(key);
+    auto [x, y] = decode_key(key);
     std::vector<long long> neighbors;
     neighbors.reserve(8);
 
@@ -38,7 +44,7 @@ std::vector<long long> World::get_neighbour_key(long long key) const
         {
             if (dx == 0 && dy == 0)
                 continue;
-            
+
             neighbors.push_back(generate_key(x + dx, y + dy));
         }
     }

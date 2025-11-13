@@ -3,20 +3,42 @@
 #include "Chunk.h"
 #include "Cell.h"
 
-// broken....
-void Debug::set(World* world_ptr)
+void Debug::register_world(World* world)
 {
-    this->world = world_ptr;
+    worlds.push_back(world);
+    if (active_index == -1) // if no world active yet
+        active_index = 0;
+}
+
+void Debug::set_active(int index)
+{
+    if (index >= 0 && index < (int)worlds.size())
+    {
+        active_index = index;
+        std::cout << "Switched active world to index " << index << "\n";
+    }
+    else
+        std::cerr << "Invalid world index!\n";
+}
+
+void Debug::list_worlds()
+{
+    std::cout << "Registered worlds:\n";
+    for (size_t i = 0; i < worlds.size(); ++i)
+    {
+        std::cout << "  [" << i << "] " << typeid(*worlds[i]).name() << "\n";
+    }
 }
 
 void Debug::positions(int global_x, int global_y)
 {
-    if (!world)
+    if (active_index == -1)
     {
-        std::cerr << "Debug error: no World set!\n";
+        std::cerr << "No world set!\n";
         return;
     }
 
+    World* world = worlds[active_index];
     Chunk& chunk = world->get_chunk(global_x, global_y);
     int local_x = chunk.local_x(global_x);
     int local_y = chunk.local_y(global_y);
@@ -31,35 +53,33 @@ void Debug::positions(int global_x, int global_y)
 
 void Debug::all_chunks()
 {
-    if (!world)
+    if (active_index == -1)
     {
-        std::cerr << "Debug error: no World set!\n";
+        std::cerr << "No world set!\n";
         return;
     }
 
-    // `get_world()` returns void*, so cast it back to the real type
+    auto* world = worlds[active_index];
     auto* chunks = static_cast<std::unordered_map<long long, Chunk>*>(world->get_world());
+
     for (const auto& selected : *chunks)
     {
-        long long key = selected.first;
-        const Chunk& chunk = selected.second;
-
-        std::cout << "Chunk key: " << key << "\n";
-        std::cout << "Chunk: (" << chunk.get_x() << ", " << chunk.get_y() << ")\n";
-        chunk.print_chunk();
-        std::cout << "\n";
+        std::cout << "Chunk key: " << selected.first << "\n";
+        selected.second.print_chunk();
     }
 }
 
 int Debug::active_chunks()
 {
-    if (!world)
+    if (active_index == -1)
     {
-        std::cerr << "Debug error: no World set!\n";
+        std::cerr << "No world set!\n";
         return 0;
     }
 
+    auto* world = worlds[active_index];
     auto* chunks = static_cast<std::unordered_map<long long, Chunk>*>(world->get_world());
+
     int active = 0;
     for (const auto& selected : *chunks)
     {
