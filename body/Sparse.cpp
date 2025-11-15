@@ -21,13 +21,19 @@ Cell &Sparse::get_cell(int global_x, int global_y)
 
     long long key = generate_key(cx, cy);
     auto it = chunks.find(key);
-    
+
     // change the state of cell
     if (it == chunks.end())
     {
         DEAD_CELL_MUTABLE.set_alive(false);
         return DEAD_CELL_MUTABLE;
     }
+
+    Chunk &chunk = it->second;
+    int lx = chunk.local_x(global_x);
+    int ly = chunk.local_y(global_y);
+
+    return chunk.get_cell(lx,ly);
 }
 
 Cell &Sparse::set_cell(int global_x, int global_y)
