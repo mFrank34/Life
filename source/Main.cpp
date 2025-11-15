@@ -63,16 +63,11 @@ int main()
         }
     }
 
-    // looking at chunks stays on the map
-    global_debug.all_chunks();
-
-    std::cout << "Active Chunk's: " << global_debug.active_chunks() << "\n";
+    std::cout << "Active Chunk's: " << global_debug.total_chunks() << "\n";
 
     unordered.unload();
 
-    std::cout << "Active Chunk After Unload: " << global_debug.active_chunks() << "\n";
-
-    global_debug.all_chunks();
+    std::cout << "Active Chunk After Unload: " << global_debug.total_chunks() << "\n";
 
     return 0;
 }
