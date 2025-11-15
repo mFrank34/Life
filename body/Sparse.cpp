@@ -11,7 +11,6 @@ inline int Sparse::chunk_index(int v, int size)
                : (v - (size - 1)) / size;
 }
 
-// important locking to one thread
 static thread_local Cell DEAD_CELL_MUTABLE;
 
 Cell &Sparse::get_cell(int global_x, int global_y)
