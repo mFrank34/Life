@@ -2,7 +2,7 @@
 #include <unordered_map>
 #include <vector>
 
-Sparse::Sparse() : World("Sparse") {};
+Sparse::Sparse() : World("Sparse map") {};
 
 inline int Sparse::chunk_index(int v, int size)
 {
