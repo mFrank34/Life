@@ -249,6 +249,30 @@ body/Manager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Manager.cpp.s
 .PHONY : body/Manager.cpp.s
 
+body/Sparse.o: body/Sparse.cpp.o
+.PHONY : body/Sparse.o
+
+# target to build an object file
+body/Sparse.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Sparse.cpp.o
+.PHONY : body/Sparse.cpp.o
+
+body/Sparse.i: body/Sparse.cpp.i
+.PHONY : body/Sparse.i
+
+# target to preprocess a source file
+body/Sparse.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Sparse.cpp.i
+.PHONY : body/Sparse.cpp.i
+
+body/Sparse.s: body/Sparse.cpp.s
+.PHONY : body/Sparse.s
+
+# target to generate assembly for a file
+body/Sparse.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Sparse.cpp.s
+.PHONY : body/Sparse.cpp.s
+
 body/Unordered.o: body/Unordered.cpp.o
 .PHONY : body/Unordered.o
 
@@ -345,6 +369,9 @@ help:
 	@echo "... body/Manager.o"
 	@echo "... body/Manager.i"
 	@echo "... body/Manager.s"
+	@echo "... body/Sparse.o"
+	@echo "... body/Sparse.i"
+	@echo "... body/Sparse.s"
 	@echo "... body/Unordered.o"
 	@echo "... body/Unordered.i"
 	@echo "... body/Unordered.s"

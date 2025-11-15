@@ -23,7 +23,7 @@ public:
     Chunk &get_chunk(int global_x, int global_y) override;
     
     // world data
-    virtual std::unordered_map<long long, Chunk>* get_world() override;
+    std::unordered_map<long long, Chunk>* get_world() override;
 
 private:
     std::unordered_map<long long, Chunk> chunks;
