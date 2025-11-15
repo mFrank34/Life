@@ -129,6 +129,54 @@ Life/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/build
 .PHONY : Life/fast
 
+body/Cache.o: body/Cache.cpp.o
+.PHONY : body/Cache.o
+
+# target to build an object file
+body/Cache.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Cache.cpp.o
+.PHONY : body/Cache.cpp.o
+
+body/Cache.i: body/Cache.cpp.i
+.PHONY : body/Cache.i
+
+# target to preprocess a source file
+body/Cache.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Cache.cpp.i
+.PHONY : body/Cache.cpp.i
+
+body/Cache.s: body/Cache.cpp.s
+.PHONY : body/Cache.s
+
+# target to generate assembly for a file
+body/Cache.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/Cache.cpp.s
+.PHONY : body/Cache.cpp.s
+
+body/CacheChunk.o: body/CacheChunk.cpp.o
+.PHONY : body/CacheChunk.o
+
+# target to build an object file
+body/CacheChunk.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/CacheChunk.cpp.o
+.PHONY : body/CacheChunk.cpp.o
+
+body/CacheChunk.i: body/CacheChunk.cpp.i
+.PHONY : body/CacheChunk.i
+
+# target to preprocess a source file
+body/CacheChunk.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/CacheChunk.cpp.i
+.PHONY : body/CacheChunk.cpp.i
+
+body/CacheChunk.s: body/CacheChunk.cpp.s
+.PHONY : body/CacheChunk.s
+
+# target to generate assembly for a file
+body/CacheChunk.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Life.dir/build.make CMakeFiles/Life.dir/body/CacheChunk.cpp.s
+.PHONY : body/CacheChunk.cpp.s
+
 body/Cell.o: body/Cell.cpp.o
 .PHONY : body/Cell.o
 
@@ -354,6 +402,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Life"
+	@echo "... body/Cache.o"
+	@echo "... body/Cache.i"
+	@echo "... body/Cache.s"
+	@echo "... body/CacheChunk.o"
+	@echo "... body/CacheChunk.i"
+	@echo "... body/CacheChunk.s"
 	@echo "... body/Cell.o"
 	@echo "... body/Cell.i"
 	@echo "... body/Cell.s"

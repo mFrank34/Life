@@ -7,7 +7,6 @@
 #include "Chunk.h"
 #include "Cell.h"
 
-
 class World
 {
 public:
@@ -17,9 +16,9 @@ public:
 
     // Core functions for other map systems
     virtual void unload() = 0;
-    virtual Chunk& get_chunk(int global_x, int global_y) = 0;
-    virtual Cell& get_cell(int global_x, int global_y) = 0;
-    virtual std::unordered_map<long long, Chunk>* get_world() = 0;
+    virtual Chunk &get_chunk(int global_x, int global_y) = 0;
+    virtual Cell &get_cell(int global_x, int global_y) = 0;
+    virtual std::unordered_map<long long, Chunk> *get_world() = 0;
 
     // helper functions for all worlds
     int neighbour_count(int global_x, int global_y);
@@ -31,8 +30,12 @@ public:
 protected:
     static const int KEYLENGTH = 32;
 
+    // key logic
     long long generate_key(int chunk_x, int chunk_y) const;
     std::pair<int, int> decode_key(long long key) const;
+
+    // handing negs
+    static int floor_div(int cord, int size);
 
     std::string world_type;
 };

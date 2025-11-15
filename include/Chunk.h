@@ -10,7 +10,7 @@ class Chunk
 {
 public:
     // chunk size be size of chunk
-    static const int CHUNK_SIZE = 32;
+    static const int SIZE = 32;
     // make class
     Chunk();
 
@@ -48,7 +48,7 @@ private:
     int chunk_y;
 
     // chunk base
-    Cell cells[CHUNK_SIZE][CHUNK_SIZE];
+    Cell cells[SIZE][SIZE];
 };
 
 #endif

@@ -1,58 +1,28 @@
 #include "Sparse.h"
-#include <unordered_map>
-#include <vector>
 
-Sparse::Sparse() : World("Sparse map") {};
+Sparse::Sparse() : World("Sparse Map") {}
 
-inline int Sparse::chunk_index(int v, int size)
+void Sparse::unload()
 {
-    return (v >= 0)
-               ? v / size
-               : (v - (size - 1)) / size;
+    std::erase_if(chunks, [](auto &pair)
+                  { return !pair.second.is_populated(); });
 }
-
-static thread_local Cell DEAD_CELL_MUTABLE;
 
 Cell &Sparse::get_cell(int global_x, int global_y)
 {
-    int cx = chunk_index(global_x, Chunk::CHUNK_SIZE);
-    int cy = chunk_index(global_y, Chunk::CHUNK_SIZE);
-
-    long long key = generate_key(cx, cy);
-    auto it = chunks.find(key);
-
-    // if chunk doesn't exist
-    if (it == chunks.end())
-    {
-        DEAD_CELL_MUTABLE.set_alive(false);
-        return DEAD_CELL_MUTABLE;
-    }
-
-    // reading current chunk
-    Chunk &chunk = it->second;
-    int lx = chunk.local_x(global_x);
-    int ly = chunk.local_y(global_y);
-
-    return chunk.get_cell(lx,ly);
-}
-
-Cell &Sparse::set_cell(int global_x, int global_y)
-{
-    // TODO: insert return statement here
+    Chunk &chunk = get_chunk(global_x, global_y);
+    return chunk.get_cell(
+        chunk.local_x(global_x),
+        chunk.local_y(global_y));
 }
 
 Chunk &Sparse::get_chunk(int global_x, int global_y)
 {
-    // TODO: insert return statement here
-}
+    int cx = floor_div(global_x, Chunk::SIZE);
+    int cy = floor_div(global_y, Chunk::SIZE);
+    long long key = generate_key(cx, cy);
 
-Chunk &Sparse::try_get_chunk(int global_x, int global_y)
-{
-    // TODO: insert return statement here
-}
-
-void Sparse::unload()
-{
+    return chunks.try_emplace(key, cx, cy).first->second;
 }
 
 std::unordered_map<long long, Chunk> *Sparse::get_world()

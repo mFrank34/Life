@@ -16,7 +16,7 @@ int World::neighbour_count(int global_x, int global_y)
 {
     // offset for cords
     static const int offsets[8][2] = {{-1, -1}, {0, -1}, {1, -1}, {-1, 0}, {1, 0}, {-1, 1}, {0, 1}, {1, 1}};
-    int count;
+    int count = 0;
 
     for (const auto &offset : offsets) // connects
     {
@@ -68,4 +68,9 @@ std::pair<int, int> World::decode_key(long long key) const
     int chunk_x = static_cast<int>(key >> KEYLENGTH); // decode key 32bit
     int chunk_y = static_cast<int>(key & 0xFFFFFFFF); // -1 32bit
     return {chunk_x, chunk_y};
+}
+
+int World::floor_div(int cord, int size)
+{
+    return (cord >= 0) ? (cord / size) : ((cord - size + 1) / size);
 }

@@ -6,10 +6,10 @@
 Chunk::Chunk(int input_x, int input_y) : chunk_x(input_x), chunk_y(input_y)
 {
     // initialize all cells
-    for (int y = 0; y < CHUNK_SIZE; y++)
+    for (int y = 0; y < SIZE; y++)
     {
         // generates y
-        for (int x = 0; x < CHUNK_SIZE; x++)
+        for (int x = 0; x < SIZE; x++)
         {
             // generates x
             cells[y][x] = Cell('0');
@@ -44,20 +44,20 @@ int Chunk::get_y() const
 /* Gets Local X*/
 int Chunk::local_x(int global_x)
 {
-    return global_x - get_x() * Chunk::CHUNK_SIZE;
+    return global_x - get_x() * Chunk::SIZE;
 }
 
 /* Gets Local Y*/
 int Chunk::local_y(int global_y)
 {
-    return global_y - get_y() * Chunk::CHUNK_SIZE;
+    return global_y - get_y() * Chunk::SIZE;
 }
 
 void Chunk::print_chunk() const
 {
-    for (int y = 0; y < CHUNK_SIZE; ++y)
+    for (int y = 0; y < SIZE; ++y)
     {
-        for (int x = 0; x < CHUNK_SIZE; ++x)
+        for (int x = 0; x < SIZE; ++x)
         {
             // prints data that is stored within said chunk
             std::cout << std::setw(2) << get_cell(x, y).get_type();
@@ -70,9 +70,9 @@ void Chunk::print_chunk() const
 int Chunk::populated_chunk() const 
 {
     int lives_cell;
-    for (int y = 0; y < CHUNK_SIZE; ++y)
+    for (int y = 0; y < SIZE; ++y)
     {
-        for (int x = 0; x < CHUNK_SIZE; ++x)
+        for (int x = 0; x < SIZE; ++x)
         {
             if (get_cell(x, y).is_alive())
             {
@@ -86,9 +86,9 @@ int Chunk::populated_chunk() const
 bool Chunk::is_populated() const
 {
     // search
-    for (int y = 0; y < CHUNK_SIZE; ++y)
+    for (int y = 0; y < SIZE; ++y)
     {
-        for (int x = 0; x < CHUNK_SIZE; ++x)
+        for (int x = 0; x < SIZE; ++x)
         {
             if (get_cell(x, y).is_alive())
             {
