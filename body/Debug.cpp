@@ -43,16 +43,11 @@ void Debug::positions(int global_x, int global_y)
     World *world = worlds[active_index];
     Chunk &chunk = world->get_chunk(global_x, global_y);
 
-    int local_x = chunk.local_x(global_x);
-    int local_y = chunk.local_y(global_y);
-
-    Cell &cell = chunk.get_cell(local_x, local_y);
-    
     std::cout << "Global: (" << global_x << ", " << global_y << ")\n";
-    std::cout << "Chunk:  (" << chunk.get_x() << ", " << chunk.get_y() << ")\n";
-    std::cout << "Alive Cells: " << chunk.populated_chunk() << "\n";
-    std::cout << "Local:  (" << local_x << ", " << local_y << ")\n";
-    std::cout << "Cell Type: '" << cell.get_type() << "'\n\n";
+    std::cout << "Chunk:  (" << chunk.get_CX() << ", " << chunk.get_CY() << ")\n";
+    std::cout << "Alive Cells: " << chunk.populated_amt() << "\n";
+    std::cout << "Local:  (" << chunk.get_LX(global_x) << ", " << chunk.get_LY(global_y) << ")\n";
+    std::cout << "Cell Type: '" << chunk.get_cell(global_x, global_y).get_type() << "'\n\n";
 }
 
 void Debug::all_chunks()

@@ -5,6 +5,7 @@
 // custom class
 #include "Cell.h"
 #include "Chunk.h"
+#include "CacheChunk.h"
 #include "Debug.h"
 #include "World.h"
 #include "Unordered.h"
@@ -17,11 +18,12 @@ NOTES:
         class from cell that holds a bool and char, and coors.
     - next steps to create a system for viewing the map
     - add UI elements for map viewing
+    - hey michael fix the cache map system
 
 Miles Stones:
     - Unordered system created, able to view a single cell and chunk with global coors.
     - next to make way for node to interact with map, partly done with with cell type and active note.
-    -
+    - Create unordered and sparse map systems
 */
 
 // testing
@@ -121,42 +123,42 @@ int main()
 
     */
 
-    Cache cache;
+    // Cache cache;
 
-    global_debug.list_worlds();
+    // global_debug.list_worlds();
 
-    global_debug.set_active(2);
+    // global_debug.set_active(2);
 
-    cache.get_cell(x, y).set_type('w');
+    // cache.get_cell(x, y).set_type('w');
 
-    global_debug.positions(x, y);
+    // global_debug.positions(x, y);
 
-    global_debug.all_chunks();
+    // global_debug.all_chunks();
 
-    // creating chunk to emtpy vail
-    cache.get_cell(x, y).set_type('0');
+    // // creating chunk to emtpy vail
+    // cache.get_cell(x, y).set_type('0');
 
-    global_debug.positions(x, y);
+    // global_debug.positions(x, y);
 
-    // creating a box within map system
+    // // creating a box within map system
 
-    std::cout << "Setting Cells from (" << square_x << "," << square_y << ")\n";
+    // std::cout << "Setting Cells from (" << square_x << "," << square_y << ")\n";
 
-    for (int sx = 0; sx < square_x; ++sx)
-    {
-        for (int sy = 0; sy < square_y; ++sy)
-        {
-            cache.get_cell(sx, sy).set_type('w');
-        }
-    }
+    // for (int sx = 0; sx < square_x; ++sx)
+    // {
+    //     for (int sy = 0; sy < square_y; ++sy)
+    //     {
+    //         cache.get_cell(sx, sy).set_type('w');
+    //     }
+    // }
 
-    std::cout << "Active Chunk's: " << global_debug.total_chunks() << "\n";
+    // std::cout << "Active Chunk's: " << global_debug.total_chunks() << "\n";
 
-    cache.unload();
+    // cache.unload();
 
-    std::cout << "Active Chunk After Unload: " << global_debug.total_chunks() << "\n";
+    // std::cout << "Active Chunk After Unload: " << global_debug.total_chunks() << "\n";
 
-    std::cout << "End of Sparse Map \n\n";
+    // std::cout << "End of Sparse Map \n\n";
 
-    return 0;
+    // return 0;
 }

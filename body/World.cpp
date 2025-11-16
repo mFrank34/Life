@@ -72,5 +72,8 @@ std::pair<int, int> World::decode_key(long long key) const
 
 int World::floor_div(int cord, int size)
 {
-    return (cord >= 0) ? (cord / size) : ((cord - size + 1) / size);
+    int div = cord / size;
+    if ((cord < 0) && (cord % size != 0))
+        div--; // move to the correct negative chunk
+    return div;
 }

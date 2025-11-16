@@ -9,46 +9,32 @@
 class Chunk
 {
 public:
-    // chunk size be size of chunk
-    static const int SIZE = 32;
-    // make class
-    Chunk();
+    Chunk(int cx = 0, int cy = 0);
 
-    Chunk(int chunk_x, int chunk_y);
-
-    // Getter for a specific cell
+    // Getters for individual cells
     Cell &get_cell(int x, int y);
     const Cell &get_cell(int x, int y) const;
 
-    // Gets Chunk X
-    int get_x() const;
-    // Gets Chunk Y
-    int get_y() const;
+    // Chunk coordinates
+    int get_CX() const;
+    int get_CY() const;
 
-    // Local X
-    int local_x(int global_x);
+    // Local X & Y coordinates
+    int get_LX(int gx) const;
+    int get_LY(int gy) const;
 
-    // local Y 
-    int local_y(int global_y);
-
-    // debugging chunks
+    // Utilities
     void print_chunk() const;
-
-    // find the amount of populated
-    int populated_chunk() const; 
-
-    // true if chunk contains alive cell
     bool is_populated() const;
+    int populated_amt() const;
 
-    ~Chunk();
+    static const int SIZE = 32;  // fixed chunk size
+    virtual ~Chunk() = default;
 
 private:
-    // location cords
-    int chunk_x;
-    int chunk_y;
-
-    // chunk base
     Cell cells[SIZE][SIZE];
+    int cx;
+    int cy;
 };
 
 #endif
