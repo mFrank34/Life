@@ -9,18 +9,19 @@ void Sparse::unload()
                   { return !pair.second.is_populated(); });
 }
 
-Cell &Sparse::get_cell(int global_x, int global_y)
+Cell &Sparse::get_cell(int gx, int gy)
 {
-    Chunk &chunk = get_chunk(global_x, global_y);
+    Chunk &chunk = get_chunk(gx, gy);
     return chunk.get_cell(
-        chunk.get_LX(global_x),
-        chunk.get_LX(global_y));
+        chunk.get_LX(gx),
+        chunk.get_LY(gy)
+        );
 }
 
-Chunk &Sparse::get_chunk(int global_x, int global_y)
+Chunk &Sparse::get_chunk(int gx, int gy)
 {
-    int cx = floor_div(global_x, Chunk::get_SIZE());
-    int cy = floor_div(global_y, Chunk::get_SIZE());
+    int cx = floor_div(gx, Chunk::get_SIZE());
+    int cy = floor_div(gy, Chunk::get_SIZE());
     long long key = generate_key(cx, cy);
 
     return chunks.try_emplace(key, cx, cy).first->second;

@@ -20,14 +20,14 @@ public:
     void set_active(int index);
 
     // debugging worlds
-    void positions(int global_x, int global_y);
+    void positions(int gx, int gy);
     void all_chunks();
 
     // alive cell with something like w, r, g, b.
     int active_chunks();
 
     // total chunks in memory.
-    int total_chunks();
+    [[nodiscard]] int total_chunks() const;
 
     // Optional helpers
     void list_worlds();

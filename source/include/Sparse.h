@@ -10,15 +10,15 @@
 #include "Chunk.h"
 #include "Cell.h"
 
-class Sparse : public World
+class Sparse final : public World
 {
 public:
     Sparse();
 
     void unload() override;
 
-    Cell &get_cell(int global_x, int global_y) override;
-    Chunk &get_chunk(int global_x, int global_y) override;
+    Cell &get_cell(int gx, int gy) override;
+    Chunk &get_chunk(int gx, int gy) override;
 
     std::unordered_map<long long, Chunk> *get_world() override;
 

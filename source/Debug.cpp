@@ -1,4 +1,6 @@
 #include "Debug.h"
+
+#include <ranges>
 #include "World.h"
 #include "DYNChunk.h"
 #include "Cell.h"
@@ -32,7 +34,7 @@ void Debug::list_worlds()
     std::cout << '\n';
 }
 
-void Debug::positions(int global_x, int global_y)
+void Debug::positions(int gx, int gy)
 {
     if (active_index == -1)
     {
@@ -41,13 +43,13 @@ void Debug::positions(int global_x, int global_y)
     }
 
     World *world = worlds[active_index];
-    Chunk &chunk = world->get_chunk(global_x, global_y);
+    Chunk &chunk = world->get_chunk(gx, gy);
 
-    std::cout << "Global: (" << global_x << ", " << global_y << ")\n";
+    std::cout << "Global: (" << gx << ", " << gy << ")\n";
     std::cout << "Chunk:  (" << chunk.get_CX() << ", " << chunk.get_CY() << ")\n";
     std::cout << "Alive Cells: " << chunk.populated_amt() << "\n";
-    std::cout << "Local:  (" << chunk.get_LX(global_x) << ", " << chunk.get_LY(global_y) << ")\n";
-    std::cout << "Cell Type: '" << chunk.get_cell(global_x, global_y).get_type() << "'\n\n";
+    std::cout << "Local:  (" << chunk.get_LX(gx) << ", " << chunk.get_LY(gy) << ")\n";
+    std::cout << "Cell Type: '" << chunk.get_cell(gx, gy).get_type() << "'\n\n";
 }
 
 void Debug::all_chunks()
@@ -80,15 +82,15 @@ int Debug::active_chunks()
     auto *chunks = static_cast<std::unordered_map<long long, Chunk> *>(world->get_world());
 
     int active = 0;
-    for (const auto &selected : *chunks)
+    for (const auto & val : *chunks | std::views::values)
     {
-        if (selected.second.is_populated())
+        if (val.is_populated())
             active++;
     }
     return active;
 }
 
-int Debug::total_chunks()
+int Debug::total_chunks() const
 {
     if (active_index == -1)
     {
