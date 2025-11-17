@@ -1,14 +1,5 @@
 # Build artifacts
-/build/
-CMakeFiles/
-CMakeCache.txt
-cmake_install.cmake
-Makefile
-Life
-
-#VS Code
-.vscode/
-*.code-workspace
+/cmake-build-debug
 
 # OS files
 .DS_Store

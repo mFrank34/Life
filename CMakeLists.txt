@@ -4,21 +4,19 @@ project(Life LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE Debug)
-endif()
 
 # ---- Source files ----
 file(GLOB_RECURSE SOURCES
         "${CMAKE_SOURCE_DIR}/source/*.cpp"
 )
 
+# DEBUG: print how many files found
+message(STATUS "Found source files: ${SOURCES}")
+
+add_executable(Life ${SOURCES})
+
 # ---- Include directory ----
-# This is where your .h/.hpp files live:
-target_include_directories(${PROJECT_NAME} PRIVATE
+target_include_directories(Life PRIVATE
         ${CMAKE_SOURCE_DIR}/source/include
 )
 
@@ -26,12 +24,10 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GTK4 REQUIRED gtk4)
 
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${GTK4_INCLUDE_DIRS})
-target_link_directories(${PROJECT_NAME} PRIVATE ${GTK4_LIBRARY_DIRS})
-target_compile_options(${PROJECT_NAME} PRIVATE ${GTK4_CFLAGS_OTHER})
-target_link_libraries(${PROJECT_NAME} PRIVATE ${GTK4_LIBRARIES})
-
+target_include_directories(Life PRIVATE ${GTK4_INCLUDE_DIRS})
+target_link_directories(Life PRIVATE ${GTK4_LIBRARY_DIRS})
+target_compile_options(Life PRIVATE ${GTK4_CFLAGS_OTHER})
+target_link_libraries(Life PRIVATE ${GTK4_LIBRARIES})
 # ---- Warnings ----
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     target_compile_options(${PROJECT_NAME} PRIVATE
