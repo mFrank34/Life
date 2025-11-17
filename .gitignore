@@ -6,8 +6,8 @@ cmake_install.cmake
 Makefile
 Life
 
-# VS Code
-#.vscode/
+#VS Code
+.vscode/
 *.code-workspace
 
 # OS files

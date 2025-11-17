@@ -16,7 +16,7 @@ public:
     Unordered();
 
     // remove all empty chunks from world data
-    void unload();
+    void unload() override;
 
     // world entities
     Cell &get_cell(int global_x, int global_y) override;
