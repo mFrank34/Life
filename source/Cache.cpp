@@ -23,7 +23,9 @@ Chunk &Cache::get_chunk(int gx, int gy)
     if (it != chunks.end())
         return *(it->second);   // dereference unique_ptr -> Chunk&
 
+    // Create new CacheChunk and store as unique_ptr<Chunk>
     chunks[key] =
+
     return *chunks[key];
 }
 
