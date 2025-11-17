@@ -7,7 +7,7 @@
 #include "DYNChunk.h"
 #include "Cell.h"
 
-class CacheChunk : public Chunk
+class CacheChunk final: public DYNChunk<16>
 {
 public:
     CacheChunk(int ccx, int ccy);
@@ -15,12 +15,6 @@ public:
     // cache logic for chunk
     int get_block_index();
     int get_inner_index();
-
-private:
-    int cx = 0, cy = 0;
-    static const int SIZE = 16;
-    Cell cells[SIZE][SIZE];
-
 }; 
 
 #endif

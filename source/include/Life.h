@@ -1,7 +1,7 @@
 #ifndef LIFE_H
 #define LIFE_H
 
-#include "DYNChunk.h"
+#include "Chunk.h"
 #include "vector"
 
 class Life

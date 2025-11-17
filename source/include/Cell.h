@@ -6,7 +6,7 @@ class Cell
 {
 private:
     char type;
-    bool alive;
+    bool alive{};
 public:
     Cell();
 

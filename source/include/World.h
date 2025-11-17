@@ -4,7 +4,7 @@
 
 #include <unordered_map>
 #include <vector>
-#include "DYNChunk.h"
+#include "Chunk.h"
 #include "Cell.h"
 
 class World

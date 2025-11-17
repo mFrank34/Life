@@ -2,9 +2,11 @@
 #include <iostream>
 
 // constructor
-Cell::Cell() {};
+Cell::Cell() : type(0), alive(false)
+{
+} ;
 
-Cell::Cell(char input_type) : type(input_type) 
+Cell::Cell(char input_type) : type(input_type)
 {
     update_cell();
 };
@@ -28,7 +30,7 @@ void Cell::set_type(char new_type)
     update_cell();
 }
 
-void Cell::set_alive(bool is_alive)
+void Cell::set_alive(const bool is_alive)
 {
     // setting the alive state
     this->alive = is_alive;
@@ -51,4 +53,4 @@ void Cell::update_cell()
 }
 
 // deconstructor
-Cell::~Cell() {};
+Cell::~Cell() = default;

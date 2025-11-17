@@ -7,7 +7,7 @@
 
 // custom classes
 #include "World.h"
-#include "DYNChunk.h"
+#include "Chunk.h"
 #include "Cell.h"
 
 class Unordered : public World
