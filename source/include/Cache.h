@@ -5,23 +5,23 @@
 #include "World.h"
 #include "Cell.h"
 #include "Chunk.h"
+#include <unordered_map>
+#include <memory>
 
 class Cache final : public World
 {
 public:
     Cache();
-
-    // remove all empty chunks from world data
+    // unloads
     void unload() override;
-
-    // world entities
+    // chunk & cell
     Chunk &get_chunk(int gx, int gy) override;
     Cell &get_cell(int gx, int gy) override;
     // world data
-    std::unordered_map<long long, Chunk> *get_world() override;
+    std::unordered_map<long long, std::unique_ptr<Chunk>> *get_world() override;
 
 private:
-    std::unordered_map<long long, Chunk> chunks;
+    std::unordered_map<long long, std::unique_ptr<Chunk>> chunks;
 };
 
 #endif

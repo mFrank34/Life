@@ -32,12 +32,12 @@ public:
     // Getters for individual cells
     Cell &get_cell(int x, int y)
     {
-        return cells[x][y];
+        return cells[y][x];
     };
 
     [[nodiscard]] const Cell &get_cell(int x, int y) const
     {
-        return cells[x][y];
+        return cells[y][x];
     };
 
     // Chunk coordinates

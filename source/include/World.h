@@ -3,6 +3,7 @@
 #define WORLD_H
 
 #include <unordered_map>
+#include <memory>
 #include <vector>
 #include "Chunk.h"
 #include "Cell.h"
@@ -18,7 +19,7 @@ public:
     virtual void unload() = 0;
     virtual Chunk &get_chunk(int global_x, int global_y) = 0;
     virtual Cell &get_cell(int global_x, int global_y) = 0;
-    virtual std::unordered_map<long long, Chunk> *get_world() = 0;
+    virtual std::unordered_map<long long, std::unique_ptr<Chunk>>* get_world() = 0;
 
     // helper functions for all worlds
     int neighbour_count(int global_x, int global_y);

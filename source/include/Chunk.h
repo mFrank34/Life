@@ -7,6 +7,8 @@ class Chunk final : public DYNChunk<32>
 {
 public:
     Chunk(int cx, int cy);
+
+    ~Chunk() override;
 };
 
 #endif //LIFE_CHUNK_H

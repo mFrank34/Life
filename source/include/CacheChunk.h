@@ -4,7 +4,7 @@
 
 #include "DYNChunk.h"
 
-class CacheChunk final: public DYNChunk<16>
+class CacheChunk final : public DYNChunk<16>
 {
 public:
     CacheChunk(int ccx, int ccy);
