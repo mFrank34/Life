@@ -1,6 +1,6 @@
 #include "Debug.h"
 #include "World.h"
-#include "Chunk.h"
+#include "DYNChunk.h"
 #include "Cell.h"
 
 void Debug::register_world(World *world)

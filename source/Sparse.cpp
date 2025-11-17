@@ -1,4 +1,5 @@
 #include "Sparse.h"
+#include "Chunk.h"
 
 Sparse::Sparse() : World("Sparse Map") {}
 

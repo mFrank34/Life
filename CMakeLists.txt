@@ -29,15 +29,15 @@ target_link_directories(Life PRIVATE ${GTK4_LIBRARY_DIRS})
 target_compile_options(Life PRIVATE ${GTK4_CFLAGS_OTHER})
 target_link_libraries(Life PRIVATE ${GTK4_LIBRARIES})
 # ---- Warnings ----
-if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     target_compile_options(${PROJECT_NAME} PRIVATE
             -Wall -Wextra -Wpedantic -Wshadow -g
     )
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     target_compile_options(${PROJECT_NAME} PRIVATE
             /W4 /WX /Zi
     )
-endif()
+endif ()
 
 # ---- Output directory ----
 set_target_properties(${PROJECT_NAME} PROPERTIES

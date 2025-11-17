@@ -4,7 +4,7 @@
 
 #include <unordered_map>
 #include <vector>
-#include "Chunk.h"
+#include "DYNChunk.h"
 #include "Cell.h"
 
 class World
@@ -31,7 +31,7 @@ protected:
     static const int KEYLENGTH = 32;
 
     // key logic
-    long long generate_key(int chunk_x, int chunk_y) const;
+    static long long generate_key(int chunk_x, int chunk_y);
     std::pair<int, int> decode_key(long long key) const;
 
     // handing negs

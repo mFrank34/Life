@@ -4,7 +4,7 @@
 
 // custom class
 #include "Cell.h"
-#include "Chunk.h"
+#include "DYNChunk.h"
 #include "CacheChunk.h"
 #include "Debug.h"
 #include "World.h"

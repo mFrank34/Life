@@ -4,7 +4,7 @@
 
 #include <unordered_map>
 #include "World.h"
-#include "Chunk.h"
+#include "DYNChunk.h"
 #include "Cell.h"
 
 class CacheChunk : public Chunk

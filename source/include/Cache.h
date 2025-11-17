@@ -3,10 +3,10 @@
 #define CACHE_H
 
 #include "World.h"
-#include "Chunk.h"
 #include "Cell.h"
+#include "Chunk.h"
 
-class Cache : public World
+class Cache final : public World
 {
 public:
     Cache();

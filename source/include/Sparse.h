@@ -7,7 +7,7 @@
 
 // custom classes
 #include "World.h"
-#include "Chunk.h"
+#include "DYNChunk.h"
 #include "Cell.h"
 
 class Sparse : public World
@@ -23,7 +23,7 @@ public:
     std::unordered_map<long long, Chunk> *get_world() override;
 
 private:
-    std::unordered_map<long long, Chunk> chunks;
+    std::unordered_map<long long, Chunk> chunks{};
 };
 
 #endif

@@ -57,7 +57,7 @@ std::string World::get_type() const
 }
 
 // protected
-long long World::generate_key(int chunk_x, int chunk_y) const
+long long World::generate_key(int chunk_x, int chunk_y)
 {
     return (static_cast<long long>(chunk_x) << 32) | (static_cast<unsigned int>(chunk_y));
 }
