@@ -1,3 +1,0 @@
-/home/frank/vscode/Life/build/CMakeFiles/Life.dir
-/home/frank/vscode/Life/build/CMakeFiles/edit_cache.dir
-/home/frank/vscode/Life/build/CMakeFiles/rebuild_cache.dir
