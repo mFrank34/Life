@@ -2,7 +2,6 @@
 
 #include <ranges>
 #include "World.h"
-#include "../doc/Exclude/DYNChunk.h"
 #include "Cell.h"
 
 void Debug::register_world(World *world)
@@ -24,7 +23,7 @@ void Debug::set_active(int index)
     std::cout << '\n';
 }
 
-void Debug::list_worlds()
+void Debug::list_worlds() const
 {
     std::cout << "Registered worlds:\n";
     for (size_t i = 0; i < worlds.size(); ++i)
@@ -34,7 +33,7 @@ void Debug::list_worlds()
     std::cout << '\n';
 }
 
-void Debug::positions(int gx, int gy)
+void Debug::positions(int gx, int gy) const
 {
     if (active_index == -1)
     {
@@ -55,7 +54,7 @@ void Debug::positions(int gx, int gy)
     std::cout << "Cell Type: '" << chunk.get_cell(local_x, local_y).get_type() << "'\n\n";
 }
 
-void Debug::all_chunks()
+void Debug::all_chunks() const
 {
     if (active_index == -1)
     {
@@ -64,16 +63,16 @@ void Debug::all_chunks()
     }
 
     auto *world = worlds[active_index];
-    auto *chunks = static_cast<std::unordered_map<long long, std::unique_ptr<Chunk>> *>(world->get_world());
+    auto *chunks = static_cast<std::unordered_map<long long, Chunk> *>(world->get_world());
 
     for (const auto &selected : *chunks)
     {
         std::cout << "Chunk key: " << selected.first << "\n";
-        selected.second->print_chunk();
+        selected.second.print_chunk();
     }
 }
 
-int Debug::active_chunks()
+int Debug::active_chunks() const
 {
     if (active_index == -1)
     {
@@ -82,12 +81,12 @@ int Debug::active_chunks()
     }
 
     auto *world = worlds[active_index];
-    auto *chunks = static_cast<std::unordered_map<long long, std::unique_ptr<Chunk>> *>(world->get_world());
+    auto *chunks = static_cast<std::unordered_map<long long, Chunk> *>(world->get_world());
 
     int active = 0;
     for (const auto & val : *chunks | std::views::values)
     {
-        if (val->is_populated())
+        if (val.is_populated())
             active++;
     }
     return active;
@@ -102,8 +101,7 @@ int Debug::total_chunks() const
     }
 
     auto *world = worlds[active_index];
-    // world->get_world() now returns unordered_map<long long, unique_ptr<Chunk>>*
-    auto *chunks = static_cast<std::unordered_map<long long, std::unique_ptr<Chunk>> *>(world->get_world());
+    auto *chunks = static_cast<std::unordered_map<long long, Chunk> *>(world->get_world());
 
     return chunks->size();
 }
