@@ -3,25 +3,33 @@
 #define CACHE_H
 
 #include "World.h"
-#include "Cell.h"
 #include "Chunk.h"
+#include "Cell.h"
+
 #include <unordered_map>
-#include <memory>
+#include <list>
 
 class Cache final : public World
 {
 public:
-    Cache();
-    // unloads
+    Cache(int size, int max);
+    // remove all empty chunks from world data
     void unload() override;
-    // chunk & cell
+    // world entities
     Chunk &get_chunk(int gx, int gy) override;
     Cell &get_cell(int gx, int gy) override;
     // world data
-    std::unordered_map<long long, std::unique_ptr<Chunk>> *get_world() override;
+    std::unordered_map<long long, Chunk> *get_world() override;
 
 private:
-    std::unordered_map<long long, std::unique_ptr<Chunk>> chunks;
+    Chunk& get_cached_chunk(int gx, int gy);
+    // cache settings
+    const int CHUNK_SIZE;
+    int max_active;
+    std::list<long long> cached_keys;
+    // storing chunks data
+    std::unordered_map<long long, Chunk> chunks;
+    std::unordered_map<long long, Chunk*> active;
 };
 
 #endif

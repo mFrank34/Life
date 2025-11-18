@@ -13,17 +13,24 @@
 class Unordered : public World
 {
 public:
-    Unordered();
+    Unordered(int size);
+
     // remove all empty chunks from world data
     void unload() override;
+
     // world entities
     Cell &get_cell(int global_x, int global_y) override;
     Chunk &get_chunk(int global_x, int global_y) override;
-    // world data
-    std::unordered_map<long long, std::unique_ptr<Chunk>> *get_world() override;
+
+    // returning world data
+    std::unordered_map<long long, Chunk> *get_world() override;
 
 private:
-    std::unordered_map<long long, std::unique_ptr<Chunk>> chunks;
+    // system setup
+    const int CHUNK_SIZE;
+
+    // world data
+    std::unordered_map<long long, Chunk> chunks;
 };
 
 #endif

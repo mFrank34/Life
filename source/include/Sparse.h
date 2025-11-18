@@ -3,6 +3,8 @@
 #define SPARSE_H
 
 #include <unordered_map>
+#include <vector>
+
 // custom classes
 #include "World.h"
 #include "Chunk.h"
@@ -11,17 +13,18 @@
 class Sparse final : public World
 {
 public:
-    Sparse();
-    // unload inactive chunks with no alive cells
+    Sparse(int size);
+    // unloads chunks in memory by removing them.
     void unload() override;
-    // cells & chunks
+    // get world entities
     Cell &get_cell(int gx, int gy) override;
     Chunk &get_chunk(int gx, int gy) override;
-    // get world
-    std::unordered_map<long long, std::unique_ptr<Chunk>> *get_world() override;
+    // returning world data
+    std::unordered_map<long long, Chunk> *get_world() override;
 
 private:
-    std::unordered_map<long long, std::unique_ptr<Chunk>> chunks{};
+    const int CHUNK_SIZE;
+    std::unordered_map<long long, Chunk> chunks{};
 };
 
 #endif

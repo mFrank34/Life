@@ -4,8 +4,7 @@
 
 // custom class
 #include "Cell.h"
-#include "DYNChunk.h"
-#include "CacheChunk.h"
+#include "Chunk.h"
 #include "Debug.h"
 #include "World.h"
 #include "Unordered.h"
@@ -22,7 +21,7 @@ NOTES:
 
 Miles Stones:
     - Unordered system created, able to view a single cell and chunk with global coors.
-    - next to make way for node to interact with map, partly done with with cell type and active note.
+    - next to make way for node to interact with map, partly done with cell type and active note.
     - Create unordered and sparse map systems
 */
 
@@ -35,7 +34,7 @@ Debug global_debug;
 int main()
 {
     // Unordered
-    Unordered unordered;
+    Unordered unordered(32);
 
     global_debug.list_worlds();
 
@@ -75,10 +74,12 @@ int main()
     std::cout << "End of Unordered Map \n\n";
 
     /*
+
     START OF SPARSE
+
     */
 
-    Sparse sparse;
+    Sparse sparse(32);
 
     global_debug.list_worlds();
 
@@ -116,10 +117,12 @@ int main()
     std::cout << "End of Sparse Map \n\n";
 
     /*
+
      START OF CACHED
+
     */
 
-    Cache cache;
+    Cache cache(32, 18);
 
     global_debug.list_worlds();
 

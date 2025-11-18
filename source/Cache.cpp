@@ -1,46 +1,65 @@
 #include "Cache.h"
-#include "CacheChunk.h"
-#include <algorithm>
-#include <cassert>
+#include "World.h"
+#include <utility>
+#include "Chunk.h"
 
-Cache::Cache() : World("Cache Map") {}
+// Constructor
+Cache::Cache(const int size, const int max)
+    : World("Cache Map"), CHUNK_SIZE(size), max_active(max) {}
 
+// Remove empty chunks
 void Cache::unload()
 {
     std::erase_if(chunks, [](auto &pair)
-    {
-        return !pair.second->is_populated();
-    });
+                  { return !pair.second.is_populated(); });
+    active.clear();
+    cached_keys.clear();
 }
 
-Chunk &Cache::get_chunk(int gx, int gy)
+Cell& Cache::get_cell(int gx, int gy)
 {
-    int cx = floor_div(gx, CacheChunk::get_SIZE());
-    int cy = floor_div(gy, CacheChunk::get_SIZE());
+    Chunk& chunk = get_cached_chunk(gx, gy);
+    return chunk.get_cell(
+        chunk.get_LX(gx),
+        chunk.get_LY(gy)
+        );
+}
+
+Chunk& Cache::get_chunk(int gx, int gy)
+{
+    int cx = floor_div(gx,CHUNK_SIZE);
+    int cy = floor_div(gy,CHUNK_SIZE);
     long long key = generate_key(cx, cy);
-
-    auto it = chunks.find(key);
-    if (it != chunks.end())
-        return *(it->second);   // dereference unique_ptr -> Chunk&
-
-    // Create new CacheChunk and store as unique_ptr<Chunk>
-    chunks[key] =
-
-    return *chunks[key];
+    return chunks.try_emplace(key, Chunk(gx, gy, CHUNK_SIZE)).first->second;
 }
 
-Cell &Cache::get_cell(int gx, int gy)
-{
-    Chunk &chunk = get_chunk(gx, gy);
-    // safe runtime check:
-    auto *cc = dynamic_cast<CacheChunk*>(&chunk);
-    assert(cc && "Expected chunk to be CacheChunk");
-    int lx = cc->get_LX(gx);
-    int ly = cc->get_LY(gy);
-    return cc->get_cell(lx, ly);
-}
-
-std::unordered_map<long long, std::unique_ptr<Chunk>> *Cache::get_world()
+std::unordered_map<long long, Chunk>* Cache::get_world()
 {
     return &chunks;
+}
+
+Chunk& Cache::get_cached_chunk(int gx, int gy)
+{
+    Chunk& chunk = get_chunk(gx, gy);
+    long long key = generate_key(gx, gy);
+
+    // if already active look though cached keys
+    auto it = active.find(key);
+    if (it != active.end()) {
+        // Already cached: refresh LRU
+        cached_keys.remove(key);
+        cached_keys.push_back(key);
+        return *it->second;
+    } else
+    {
+        active[key] = &chunk;
+        cached_keys.push_back(key);
+        // Evict if over capacity
+        if ((int)active.size() > max_active) {
+            long long evict_key = cached_keys.front();
+            cached_keys.pop_front();
+            active.erase(evict_key);
+        }
+    }
+    return chunk;
 }

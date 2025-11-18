@@ -1,15 +1,16 @@
 #include "Sparse.h"
 #include "Chunk.h"
-#include <algorithm>
-#include <memory>
 
+Sparse::Sparse(const int size)
+    : World("Sparse Map"), CHUNK_SIZE(size)
+{
 
-Sparse::Sparse() : World("Sparse Map") {}
+}
 
 void Sparse::unload()
 {
     std::erase_if(chunks, [](auto &pair)
-                  { return !pair.second->is_populated(); });
+                  { return !pair.second.is_populated(); });
 }
 
 Cell &Sparse::get_cell(int gx, int gy)
@@ -23,15 +24,14 @@ Cell &Sparse::get_cell(int gx, int gy)
 
 Chunk &Sparse::get_chunk(int gx, int gy)
 {
-    int cx = floor_div(gx, Chunk::get_SIZE());
-    int cy = floor_div(gy, Chunk::get_SIZE());
+    int cx = floor_div(gx, CHUNK_SIZE);
+    int cy = floor_div(gy, CHUNK_SIZE);
     long long key = generate_key(cx, cy);
 
-    chunks[key] = std::make_unique<Chunk>(gx, gy);
-    return *chunks[key];
+    return chunks.try_emplace(key, cx, cy, CHUNK_SIZE).first->second;
 }
 
-std::unordered_map<long long, std::unique_ptr<Chunk>>* Sparse::get_world()
+std::unordered_map<long long, Chunk> *Sparse::get_world()
 {
     return &chunks;
 }
