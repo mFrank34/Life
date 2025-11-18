@@ -1,11 +1,11 @@
 #include "Cache.h"
+#include "World.h"
 #include <utility>
 #include "Chunk.h"
 
-
 // Constructor
 Cache::Cache(const int size, const int max)
-    : World("Cache Map"), CHUNK_SIZE(size), max_activa(max) {}
+    : World("Cache Map"), CHUNK_SIZE(size), max_active(max) {}
 
 // Remove empty chunks
 void Cache::unload()
@@ -45,24 +45,21 @@ Chunk& Cache::get_cached_chunk(int gx, int gy)
 
     // if already active look though cached keys
     auto it = active.find(key);
-    if (it == active.end())
-    {
+    if (it != active.end()) {
+        // Already cached: refresh LRU
         cached_keys.remove(key);
         cached_keys.push_back(key);
         return *it->second;
-    }
-
-    // add new chunk to cached
-    active[key] = &chunk;
-    cached_keys.push_front(key);
-
-    // evict if over capacity
-    if ((int)active.size() > max_activa)
+    } else
     {
-        long long evict_key = cached_keys.back();
-        cached_keys.pop_back();
-        active.erase(evict_key);
+        active[key] = &chunk;
+        cached_keys.push_back(key);
+        // Evict if over capacity
+        if ((int)active.size() > max_active) {
+            long long evict_key = cached_keys.front();
+            cached_keys.pop_front();
+            active.erase(evict_key);
+        }
     }
-
     return chunk;
 }

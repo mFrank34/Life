@@ -25,7 +25,7 @@ private:
     Chunk& get_cached_chunk(int gx, int gy);
     // cache settings
     const int CHUNK_SIZE;
-    int max_activa;
+    int max_active;
     std::list<long long> cached_keys;
     // storing chunks data
     std::unordered_map<long long, Chunk> chunks;
