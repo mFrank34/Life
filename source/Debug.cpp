@@ -2,7 +2,7 @@
 
 #include <ranges>
 #include "World.h"
-#include "DYNChunk.h"
+#include "../doc/DYNChunk.h"
 #include "Cell.h"
 
 void Debug::register_world(World *world)
