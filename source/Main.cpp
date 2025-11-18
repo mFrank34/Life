@@ -26,7 +26,7 @@ Miles Stones:
 */
 
 // testing
-int x = 128, y = 128;
+int x = -128, y = 128;
 int square_x = 64, square_y = 64;
 
 Debug global_debug;
