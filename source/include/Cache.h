@@ -9,7 +9,7 @@
 class Cache final : public World
 {
 public:
-    Cache();
+    Cache(int size);
 
     // remove all empty chunks from world data
     void unload() override;
@@ -21,6 +21,7 @@ public:
     std::unordered_map<long long, Chunk> *get_world() override;
 
 private:
+    const int size;
     std::unordered_map<long long, Chunk> chunks;
 };
 

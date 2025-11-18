@@ -1,6 +1,7 @@
 #include "BaseChunk.h"
 
-BaseChunk::BaseChunk(int cx, int cy, int size): cx(cx), cy(cy), size(size) {}
+BaseChunk::BaseChunk(int cx, int cy, int size)
+    : cx(cx), cy(cy), size(size) {}
 
 int BaseChunk::get_CX() const
 {

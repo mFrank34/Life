@@ -4,6 +4,7 @@
 
 #include <unordered_map>
 #include <vector>
+#include <string>
 #include "Chunk.h"
 #include "Cell.h"
 

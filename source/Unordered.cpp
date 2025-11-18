@@ -2,7 +2,11 @@
 #include <unordered_map>
 #include <vector>
 
-Unordered::Unordered() : World("Unordered Map") {}
+Unordered::Unordered(const int size)
+    : World("Unordered Map"), CHUNK_SIZE(size)
+{
+
+}
 
 void Unordered::unload()
 {
@@ -12,30 +16,23 @@ void Unordered::unload()
 
 Cell &Unordered::get_cell(int global_x, int global_y)
 {
-    Chunk &chunk = get_chunk(global_x, global_y);
-    int cx = floor_div(global_x, chunk.get_SIZE());
-    int cy = floor_div(global_y, chunk.get_SIZE());
-    long long key = generate_key(cx, cy);
-
-    // generating chunk
-    chunks.try_emplace(key, cx, cy).first->second;
-
-    // cords maths for x and y
+    Chunk& chunk = get_chunk(global_x, global_y);
+    // Convert to local coordinates
     int local_x = chunk.get_LX(global_x);
     int local_y = chunk.get_LY(global_y);
-
-    // return the cell
+    // hand over cell in vector
     return chunk.get_cell(local_x, local_y);
 }
 
 Chunk &Unordered::get_chunk(int global_x, int global_y)
 {
     // reversed the cell function to return chunk as well
-    int cx = floor_div(global_x, Chunk::get_SIZE());
-    int cy = floor_div(global_y, Chunk::get_SIZE());
+    int cx = floor_div(global_x, CHUNK_SIZE);
+    int cy = floor_div(global_y, CHUNK_SIZE);
     // key
     long long key = generate_key(cx, cy);
-    return chunks.try_emplace(key, cx, cy).first->second;
+    auto [it, inserted] = chunks.try_emplace(key, cx, cy, CHUNK_SIZE);
+    return it->second;
 }
 
 std::unordered_map<long long, Chunk> *Unordered::get_world()

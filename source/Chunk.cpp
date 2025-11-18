@@ -3,22 +3,45 @@
 #include <iomanip>
 #include <iostream>
 
-Chunk::Chunk(const int cx, const int cy)
-    : BaseChunk(cx, cy, 32)
+Chunk::Chunk(const int cx, const int cy, int const cs)
+    : cx(cx), cy(cy), size(cs)
 {
+    cells.resize(size * size);
     for (int y = 0; y < size; y++)
         for (int x = 0; x < size; x++)
-            cells[y][x] = Cell('0');
+            cells[y * size + x] = Cell('0');
+}
+int Chunk::get_CX() const
+{
+    return cx;
 }
 
-Cell& Chunk::get_cell(int x, int y)
+int Chunk::get_CY() const
 {
-    return cells[y][x];
+    return cy;
 }
 
-const Cell& Chunk::get_cell(int x, int y) const
+int Chunk::get_LX(const int gx) const {
+    return (gx % size + size) % size;
+}
+
+int Chunk::get_LY(const int gy) const {
+    return (gy % size + size) % size;
+}
+
+int Chunk::get_size() const
 {
-    return cells[y][x];
+    return size;
+}
+
+Cell& Chunk::get_cell(const int x, const int y)
+{
+    return cells[y * size + x];
+}
+
+const Cell& Chunk::get_cell(const int x, const int y) const
+{
+    return cells[y * size + x];
 }
 
 void Chunk::print_chunk() const
@@ -26,7 +49,7 @@ void Chunk::print_chunk() const
     for (int y = 0; y < size; y++)
     {
         for (int x = 0; x < size; x++)
-            std::cout << std::setw(2) << cells[y][x].get_type();
+            std::cout << std::setw(2) << cells[y * size + x].get_type();
         std::cout << '\n';
     }
     std::cout << '\n';
@@ -37,18 +60,18 @@ bool Chunk::is_populated() const
     for (int y = 0; y < size; y++)
     {
         for (int x = 0; x < size; x++)
-            if (cells[y][x].is_alive())
+            if (cells[y * size + x].is_alive())
                 return true;
     }
     return false;
 }
 
-int Chunk::populate_amt() const
+int Chunk::populated_amt() const
 {
     int lives_cell = 0;
     for (int y = 0; y < size; ++y)
         for (int x = 0; x < size; ++x)
-            if (cells[y][x].is_alive())
+            if (cells[y * size + x].is_alive())
                 lives_cell++;
     return lives_cell;
 }

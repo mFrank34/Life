@@ -2,7 +2,7 @@
 
 #include <ranges>
 #include "World.h"
-#include "../doc/DYNChunk.h"
+#include "../doc/Exclude/DYNChunk.h"
 #include "Cell.h"
 
 void Debug::register_world(World *world)
@@ -45,11 +45,14 @@ void Debug::positions(int gx, int gy)
     World *world = worlds[active_index];
     Chunk &chunk = world->get_chunk(gx, gy);
 
+    int local_x = chunk.get_LX(gx);
+    int local_y = chunk.get_LY(gy);
+
     std::cout << "Global: (" << gx << ", " << gy << ")\n";
     std::cout << "Chunk:  (" << chunk.get_CX() << ", " << chunk.get_CY() << ")\n";
     std::cout << "Alive Cells: " << chunk.populated_amt() << "\n";
-    std::cout << "Local:  (" << chunk.get_LX(gx) << ", " << chunk.get_LY(gy) << ")\n";
-    std::cout << "Cell Type: '" << chunk.get_cell(gx, gy).get_type() << "'\n\n";
+    std::cout << "Local:  (" << local_x << ", " << local_y << ")\n";
+    std::cout << "Cell Type: '" << chunk.get_cell(local_x, local_y).get_type() << "'\n\n";
 }
 
 void Debug::all_chunks()

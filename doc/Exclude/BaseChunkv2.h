@@ -1,7 +1,7 @@
 #ifndef BASECHUNK_H
 #define BASECHUNK_H
 
-#include "Cell.h"
+#include "../../source/include/Cell.h"
 
 class BaseChunk
 {
@@ -26,11 +26,11 @@ public:
     // Utilities for chunk
     virtual void print_chunk() const = 0;
     virtual bool is_populated() const = 0;
-    virtual int populate_amt() const = 0;
+    virtual int populated_amt() const = 0;
 
 protected:
     int cx, cy;
-    static int size;
+    int size;
 };
 
 #endif //BASECHUNK_H

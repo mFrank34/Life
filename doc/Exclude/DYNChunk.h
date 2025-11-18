@@ -2,7 +2,7 @@
 #ifndef DYNCHUNK_H
 #define DYNCHUNK_H
 
-#include "../source/include/Cell.h"
+#include "../../source/include/Cell.h"
 #include <iostream>
 #include <iomanip>
 
