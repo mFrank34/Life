@@ -31,7 +31,7 @@ public:
     int populated_amt() const;
 
 private:
-    int cx, cy;
+    int chunk_x, chunk_y;
     // Chunk size
     int size;
     std::vector<Cell> cells;

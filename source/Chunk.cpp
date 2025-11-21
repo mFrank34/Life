@@ -1,10 +1,9 @@
 #include "Chunk.h"
-
 #include <iomanip>
 #include <iostream>
 
 Chunk::Chunk(const int cx, const int cy, int const cs)
-    : cx(cx), cy(cy), size(cs)
+    : chunk_x(cx), chunk_y(cy), size(cs)
 {
     cells.resize(size * size);
     for (int y = 0; y < size; y++)
@@ -13,12 +12,12 @@ Chunk::Chunk(const int cx, const int cy, int const cs)
 }
 int Chunk::get_CX() const
 {
-    return cx;
+    return chunk_x;
 }
 
 int Chunk::get_CY() const
 {
-    return cy;
+    return chunk_y;
 }
 
 int Chunk::get_LX(const int gx) const {
