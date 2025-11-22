@@ -8,8 +8,13 @@ class Chunk
 {
 public:
     Chunk(int cx, int cy, int cs);
-
     virtual ~Chunk() = default;
+
+    // chunk operators
+    Chunk(const Chunk& other);
+    Chunk& operator=(const Chunk& other);
+    Chunk(Chunk&& other) noexcept;
+    Chunk& operator=(Chunk&& other) noexcept;
 
     // chunk coords
     int get_CX() const;

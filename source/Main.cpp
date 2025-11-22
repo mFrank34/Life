@@ -3,6 +3,9 @@
 #include <vector>
 
 // custom class
+#include <Manager.h>
+
+#include "Rules.h"
 #include "Cell.h"
 #include "Chunk.h"
 #include "Debug.h"
@@ -25,139 +28,26 @@ Miles Stones:
     - Create unordered and sparse map systems
 */
 
-// testing
-int x = 128, y = 128;
-int square_x = 64, square_y =  64;
-
 Debug global_debug;
 
 int main()
 {
-    // Unordered
-    Unordered unordered(1);
+    constexpr int size = 3;
+    Sparse world(size);
+    Rules rules;
 
-    global_debug.list_worlds();
-
-    global_debug.set_active(0);
-
-    // testing setting single point
-
-    unordered.get_cell(x, y).set_type('w');
-
-    global_debug.positions(x, y);
+    Manager life(world, rules);
+    global_debug.register_world(0);
 
     global_debug.all_chunks();
+    //global_debug.all_chunks();
 
-    // creating chunk to emtpy vail
-    unordered.get_cell(x, y).set_type('0');
-
-    global_debug.positions(x, y);
-
-    // creating a box within map system
-
-    std::cout << "Printing to chunks from (" << square_x << "," << square_y << ")\n";
-
-    for (int sx = 0; sx < square_x; ++sx)
+    for (int index = 0; index < size; index++)
     {
-        for (int sy = 0; sy < square_y; ++sy)
-        {
-            unordered.get_cell(sx, sy).set_type('w');
-        }
+        std::cout << "Index:" << index << std::endl;
+        life.update();
+        world.unload();
+        global_debug.all_chunks();
     }
-
-    std::cout << "Active Chunk's: " << global_debug.total_chunks() << "\n";
-
-    unordered.unload();
-
-    std::cout << "Active Chunk After Unload: " << global_debug.total_chunks() << "\n";
-
-    std::cout << "End of Unordered Map \n\n";
-
-    /*
-
-    START OF SPARSE
-
-    */
-
-    Sparse sparse(32);
-
-    global_debug.list_worlds();
-
-    global_debug.set_active(1);
-
-    sparse.get_cell(x, y).set_type('w');
-
-    global_debug.positions(x, y);
-
-    global_debug.all_chunks();
-
-    // creating chunk to emtpy vail
-    sparse.get_cell(x, y).set_type('0');
-
-    global_debug.positions(x, y);
-
-    // creating a box within map system
-
-    std::cout << "Setting Cells from (" << square_x << "," << square_y << ")\n";
-
-    for (int sx = 0; sx < square_x; ++sx)
-    {
-        for (int sy = 0; sy < square_y; ++sy)
-        {
-            sparse.get_cell(sx, sy).set_type('w');
-        }
-    }
-
-    std::cout << "Active Chunk's: " << global_debug.total_chunks() << "\n";
-
-    sparse.unload();
-
-    std::cout << "Active Chunk After Unload: " << global_debug.total_chunks() << "\n";
-
-    std::cout << "End of Sparse Map \n\n";
-
-    /*
-
-     START OF CACHED
-
-    */
-
-    Cache cache(32, 18);
-
-    global_debug.list_worlds();
-
-    global_debug.set_active(2);
-
-    cache.get_cell(x, y).set_type('w');
-
-    global_debug.positions(x, y);
-
-    global_debug.all_chunks();
-
-    // creating chunk to emtpy vail
-    cache.get_cell(x, y).set_type('0');
-
-    global_debug.positions(x, y);
-
-    // creating a box within map system
-
-    std::cout << "Setting Cells from (" << square_x << "," << square_y << ")\n";
-
-    for (int sx = 0; sx < square_x; ++sx)
-    {
-        for (int sy = 0; sy < square_y; ++sy)
-        {
-            cache.get_cell(sx, sy).set_type('w');
-        }
-    }
-
-    std::cout << "Active Chunk's: " << global_debug.total_chunks() << "\n";
-
-    cache.unload();
-
-    std::cout << "Active Chunk After Unload: " << global_debug.total_chunks() << "\n";
-
-    std::cout << "End of Cache Map \n\n";
-
     return 0;
 }

@@ -62,13 +62,13 @@ void Debug::all_chunks() const
         return;
     }
 
-    auto *world = worlds[active_index];
-    auto *chunks = static_cast<std::unordered_map<long long, Chunk> *>(world->get_world());
+    auto* world = worlds[active_index];
+    auto& chunks = world->get_world();
 
-    for (const auto &selected : *chunks)
+    for (const auto& [key, chunk] : chunks)
     {
-        std::cout << "Chunk key: " << selected.first << "\n";
-        selected.second.print_chunk();
+        std::cout << "Chunk key: " << key << "\n";
+        chunk.print_chunk();
     }
 }
 
@@ -80,11 +80,11 @@ int Debug::active_chunks() const
         return 0;
     }
 
-    auto *world = worlds[active_index];
-    auto *chunks = static_cast<std::unordered_map<long long, Chunk> *>(world->get_world());
+    auto* world = worlds[active_index];
+    auto& chunks = world->get_world();
 
     int active = 0;
-    for (const auto & val : *chunks | std::views::values)
+    for (const auto & val : chunks | std::views::values)
     {
         if (val.is_populated())
             active++;
@@ -100,8 +100,8 @@ int Debug::total_chunks() const
         return 0;
     }
 
-    auto *world = worlds[active_index];
-    auto *chunks = static_cast<std::unordered_map<long long, Chunk> *>(world->get_world());
+    auto* world = worlds[active_index];
+    auto& chunks = world->get_world();
 
-    return chunks->size();
+    return chunks.size();
 }

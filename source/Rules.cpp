@@ -1,9 +1,9 @@
-#include "Life.h"
+#include "Rules.h"
 
-Life::Life() {};
+Rules::Rules() = default;
 
 // Any live cell with fewer than two live neighbours dies, as if by under-population.
-bool Life::underpopulation(int c)
+bool Rules::underpopulation(int c) const
 {
     if (c < limit)
         return true;
@@ -11,7 +11,7 @@ bool Life::underpopulation(int c)
 }
 
 // Any live cell with two or three live neighbours lives on to the next generation.
-bool Life::survival(int c)
+bool Rules::survival(int c) const
 {
     if (c == min || c == limit)
         return true;
@@ -19,7 +19,7 @@ bool Life::survival(int c)
 }
 
 // Any live cell with more than three live neighbours dies, as if by overpopulation.
-bool Life::overpopulation(int c)
+bool Rules::overpopulation(int c) const
 {
     if (c > limit)
         return true;
@@ -27,12 +27,11 @@ bool Life::overpopulation(int c)
 }
 
 // Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
-bool Life::reproduction(int c)
+bool Rules::reproduction(int c) const
 {
     if (c == limit)
         return true;
     return false;
 };
 
-
-Life::~Life() {};
+Rules::~Rules() {};

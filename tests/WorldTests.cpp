@@ -22,9 +22,9 @@ public:
         return dummy;
     }
 
-    std::unordered_map<long long, Chunk>* get_world() override {
+    std::unordered_map<long long, Chunk>& get_world() override {
         static std::unordered_map<long long, Chunk> dummy;
-        return &dummy;
+        return dummy;
     }
 
     // Public wrappers to access protected methods

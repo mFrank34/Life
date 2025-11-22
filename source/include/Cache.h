@@ -19,7 +19,7 @@ public:
     Chunk &get_chunk(int gx, int gy) override;
     Cell &get_cell(int gx, int gy) override;
     // world data
-    std::unordered_map<long long, Chunk> *get_world() override;
+    std::unordered_map<long long, Chunk>& get_world() override;
 
 private:
     Chunk& get_cached_chunk(int gx, int gy);

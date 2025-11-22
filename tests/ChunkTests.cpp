@@ -115,5 +115,47 @@ TEST_CASE("Chunk population checks", "[Chunk]") {
     }
 }
 
+// Helper: create a chunk with one alive cell
+Chunk makeChunkWithAliveCell() {
+    Chunk c(0, 0, 4);
+    c.get_cell(1, 1).set_type('w');
+    return c;
+}
+
+TEST_CASE("Chunk copy constructor copies cells", "[chunk]") {
+    Chunk original = makeChunkWithAliveCell();
+    Chunk copy(original);
+
+    REQUIRE(copy.get_cell(1, 1).is_alive());
+    REQUIRE(original.get_cell(1, 1).is_alive());
+}
+
+TEST_CASE("Chunk copy assignment copies cells", "[chunk]") {
+    Chunk original = makeChunkWithAliveCell();
+    Chunk copyAssign(0, 0, 4);
+
+    copyAssign = original;
+
+    REQUIRE(copyAssign.get_cell(1, 1).is_alive());
+    REQUIRE(original.get_cell(1, 1).is_alive());
+}
+
+TEST_CASE("Chunk move constructor transfers cells", "[chunk]") {
+    Chunk original = makeChunkWithAliveCell();
+    Chunk moved(std::move(original));
+
+    REQUIRE(moved.get_cell(1, 1).is_alive());
+    // original cells may be empty after move, but moved must have them
+}
+
+TEST_CASE("Chunk move assignment transfers cells", "[chunk]") {
+    Chunk original = makeChunkWithAliveCell();
+    Chunk moveAssign(0, 0, 4);
+
+    moveAssign = std::move(original);
+
+    REQUIRE(moveAssign.get_cell(1, 1).is_alive());
+}
+
 
 

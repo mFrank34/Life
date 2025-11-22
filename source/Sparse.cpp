@@ -31,7 +31,7 @@ Chunk &Sparse::get_chunk(int gx, int gy)
     return chunks.try_emplace(key, cx, cy, CHUNK_SIZE).first->second;
 }
 
-std::unordered_map<long long, Chunk> *Sparse::get_world()
+std::unordered_map<long long, Chunk>& Sparse::get_world()
 {
-    return &chunks;
+    return chunks;
 }

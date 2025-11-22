@@ -33,9 +33,9 @@ Chunk& Cache::get_chunk(int gx, int gy)
     return chunks.try_emplace(key, Chunk(gx, gy, CHUNK_SIZE)).first->second;
 }
 
-std::unordered_map<long long, Chunk>* Cache::get_world()
+std::unordered_map<long long, Chunk>& Cache::get_world()
 {
-    return &chunks;
+    return chunks;
 }
 
 Chunk& Cache::get_cached_chunk(int gx, int gy)

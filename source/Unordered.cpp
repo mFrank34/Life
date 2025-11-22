@@ -35,7 +35,7 @@ Chunk &Unordered::get_chunk(int global_x, int global_y)
     return it->second;
 }
 
-std::unordered_map<long long, Chunk> *Unordered::get_world()
+std::unordered_map<long long, Chunk>& Unordered::get_world()
 {
-    return &chunks; // std::unordered_map<long long, Chunk>
+    return chunks; // std::unordered_map<long long, Chunk>
 }
