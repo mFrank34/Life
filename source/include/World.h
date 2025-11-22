@@ -13,7 +13,7 @@ class World
 {
 public:
     // constructor's and deconstructor's
-    World(std::string world_type);
+    World(const std::string& world_type);
     virtual ~World() = default;
 
     // Core functions for other map systems

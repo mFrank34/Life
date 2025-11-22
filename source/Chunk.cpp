@@ -20,11 +20,13 @@ int Chunk::get_CY() const
     return chunk_y;
 }
 
-int Chunk::get_LX(const int gx) const {
+int Chunk::get_LX(const int gx) const
+{
     return (gx % size + size) % size;
 }
 
-int Chunk::get_LY(const int gy) const {
+int Chunk::get_LY(const int gy) const
+{
     return (gy % size + size) % size;
 }
 

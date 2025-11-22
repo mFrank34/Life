@@ -4,10 +4,9 @@
 
 extern Debug global_debug;
 
-World::World(std::string type)
+World::World(const std::string& world_type)
 {
-    this->world_type = type;
-
+    this->world_type = world_type;
     // register with debugger
     global_debug.register_world(this);
 }
