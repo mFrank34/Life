@@ -22,39 +22,72 @@ Manager::Manager(World& world, Rules& rules)
 
 }
 
-std::vector<CellQuery> Manager::get_neighbour_queries()
-{
-
-};
-
 void Manager::update()
 {
     auto& selected_world = world.get_world();
     for (auto& [key, selected] : selected_world) {
         int selected_chunk_size = selected.get_size();
-        // finding out if key is alive in world
-        // all keys for surrounding chunks
+        // finding out if key is alive in world | all keys for surrounding chunks
         std::vector<long long> list_neighbour_key = world.get_neighbour_key(key);
 
         // Create temp buffer for next state | off-setting the chunk to make sightly larger chunk
         Chunk buffer(selected.get_CX(), selected.get_CY(), (selected.get_size() + CHUNK_OFF_SET));
 
-        for (long long neighbour_key : list_neighbour_key)
-        {
-            /* Chunks lay out: starting from 0 to 7 for 8 entries
-             * 1 2 3    * is chunk that being updated
-             * 4 * 5    - need to find out chunks that are
-             * 6 7 8    - alive within world
-             */
-            int id = 0;
-            if (selected_world.contains(neighbour_key))
-            {
-                active_neighbour.emplace_back(id, neighbour_key);
-            }
-            id++;
-        }
 
-        for (auto[id, neighbour_key] : active_neighbour)
+        if (!active_neighbour.empty())
+            Neighbours_cells_edges(selected_world);
+
+        // interacting with the current selected chunk
+        for (int i = 0; i < selected.get_size(); i++) {
+            for (int j = 0; j < selected.get_size(); j++) {
+                // selecting cell logic and adding changing buffer
+                int live = world.neighbour_count(i, j);
+                // live cells around i & j
+                bool current_cell = selected.get_cell(i, j).is_alive(); // if it alive or not
+                // these need to shifted over by CHUNK_OFF_SET to fit in buffer chunk
+                if (current_cell && (live < 2 || live > 3 ))
+                {
+                    buffer.get_cell(i + CHUNK_OFF_SET, j + CHUNK_OFF_SET).set_type('0');
+                }
+                else if (!current_cell && live == 3)
+                {
+                    buffer.get_cell(i + CHUNK_OFF_SET , j + CHUNK_OFF_SET).set_type('w');
+                }
+                else
+                {
+                    buffer.get_cell(i + CHUNK_OFF_SET, j + CHUNK_OFF_SET).set_type(
+                        world.get_cell(i,j).get_type()
+                        );
+                }
+            }
+        }
+        // load buffer back into selected chunk
+        selected = std::move(buffer);
+    }
+}
+
+void Manager::find_active_neighbour(auto& keys, auto& selected)
+{
+    for (long long neighbour_key : keys)
+    {
+        /* Chunks lay out: starting from 0 to 7 for 8 entries
+         * 1 2 3    * is chunk that being updated
+         * 4 * 5    - need to find out chunks that are
+         * 6 7 8    - alive within world
+         */
+        int id = 0;
+        if (selected.contains(neighbour_key))
+        {
+            active_neighbour.emplace_back(id, neighbour_key);
+        }
+        id++;
+    }
+}
+
+void Manager::Neighbours_cells_edges(auto& selected_world)
+{
+    int selected_chunk_size = selected_world.get_chunk_size();
+    for (auto[id, neighbour_key] : active_neighbour)
         {
             std::vector<Cell> cells;
             switch (id) // id is number around chunks
@@ -139,34 +172,4 @@ void Manager::update()
                 break;
             }
         }
-
-        // interacting with the current selected chunk
-        for (int i = 0; i < selected.get_size(); i++) {
-            for (int j = 0; j < selected.get_size(); j++) {
-                // selecting cell logic and adding changing buffer
-                int live = world.neighbour_count(i, j);
-                // live cells around i & j
-                bool current_cell = selected.get_cell(i, j).is_alive(); // if it alive or not
-                // these need to shifted over by CHUNK_OFF_SET to fit in buffer chunk
-                if (current_cell && (live < 2 || live > 3 ))
-                {
-                    buffer.get_cell(i + CHUNK_OFF_SET, j + CHUNK_OFF_SET).set_type('0');
-                }
-                else if (!current_cell && live == 3)
-                {
-                    buffer.get_cell(i + CHUNK_OFF_SET , j + CHUNK_OFF_SET).set_type('w');
-                }
-                else
-                {
-                    buffer.get_cell(i + CHUNK_OFF_SET, j + CHUNK_OFF_SET).set_type(
-                        world.get_cell(i,j).get_type()
-                        );
-                }
-            }
-        }
-        // load buffer back into selected chunk
-        selected = std::move(buffer);
-    }
 }
-
-Manager::~Manager() {};
