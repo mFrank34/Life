@@ -40,7 +40,6 @@ int main()
     global_debug.register_world(0);
 
     global_debug.all_chunks();
-    //global_debug.all_chunks();
 
     for (int index = 0; index < size; index++)
     {
