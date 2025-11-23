@@ -30,6 +30,15 @@ public:
     ~Manager();
 
 private:
+    // for changing the chunk off set value THIS Must Not CHANGE
+    static constexpr int CHUNK_OFF_SET = 2;
+
+    // finding out chunks that active
+    std::vector<std::pair<int, long long>> active_neighbour; // id and key
+
+    // id and cells that boring the that chunk
+    std::vector<std::pair<int, std::vector<Cell>>> neighbour_cells; // id and cell
+
     World& world;
     Rules& rules;
 };
