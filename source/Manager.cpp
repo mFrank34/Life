@@ -18,6 +18,13 @@ Manager::Manager(World& world, Rules& rules)
     : world(world), rules(rules)
 {
 
+}
+
+std::vector<CellQuery> Manager::get_neighbour_queries()
+{
+
+
+
 };
 
 void Manager::update()
@@ -25,10 +32,49 @@ void Manager::update()
     auto& selected_world = world.get_world();
     for (auto& [key, selected] : selected_world) {
 
-        std::vector<long long> neighbour_key = world.get_neighbour_key(key);
+        // finding out if key is alive in world
+        std::vector<long long> list_neighbour_key = world.get_neighbour_key(key); // all keys for surrounding chunks
+        std::vector<std::pair<int, long long>> active_neighbour; // finding out chunks that active
+        for (long long neighbour_key : list_neighbour_key)
+        {
+            /* Chunks lay out:
+             * 1 2 3    * is chunk that being updated
+             * 4 * 5    - need to find out chunks that are
+             * 6 7 8    - alive within world
+             */
+            int id = 1;
+            if (selected_world.contains(neighbour_key))
+            {
+                active_neighbour.emplace_back(id, neighbour_key);
+            }
+            id++;
+        }
 
+        for (auto[id, neighbour_key] : active_neighbour)
+        {
+            if (id == 1 || id == 2 || id == 3)
+            {
+                // get bottom row of the chunk
+                if (id == 1)
+                    return;
 
+                if (id == 2)
+                    return;
 
+                if (id == 3)
+                    return;
+            }
+
+            if (id == 4 || id == 5)
+            {
+
+            }
+
+            if (id == 6 || id == 7 || id == 8)
+            {
+
+            }
+        }
         // Create temp buffer for next state
         Chunk buffer(selected.get_CX(), selected.get_CY(), selected.get_size());
         for (int i = 0; i < selected.get_size(); i++) {
