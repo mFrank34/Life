@@ -43,7 +43,6 @@ std::vector<long long> World::get_neighbour_key(long long key) const
         {
             if (dx == 0 && dy == 0)
                 continue;
-
             neighbors.push_back(generate_key(x + dx, y + dy));
         }
     }

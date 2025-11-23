@@ -6,12 +6,22 @@
 #include "Sparse.h"
 #include "Rules.h"
 
+struct CellQuery
+{
+    int chunk_x;
+    int chunk_y;
+    int cell_x;
+    int cell_y;
+};
+
 class Manager
 {
 public:
     Manager( World& world,  Rules& rules);
 
-    void update() ;
+    std::vector<CellQuery> get_neighbour_queries();
+
+    void update();
 
     void step();
 
@@ -23,5 +33,7 @@ private:
     World& world;
     Rules& rules;
 };
+
+
 
 #endif
