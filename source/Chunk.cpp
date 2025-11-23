@@ -8,7 +8,7 @@ Chunk::Chunk(const int cx, const int cy, int const cs)
     cells.resize(size * size);
     for (int y = 0; y < size; y++)
         for (int x = 0; x < size; x++)
-            cells[y * size + x] = Cell('0');
+            cells[y * size + x] = Cell();
 }
 
 Chunk::Chunk(const Chunk& other)
@@ -74,6 +74,11 @@ Cell& Chunk::get_cell(const int x, const int y)
 const Cell& Chunk::get_cell(const int x, const int y) const
 {
     return cells[y * size + x];
+}
+Cell& Chunk::get_cell(const int index)
+{
+    // ONLY use of needing index instead
+    return cells[index];
 }
 
 void Chunk::print_chunk() const

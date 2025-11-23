@@ -29,6 +29,7 @@ public:
     // cell instances
     Cell& get_cell(int x, int y);
     const Cell& get_cell(int x, int y) const;
+    Cell& get_cell(int index);
     // view chunk
     void print_chunk() const;
     // stats of chunks
