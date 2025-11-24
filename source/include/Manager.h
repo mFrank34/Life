@@ -3,12 +3,11 @@
 #define MANAGER_H
 
 #include "Manager.h"
-#include "Sparse.h"
+#include "World.h"
 #include "Rules.h"
 
 class Manager
 {
-private:
     // for changing the chunk off set value THIS Must Not CHANGE
     static constexpr int CHUNK_OFF_SET = 2;
     // rules and world objects

@@ -1,14 +1,13 @@
 #include <gtk/gtk.h> // UI Lib
 #include <iostream>
-#include <vector>
 
 // custom class
 #include <Manager.h>
-
 #include "Rules.h"
 #include "Cell.h"
 #include "Chunk.h"
 #include "Debug.h"
+// storage containers
 #include "World.h"
 #include "Unordered.h"
 #include "Sparse.h"
@@ -30,7 +29,7 @@ Miles Stones:
 
 void block1(World& world)
 {
-    int size = 9;
+    constexpr int size = 9;
     for (int y = 0; y < size; y++)
         for (int x = 0; x < size; x++)
             world.get_cell(x,y).set_type('w');
@@ -38,7 +37,7 @@ void block1(World& world)
 
 void block2(World& world)
 {
-    int size = 3;
+    constexpr int size = 3;
     for (int y = 0; y < size; y++)
         world.get_cell(0,y).set_type('w');
 }
@@ -65,6 +64,5 @@ int main()
         world.unload();
         global_debug.all_chunks();
     }
-
     return 0;
 }
