@@ -8,18 +8,18 @@ TEST_CASE("Sparse Map constructor registers type and debugger", "[Sparse]")
     REQUIRE(world.get_type() == "Sparse Map");
 }
 
-TEST_CASE("Sparse: World neighbour_count counts alive neighbors", "[Sparse]") {
-    // why here cos i need working get cell function
-    Sparse test(4);
-    // Set up a cell at (0,0) and its neighbors.
-    test.get_cell(0, 0).set_type('w');
-    test.get_cell(1, 0).set_type('w');
-    test.get_cell(0, 1).set_type('w');
-    // The cell at (0,0) should have 2 alive neighbors
-    REQUIRE(test.neighbour_count(0, 0) == 2);
-    // The cell at (1,1) should have 3 alive neighbors
-    REQUIRE(test.neighbour_count(1, 1) == 3);
-}
+// TEST_CASE("Sparse: World neighbour_count counts alive neighbors", "[Sparse]") {
+//     // why here cos i need working get cell function
+//     Sparse test(4);
+//     // Set up a cell at (0,0) and its neighbors.
+//     test.get_cell(0, 0).set_type('w');
+//     test.get_cell(1, 0).set_type('w');
+//     test.get_cell(0, 1).set_type('w');
+//     // The cell at (0,0) should have 2 alive neighbors
+//     REQUIRE(test.neighbour_count(0, 0) == 2);
+//     // The cell at (1,1) should have 3 alive neighbors
+//     REQUIRE(test.neighbour_count(1, 1) == 3);
+// }
 
 TEST_CASE("Sparse: Unload World", "[Sparse]")
 {

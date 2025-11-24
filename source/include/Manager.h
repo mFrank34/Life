@@ -6,14 +6,6 @@
 #include "Sparse.h"
 #include "Rules.h"
 
-struct CellQuery
-{
-    int chunk_x;
-    int chunk_y;
-    int cell_x;
-    int cell_y;
-};
-
 class Manager
 {
 private:
@@ -31,7 +23,7 @@ private:
     // neighbour edge cases
     void find_active_neighbour(const std::vector<long long>& keys,
         const std::unordered_map<long long, Chunk>& selected);
-    void neighbours_cells_edge(std::unordered_map<long long, Chunk> selected_world, int SIZE);
+    void neighbours_cells_edge(const std::unordered_map<long long, Chunk>& selected_world, int SIZE);
 
     // chunk updater function
     static void chunk_update(Chunk& buffer, Chunk& selected); // selected is one currently being change
@@ -39,7 +31,7 @@ private:
     static void fill_halo_region(Chunk& buffer, const std::vector<std::pair<int,
         std::vector<Cell>>>& cells, int size);
     // constructing a halo chunk
-    static void construct_halo(Chunk& buffer, const Chunk& selected,
+    static void construct_halo(Chunk& buffer, Chunk& selected,
         const std::vector<std::pair<int, std::vector<Cell>>>& cells);
 
 public:
@@ -47,8 +39,8 @@ public:
     ~Manager() = default;
 
     void update();
-    void step();
-    void render_step();
+    static void step();
+    static void render_step();
 };
 
 #endif

@@ -28,6 +28,21 @@ Miles Stones:
     - Create unordered and sparse map systems
 */
 
+void block1(World& world)
+{
+    int size = 9;
+    for (int y = 0; y < size; y++)
+        for (int x = 0; x < size; x++)
+            world.get_cell(x,y).set_type('w');
+}
+
+void block2(World& world)
+{
+    int size = 3;
+    for (int y = 0; y < size; y++)
+        world.get_cell(0,y).set_type('w');
+}
+
 Debug global_debug;
 
 int main()
@@ -39,14 +54,17 @@ int main()
     Manager life(world, rules);
     global_debug.register_world(0);
 
+    std::cout << "Starting Pos: " << std::endl;
+    block2(world);
     global_debug.all_chunks();
 
     for (int index = 0; index < size; index++)
     {
-        std::cout << "Index:" << index << std::endl;
+        std::cout << "Step: " << index << std::endl;
         life.update();
         world.unload();
         global_debug.all_chunks();
     }
+
     return 0;
 }

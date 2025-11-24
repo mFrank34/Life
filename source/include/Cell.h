@@ -23,6 +23,7 @@ public:
     void update_cell();
 
     ~Cell();
+
 };
 
 #endif
