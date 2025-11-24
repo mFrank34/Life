@@ -29,21 +29,26 @@ private:
     std::vector<std::pair<int, std::vector<Cell>>> neighbour_cells; // id and cells
 
     // neighbour edge cases
-    void find_active_neighbour(const std::vector<long long>& keys, const std::unordered_map<long long, Chunk>& selected);
-    void Neighbours_cells_edge(std::unordered_map<long long, Chunk> selected_world, int SIZE);
+    void find_active_neighbour(const std::vector<long long>& keys,
+        const std::unordered_map<long long, Chunk>& selected);
+    void neighbours_cells_edge(std::unordered_map<long long, Chunk> selected_world, int SIZE);
+
+    // chunk updater function
+    static void chunk_update(Chunk& buffer, Chunk& selected); // selected is one currently being change
+    // halo chunk helper
+    static void fill_halo_region(Chunk& buffer, const std::vector<std::pair<int,
+        std::vector<Cell>>>& cells, int size);
+    // constructing a halo chunk
+    static void construct_halo(Chunk& buffer, const Chunk& selected,
+        const std::vector<std::pair<int, std::vector<Cell>>>& cells);
 
 public:
     Manager( World& world,  Rules& rules);
     ~Manager() = default;
 
     void update();
-
     void step();
     void render_step();
-
-
 };
-
-
 
 #endif
