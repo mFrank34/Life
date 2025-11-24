@@ -29,7 +29,7 @@ private:
     std::vector<std::pair<int, std::vector<Cell>>> neighbour_cells; // id and cells
 
     // neighbour edge cases
-    void find_active_neighbour(std::vector<long long> keys, std::unordered_map<long long, Chunk> selected);
+    void find_active_neighbour(const std::vector<long long>& keys, const std::unordered_map<long long, Chunk>& selected);
     void Neighbours_cells_edge(std::unordered_map<long long, Chunk> selected_world, int SIZE);
 
 public:
