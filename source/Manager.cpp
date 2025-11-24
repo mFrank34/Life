@@ -53,7 +53,8 @@ void Manager::update()
     }
 }
 
-void Manager::find_active_neighbour(std::vector<long long> keys, std::unordered_map<long long, Chunk> selected)
+void Manager::find_active_neighbour(const std::vector<long long>& keys,
+    const std::unordered_map<long long, Chunk>& selected)
 {
     for (long long neighbour_key : keys)
     {
