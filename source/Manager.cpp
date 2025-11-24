@@ -32,36 +32,36 @@ void Manager::neighbours_cells_edge(const std::unordered_map<long long, Chunk>& 
 {
     neighbour_cells.clear();
     for (auto [id, neighbour_key] : active_neighbour) {
-        const Chunk& n = selected_world.at(neighbour_key);
+        const Chunk& neighbour = selected_world.at(neighbour_key);
         std::vector<Cell> cells;
         switch (id) {
         case 0: // N row: y=0, x=0..SIZE-1
             cells.reserve(SIZE);
-            for (int x = 0; x < SIZE; ++x) cells.emplace_back(n.get_cell(x, 0));
+            for (int x = 0; x < SIZE; ++x) cells.emplace_back(neighbour.get_cell(x, 0));
             break;
         case 1: // NE corner: (SIZE-1, 0)
-            cells.emplace_back(n.get_cell(SIZE-1, 0));
+            cells.emplace_back(neighbour.get_cell(SIZE-1, 0));
             break;
         case 2: // E col: x=SIZE-1, y=0 SIZE-1
             cells.reserve(SIZE);
-            for (int y = 0; y < SIZE; ++y) cells.emplace_back(n.get_cell(SIZE-1, y));
+            for (int y = 0; y < SIZE; ++y) cells.emplace_back(neighbour.get_cell(SIZE-1, y));
             break;
         case 3: // SE corner: (SIZE-1, SIZE-1)
-            cells.emplace_back(n.get_cell(SIZE-1, SIZE-1));
+            cells.emplace_back(neighbour.get_cell(SIZE-1, SIZE-1));
             break;
         case 4: // S row: y=SIZE-1, x=0..SIZE-1
             cells.reserve(SIZE);
-            for (int x = 0; x < SIZE; ++x) cells.emplace_back(n.get_cell(x, SIZE-1));
+            for (int x = 0; x < SIZE; ++x) cells.emplace_back(neighbour.get_cell(x, SIZE-1));
             break;
         case 5: // SW corner: (0, SIZE-1)
-            cells.emplace_back(n.get_cell(0, SIZE-1));
+            cells.emplace_back(neighbour.get_cell(0, SIZE-1));
             break;
         case 6: // W col: x=0, y=0..SIZE-1
             cells.reserve(SIZE);
-            for (int y = 0; y < SIZE; ++y) cells.emplace_back(n.get_cell(0, y));
+            for (int y = 0; y < SIZE; ++y) cells.emplace_back(neighbour.get_cell(0, y));
             break;
         case 7: // NW corner: (0, 0)
-            cells.emplace_back(n.get_cell(0, 0));
+            cells.emplace_back(neighbour.get_cell(0, 0));
             break;
         default: break;
         }
