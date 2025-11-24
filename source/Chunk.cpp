@@ -8,7 +8,7 @@ Chunk::Chunk(const int cx, const int cy, int const cs)
     cells.resize(size * size);
     for (int y = 0; y < size; y++)
         for (int x = 0; x < size; x++)
-            cells[y * size + x] = Cell();
+            cells[y * size + x] = Cell('0');
 }
 
 Chunk::Chunk(const Chunk& other)
