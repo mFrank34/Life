@@ -1,20 +1,8 @@
 #include "Manager.h"
 
-#include <gtk-4.0/gtk/gtkgestureswipe.h>
-
 #include "Rules.h"
 #include "World.h"
 #include "Chunk.h"
-
-/*
-Notes:
-    Create a map manger for different map types.
-    - Unordered map
-    - Cache aware grids
-    - Spares aware grids
-
-    this need to manage all these different map system.
-*/
 
 Manager::Manager(World& world, Rules& rules)
     : world(world), rules(rules)
@@ -33,9 +21,8 @@ void Manager::update()
         // Create temp buffer for next state | off-setting the chunk to make sightly larger chunk
         Chunk buffer(selected.get_CX(), selected.get_CY(), (selected.get_size() + CHUNK_OFF_SET));
 
-
         if (!active_neighbour.empty())
-            Neighbours_cells_edges(selected_world);
+            Neighbours_cells_edge(selected_world, selected_chunk_size);
 
         // interacting with the current selected chunk
         for (int i = 0; i < selected.get_size(); i++) {
@@ -66,7 +53,7 @@ void Manager::update()
     }
 }
 
-void Manager::find_active_neighbour(auto& keys, auto& selected)
+void Manager::find_active_neighbour(std::vector<long long> keys, std::unordered_map<long long, Chunk> selected)
 {
     for (long long neighbour_key : keys)
     {
@@ -84,9 +71,8 @@ void Manager::find_active_neighbour(auto& keys, auto& selected)
     }
 }
 
-void Manager::Neighbours_cells_edges(auto& selected_world)
+void Manager::Neighbours_cells_edge(std::unordered_map<long long, Chunk> selected_world, int SIZE)
 {
-    int selected_chunk_size = selected_world.get_chunk_size();
     for (auto[id, neighbour_key] : active_neighbour)
         {
             std::vector<Cell> cells;
@@ -95,7 +81,7 @@ void Manager::Neighbours_cells_edges(auto& selected_world)
             case 0:
                 {   // 1 cell every time
                     Chunk selected_neighbour = selected_world.find(neighbour_key)->second;
-                    const int index = (selected_chunk_size * selected_chunk_size) - 1; // working maths backward for indexing
+                    const int index = (SIZE * SIZE) - 1; // working maths backward for indexing
                     cells.emplace_back(selected_neighbour.get_cell(index));
                     neighbour_cells.emplace_back(id,cells);
                     break;
@@ -103,9 +89,9 @@ void Manager::Neighbours_cells_edges(auto& selected_world)
             case 1:
                 {   // multi-able cells depending on size
                     Chunk selected_neighbour = selected_world.find(neighbour_key)->second;
-                    for (int i = 1; i < selected_chunk_size; i++)
+                    for (int i = 1; i < SIZE; i++)
                     {
-                        const int index = (selected_chunk_size - 1) * selected_chunk_size + i;
+                        const int index = (SIZE - 1) * SIZE + i;
                         cells.emplace_back(selected_neighbour.get_cell(index));
                         neighbour_cells.emplace_back(id,cells);
                     }
@@ -114,7 +100,7 @@ void Manager::Neighbours_cells_edges(auto& selected_world)
             case 2:
                 {
                     Chunk selected_neighbour = selected_world.find(neighbour_key)->second;
-                    const int index = (selected_chunk_size * selected_chunk_size) - selected_chunk_size;
+                    const int index = (SIZE * SIZE) - SIZE;
                     cells.emplace_back(selected_neighbour.get_cell(index));
                     neighbour_cells.emplace_back(id,cells);
                     break;
@@ -122,9 +108,9 @@ void Manager::Neighbours_cells_edges(auto& selected_world)
             case 3:
                 {
                     Chunk selected_neighbour = selected_world.find(neighbour_key)->second;
-                    for (int i = 1; i < selected_chunk_size; i++)
+                    for (int i = 1; i < SIZE; i++)
                     {
-                        const int index = i * selected_chunk_size + (selected_chunk_size - 1);
+                        const int index = i * SIZE + (SIZE - 1);
                         cells.emplace_back(selected_neighbour.get_cell(index));
                         neighbour_cells.emplace_back(id,cells);
                     }
@@ -133,9 +119,9 @@ void Manager::Neighbours_cells_edges(auto& selected_world)
             case 4:
                 {
                     Chunk selected_neighbour = selected_world.find(neighbour_key)->second;
-                    for (int i = 1; i < selected_chunk_size; i++)
+                    for (int i = 1; i < SIZE; i++)
                     {
-                        const int index = i * selected_chunk_size;
+                        const int index = i * SIZE;
                         cells.emplace_back(selected_neighbour.get_cell(index));
                         neighbour_cells.emplace_back(id,cells);
                     }
@@ -144,7 +130,7 @@ void Manager::Neighbours_cells_edges(auto& selected_world)
             case 5:
                 {
                     Chunk selected_neighbour = selected_world.find(neighbour_key)->second;
-                    const int index = selected_chunk_size - 1; // working maths backward for indexing
+                    const int index = SIZE - 1; // working maths backward for indexing
                     cells.emplace_back(selected_neighbour.get_cell(index));
                     neighbour_cells.emplace_back(id,cells);
                     break;
@@ -152,9 +138,9 @@ void Manager::Neighbours_cells_edges(auto& selected_world)
             case 6:
                 {
                     Chunk selected_neighbour = selected_world.find(neighbour_key)->second;
-                    for (int i = 1; i < selected_chunk_size; i++)
+                    for (int i = 1; i < SIZE; i++)
                     {
-                        int index = selected_chunk_size + i;
+                        int index = SIZE + i;
                         cells.emplace_back(selected_neighbour.get_cell(index));
                         neighbour_cells.emplace_back(id,cells);
                     }
