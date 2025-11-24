@@ -12,7 +12,7 @@ Chunk::Chunk(const int cx, const int cy, int const cs)
 }
 
 Chunk::Chunk(const Chunk& other)
-    :chunk_x(other.chunk_x), chunk_y(other.chunk_y), size(other.size), cells(other.cells) {}
+    : chunk_x(other.chunk_x), chunk_y(other.chunk_y), size(other.size), cells(other.cells) {}
 
 Chunk& Chunk::operator=(const Chunk& other)
 {
@@ -27,7 +27,7 @@ Chunk& Chunk::operator=(const Chunk& other)
 }
 
 Chunk::Chunk(Chunk&& other) noexcept
-    :chunk_x(other.chunk_x), chunk_y(other.chunk_y), size(other.size), cells(std::move(other.cells)) {}
+    : chunk_x(other.chunk_x), chunk_y(other.chunk_y), size(other.size), cells(std::move(other.cells)) {}
 
 Chunk& Chunk::operator=(Chunk&& other) noexcept
 {
@@ -132,4 +132,22 @@ int Chunk::populated_amt() const
             if (cells[y * size + x].is_alive())
                 lives_cell++;
     return lives_cell;
+}
+
+int Chunk::neighbour_count(int cx, int cy) const
+{
+    // offset for cords
+    static const int offsets[8][2] = {{-1, -1}, {0, -1}, {1, -1}, {-1, 0}, {1, 0}, {-1, 1}, {0, 1}, {1, 1}};
+    int count = 0;
+    for (const auto &offset : offsets) // connects
+    {
+        // gets the surrounding cell coors
+        Cell neighbour = get_cell(cx + offset[0], cy + offset[1]);
+        if (neighbour.is_alive())
+        {
+            // counting the alive cells
+            count++;
+        };
+    };
+    return count;
 }

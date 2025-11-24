@@ -11,25 +11,6 @@ World::World(const std::string& world_type)
     global_debug.register_world(this);
 }
 
-int World::neighbour_count(int global_x, int global_y)
-{
-    // offset for cords
-    static const int offsets[8][2] = {{-1, -1}, {0, -1}, {1, -1}, {-1, 0}, {1, 0}, {-1, 1}, {0, 1}, {1, 1}};
-    int count = 0;
-
-    for (const auto &offset : offsets) // connects
-    {
-        // gets the surrounding cell coors
-        Cell &neighbor = get_cell(global_x + offset[0], global_y + offset[1]);
-        if (neighbor.is_alive())
-        {
-            // counting the alive cells
-            count++;
-        };
-    };
-    return count;
-}
-
 std::vector<long long> World::get_neighbour_key(long long key) const
 {
     auto [x, y] = decode_key(key);

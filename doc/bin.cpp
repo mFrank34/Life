@@ -91,3 +91,18 @@ Chunk Life::step(Chunk chunk, std::vector<Chunk *> relevent_chunks)
 
     return chunk;
 };
+
+auto& selected_world = world.get_world();
+for (auto& [key, selected] : selected_world) {
+    int selected_chunk_size = selected.get_size();
+    // finding out if key is alive in world | all keys for surrounding chunks
+    std::vector<long long> list_neighbour_key = world.get_neighbour_key(key);
+    find_active_neighbour(list_neighbour_key, selected_world);
+    // Create temp buffer for next state | off-setting the chunk to make sightly larger chunk
+    Chunk buffer(selected.get_CX(), selected.get_CY(), (selected.get_size() + CHUNK_OFF_SET));
+
+    if (!active_neighbour.empty())
+        Neighbours_cells_edge(selected_world, selected_chunk_size);
+
+
+}
