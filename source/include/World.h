@@ -3,8 +3,8 @@
 #define WORLD_H
 
 #include <unordered_map>
+#include <array>
 #include <memory>
-#include <vector>
 #include <string>
 #include "Chunk.h"
 #include "Cell.h"
@@ -24,7 +24,7 @@ public:
 
     // helper functions for all worlds
     int neighbour_count(int global_x, int global_y);
-    std::vector<long long> get_neighbour_key(long long key) const;
+    std::array<long long, 8> get_neighbour_key(long long key) const;
 
     // World information
     std::string get_type() const;

@@ -39,29 +39,29 @@ void block2(World& world)
 {
     constexpr int size = 3;
     for (int y = 0; y < size; y++)
-        world.get_cell(0,y).set_type('w');
+        world.get_cell(0,y+1).set_type('w');
 }
 
 Debug global_debug;
 
 int main()
 {
-    constexpr int size = 3;
+    constexpr int size = 5;
     Sparse world(size);
     Rules rules;
 
     Manager life(world, rules);
-    global_debug.register_world(0);
+    global_debug.register_world(nullptr);
 
     std::cout << "Starting Pos: " << std::endl;
     block2(world);
     global_debug.all_chunks();
 
-    for (int index = 0; index < size; index++)
+    for (int index = 0; index < 3; index++)
     {
         std::cout << "Step: " << index << std::endl;
         life.update();
-        world.unload();
+        //world.unload();
         global_debug.all_chunks();
     }
     return 0;

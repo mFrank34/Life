@@ -2,9 +2,14 @@
 #ifndef MANAGER_H
 #define MANAGER_H
 
-#include "Manager.h"
 #include "World.h"
 #include "Rules.h"
+
+enum class haloDirection
+{
+    Import,
+    Export
+};
 
 class Manager
 {
@@ -16,22 +21,23 @@ class Manager
 
     // finding out chunks that active
     std::vector<std::pair<int, long long>> active_neighbour;
-    // id and cells that boring the that chunk
-    std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>> neighbour_cells; // id and cells
+    // id and cells that boring the that chunk and hands id of chunk and references to cells
+    std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>> neighbour_cells;
 
     // neighbour edge cases
-    void find_active_neighbour(const std::vector<long long>& keys,
+    void find_active_neighbour(const std::array<long long, 8>& keys,
         const std::unordered_map<long long, Chunk>& selected);
     void neighbours_cells_edge(const std::unordered_map<long long, Chunk>& selected_world, int SIZE);
 
-    // chunk updater function
-    static void chunk_update(Chunk& buffer, Chunk& selected); // selected is one currently being change
     // halo chunk helper
-    static void fill_halo_region(Chunk& buffer,
-        const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells, int size);
+    static void halo_bridge(Chunk& buffer,
+        const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells,
+        int size, haloDirection dir);
     // constructing a halo chunk
     static void construct_halo(Chunk& buffer, Chunk& selected,
         const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells);
+    // chunk updater function
+    static void chunk_update(Chunk& buffer, Chunk& selected); // selected is one currently being change
 
 public:
     Manager( World& world,  Rules& rules);
