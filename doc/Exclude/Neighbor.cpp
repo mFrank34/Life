@@ -44,3 +44,9 @@ std::vector<Neighbor> Neighbor::neighbors_cords()
 }
 
 Neighbor::~Neighbor() {};
+
+/* Chunks lay out: starting from 0 to 7 for 8 entries
+   * 1 2 3    * is chunk that being updated
+   * 4 * 5    - need to find out chunks that are
+   * 6 7 8    - alive within world
+   */

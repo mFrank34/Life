@@ -1,6 +1,8 @@
 #include "World.h"
-#include "Debug.h"
+
+#include <array>
 #include <vector>
+#include "Debug.h"
 
 extern Debug global_debug;
 
@@ -11,23 +13,19 @@ World::World(const std::string& world_type)
     global_debug.register_world(this);
 }
 
-std::vector<long long> World::get_neighbour_key(long long key) const
+std::array<long long, 8> World::get_neighbour_key(long long key) const
 {
     auto [x, y] = decode_key(key);
-    std::vector<long long> neighbors;
-    neighbors.reserve(8);
-
-    // searching for keys to add
-    for (int dy = -1; dy <= 1; ++dy)
-    {
-        for (int dx = -1; dx <= 1; ++dx)
-        {
-            if (dx == 0 && dy == 0)
-                continue;
-            neighbors.push_back(generate_key(x + dx, y + dy));
-        }
-    }
-    return neighbors;
+    return {
+        generate_key(x, y-1), // N
+        generate_key(x+1, y-1), // NE
+        generate_key(x+1, y),   // E
+        generate_key(x+1, y+1), // SE
+        generate_key(x, y+1), // S
+        generate_key(x-1, y+1), // SW
+        generate_key(x-1, y),   // W
+        generate_key(x-1, y-1)  // NW
+    };
 }
 
 std::string World::get_type() const
