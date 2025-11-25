@@ -1,7 +1,5 @@
 #include "Manager.h"
-
-#include <iostream>
-#include <ostream>
+#include <functional>
 
 #include "Rules.h"
 #include "World.h"
@@ -32,39 +30,44 @@ void Manager::neighbours_cells_edge(const std::unordered_map<long long, Chunk>& 
 {
     neighbour_cells.clear();
     for (auto [id, neighbour_key] : active_neighbour) {
-        const Chunk& neighbour = selected_world.at(neighbour_key);
-        std::vector<Cell> cells;
+        Chunk& neighbour = const_cast<Chunk&>(selected_world.at(neighbour_key));
+        std::vector<std::reference_wrapper<Cell>> cells;
         switch (id) {
         case 0: // N row: y=0, x=0..SIZE-1
             cells.reserve(SIZE);
-            for (int x = 0; x < SIZE; ++x) cells.emplace_back(neighbour.get_cell(x, 0));
+            for (int x = 0; x < SIZE; ++x)
+                cells.emplace_back(neighbour.get_cell(x, 0));
             break;
         case 1: // NE corner: (SIZE-1, 0)
             cells.emplace_back(neighbour.get_cell(SIZE-1, 0));
             break;
-        case 2: // E col: x=SIZE-1, y=0 SIZE-1
+        case 2: // E col: x=SIZE-1, y=0     SIZE-1
             cells.reserve(SIZE);
-            for (int y = 0; y < SIZE; ++y) cells.emplace_back(neighbour.get_cell(SIZE-1, y));
+            for (int y = 0; y < SIZE; ++y)
+                cells.emplace_back(neighbour.get_cell(SIZE-1, y));
             break;
         case 3: // SE corner: (SIZE-1, SIZE-1)
             cells.emplace_back(neighbour.get_cell(SIZE-1, SIZE-1));
             break;
-        case 4: // S row: y=SIZE-1, x=0..SIZE-1
+        case 4: // S row: y=SIZE-1, x=0     SIZE-1
             cells.reserve(SIZE);
-            for (int x = 0; x < SIZE; ++x) cells.emplace_back(neighbour.get_cell(x, SIZE-1));
+            for (int x = 0; x < SIZE; ++x)
+                cells.emplace_back(neighbour.get_cell(x, SIZE-1));
             break;
         case 5: // SW corner: (0, SIZE-1)
             cells.emplace_back(neighbour.get_cell(0, SIZE-1));
             break;
-        case 6: // W col: x=0, y=0..SIZE-1
+        case 6: // W col: x=0, y=0          SIZE-1
             cells.reserve(SIZE);
-            for (int y = 0; y < SIZE; ++y) cells.emplace_back(neighbour.get_cell(0, y));
+            for (int y = 0; y < SIZE; ++y)
+                cells.emplace_back(neighbour.get_cell(0, y));
             break;
         case 7: // NW corner: (0, 0)
             cells.emplace_back(neighbour.get_cell(0, 0));
             break;
         default: break;
         }
+
         neighbour_cells.emplace_back(id, std::move(cells));
     }
 }
@@ -74,7 +77,7 @@ void Manager::chunk_update(Chunk& buffer, Chunk& selected)
     const int size = selected.get_size(); // 3
     for (int y = 1; y <= size; ++y) {
         for (int x = 1; x <= size; ++x) {
-            int live = buffer.neighbour_count(x, y); // live neighbour count
+            const int live = buffer.neighbour_count(x, y); // live neighbour count
             bool current_cell = buffer.get_cell(x, y).is_alive(); // if current cell is alive
             Cell& target = selected.get_cell(x-1, y-1); // shifted x|y by 1 for other index
             // rules
@@ -89,55 +92,56 @@ void Manager::chunk_update(Chunk& buffer, Chunk& selected)
     }
 }
 
-void Manager::fill_halo_region(Chunk& buffer, const std::vector<std::pair<int, std::vector<Cell>>>& cells, const int size)
+void Manager::fill_halo_region(Chunk& buffer,
+    const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells, const int size)
 {
     if (cells.empty()) return;
-    for (auto [id, cellVec] : cells)
+    for (auto [id, cellRef] : cells)
     {
         switch (id)
         {
         case 0: // North (top row)
             {
                 for (int x = 0; x < size; ++x)
-                    buffer.get_cell(x+1, 0).set_type(cellVec[x].get_type());
+                    buffer.get_cell(x+1, 0).set_type(cellRef[x].get().get_type());
                 break;
             }
         case 1: // North-East (top-right corner)
             {
-                buffer.get_cell(size + 1, 0).set_type(cellVec[0].get_type());
+                buffer.get_cell(size + 1, 0).set_type(cellRef[0].get().get_type());
                 break;
             }
         case 2: // East (right column)
             {
                 for (int y = 0; y < size; ++y)
-                    buffer.get_cell(size+1, y+1).set_type(cellVec[y].get_type());
+                    buffer.get_cell(size+1, y+1).set_type(cellRef[y].get().get_type());
                 break;
             }
         case 3: // South-East (bottom-right corner)
             {
-                buffer.get_cell(size + 1, size + 1).set_type(cellVec[0].get_type());
+                buffer.get_cell(size + 1, size + 1).set_type(cellRef[0].get().get_type());
                 break;
             }
         case 4: // South (bottom row)
             {
                 for (int x = 0; x < size; ++x)
-                    buffer.get_cell(x+1, size + 1).set_type(cellVec[x].get_type());
+                    buffer.get_cell(x+1, size + 1).set_type(cellRef[x].get().get_type());
                 break;
             }
         case 5: // South-West (bottom-left corner)
             {
-                buffer.get_cell(0, size + 1).set_type(cellVec[0].get_type());
+                buffer.get_cell(0, size + 1).set_type(cellRef[0].get().get_type());
                 break;
             }
         case 6: // West (left column)
             {
                 for (int y = 0; y < size; ++y)
-                    buffer.get_cell(0, y+1).set_type(cellVec[y].get_type());
+                    buffer.get_cell(0, y+1).set_type(cellRef[y].get().get_type());
                 break;
             }
         case 7: // North-West (top-left corner)
             {
-                buffer.get_cell(0, 0).set_type(cellVec[0].get_type());
+                buffer.get_cell(0, 0).set_type(cellRef[0].get().get_type());
                 break;
             }
         default: break;
@@ -145,7 +149,8 @@ void Manager::fill_halo_region(Chunk& buffer, const std::vector<std::pair<int, s
     }
 }
 
-void Manager::construct_halo(Chunk& buffer, Chunk& selected,const std::vector<std::pair<int, std::vector<Cell>>>& cells)
+void Manager::construct_halo(Chunk& buffer, Chunk& selected,
+    const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells)
 {
     const int size = selected.get_size(); // inner: 3
     constexpr int halo = 1;
