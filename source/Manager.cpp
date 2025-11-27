@@ -68,7 +68,7 @@ void Manager::neighbours_cells_edge(const std::unordered_map<long long, Chunk>& 
 
 void Manager::halo_bridge(Chunk& buffer,
     const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells,
-    const int size, haloDirection dir)
+    const int size, const haloDirection dir)
 {
     if (cells.empty()) return;
     for (auto [id, cellRef] : cells)
@@ -82,7 +82,7 @@ void Manager::halo_bridge(Chunk& buffer,
                     if (dir == haloDirection::Import)
                         buffer.get_cell(x+1, 0).set_type(cellRef[x].get().get_type());
                     else
-                        cellRef[x].get().set_type(buffer.get_cell(x+1, 0).get_type());
+                        cellRef.at(x).get().set_type(buffer.get_cell(x+1, 0).get_type());
                 }
                 break;
             }

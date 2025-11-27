@@ -85,7 +85,6 @@ void Chunk::print_chunk() const
 {
     if (cells.size() != size * size)
     {
-        // error handle
         std::cerr << "Chunk not initialized Properly!" << std::endl;
     }
     // Print column headers once
