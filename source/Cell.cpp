@@ -1,5 +1,4 @@
 #include "Cell.h"
-#include <iostream>
 
 // constructor
 Cell::Cell() : type(0), alive(false)
