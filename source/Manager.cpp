@@ -7,9 +7,6 @@
 #include "World.h"
 #include "Chunk.h"
 
-Manager::Manager(World& world, Rules& rules)
-    : world(world), rules(rules) {}
-
 void Manager::find_active_neighbour(const std::array<long long, 8>& keys,
                                     const std::unordered_map<long long, Chunk>& selected)
 {
@@ -21,11 +18,11 @@ void Manager::find_active_neighbour(const std::array<long long, 8>& keys,
     }
 }
 
-void Manager::neighbours_cells_edge(const std::unordered_map<long long, Chunk>& selected_world, const int SIZE)
+void Manager::neighbours_cells_edge(std::unordered_map<long long, Chunk>& selected_world, const int SIZE)
 {
     neighbour_cells.clear();
     for (auto [id, neighbour_key] : active_neighbour) {
-        auto& neighbour = const_cast<Chunk&>(selected_world.at(neighbour_key));
+        auto& neighbour = selected_world.at(neighbour_key);
         std::vector<std::reference_wrapper<Cell>> cells;
         switch (id) {
         case 0: // N row: y=0, x=0..SIZE-1
@@ -66,9 +63,9 @@ void Manager::neighbours_cells_edge(const std::unordered_map<long long, Chunk>& 
     }
 }
 
-void Manager::halo_bridge(Chunk& buffer,
-    const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells,
-    const int size, const haloDirection dir)
+auto Manager::halo_bridge(Chunk& buffer,
+                          const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells,
+                          const int size, const haloDirection dir) -> void
 {
     if (cells.empty()) return;
     for (auto [id, cellRef] : cells)
@@ -157,7 +154,7 @@ void Manager::halo_bridge(Chunk& buffer,
 }
 
 void Manager::construct_halo(Chunk& buffer, Chunk& selected,
-    const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells)
+                             const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells)
 {
     const int size = selected.get_size(); // inner: 3
     constexpr int halo = 1;
@@ -187,6 +184,9 @@ void Manager::chunk_update(Chunk& buffer, Chunk& selected)
         }
     }
 }
+
+Manager::Manager(World& world, Rules& rules)
+    : world(world), rules(rules) {}
 
 void Manager::update()
 {

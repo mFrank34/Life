@@ -75,6 +75,7 @@ const Cell& Chunk::get_cell(const int x, const int y) const
 {
     return cells[y * size + x];
 }
+
 Cell& Chunk::get_cell(const int index)
 {
     // ONLY use of needing index instead
@@ -141,7 +142,8 @@ int Chunk::neighbour_count(int cx, int cy) const
     for (const auto &offset : offsets) // connects
     {
         // gets the surrounding cell coors
-        Cell neighbour = get_cell(cx + offset[0], cy + offset[1]);
+        Cell neighbour;
+        neighbour = get_cell(cx + offset[0], cy + offset[1]);
         if (neighbour.is_alive())
         {
             // counting the alive cells

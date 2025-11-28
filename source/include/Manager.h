@@ -27,7 +27,7 @@ class Manager
     // neighbour edge cases
     void find_active_neighbour(const std::array<long long, 8>& keys,
         const std::unordered_map<long long, Chunk>& selected);
-    void neighbours_cells_edge(const std::unordered_map<long long, Chunk>& selected_world, int SIZE);
+    void neighbours_cells_edge(std::unordered_map<long long, Chunk>& selected_world, int SIZE);
 
     // halo chunk helper
     static void halo_bridge(Chunk& buffer,

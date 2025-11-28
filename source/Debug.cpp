@@ -1,6 +1,7 @@
 #include "Debug.h"
 
 #include <ranges>
+#include <iostream>
 #include "World.h"
 #include "Cell.h"
 
