@@ -1,45 +1,5 @@
 #include "Chunk.h"
-#include <iomanip>
-#include <iostream>
-
-Chunk::Chunk(const int cx, const int cy, int const cs)
-    : chunk_x(cx), chunk_y(cy), size(cs)
-{
-    cells.resize(size * size);
-    for (int y = 0; y < size; y++)
-        for (int x = 0; x < size; x++)
-            cells[y * size + x] = Cell('0');
-}
-
-Chunk::Chunk(const Chunk& other)
-    : chunk_x(other.chunk_x), chunk_y(other.chunk_y), size(other.size), cells(other.cells) {}
-
-Chunk& Chunk::operator=(const Chunk& other)
-{
-    if (this != &other)
-    {
-        chunk_x = other.chunk_x;
-        chunk_y = other.chunk_y;
-        size = other.size;
-        cells = other.cells;
-    }
-    return *this;
-}
-
-Chunk::Chunk(Chunk&& other) noexcept
-    : chunk_x(other.chunk_x), chunk_y(other.chunk_y), size(other.size), cells(std::move(other.cells)) {}
-
-Chunk& Chunk::operator=(Chunk&& other) noexcept
-{
-    if (this != &other)
-    {
-        chunk_x = other.chunk_x;
-        chunk_y = other.chunk_y;
-        size = other.size;
-        cells = std::move(other.cells);
-    }
-    return *this;
-}
+#include <array>
 
 int Chunk::get_CX() const
 {
@@ -61,11 +21,6 @@ int Chunk::get_LY(const int gy) const
     return (gy % size + size) % size;
 }
 
-int Chunk::get_size() const
-{
-    return size;
-}
-
 Cell& Chunk::get_cell(const int x, const int y)
 {
     return cells[y * size + x];
@@ -82,35 +37,9 @@ Cell& Chunk::get_cell(const int index)
     return cells[index];
 }
 
-void Chunk::print_chunk() const
+std::vector<Cell>& Chunk::get_cells()
 {
-    if (cells.size() != size * size)
-    {
-        std::cerr << "Chunk not initialized Properly!" << std::endl;
-    }
-    // Print column headers once
-    std::cout << "   |";
-    for (int x = 0; x < size; x++)
-        std::cout << std::setw(2) << x;
-    std::cout << '\n';
-
-    // Print a separator line
-    std::cout << "---+";
-    for (int x = 0; x < size; x++)
-        std::cout << "--";
-    std::cout << '\n';
-
-    // Print each row with its index and contents
-    for (int y = 0; y < size; y++)
-    {
-        std::cout << std::setw(2) << y << " |";
-        for (int x = 0; x < size; x++)
-        {
-            std::cout << std::setw(2) << cells[y * size + x].get_type();
-        }
-        std::cout << '\n';
-    }
-    std::cout << '\n';
+    return cells;
 }
 
 bool Chunk::is_populated() const
@@ -134,21 +63,25 @@ int Chunk::populated_amt() const
     return lives_cell;
 }
 
-int Chunk::neighbour_count(int cx, int cy) const
+int Chunk::neighbour_count(const int cx, const int cy) const
 {
-    // offset for cords
-    static const int offsets[8][2] = {{-1, -1}, {0, -1}, {1, -1}, {-1, 0}, {1, 0}, {-1, 1}, {0, 1}, {1, 1}};
+    using Offset = std::array<int, 2>;
+    using Offsets = std::array<Offset, 8>;
+
+    static const Offsets offsets = {{
+        {{-1, -1}}, {{ 0, -1}}, {{ 1, -1}},
+        {{-1,  0}},             {{ 1,  0}},
+        {{-1,  1}}, {{ 0,  1}}, {{ 1,  1}}
+    }};
+
     int count = 0;
     for (const auto &offset : offsets) // connects
-    {
-        // gets the surrounding cell coors
-        Cell neighbour;
-        neighbour = get_cell(cx + offset[0], cy + offset[1]);
-        if (neighbour.is_alive())
-        {
-            // counting the alive cells
-            count++;
-        };
-    };
+        if (get_cell(cx + offset[0], cy + offset[1]).is_alive())
+            count++; //counting the alive cells
     return count;
+}
+
+int Chunk::get_size() const
+{
+    return size;
 }
