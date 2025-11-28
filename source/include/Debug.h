@@ -3,14 +3,11 @@
 #define DEBUG_H
 
 #include <vector>
-#include <unordered_map>
-#include <iostream>
 
 class World;
 
 class Debug
 {
-private:
     std::vector<World *> worlds;
     int active_index = -1;
 

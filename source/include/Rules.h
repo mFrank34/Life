@@ -17,9 +17,6 @@ public:
     bool overpopulation(int c) const;
     bool reproduction(int c) const;
 
-    // step 
-    Chunk step(Chunk chunk, std::vector<Chunk*> relevent_chunks);
-
     ~Rules();
 
 private:
