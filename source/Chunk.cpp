@@ -1,6 +1,16 @@
 #include "Chunk.h"
 #include <array>
 
+
+Chunk::Chunk(const int cx, const int cy, const int cs)
+    : chunk_x(cx), chunk_y(cy), size(cs), cells(size * size) {
+    for (int y = 0; y < size; y++) {
+        for (int x = 0; x < size; x++) {
+            get_cell(x,y).set_type('0');
+        }
+    }
+}
+
 int Chunk::get_CX() const
 {
     return chunk_x;
