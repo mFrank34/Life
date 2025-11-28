@@ -1,9 +1,44 @@
 #include "Debug.h"
 
 #include <ranges>
+#include <format>
 #include <iostream>
+
 #include "World.h"
 #include "Cell.h"
+
+void Debug::view_chunk(const std::vector<Cell> &cells, const int size) const
+{
+    if (cells.size() != size * size)
+    {
+        std::cerr << "Chunk not initialized properly!\n";
+        return;
+    }
+
+    // Column headers
+    std::string header = "   |";
+    for (int x = 0; x < size; ++x)
+        header += std::format("{:2}", x);
+    std::cout << header << '\n';
+
+    // Separator line
+    std::string sep = "---+";
+    for (int x = 0; x < size; ++x)
+        sep += "--";
+    std::cout << sep << '\n';
+
+    // Each row
+    for (int y = 0; y < size; ++y)
+    {
+        std::string row = std::format("{:2} |", y);
+        for (int x = 0; x < size; ++x)
+        {
+            row += std::format("{:2}", cells[y * size + x].get_type());
+        }
+        std::cout << row << '\n';
+    }
+    std::cout << '\n';
+}
 
 void Debug::register_world(World *world)
 {
@@ -64,12 +99,12 @@ void Debug::all_chunks() const
     }
 
     auto* world = worlds[active_index];
-    auto& chunks = world->get_world();
+    const auto& chunks = world->get_world();
 
     for (const auto& [key, chunk] : chunks)
     {
         std::cout << "Chunk key: " << key << "\n";
-        chunk.print_chunk();
+        view_chunk(chunk.get_cells(), chunk.get_size());
     }
 }
 
@@ -100,9 +135,6 @@ int Debug::total_chunks() const
         std::cerr << "No world set!\n";
         return 0;
     }
-
     auto* world = worlds[active_index];
-    auto& chunks = world->get_world();
-
-    return chunks.size();
+    return static_cast<int>(world->get_world().size());
 }

@@ -14,7 +14,7 @@ public:
     void set_type(char new_type);
     void set_alive(bool is_alive);
     void update_cell();
-    ~Cell();
+    ~Cell() = default;
 };
 
 #endif

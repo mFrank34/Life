@@ -25,7 +25,7 @@ public:
     const Cell& get_cell(int x, int y) const;
     Cell& get_cell(int index);
     // cell data
-    std::vector<Cell>& get_cells();
+    const std::vector<Cell>& get_cells() const ;
     // lookup
     bool is_populated() const;
     int populated_amt() const;

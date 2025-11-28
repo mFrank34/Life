@@ -37,7 +37,7 @@ Cell& Chunk::get_cell(const int index)
     return cells[index];
 }
 
-std::vector<Cell>& Chunk::get_cells()
+const std::vector<Cell>& Chunk::get_cells() const
 {
     return cells;
 }
