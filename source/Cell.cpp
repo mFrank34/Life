@@ -50,6 +50,3 @@ void Cell::update_cell()
         break; // default cell type
     }
 }
-
-// deconstructor
-Cell::~Cell() = default;
