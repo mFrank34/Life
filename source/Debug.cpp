@@ -7,8 +7,7 @@
 #include "World.h"
 #include "Cell.h"
 
-void Debug::view_chunk(const std::vector<Cell> &cells, const int size) const
-{
+void Debug::view_chunk(const std::vector<Cell> &cells, const int size) {
     if (cells.size() != size * size)
     {
         std::cerr << "Chunk not initialized properly!\n";
@@ -49,7 +48,7 @@ void Debug::register_world(World *world)
 
 void Debug::set_active(int index)
 {
-    if (index >= 0 && index < (int)worlds.size())
+    if (index >= 0 && index < static_cast<int>(worlds.size()))
     {
         active_index = index;
         std::cout << "Switched active world to index: " << index << "\n";
