@@ -13,7 +13,7 @@ class World
 {
 public:
     // constructor's and deconstructor's
-    World(const std::string& world_type);
+    World(const std::string_view& world_type);
     virtual ~World() = default;
 
     // Core functions for other map systems
@@ -34,7 +34,8 @@ protected:
 
     // key logic
     static long long generate_key(int chunk_x, int chunk_y);
-    std::pair<int, int> decode_key(long long key) const;
+
+    static std::pair<int, int> decode_key(long long key);
 
     // handing negs
     static int floor_div(int cord, int size);
