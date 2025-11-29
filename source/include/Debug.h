@@ -9,10 +9,6 @@ class World;
 
 class Debug
 {
-    std::vector<World *> worlds;
-    int active_index = -1;
-
-    static void view_chunk(const std::vector<Cell> &cells, int size);
 public:
     void register_world(World *world);
     void set_active(int index);
@@ -21,6 +17,12 @@ public:
     int active_chunks() const;
     int total_chunks() const;
     void list_worlds() const;
+
+private:
+    std::vector<World *> worlds;
+    int active_index = -1;
+
+    static void view_chunk(const std::vector<Cell> &cells, int size);
 };
 
 #endif

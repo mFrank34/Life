@@ -6,7 +6,7 @@
 
 extern Debug global_debug;
 
-World::World(const std::string& world_type)
+World::World(const std::string_view& world_type)
 {
     this->world_type = world_type;
     // register with debugger
@@ -40,10 +40,9 @@ long long World::generate_key(int chunk_x, int chunk_y)
 }
 
 // protected
-std::pair<int, int> World::decode_key(long long key) const
-{
-    int chunk_x = static_cast<int>(key >> KEYLENGTH); // decode key 32bit
-    int chunk_y = static_cast<int>(key & 0xFFFFFFFF); // -1 32bit
+std::pair<int, int> World::decode_key(long long key) {
+    auto chunk_x = static_cast<int>(key >> KEYLENGTH); // decode key 32bit
+    auto chunk_y = static_cast<int>(key & 0xFFFFFFFF); // -1 32bit
     return {chunk_x, chunk_y};
 }
 
