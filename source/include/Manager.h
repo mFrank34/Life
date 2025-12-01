@@ -11,6 +11,13 @@ enum class haloDirection
     Export
 };
 
+struct haloInfo
+{
+    int startX, startY;
+    int stepX, stepY;
+    int count;
+};
+
 class Manager
 {
     // for changing the chunk off set value THIS Must Not CHANGE
@@ -18,21 +25,23 @@ class Manager
     // rules and world objects
     World& world;
     Rules& rules;
-
     // finding out chunks that active
     std::vector<std::pair<int, long long>> active_neighbour;
+    std::vector<std::pair<int, long long>> missing_neighbour;
     // id and cells that boring the that chunk and hands id of chunk and references to cells
     std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>> neighbour_cells;
 
     // neighbour edge cases
-    void find_active_neighbour(const std::array<long long, 8>& keys,
-        const std::unordered_map<long long, Chunk>& selected);
-    void neighbours_cells_edge(std::unordered_map<long long, Chunk>& selected_world, int SIZE);
+    void find_neighbour(const std::array<long long, 8>& keys,
+        const std::unordered_map<long long, Chunk>& map);
 
-    // halo chunk helper
-    static void halo_bridge(Chunk& buffer,
-        const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells,
-        int size, haloDirection dir);
+    void generate_missing_neighbour();
+
+    void get_neighbours_edge_case(std::unordered_map<long long, Chunk>& selected_world, int SIZE);
+
+    static auto halo_bridge(Chunk& buffer,
+                            const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells,
+                            int size, haloDirection dir) -> void;
     // constructing a halo chunk
     static void construct_halo(Chunk& buffer, Chunk& selected,
         const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells);

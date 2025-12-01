@@ -34,19 +34,19 @@ std::string World::get_type() const
 }
 
 // protected
-long long World::generate_key(int chunk_x, int chunk_y)
+long long World::generate_key(const int chunk_x, int chunk_y)
 {
     return (static_cast<long long>(chunk_x) << 32) | (static_cast<unsigned int>(chunk_y));
 }
 
 // protected
-std::pair<int, int> World::decode_key(long long key) {
+std::pair<int, int> World::decode_key(const long long key) {
     auto chunk_x = static_cast<int>(key >> KEYLENGTH); // decode key 32bit
     auto chunk_y = static_cast<int>(key & 0xFFFFFFFF); // -1 32bit
     return {chunk_x, chunk_y};
 }
 
-int World::floor_div(int cord, int size)
+int World::floor_div(const int cord, const int size)
 {
     int div = cord / size;
     if ((cord < 0) && (cord % size != 0))

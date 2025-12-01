@@ -19,6 +19,7 @@ public:
     // get world entities
     Cell &get_cell(int gx, int gy) override;
     Chunk &get_chunk(int gx, int gy) override;
+    Chunk &get_chunk(long long key) override;
 
     // returning world data
     std::unordered_map<long long, Chunk>& get_world() override;
