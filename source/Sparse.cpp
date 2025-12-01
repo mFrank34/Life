@@ -2,10 +2,7 @@
 #include "Chunk.h"
 
 Sparse::Sparse(const int size)
-    : World("Sparse Map"), CHUNK_SIZE(size)
-{
-
-}
+    : World("Sparse Map"), CHUNK_SIZE(size) {}
 
 void Sparse::unload()
 {
@@ -13,7 +10,7 @@ void Sparse::unload()
                   { return !pair.second.is_populated(); });
 }
 
-Cell &Sparse::get_cell(int gx, int gy)
+Cell &Sparse::get_cell(const int gx, const int gy)
 {
     Chunk &chunk = get_chunk(gx, gy);
     return chunk.get_cell(
@@ -22,12 +19,21 @@ Cell &Sparse::get_cell(int gx, int gy)
         );
 }
 
-Chunk &Sparse::get_chunk(int gx, int gy)
+Chunk &Sparse::get_chunk(const int gx, const int gy)
 {
     int cx = floor_div(gx, CHUNK_SIZE);
     int cy = floor_div(gy, CHUNK_SIZE);
-    long long key = generate_key(cx, cy);
+    const long long key = generate_key(cx, cy);
 
+    return chunks.try_emplace(key, cx, cy, CHUNK_SIZE).first->second;
+}
+
+Chunk& Sparse::get_chunk(const long long key)
+{
+    if (const auto it = chunks.find(key); it != chunks.end())
+        return it->second;
+
+    auto [cx, cy] = decode_key(key);
     return chunks.try_emplace(key, cx, cy, CHUNK_SIZE).first->second;
 }
 

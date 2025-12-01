@@ -1,24 +1,38 @@
 #include "Manager.h"
-#include <functional>
-#include <iostream>
-#include <ostream>
-
 #include "Rules.h"
 #include "World.h"
 #include "Chunk.h"
 
-void Manager::find_active_neighbour(const std::array<long long, 8>& keys,
-                                    const std::unordered_map<long long, Chunk>& selected)
+#include <functional>
+#include <map>
+
+void Manager::find_neighbour(
+    const std::array<long long, 8>& keys,
+    const std::unordered_map<long long, Chunk>& map)
 {
     active_neighbour.clear();
+    missing_neighbour.clear();
     for (int id = 0 ; id < 8; ++id)
     {
-        if (long long key = keys[id]; selected.contains(key))
+        if (long long key = keys[id]; map.contains(key))
             active_neighbour.emplace_back(id, key);
+        else
+            missing_neighbour.emplace_back(id, key);
     }
 }
 
-void Manager::neighbours_cells_edge(std::unordered_map<long long, Chunk>& selected_world, const int SIZE)
+void Manager::generate_missing_neighbour()
+{
+    for ( auto[id, key] : missing_neighbour)
+    {
+        world.get_chunk(key);
+        active_neighbour.emplace_back(id, key);
+    }
+}
+
+void Manager::get_neighbours_edge_case(
+    std::unordered_map<long long, Chunk>& selected_world,
+    const int SIZE)
 {
     neighbour_cells.clear();
     for (auto [id, neighbour_key] : active_neighbour) {
@@ -63,98 +77,47 @@ void Manager::neighbours_cells_edge(std::unordered_map<long long, Chunk>& select
     }
 }
 
-auto Manager::halo_bridge(Chunk& buffer,
-                          const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells,
-                          const int size, const haloDirection dir) -> void
+void Manager::halo_bridge(Chunk& buffer,
+    const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells,
+    const int size, const haloDirection dir)
 {
     if (cells.empty()) return;
-    for (auto [id, cellRef] : cells)
+
+    const std::map<int, haloInfo> halo_map = {
+        {0, {1, 0, 1, 0, size}},
+        {1, {size+1, 0, 0, 0, 1}},
+        {2, {size+1, 1, 0, 1, size}},
+        {3, {size+1, size+1, 0, 0, 1}},
+        {4, {1, size+1, 1, 0, size}},
+        {5, {0, size+1, 0, 0, 1}},
+        {6, {0, 1, 0, 1, size}},
+        {7, {0, 0, 0, 0, 1}}
+    };
+
+    for (auto& [id, cellRef] : cells)
     {
-        switch (id)
+        auto it = halo_map.find(id);
+        if (it == halo_map.end()) continue;
+
+        const haloInfo& halo = it->second;
+        for (int i = 0; i < halo.count; ++i)
         {
-        case 0: // North (top row)
-            {
-                for (int x = 0; x < size; ++x)
-                {
-                    if (dir == haloDirection::Import)
-                        buffer.get_cell(x+1, 0).set_type(cellRef[x].get().get_type());
-                    else
-                        cellRef.at(x).get().set_type(buffer.get_cell(x+1, 0).get_type());
-                }
-                break;
-            }
-        case 1: // North-East (top-right corner)
-            {
-                if (dir == haloDirection::Import)
-                    buffer.get_cell(size + 1, 0).set_type(cellRef[0].get().get_type());
-                else
-                    cellRef[0].get().set_type(buffer.get_cell(size +1, 0).get_type());
-                break;
-            }
-        case 2: // East (right column)
-            {
-                for (int y = 0; y < size; ++y)
-                {
-                    if (dir == haloDirection::Import)
-                        buffer.get_cell(size+1, y+1).set_type(cellRef[y].get().get_type());
-                    else
-                        cellRef[y].get().set_type(buffer.get_cell(size+1, y+1).get_type());
-                }
-                break;
-            }
-        case 3: // South-East (bottom-right corner)
-            {
-                if (dir == haloDirection::Import)
-                    buffer.get_cell(size + 1, size + 1).set_type(cellRef[0].get().get_type());
-                else
-                    cellRef[0].get().set_type(buffer.get_cell(size + 1, size + 1).get_type());
-                break;
-            }
-        case 4: // South (bottom row)
-            {
-                for (int x = 0; x < size; ++x)
-                {
-                    if (dir == haloDirection::Import)
-                        buffer.get_cell(x+1, size + 1).set_type(cellRef[x].get().get_type());
-                    else
-                        cellRef[x].get().set_type(buffer.get_cell(x+1, size+1).get_type());
-                }
-                break;
-            }
-        case 5: // South-West (bottom-left corner)
-            {
-                if (dir == haloDirection::Import)
-                    buffer.get_cell(0, size + 1).set_type(cellRef[0].get().get_type());
-                else
-                    cellRef[0].get().set_type(buffer.get_cell(0, size+1).get_type());
-                break;
-            }
-        case 6: // West (left column)
-            {
-                for (int y = 0; y < size; ++y)
-                {
-                    if (dir == haloDirection::Import)
-                        buffer.get_cell(0, y+1).set_type(cellRef[y].get().get_type());
-                    else
-                        cellRef[y].get().set_type(buffer.get_cell(0, y+1).get_type());
-                }
-                break;
-            }
-        case 7: // North-West (top-left corner)
-            {
-                if (dir == haloDirection::Import)
-                    buffer.get_cell(0, 0).set_type(cellRef[0].get().get_type());
-                else
-                    cellRef[0].get().set_type(buffer.get_cell(0, 0).get_type());
-                break;
-            }
-        default: break;
+            const int bx = halo.startX + halo.stepX *  i;
+            const int by = halo.startY + halo.stepY *  i;
+
+            Cell& halo_call = buffer.get_cell(bx, by);
+            Cell& remote_cell = cellRef.at(i).get();
+
+            if (dir == haloDirection::Import)
+                halo_call.set_type(remote_cell.get_type());
+            else
+                remote_cell.set_type(halo_call.get_type());
         }
     }
 }
 
 void Manager::construct_halo(Chunk& buffer, Chunk& selected,
-                             const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells)
+    const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells)
 {
     const int size = selected.get_size(); // inner: 3
     constexpr int halo = 1;
@@ -190,6 +153,7 @@ Manager::Manager(World& world, Rules& rules)
 
 void Manager::update()
 {
+    // rebuild chunk system with
     auto& world_data = world.get_world();
     for (auto&[key, chunk] : world_data)
     {
@@ -198,14 +162,14 @@ void Manager::update()
         std::array<long long, 8> keys = world.get_neighbour_key(key);
 
         // find active neighbours
-        find_active_neighbour(keys, world_data);
+        find_neighbour(keys, world_data);
 
         // buffer with halo
         Chunk buffer(chunk.get_CX(), chunk.get_CY(), chunk.get_size() + 2);
 
         // import halos
         if (!active_neighbour.empty())
-            neighbours_cells_edge(world_data, size);
+            get_neighbours_edge_case(world_data, size);
 
         construct_halo(buffer, chunk, neighbour_cells);
 
@@ -216,14 +180,4 @@ void Manager::update()
         if (!active_neighbour.empty())
             halo_bridge(buffer, neighbour_cells, size, haloDirection::Export);
     }
-}
-
-void Manager::step()
-{
-
-}
-
-void Manager::render_step()
-{
-
 }
