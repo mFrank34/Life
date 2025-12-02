@@ -39,37 +39,33 @@ void Manager::get_neighbours_edge_case(
         auto& neighbour = selected_world.at(neighbour_key);
         std::vector<std::reference_wrapper<Cell>> cells;
         switch (id) {
-        case 0: // N row: y=0, x=0..SIZE-1
-            cells.reserve(SIZE);
+        case 0: // N (take neighbour's bottom row)
             for (int x = 0; x < SIZE; ++x)
-                cells.emplace_back(neighbour.get_cell(x, 0));
+                cells.emplace_back(neighbour.get_cell(x, SIZE - 1));
             break;
-        case 1: // NE corner: (SIZE-1, 0)
-            cells.emplace_back(neighbour.get_cell(SIZE-1, 0));
+        case 1: // NE (neighbour bottom-left corner)
+            cells.emplace_back(neighbour.get_cell(0, SIZE - 1));
             break;
-        case 2: // E col: x=SIZE-1, y=0     SIZE-1
-            cells.reserve(SIZE);
-            for (int y = 0; y < SIZE; ++y)
-                cells.emplace_back(neighbour.get_cell(SIZE-1, y));
-            break;
-        case 3: // SE corner: (SIZE-1, SIZE-1)
-            cells.emplace_back(neighbour.get_cell(SIZE-1, SIZE-1));
-            break;
-        case 4: // S row: y=SIZE-1, x=0     SIZE-1
-            cells.reserve(SIZE);
-            for (int x = 0; x < SIZE; ++x)
-                cells.emplace_back(neighbour.get_cell(x, SIZE-1));
-            break;
-        case 5: // SW corner: (0, SIZE-1)
-            cells.emplace_back(neighbour.get_cell(0, SIZE-1));
-            break;
-        case 6: // W col: x=0, y=0          SIZE-1
-            cells.reserve(SIZE);
+        case 2: // E (take neighbour's left column)
             for (int y = 0; y < SIZE; ++y)
                 cells.emplace_back(neighbour.get_cell(0, y));
             break;
-        case 7: // NW corner: (0, 0)
+        case 3: // SE (neighbour top-left corner)
             cells.emplace_back(neighbour.get_cell(0, 0));
+            break;
+        case 4: // S (take neighbour's top row)
+            for (int x = 0; x < SIZE; ++x)
+                cells.emplace_back(neighbour.get_cell(x, 0));
+            break;
+        case 5: // SW (neighbour top-right corner)
+            cells.emplace_back(neighbour.get_cell(SIZE - 1, 0));
+            break;
+        case 6: // W (take neighbour’s right column)
+            for (int y = 0; y < SIZE; ++y)
+                cells.emplace_back(neighbour.get_cell(SIZE - 1, y));
+            break;
+        case 7: // NW (neighbour bottom-right corner)
+            cells.emplace_back(neighbour.get_cell(SIZE - 1, SIZE - 1));
             break;
         default: break;
         }
@@ -81,17 +77,16 @@ void Manager::halo_bridge(Chunk& buffer,
     const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells,
     const int size, const haloDirection dir)
 {
-    if (cells.empty()) return;
-
     const std::map<int, haloInfo> halo_map = {
-        {0, {1, 0, 1, 0, size}},
-        {1, {size+1, 0, 0, 0, 1}},
-        {2, {size+1, 1, 0, 1, size}},
-        {3, {size+1, size+1, 0, 0, 1}},
-        {4, {1, size+1, 1, 0, size}},
-        {5, {0, size+1, 0, 0, 1}},
-        {6, {0, 1, 0, 1, size}},
-        {7, {0, 0, 0, 0, 1}}
+        // id, {startX, startY, stepX, stepY, count}
+        {0, {1, 0, 1, 0, size}}, // 0: North (top row)
+        {1, {size + 1, 0, 0, 0, 1}}, // 1: North-East (top-right corner)
+        {2, {size + 1, 1, 0, 1, size}}, // 2: East (right column)
+        {3, {size + 1, size + 1, 0, 0, 1}},  // 3: South-East (bottom-right corner)
+        {4, {1, size + 1, 1, 0, size}}, // 4: South (bottom row)
+        {5, {0, size + 1, 0, 0, 1}}, // 5: South-West (bottom-left corner)
+        {6, {0, 1, 0, 1, size}}, // 6: West (left column)
+        {7, {0, 0, 0, 0, 1}} // 7: North-West (top-left corner)
     };
 
     for (auto& [id, cellRef] : cells)
@@ -119,7 +114,7 @@ void Manager::halo_bridge(Chunk& buffer,
 void Manager::construct_halo(Chunk& buffer, Chunk& selected,
     const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells)
 {
-    const int size = selected.get_size(); // inner: 3
+    const int size = selected.get_size();
     constexpr int halo = 1;
     // copy inner into buffer at offset (1size maps to buffer)
     for (int y = 0; y < size; ++y)
@@ -130,19 +125,20 @@ void Manager::construct_halo(Chunk& buffer, Chunk& selected,
 
 void Manager::chunk_update(Chunk& buffer, Chunk& selected)
 {
-    const int size = selected.get_size(); // 3
-    for (int y = 1; y < size; ++y) {
-        for (int x = 1; x < size; ++x) {
-            const int live = buffer.neighbour_count(x + 1, y + 1);
-            const bool current_cell = buffer.get_cell(x + 1, y + 1).is_alive(); // if current cell is alive
-            Cell& target = selected.get_cell(x, y); // shifted x|y by 1 for other index
+    const int size = selected.get_size(); // dynamic you know
+    for (int y = 0; y < size; ++y) {
+        for (int x = 0; x < size; ++x) {
+            const int bx = x + 1, by = y + 1; // Buffer coordinates
+            const int live = buffer.neighbour_count(bx, by);
+            const bool current_cell = buffer.get_cell(bx, by).is_alive();
+            Cell& target = selected.get_cell(x, y);
             // rules
             if (current_cell && (live < 2 || live > 3)) {
                 target.set_type('0');   // death
             } else if (!current_cell && live == 3) {
                 target.set_type('w');   // birth
             } else {
-                target.set_type(buffer.get_cell(x, y).get_type());
+                target.set_type(buffer.get_cell(bx, by).get_type());
             }
         }
     }
