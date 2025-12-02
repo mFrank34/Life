@@ -131,11 +131,11 @@ void Manager::construct_halo(Chunk& buffer, Chunk& selected,
 void Manager::chunk_update(Chunk& buffer, Chunk& selected)
 {
     const int size = selected.get_size(); // 3
-    for (int y = 1; y <= size; ++y) {
-        for (int x = 1; x <= size; ++x) {
-            const int live = buffer.neighbour_count(x, y); // live neighbour count
-            const bool current_cell = buffer.get_cell(x, y).is_alive(); // if current cell is alive
-            Cell& target = selected.get_cell(x-1, y-1); // shifted x|y by 1 for other index
+    for (int y = 0; y < size; ++y) {
+        for (int x = 0; x < size; ++x) {
+            const int live = buffer.neighbour_count(x + 1, y + 1);
+            const bool current_cell = buffer.get_cell(x + 1, y + 1).is_alive(); // if current cell is alive
+            Cell& target = selected.get_cell(x, y); // shifted x|y by 1 for other index
             // rules
             if (current_cell && (live < 2 || live > 3)) {
                 target.set_type('0');   // death
@@ -160,24 +160,18 @@ void Manager::update()
         const int size = chunk.get_size();
         // enforce fixed neighbour order
         std::array<long long, 8> keys = world.get_neighbour_key(key);
-
         // find active neighbours
-        find_neighbour(keys, world_data);
-
+        find_neighbour(keys, world_data); // -> gets active chunks and stores missing keys
+        if (active_neighbour.size() < 8) // get missing neighbours
+            generate_missing_neighbour(); // takes missing keys generates the chunk
         // buffer with halo
         Chunk buffer(chunk.get_CX(), chunk.get_CY(), chunk.get_size() + 2);
-
         // import halos
-        if (!active_neighbour.empty())
-            get_neighbours_edge_case(world_data, size);
-
+        get_neighbours_edge_case(world_data, size);
         construct_halo(buffer, chunk, neighbour_cells);
-
         // update inner cells
         chunk_update(buffer, chunk);
-
-        // export halos back
-        if (!active_neighbour.empty())
-            halo_bridge(buffer, neighbour_cells, size, haloDirection::Export);
+        // hand back to neighbouring chunks cells
+        halo_bridge(buffer, neighbour_cells, size, haloDirection::Export);
     }
 }
