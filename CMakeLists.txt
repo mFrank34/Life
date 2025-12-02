@@ -11,12 +11,10 @@ enable_testing()
 file(GLOB_RECURSE CORE_SOURCES "${CMAKE_SOURCE_DIR}/source/*.cpp")
 list(REMOVE_ITEM CORE_SOURCES "${CMAKE_SOURCE_DIR}/source/Main.cpp")
 
-add_library(LifeCore ${CORE_SOURCES}
-        bin/Bin.cpp)
+add_library(LifeCore ${CORE_SOURCES})
 target_include_directories(LifeCore PUBLIC ${CMAKE_SOURCE_DIR}/source/include)
 
-add_executable(Life source/Main.cpp
-        bin/Bin.cpp)
+add_executable(Life source/Main.cpp)
 target_link_libraries(Life PRIVATE LifeCore)
 
 # GTK4 setup
