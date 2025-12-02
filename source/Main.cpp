@@ -25,13 +25,13 @@ void block2(World& world)
 {
     constexpr int size = 3;
     for (int y = 0; y < size; y++)
-        world.get_cell(2,y+1).set_type('w');
+        world.get_cell(1,y).set_type('w');
 }
 
 Debug global_debug;
 int main()
 {
-    constexpr int size = 5;
+    constexpr int size = 3;
     Sparse world(size);
     Rules rules;
 

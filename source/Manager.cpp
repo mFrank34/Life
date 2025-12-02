@@ -131,8 +131,8 @@ void Manager::construct_halo(Chunk& buffer, Chunk& selected,
 void Manager::chunk_update(Chunk& buffer, Chunk& selected)
 {
     const int size = selected.get_size(); // 3
-    for (int y = 0; y < size; ++y) {
-        for (int x = 0; x < size; ++x) {
+    for (int y = 1; y < size; ++y) {
+        for (int x = 1; x < size; ++x) {
             const int live = buffer.neighbour_count(x + 1, y + 1);
             const bool current_cell = buffer.get_cell(x + 1, y + 1).is_alive(); // if current cell is alive
             Cell& target = selected.get_cell(x, y); // shifted x|y by 1 for other index
@@ -165,9 +165,9 @@ void Manager::update()
         if (active_neighbour.size() < 8) // get missing neighbours
             generate_missing_neighbour(); // takes missing keys generates the chunk
         // buffer with halo
-        Chunk buffer(chunk.get_CX(), chunk.get_CY(), chunk.get_size() + 2);
-        // import halos
         get_neighbours_edge_case(world_data, size);
+
+        Chunk buffer(chunk.get_CX(), chunk.get_CY(), chunk.get_size() + 2);
         construct_halo(buffer, chunk, neighbour_cells);
         // update inner cells
         chunk_update(buffer, chunk);
