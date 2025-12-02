@@ -40,8 +40,8 @@ class Manager
     void get_neighbours_edge_case(std::unordered_map<long long, Chunk>& selected_world, int SIZE);
 
     static auto halo_bridge(Chunk& buffer,
-                            const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells,
-                            int size, haloDirection dir) -> void;
+        const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells,
+        int size, haloDirection dir) -> void;
     // constructing a halo chunk
     static void construct_halo(Chunk& buffer, Chunk& selected,
         const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells);
