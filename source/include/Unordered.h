@@ -29,7 +29,6 @@ public:
 private:
     // system setup
     const int CHUNK_SIZE;
-
     // world data
     std::unordered_map<long long, Chunk> chunks;
 };
