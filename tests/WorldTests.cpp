@@ -22,6 +22,11 @@ public:
         return dummy;
     }
 
+    Chunk& get_chunk(long long key) override {
+        static Chunk dummy(0,0,1);
+        return dummy;
+    }
+
     std::unordered_map<long long, Chunk>& get_world() override {
         static std::unordered_map<long long, Chunk> dummy;
         return dummy;
