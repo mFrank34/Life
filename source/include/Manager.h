@@ -53,8 +53,7 @@ public:
     ~Manager() = default;
 
     void update();
-    static void step();
-    static void render_step();
+
 };
 
 #endif
