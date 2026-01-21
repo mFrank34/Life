@@ -21,17 +21,20 @@ public:
     virtual Chunk &get_chunk(int global_x, int global_y) = 0;
     virtual Chunk &get_chunk(long long key) = 0;
     virtual Cell &get_cell(int global_x, int global_y) = 0;
+
+    // world data
     virtual std::unordered_map<long long, Chunk>& get_world() = 0;
+    virtual std::unordered_map<long long, Chunk>& get_next_world() = 0;
+    virtual void swap_world() = 0;
 
     // helper functions for all worlds
-    int neighbour_count(int global_x, int global_y);
     std::array<long long, 8> get_neighbour_key(long long key) const;
 
     // World information
     std::string get_type() const;
 
 protected:
-    static const int KEYLENGTH = 32;
+    static constexpr int KEY_LENGTH = 32;
 
     // key logic
     static long long generate_key(int chunk_x, int chunk_y);

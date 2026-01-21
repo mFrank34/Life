@@ -20,13 +20,16 @@ public:
     Cell &get_cell(int gx, int gy) override;
     Chunk &get_chunk(int gx, int gy) override;
     Chunk &get_chunk(long long key) override;
+    void swap_world() override;
 
     // returning world data
     std::unordered_map<long long, Chunk>& get_world() override;
+    std::unordered_map<long long, Chunk>& get_next_world() override;
 
 private:
     const int CHUNK_SIZE;
-    std::unordered_map<long long, Chunk> chunks{};
+    std::unordered_map<long long, Chunk> world;
+    std::unordered_map<long long, Chunk> nextWorld;
 };
 
 #endif

@@ -41,7 +41,7 @@ long long World::generate_key(const int chunk_x, int chunk_y)
 
 // protected
 std::pair<int, int> World::decode_key(const long long key) {
-    auto chunk_x = static_cast<int>(key >> KEYLENGTH); // decode key 32bit
+    auto chunk_x = static_cast<int>(key >> KEY_LENGTH); // decode key 32bit
     auto chunk_y = static_cast<int>(key & 0xFFFFFFFF); // -1 32bit
     return {chunk_x, chunk_y};
 }
