@@ -7,6 +7,7 @@
 #include "Cell.h"
 #include "Chunk.h"
 #include "Debug.h"
+
 // storage containers
 #include "World.h"
 #include "Unordered.h"
@@ -25,13 +26,13 @@ void block2(World& world)
 {
     constexpr int size = 3;
     for (int y = 0; y < size; y++)
-        world.get_cell(0,y).set_type('w');
+        world.get_cell(1,y).set_type('w');
 }
 
 Debug global_debug;
 int main()
 {
-    constexpr int size = 3;
+    constexpr int size = 16;
     Sparse world(size);
     Rules rules;
 
