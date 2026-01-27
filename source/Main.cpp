@@ -22,12 +22,12 @@ void block1(World& world)
             world.get_cell(x,y).set_type('w');
 }
 
-void block2(World& world)
+void blinker(World& world)
 {
-    constexpr int size = 3;
-    for (int y = 1; y < size; y++)
-        world.get_cell(1,y).set_type('w');
+    for (int y = 1; y <= 3; ++y)
+        world.get_cell(1, y).set_type('w');
 }
+
 
 Debug global_debug;
 int main()
@@ -40,7 +40,7 @@ int main()
     global_debug.register_world(0);
 
     std::cout << "Starting Pos: " << std::endl;
-    block2(world);
+    blinker(world);
     global_debug.all_chunks();
 
     for (int index = 0; index < 3; index++)

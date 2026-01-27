@@ -63,4 +63,5 @@ std::unordered_map<long long, Chunk>& Sparse::get_next_world()
 void Sparse::swap_world()
 {
     world.swap(nextWorld);
+    nextWorld.clear();
 }

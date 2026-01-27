@@ -29,6 +29,7 @@ public:
 private:
     const int CHUNK_SIZE;
     std::unordered_map<long long, Chunk> world;
+
     std::unordered_map<long long, Chunk> nextWorld;
 };
 
