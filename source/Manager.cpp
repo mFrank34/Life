@@ -7,6 +7,7 @@
 #include <iostream>
 #include <map>
 #include <ostream>
+#include <ranges>
 
 void Manager::find_neighbour(
     const std::array<long long, 8>& keys,
@@ -43,32 +44,32 @@ void Manager::get_neighbours_edge_case(
         std::vector<std::reference_wrapper<Cell>> cells;
         switch (id)
         {
-        case 0: // N (take neighbour's bottom row)
+        case 0: // N (take neighbor's bottom row)
             for (int x = 0; x < SIZE; ++x)
                 cells.emplace_back(neighbour.get_cell(x, SIZE - 1));
             break;
-        case 1: // NE (neighbour bottom-left corner)
+        case 1: // NE (neighbor bottom-left corner)
             cells.emplace_back(neighbour.get_cell(0, SIZE - 1));
             break;
         case 2: // E (take neighbour's left column)d
             for (int y = 0; y < SIZE; ++y)
                 cells.emplace_back(neighbour.get_cell(0, y));
             break;
-        case 3: // SE (neighbour top-left corner)
+        case 3: // SE (neighbor top-left corner)
             cells.emplace_back(neighbour.get_cell(0, 0));
             break;
-        case 4: // S (take neighbour's top row)
+        case 4: // S (take neighbor's top row)
             for (int x = 0; x < SIZE; ++x)
                 cells.emplace_back(neighbour.get_cell(x, 0));
             break;
-        case 5: // SW (neighbour top-right corner)
+        case 5: // SW (neighbor top-right corner)
             cells.emplace_back(neighbour.get_cell(SIZE - 1, 0));
             break;
-        case 6: // W (take neighbour’s right column)
+        case 6: // W (take neighbor’s right column)
             for (int y = 0; y < SIZE; ++y)
                 cells.emplace_back(neighbour.get_cell(SIZE - 1, y));
             break;
-        case 7: // NW (neighbour bottom-right corner)
+        case 7: // NW (neighbor bottom-right corner)
             cells.emplace_back(neighbour.get_cell(SIZE - 1, SIZE - 1));
             break;
         default: break;
@@ -166,21 +167,46 @@ void Manager::update()
     auto& world_data = world.get_world();
     auto& next_data = world.get_next_world();
 
+    // --- Phase 0: Ensure Sync between both worlds
+    std::vector<long long> to_create;
+
+    for (auto& [key, chunk] : world_data)
+    {
+        auto keys = world.get_neighbour_key(key);
+        for (long long nkey : keys)
+        {
+            if (!world_data.contains(nkey))
+                to_create.push_back(nkey);
+        }
+    }
+
+    for (long long key : to_create)
+        world.get_chunk(key);
+
     // --- Phase 1: compute next stage of game ---
+
     for (auto& [key, chunk] : world_data)
     {
         const int size = chunk.get_size();
 
-        std::array<long long, 8> keys = world.get_neighbour_key(key);
+        auto keys = world.get_neighbour_key(key);
         find_neighbour(keys, world_data);
-
-        if (active_neighbour.size() < keys.size())
-            generate_missing_neighbour();
 
         get_neighbours_edge_case(world_data, size);
 
         Chunk halo(chunk.get_CX(), chunk.get_CY(), size + 2);
         construct_halo(halo, chunk, neighbour_cells);
+
+        // ensure nextWorld chunk exists
+        if (!next_data.contains(key))
+        {
+            next_data.try_emplace(
+                key,
+                chunk.get_CX(),
+                chunk.get_CY(),
+                size
+            );
+        }
 
         Chunk& next = next_data.at(key);
         chunk_update(halo, next, chunk);
