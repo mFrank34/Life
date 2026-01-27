@@ -6,7 +6,7 @@ Sparse::Sparse(const int size)
 
 void Sparse::unload()
 {
-    std::erase_if(chunks, [](auto &pair)
+    std::erase_if(world, [](auto &pair)
                   { return !pair.second.is_populated(); });
 }
 
@@ -19,25 +19,49 @@ Cell &Sparse::get_cell(const int gx, const int gy)
         );
 }
 
-Chunk &Sparse::get_chunk(const int gx, const int gy)
+Chunk& Sparse::get_chunk(const int gx, const int gy)
 {
     int cx = floor_div(gx, CHUNK_SIZE);
     int cy = floor_div(gy, CHUNK_SIZE);
     const long long key = generate_key(cx, cy);
 
-    return chunks.try_emplace(key, cx, cy, CHUNK_SIZE).first->second;
+    return get_chunk(key);
 }
+
 
 Chunk& Sparse::get_chunk(const long long key)
 {
-    if (const auto it = chunks.find(key); it != chunks.end())
+    auto it = world.find(key);
+    if (it != world.end())
         return it->second;
 
     auto [cx, cy] = decode_key(key);
-    return chunks.try_emplace(key, cx, cy, CHUNK_SIZE).first->second;
+
+    // Create in BOTH maps
+    auto [w_it, _] = world.try_emplace(
+        key, cx, cy, CHUNK_SIZE
+    );
+
+    nextWorld.try_emplace(
+        key, cx, cy, CHUNK_SIZE
+    );
+
+    return w_it->second;
 }
+
 
 std::unordered_map<long long, Chunk>& Sparse::get_world()
 {
-    return chunks;
+    return world;
+}
+
+std::unordered_map<long long, Chunk>& Sparse::get_next_world()
+{
+    return nextWorld;
+}
+
+void Sparse::swap_world()
+{
+    world.swap(nextWorld);
+    nextWorld.clear();
 }
