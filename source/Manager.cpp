@@ -80,7 +80,8 @@ void Manager::get_neighbours_edge_case(
 
 void Manager::halo_bridge(Chunk& buffer,
                           const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells,
-                          const int size, const haloDirection dir)
+                          const int size,
+                          const haloDirection dir)
 {
     const std::map<int, haloInfo> halo_map = {
         // id, {startX, startY, stepX, stepY, count}
