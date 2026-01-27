@@ -19,12 +19,12 @@ target_link_libraries(Life PRIVATE LifeCore)
 
 # GTK4 setup
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(GTK4 REQUIRED gtk4)
+pkg_check_modules(GTKMM REQUIRED gtkmm-4.0)
 
-target_include_directories(Life PRIVATE ${GTK4_INCLUDE_DIRS})
-target_link_directories(Life PRIVATE ${GTK4_LIBRARY_DIRS})
-target_compile_options(Life PRIVATE ${GTK4_CFLAGS_OTHER})
-target_link_libraries(Life PRIVATE ${GTK4_LIBRARIES})
+target_include_directories(LifeCore PUBLIC ${GTKMM_INCLUDE_DIRS})
+target_compile_options(LifeCore PUBLIC ${GTKMM_CFLAGS_OTHER})
+target_link_directories(LifeCore PUBLIC ${GTKMM_LIBRARY_DIRS})
+target_link_libraries(LifeCore PUBLIC ${GTKMM_LIBRARIES})
 
 set_target_properties(Life PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
