@@ -5,29 +5,22 @@
 #include <gtkmm.h>
 
 class World;
+class Manager;
+class View;
 
-class Interface : public Gtk::DrawingArea
+class Interface : public Gtk::Box
 {
 public:
-    explicit Interface(const World& world);
+    Interface(World& world, Manager& manager);
 
 private:
-    const World& world;
+    World& world;
+    Manager& manager;
 
-    int cell_size = 8;
-    int cam_x = 0;
-    int cam_y = 0;
+    Gtk::Stack stack;
 
-    bool dragging = false;
-    double last_x = 0;
-    double last_y = 0;
-
-    void on_draw(
-        const Cairo::RefPtr<Cairo::Context>& cr,
-        int width,
-        int height
-    );
+    Gtk::Widget* create_start_page();
+    Gtk::Widget* create_main_ui();
 };
-
 
 #endif // INTERFACE_H
