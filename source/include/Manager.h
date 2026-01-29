@@ -2,8 +2,6 @@
 #ifndef MANAGER_H
 #define MANAGER_H
 
-#include <algorithm>
-
 #include "World.h"
 #include "Rules.h"
 
@@ -19,7 +17,6 @@ struct haloInfo
     int stepX, stepY;
     int count;
 };
-
 
 class Manager
 {

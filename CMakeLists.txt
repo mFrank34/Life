@@ -9,7 +9,7 @@ enable_testing()
 
 # Core sources
 file(GLOB_RECURSE CORE_SOURCES "${CMAKE_SOURCE_DIR}/source/*.cpp")
-list(REMOVE_ITEM CORE_SOURCES "${CMAKE_SOURCE_DIR}/source/Main.cpp")
+list(REMOVE_ITEM CORE_SOURCES "${CMAKE_SOURCE_DIR}/source/App.cpp")
 
 add_library(LifeCore ${CORE_SOURCES})
 target_include_directories(LifeCore PUBLIC ${CMAKE_SOURCE_DIR}/source/include)

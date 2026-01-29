@@ -60,9 +60,16 @@ int run_headless(int steps)
 
 int run_interface()
 {
-    auto app = Gtk::Application::create(
-        "org.example.life",
-        Gio::Application::Flags::NONE
+    auto app = Gtk::Application::create("org.example.life");
+
+    // --- Load Style Sheet into application
+    auto css = Gtk::CssProvider::create();
+    css->load_from_path("style.css");
+
+    Gtk::StyleContext::add_provider_for_display(
+        Gdk::Display::get_default(),
+        css,
+        GTK_STYLE_PROVIDER_PRIORITY_APPLICATION
     );
 
     constexpr int size = 3;
@@ -73,13 +80,11 @@ int run_interface()
     blinker(world);
 
     app->signal_activate().connect([&]() {
-        // Window must live on the heap
         auto window = new Gtk::Window();
         window->set_title("Conway's Game of Life");
         window->set_default_size(800, 600);
 
-        // Interface must be GTK-owned
-        auto ui = Gtk::make_managed<Interface>(world);
+        auto ui = Gtk::make_managed<Interface>(world, life);
         window->set_child(*ui);
 
         app->add_window(*window);
@@ -93,7 +98,7 @@ int run_interface()
 
 int main(int argc, char** argv)
 {
-    bool use_ui = false;
+    bool use_ui = true;
     int steps = 3;
 
     // Parse your own arguments normally
