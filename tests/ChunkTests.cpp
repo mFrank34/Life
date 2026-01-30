@@ -1,6 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
-#include "Chunk.h"
-#include "Cell.h"
+#include "../source/Chunk.h"
+#include "../source/Cell.h"
 
 TEST_CASE("Constructor sets chunk size correctly", "[Chunk]") {
     SECTION("Chunk Size is 16") {

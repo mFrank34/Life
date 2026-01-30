@@ -1,5 +1,5 @@
 #include <catch2/catch_test_macros.hpp>
-#include "Cell.h"
+#include "../source/Cell.h"
 
 TEST_CASE("Default constructor initializes correctly", "[cell]") {
     Cell c;

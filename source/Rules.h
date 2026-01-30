@@ -1,9 +1,9 @@
 #ifndef LIFE_H
 #define LIFE_H
 
-#include <Sparse.h>
-
+#include "Sparse.h"
 #include "Chunk.h"
+
 #include "vector"
 
 class Rules
