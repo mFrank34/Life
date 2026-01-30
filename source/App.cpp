@@ -60,17 +60,7 @@ int run_headless(int steps)
 
 int run_interface()
 {
-    auto app = Gtk::Application::create("org.example.life");
-
-    // --- Load Style Sheet into application
-    auto css = Gtk::CssProvider::create();
-    css->load_from_path("style.css");
-
-    Gtk::StyleContext::add_provider_for_display(
-        Gdk::Display::get_default(),
-        css,
-        GTK_STYLE_PROVIDER_PRIORITY_APPLICATION
-    );
+    auto app = Gtk::Application::create("life.Simulation");
 
     constexpr int size = 3;
     Sparse world(size);

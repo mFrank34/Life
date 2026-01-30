@@ -11,122 +11,75 @@ Interface::Interface(World& world, Manager& manager)
     set_hexpand(true);
     set_vexpand(true);
 
-    // --- World view (expands) ---
+    // --- OVERLAY (world view + floating panels) ---
+    auto overlay = Gtk::make_managed<Gtk::Overlay>();
+    overlay->set_hexpand(true);
+    overlay->set_vexpand(true);
+    append(*overlay);
+
+    // --- WORLD VIEW (fills everything) ---
     auto view = Gtk::make_managed<View>(world);
-    view->set_hexpand(true);
-    view->set_vexpand(true);
+    overlay->set_child(*view);
 
-    append(*view);
+    // --- LEFT PANEL (floats top-left) ---
+    auto left_panel = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL);
+    left_panel->set_halign(Gtk::Align::START);
+    left_panel->set_valign(Gtk::Align::START);
+    left_panel->set_margin(8);
 
-    // --- Control bar (fixed height)
-    auto controls = Gtk::make_managed<Gtk::Grid>();
-    controls->set_hexpand(true);
-    controls->set_vexpand(false);
-    controls->set_column_spacing(12);
-    controls->set_margin(8);
+    overlay->add_overlay(*left_panel);
 
-    append(*controls);
+    // Add your cell type buttons
+    left_panel->append(*Gtk::make_managed<Gtk::Button>("Blue"));
+    left_panel->append(*Gtk::make_managed<Gtk::Button>("Red"));
+    left_panel->append(*Gtk::make_managed<Gtk::Button>("Green"));
+    left_panel->append(*Gtk::make_managed<Gtk::Button>("White"));
+
+    // --- RIGHT PANEL (floats top-right) ---
+    // --- RIGHT PANEL (floats top-right) ---
+    auto right_panel = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL);
+    right_panel->set_halign(Gtk::Align::END);
+    right_panel->set_valign(Gtk::Align::START);
+    right_panel->set_margin(8);
+
+    overlay->add_overlay(*right_panel);
+
+    // Speed buttons
+    auto speed1 = Gtk::make_managed<Gtk::Button>("x1");
+    auto speed2 = Gtk::make_managed<Gtk::Button>("x2");
+    auto speed3 = Gtk::make_managed<Gtk::Button>("x4");
+    auto speed4 = Gtk::make_managed<Gtk::Button>("x8");
+
+    speed1->add_css_class("speed-btn");
+    speed2->add_css_class("speed-btn");
+    speed3->add_css_class("speed-btn");
+    speed4->add_css_class("speed-btn");
+
+    right_panel->append(*speed1);
+    right_panel->append(*speed2);
+    right_panel->append(*speed3);
+    right_panel->append(*speed4);
 
 
-    // --- Cell type buttons ---
-    auto cell_panel = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL);
-    cell_panel->set_vexpand(false);
+    // --- BOTTOM CONTROLS (floating bottom center) ---
+    auto bottom_controls = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL);
+    bottom_controls->set_margin(8);
+    bottom_controls->set_spacing(12);
 
-    cell_panel->append(*Gtk::make_managed<Gtk::Button>("Blue"));
-    cell_panel->append(*Gtk::make_managed<Gtk::Button>("Red"));
-    cell_panel->append(*Gtk::make_managed<Gtk::Button>("Green"));
-    cell_panel->append(*Gtk::make_managed<Gtk::Button>("White"));
+    // Align bottom center
+    bottom_controls->set_halign(Gtk::Align::CENTER);
+    bottom_controls->set_valign(Gtk::Align::END);
 
-    controls->attach(*cell_panel, 0, 0, 1, 2);
+    overlay->add_overlay(*bottom_controls);
 
+    bottom_controls->append(*Gtk::make_managed<Gtk::Button>("Start"));
+    bottom_controls->append(*Gtk::make_managed<Gtk::Button>("Pause"));
+    bottom_controls->append(*Gtk::make_managed<Gtk::Button>("Restart"));
+    bottom_controls->append(*Gtk::make_managed<Gtk::Button>("Generate"));
+    bottom_controls->append(*Gtk::make_managed<Gtk::Button>("Rule Editor"));
+    bottom_controls->append(*Gtk::make_managed<Gtk::Button>("Import"));
+    bottom_controls->append(*Gtk::make_managed<Gtk::Button>("Export"));
+    bottom_controls->append(*Gtk::make_managed<Gtk::Button>("Settings"));
 
-    // --- Simulation buttons ---
-    auto sim_panel = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL);
-    sim_panel->set_vexpand(false);
-
-    sim_panel->append(*Gtk::make_managed<Gtk::Button>("Start"));
-    sim_panel->append(*Gtk::make_managed<Gtk::Button>("Pause"));
-    sim_panel->append(*Gtk::make_managed<Gtk::Button>("Restart"));
-    sim_panel->append(*Gtk::make_managed<Gtk::Button>("Generate"));
-
-    controls->attach(*sim_panel, 1, 1);
-
-    // --- Speed slider ----
-    auto speed = Gtk::make_managed<Gtk::Scale>(Gtk::Orientation::VERTICAL);
-    speed->set_range(1, 60);
-    speed->set_value(10);
-    speed->set_vexpand(true);
-
-    controls->attach(*speed, 2, 0, 1, 2);
+    append(*bottom_controls);
 }
-
-Gtk::Widget* Interface::create_start_page()
-{
-    auto box = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL);
-    box->set_valign(Gtk::Align::CENTER);
-    box->set_halign(Gtk::Align::CENTER);
-    box->set_spacing(16);
-
-    auto title = Gtk::make_managed<Gtk::Label>("Conway's Game of Life");
-    title->set_margin_bottom(20);
-
-    auto start = Gtk::make_managed<Gtk::Button>("Start");
-
-    start->signal_clicked().connect([this]()
-    {
-        stack.set_visible_child("main");
-    });
-
-    box->append(*title);
-    box->append(*start);
-
-    return box;
-}
-
-// Gtk::Widget* Interface::create_main_ui()
-// {
-//     auto root = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL);
-//
-//     // ---- World Area ----
-//     auto overlay = Gtk::make_managed<Gtk::Overlay>();
-//     auto view = Gtk::make_managed<View>(world);
-//     view->set_hexpand(true);
-//     view->set_vexpand(true);
-//     overlay->set_child(*view);
-//     root->append(*overlay);
-//
-//     // ---- Controls ----
-//     auto controls = Gtk::make_managed<Gtk::Grid>();
-//     controls->set_row_spacing(8);
-//     controls->set_column_spacing(16);
-//     controls->set_margin(12);
-//
-//     // Cell type column
-//     auto cell_panel = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL);
-//     cell_panel->append(*Gtk::make_managed<Gtk::ToggleButton>("Blue"));
-//     cell_panel->append(*Gtk::make_managed<Gtk::ToggleButton>("Red"));
-//     cell_panel->append(*Gtk::make_managed<Gtk::ToggleButton>("Green"));
-//     cell_panel->append(*Gtk::make_managed<Gtk::ToggleButton>("White"));
-//
-//     // Simulation buttons row
-//     auto sim_panel = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL);
-//     sim_panel->set_spacing(6);
-//     sim_panel->append(*Gtk::make_managed<Gtk::Button>("Start"));
-//     sim_panel->append(*Gtk::make_managed<Gtk::Button>("Pause"));
-//     sim_panel->append(*Gtk::make_managed<Gtk::Button>("Restart"));
-//     sim_panel->append(*Gtk::make_managed<Gtk::Button>("Generate"));
-//
-//     // Speed control
-//     auto speed = Gtk::make_managed<Gtk::Scale>(Gtk::Orientation::VERTICAL);
-//     speed->set_range(0.25, 5.0);
-//     speed->set_value(1.0);
-//     speed->set_vexpand(true);
-//
-//     // Place grid items
-//     controls->attach(*cell_panel, 0, 0);
-//     controls->attach(*sim_panel, 1, 0);
-//     controls->attach(*speed, 2, 0);
-//
-//     root->append(*controls);
-//     return root;
-// }

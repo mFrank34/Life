@@ -1,0 +1,16 @@
+.floating-bar {
+    background: rgba(30, 30, 30, 0.85);
+    padding: 8px;
+    border-radius: 6px;
+}
+
+button {
+    border-radius: 4px;
+    background: #444;
+    color: white;
+}
+
+.speed-slider {
+    min-width: 40px;
+    max-width: 40px;
+}
