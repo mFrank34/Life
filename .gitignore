@@ -1,7 +1,30 @@
-# Build artifacts
-/bin
-/cmake-build-debug
+ artifacts (CMake)
+build/
+build-*/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+install_manifest.txt
+CPackConfig.cmake
+CPackSourceConfig.cmake
+Testing/
 
-# OS files
+# Generated binaries
+Life
+Life.exe
+*.o
+*.obj
+
+# IDEs
+.idea/
+*.user
+*.userprefs
+
+# OS junk
+
 .DS_Store
 Thumbs.db
+
+# Logs
+*.log
