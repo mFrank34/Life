@@ -1,8 +1,8 @@
 #include <catch2/catch_test_macros.hpp>
 
-#include "World.h"
-#include "Cell.h"
-#include "Debug.h"
+#include "../source/World.h"
+#include "../source/Cell.h"
+#include "../source/Debug.h"
 
 Debug global_debug;
 // Minimal concrete subclass for testing
