@@ -88,7 +88,7 @@ int run_interface()
 
 int main(int argc, char** argv)
 {
-    bool use_ui = true;
+    bool use_ui = false;
     int steps = 3;
 
     // Parse your own arguments normally
