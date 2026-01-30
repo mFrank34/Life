@@ -46,3 +46,8 @@ complex adaptive systems, emergent behaviors, and performance trade-offs in larg
 - Build a search system to detect and locate specific patterns within the simulation.
 - Create an interactive map viewer for visualizing the world state.
 - Integrate benchmarking tools to evaluate simulation performance.
+
+# Installation & Build
+This project uses CMake Presets to provide a consistent build experience across Linux and Windows.
+
+todo
