@@ -22,7 +22,6 @@ Life.exe
 *.userprefs
 
 # OS junk
-
 .DS_Store
 Thumbs.db
 

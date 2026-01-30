@@ -30,7 +30,6 @@ target_compile_options(LifeCore PUBLIC ${GTKMM_CFLAGS_OTHER})
 target_link_directories(LifeCore PUBLIC ${GTKMM_LIBRARY_DIRS})
 target_link_libraries(LifeCore PUBLIC ${GTKMM_LIBRARIES})
 
-
 # Tests (optional)
 if(BUILD_TESTS)
     include(CTest)
@@ -52,7 +51,7 @@ include(InstallRequiredSystemLibraries)
 
 set(CPACK_PACKAGE_NAME "Life")  # RPM-safe
 set(CPACK_PACKAGE_VENDOR "Frank")
-set(CPACK_PACKAGE_CONTACT "frank@example.com")
+set(CPACK_PACKAGE_CONTACT "mffranks34@gmail.com")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Life GTK4 Application")
 set(CPACK_PACKAGE_VERSION "1.0.0")
 
