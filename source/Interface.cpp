@@ -17,7 +17,7 @@ Interface::Interface(World& world, Manager& manager)
     overlay->set_vexpand(true);
     append(*overlay);
 
-    // --- WORLD VIEW (fills everything) ---
+    // --- WORLD VIEW ---
     auto view = Gtk::make_managed<View>(world);
     overlay->set_child(*view);
 
@@ -35,7 +35,6 @@ Interface::Interface(World& world, Manager& manager)
     left_panel->append(*Gtk::make_managed<Gtk::Button>("Green"));
     left_panel->append(*Gtk::make_managed<Gtk::Button>("White"));
 
-    // --- RIGHT PANEL (floats top-right) ---
     // --- RIGHT PANEL (floats top-right) ---
     auto right_panel = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL);
     right_panel->set_halign(Gtk::Align::END);
