@@ -69,7 +69,8 @@ int run_interface()
 
     blinker(world);
 
-    app->signal_activate().connect([&]() {
+    app->signal_activate().connect([&]()
+    {
         auto window = new Gtk::Window();
         window->set_title("Conway's Game of Life");
         window->set_default_size(800, 600);
@@ -88,10 +89,10 @@ int run_interface()
 
 int main(int argc, char** argv)
 {
-    bool use_ui = false;
+    bool use_ui = true;
     int steps = 3;
 
-    // Parse your own arguments normally
+
     for (int i = 1; i < argc; ++i)
     {
         std::string arg = argv[i];
@@ -113,4 +114,3 @@ int main(int argc, char** argv)
     // Headless mode
     return run_headless(steps);
 }
-

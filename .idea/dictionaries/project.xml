@@ -2,6 +2,7 @@
   <dictionary name="project">
     <words>
       <w>cachechunk</w>
+      <w>coords</w>
       <w>dynchunk</w>
       <w>mffranks</w>
     </words>
