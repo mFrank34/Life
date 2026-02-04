@@ -127,26 +127,21 @@ void View::create_Grid(
     int size
 ) const
 {
-    // grid color
-    cr->set_source_rgba(0.8, 0.8, 0.8, 0.3);
-    cr->set_line_width(1.0 / zoom);
-
-    // visible world bounds
-    double left = camera_x / zoom;
-    double top = camera_y / zoom;
-    double right = (camera_x + width) / zoom;
-    double bottom = (camera_y + height) / zoom;
-
-    int start_x = std::floor(left / cell_size) * cell_size;
-    int end_x = std::ceil(right / cell_size) * cell_size;
-
-    int start_y = std::floor(top / cell_size) * cell_size;
-    int end_y = std::ceil(bottom / cell_size) * cell_size;
+    // visible world area
+    double left = camera_x;
+    double top = camera_y;
+    double right = camera_x + width / zoom;
+    double bottom = camera_y + height / zoom;
 
     int chunk_pixels = size * cell_size;
 
-    // chunk grid lines
-    cr->set_source_rgba(0.2, 0.2, 0.2, 0.5);
+    int start_x = std::floor(left / chunk_pixels) * chunk_pixels;
+    int end_x = std::ceil(right / chunk_pixels) * chunk_pixels;
+
+    int start_y = std::floor(top / chunk_pixels) * chunk_pixels;
+    int end_y = std::ceil(bottom / chunk_pixels) * chunk_pixels;
+
+    cr->set_source_rgba(0, 128, 0, 0.5);
     cr->set_line_width(2.0 / zoom);
 
     for (int x = start_x; x <= end_x; x += chunk_pixels)

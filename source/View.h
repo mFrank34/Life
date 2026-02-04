@@ -2,7 +2,6 @@
 #define VIEW_H
 
 #include <gtkmm/drawingarea.h>
-#include <gtkmm/eventcontrollerscroll.h>
 #include <gtkmm/gestureclick.h>
 
 class World;
