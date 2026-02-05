@@ -62,7 +62,7 @@ int run_interface()
 {
     auto app = Gtk::Application::create("life.Simulation");
 
-    constexpr int size = 3;
+    constexpr int size = 32;
     Sparse world(size);
     Rules rules;
     Manager life(world, rules);
