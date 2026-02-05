@@ -67,20 +67,13 @@ void View::on_draw(
     int height
 ) const
 {
-    // IMPORTANT: scale first, then translate
     cr->scale(zoom, zoom);
     cr->translate(-camera_x, -camera_y);
-
-    create_Grid(cr, width, height, 3);
 
     auto& data = world.get_world();
     for (const auto& [key, chunk] : data)
     {
         bool even = ((chunk.get_CX() + chunk.get_CY()) % 2 == 0);
-
-        double alpha = std::clamp((cell_size * zoom - 6.0) / 10.0, 0.0, 0.5);
-        // add rgb with a for alpha coloring
-        cr->set_source_rgba(even ? 0.8 : 0.4, 0.4, even ? 0.4 : 0.8, 1);
 
         for (int cy = 0; cy < chunk.get_size(); cy++)
         {
@@ -88,6 +81,24 @@ void View::on_draw(
             {
                 int wx = chunk.get_CX() * chunk.get_size() + cx;
                 int wy = chunk.get_CY() * chunk.get_size() + cy;
+
+                char type = world.get_cell(wx, wy).get_type();
+
+                if (type == 'w')
+                {
+                    // wall cell
+                    cr->set_source_rgba(1.0, 1.0, 1.0, 1.0);
+                }
+                else
+                {
+                    // default cell
+                    cr->set_source_rgba(
+                        even ? 0.8 : 0.4,
+                        0.4,
+                        even ? 0.4 : 0.8,
+                        1.0
+                    );
+                }
 
                 cr->rectangle(
                     wx * cell_size,
@@ -99,6 +110,9 @@ void View::on_draw(
             }
         }
     }
+
+    // draw grid last
+    create_Grid(cr, width, height, 1);
 }
 
 void View::on_click(int, double mx, double my)
@@ -109,9 +123,16 @@ void View::on_click(int, double mx, double my)
     int cx = world_x / cell_size;
     int cy = world_y / cell_size;
 
-    world.get_cell(cx, cy).set_type('w');
+    auto& cell = world.get_cell(cx, cy);
+
+    if (cell.get_type() == 'w')
+        cell.set_type('0'); // unselect
+    else
+        cell.set_type('w'); // place wall
+
     queue_draw();
 }
+
 
 void View::on_release(int, double, double)
 {
@@ -180,18 +201,18 @@ void View::create_Grid(
     int end_y = std::ceil(bottom / step) * step;
 
     cr->set_source_rgba(0.0, 0.5, 0.0, 0.5);
-    cr->set_line_width(std::max(1.0 / zoom, 0.5));
+    cr->set_line_width(1.0 / zoom);
 
     for (int x = start_x; x <= end_x; x += step)
     {
-        cr->move_to(x, start_y);
-        cr->line_to(x, end_y);
+        cr->move_to(x + 0.5, start_y + 0.5);
+        cr->line_to(x + 0.5, end_y + 0.5);
     }
 
     for (int y = start_y; y <= end_y; y += step)
     {
-        cr->move_to(start_x, y);
-        cr->line_to(end_x, y);
+        cr->move_to(start_x + 0.5, y + 0.5);
+        cr->line_to(end_x + 0.5, y + 0.5);
     }
 
     cr->stroke();
