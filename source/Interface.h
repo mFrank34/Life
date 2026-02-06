@@ -4,9 +4,10 @@
 #pragma once
 #include <gtkmm.h>
 
+#include "View.h"
+
 class World;
 class Manager;
-class View;
 
 enum class SimSpeed
 {
@@ -24,7 +25,6 @@ enum class CellColor
     White
 };
 
-
 class Interface : public Gtk::Box
 {
 public:
@@ -36,6 +36,7 @@ private:
 
     // UI owner
     Gtk::Overlay overlay;
+    View view;
 
     // Bottom controls
     Gtk::Box bottom_controls{Gtk::Orientation::HORIZONTAL};

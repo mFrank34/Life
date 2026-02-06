@@ -6,19 +6,19 @@
 Interface::Interface(World& world, Manager& manager)
     : Gtk::Box(Gtk::Orientation::VERTICAL),
       world(world),
-      manager(manager)
+      manager(manager),
+      view(world)
 {
     set_hexpand(true);
     set_vexpand(true);
 
-    // --- OVERLAY (member, not local) ---
+    // --- OVERLAY ---
     overlay.set_hexpand(true);
     overlay.set_vexpand(true);
     append(overlay);
 
     // --- WORLD VIEW ---
-    auto view = Gtk::make_managed<View>(world);
-    overlay.set_child(*view);
+    overlay.set_child(view);
 
     // --- LEFT PANEL (colour selection) ---
     left_panel.set_halign(Gtk::Align::START);
