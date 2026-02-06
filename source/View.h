@@ -16,7 +16,7 @@ public:
 private:
     World& world;
 
-    int cell_size = 6;
+    int cell_size = 16;
 
     // camera (world space)
     double camera_x = 0.0;

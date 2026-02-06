@@ -67,6 +67,7 @@ void View::on_draw(
     int height
 ) const
 {
+    // TODO create more cell types to application to render like blue, green and red cells
     cr->scale(zoom, zoom);
     cr->translate(-camera_x, -camera_y);
 
@@ -161,11 +162,15 @@ bool View::on_scroll(double, double dy)
 
 void View::zoom_at(double mx, double my, double dy)
 {
-    double world_x = camera_x + mx / zoom;
-    double world_y = camera_y + my / zoom;
-
+    // TODO Fix the zoom limiting section and fix bug with placement of cells when moving zoom location
     double zoom_factor = std::pow(1.1, -dy);
     double new_zoom = std::clamp(zoom * zoom_factor, 0.2, 5.0);
+
+    if (new_zoom == zoom)
+        return;
+
+    double world_x = camera_x + mx / zoom;
+    double world_y = camera_y + my / zoom;
 
     camera_x = world_x - mx / new_zoom;
     camera_y = world_y - my / new_zoom;
@@ -173,6 +178,7 @@ void View::zoom_at(double mx, double my, double dy)
     zoom = new_zoom;
     queue_draw();
 }
+
 
 void View::create_Grid(
     const Cairo::RefPtr<Cairo::Context>& cr,
@@ -184,8 +190,9 @@ void View::create_Grid(
     // grid spacing in screen pixels
     double screen_step = (size * cell_size) * zoom;
 
+    // TODO remove the limit on grid when the zoom is fixed
     // too small to be meaningful
-    if (screen_step < 6.0)
+    if (screen_step < 5.0)
         return;
 
     double left = camera_x;
@@ -200,19 +207,19 @@ void View::create_Grid(
     int start_y = std::floor(top / step) * step;
     int end_y = std::ceil(bottom / step) * step;
 
-    cr->set_source_rgba(0.0, 0.5, 0.0, 0.5);
+    cr->set_source_rgba(83, 83, 83, 0.5);
     cr->set_line_width(1.0 / zoom);
 
     for (int x = start_x; x <= end_x; x += step)
     {
-        cr->move_to(x + 0.5, start_y + 0.5);
-        cr->line_to(x + 0.5, end_y + 0.5);
+        cr->move_to(x, start_y);
+        cr->line_to(x, end_y);
     }
 
     for (int y = start_y; y <= end_y; y += step)
     {
-        cr->move_to(start_x + 0.5, y + 0.5);
-        cr->line_to(end_x + 0.5, y + 0.5);
+        cr->move_to(start_x, y);
+        cr->line_to(end_x, y);
     }
 
     cr->stroke();

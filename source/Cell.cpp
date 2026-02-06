@@ -37,6 +37,7 @@ void Cell::set_alive(const bool is_alive)
 
 void Cell::update_cell()
 {
+    // TODO Create more cell types for application like green, blue and red
     switch (type)
     {
     case '0':

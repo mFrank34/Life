@@ -5,6 +5,7 @@
 class Controller
 {
 public:
+    // TODO Build a Controller for application to control the speed of the game and different aspects
     Controller()
         : world(), manager(), ui(world);
 };
