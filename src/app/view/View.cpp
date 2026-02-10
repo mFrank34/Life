@@ -111,7 +111,6 @@ void View::on_draw(
             }
         }
     }
-
     // draw grid last
     create_Grid(cr, width, height, 1);
 }
