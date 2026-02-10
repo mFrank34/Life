@@ -1,25 +1,22 @@
 #pragma once
-#ifndef UNORDERED_H
-#define UNORDERED_H
+#ifndef SPARSE_H
+#define SPARSE_H
 
 #include <unordered_map>
-#include <vector>
 
 // custom classes
-#include "World.h"
-#include "Chunk.h"
-#include "Cell.h"
+#include "world/World.h"
+#include "world/structure/Chunk.h"
+#include "world/structure/Cell.h"
 
-class Unordered : public World
+class Sparse final : public World
 {
 public:
-    Unordered(int size);
-
-    // remove all empty chunks from world data
+    Sparse(int size);
+    // unloads chunks in memory by removing them.
     void unload() override;
-
-    // world entities
-    Cell &get_cell(int global_x, int global_y) override;
+    // get world entities
+    Cell &get_cell(int gx, int gy) override;
     Chunk &get_chunk(int gx, int gy) override;
     Chunk &get_chunk(long long key) override;
     void swap_world() override;
@@ -29,13 +26,10 @@ public:
     std::unordered_map<long long, Chunk>& get_next_world() override;
 
 private:
-    // system setup
     const int CHUNK_SIZE;
-
-    // world data
     std::unordered_map<long long, Chunk> world;
-    std::unordered_map<long long, Chunk> nextWorld;
 
+    std::unordered_map<long long, Chunk> nextWorld;
 };
 
 #endif

@@ -1,7 +1,7 @@
 #include "Cache.h"
-#include "World.h"
+#include "world/World.h"
 #include <utility>
-#include "Chunk.h"
+#include "world/structure/Chunk.h"
 
 // Constructor
 Cache::Cache(const int size, const int max)

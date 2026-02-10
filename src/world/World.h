@@ -6,8 +6,8 @@
 #include <array>
 #include <memory>
 #include <string>
-#include "Chunk.h"
-#include "Cell.h"
+#include "world/structure/Chunk.h"
+#include "world/structure/Cell.h"
 
 class World
 {

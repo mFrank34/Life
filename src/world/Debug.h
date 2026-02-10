@@ -3,7 +3,7 @@
 #define DEBUG_H
 
 #include <vector>
-#include "Cell.h"
+#include "world/structure/Cell.h"
 
 class World;
 

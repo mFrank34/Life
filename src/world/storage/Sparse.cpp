@@ -1,5 +1,6 @@
 #include "Sparse.h"
-#include "Chunk.h"
+#include "world/structure/Chunk.h"
+#include "world/World.h"
 
 Sparse::Sparse(const int size)
     : World("Sparse Map"), CHUNK_SIZE(size) {}

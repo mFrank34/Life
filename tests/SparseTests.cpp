@@ -1,6 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 
-#include "../source/Sparse.h"
+#include "world/storage/Sparse.h"
 
 TEST_CASE("Sparse Map constructor registers type and debugger", "[Sparse]")
 {
