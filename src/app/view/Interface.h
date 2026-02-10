@@ -5,9 +5,11 @@
 #include <gtkmm.h>
 
 #include "View.h"
+#include "../controller/Controller.h"
 
 class World;
 class Manager;
+class Controller;
 
 enum class SimSpeed
 {
