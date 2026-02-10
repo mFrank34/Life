@@ -5,20 +5,16 @@
 #include <gtkmm.h>
 
 // custom class
-#include "Manager.h"
-#include "Rules.h"
-#include "Cell.h"
-#include "Chunk.h"
-#include "Debug.h"
+#include "controller/Manager.h"
+#include "rules/Rules.h"
+#include "world/Debug.h"
 
 // storage containers
-#include "World.h"
-#include "Unordered.h"
-#include "Sparse.h"
-#include "Cache.h"
+#include "world/World.h"
+#include "world/storage/Sparse.h"
 
 // UI
-#include "Interface.h"
+#include "view/Interface.h"
 
 Debug global_debug;
 

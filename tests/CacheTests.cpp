@@ -1,5 +1,5 @@
 #include <catch2/catch_test_macros.hpp>
-#include "../source/Cache.h"
+#include "world/storage/Cache.h"
 
 TEST_CASE("Cache Map constructor registers type and debugger", "[Cache]")
 {

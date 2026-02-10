@@ -5,7 +5,7 @@
 #include <iostream>
 
 #include "World.h"
-#include "Cell.h"
+#include "world/structure/Cell.h"
 
 void Debug::view_chunk(const std::vector<Cell> &cells, const int size) {
     if (cells.size() != size * size)
