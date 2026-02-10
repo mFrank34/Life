@@ -2,8 +2,9 @@
 #ifndef MANAGER_H
 #define MANAGER_H
 
-#include "World.h"
-#include "Rules.h"
+#include "world/World.h"
+#include "world/structure/Chunk.h"
+#include "rules/Rules.h"
 
 enum class haloDirection
 {

@@ -1,7 +1,7 @@
 #include "Manager.h"
-#include "Rules.h"
-#include "World.h"
-#include "Chunk.h"
+#include "rules/Rules.h"
+#include "world/World.h"
+#include "world/structure/Chunk.h"
 
 #include <functional>
 #include <iostream>

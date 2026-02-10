@@ -2,9 +2,9 @@
 #ifndef CACHE_H
 #define CACHE_H
 
-#include "World.h"
-#include "Chunk.h"
-#include "Cell.h"
+#include "world/World.h"
+#include "world/structure/Chunk.h"
+#include "world/structure/Cell.h"
 
 #include <unordered_map>
 #include <list>

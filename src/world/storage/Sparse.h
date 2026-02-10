@@ -3,12 +3,11 @@
 #define SPARSE_H
 
 #include <unordered_map>
-#include <vector>
 
 // custom classes
-#include "World.h"
-#include "Chunk.h"
-#include "Cell.h"
+#include "world/World.h"
+#include "world/structure/Chunk.h"
+#include "world/structure/Cell.h"
 
 class Sparse final : public World
 {

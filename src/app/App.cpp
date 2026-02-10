@@ -7,15 +7,11 @@
 // custom class
 #include "controller/Manager.h"
 #include "rules/Rules.h"
-#include "world/structure/Cell.h"
-#include "world/structure/Chunk.h"
 #include "world/Debug.h"
 
 // storage containers
 #include "world/World.h"
-#include "world/storage/Cache.h"
 #include "world/storage/Sparse.h"
-#include "world/storage/Unordered.h"
 
 // UI
 #include "view/Interface.h"
