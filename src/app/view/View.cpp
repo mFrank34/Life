@@ -4,8 +4,8 @@
 #include <algorithm>
 #include <cmath>
 
-#include "World.h"
-#include "Chunk.h"
+#include "world/World.h"
+#include "world/structure/Chunk.h"
 
 View::View(World& world)
     : world(world)

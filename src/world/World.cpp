@@ -1,7 +1,6 @@
 #include "World.h"
 
 #include <array>
-#include <vector>
 #include "Debug.h"
 
 extern Debug global_debug;

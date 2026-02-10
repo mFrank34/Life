@@ -1,7 +1,7 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 #pragma once
-#include "../view/Interface.h"
+#include "app/view/Interface.h"
 
 enum class SimSpeed;
 enum class CellColor;

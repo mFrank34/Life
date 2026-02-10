@@ -1,7 +1,7 @@
 #include "Interface.h"
 #include "View.h"
-#include "World.h"
-#include "../controller/Manager.h"
+#include "world/World.h"
+#include "app/controller/Manager.h"
 
 Interface::Interface(World& world, Manager& manager)
     : Gtk::Box(Gtk::Orientation::VERTICAL),
