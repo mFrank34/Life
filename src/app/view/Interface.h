@@ -3,13 +3,11 @@
 
 #pragma once
 #include <gtkmm.h>
+#include <gtkmm/drawingarea.h>
 
-#include "View.h"
 #include "app/controller/Controller.h"
 
-class World;
 class Manager;
-class Controller;
 
 enum class SimSpeed
 {
@@ -30,15 +28,20 @@ enum class CellColor
 class Interface : public Gtk::Box
 {
 public:
-    Interface(World& world, Manager& manager);
+    Interface(Controller& controller, Manager& manager);
 
 private:
-    World& world;
+    Controller& controller;
     Manager& manager;
 
-    // UI owner
+    // UI components
     Gtk::Overlay overlay;
-    View view;
+    Gtk::DrawingArea drawing_area;
+
+    // Drawing handler
+    void on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int w, int h);
+    void create_Grid(const Cairo::RefPtr<Cairo::Context>& cr,
+                     int width, int height, int size) const;
 
     // Bottom controls
     Gtk::Box bottom_controls{Gtk::Orientation::HORIZONTAL};
@@ -52,7 +55,7 @@ private:
     Gtk::Button btn_export;
     Gtk::Button btn_settings;
 
-    // Callbacks
+    // Button callbacks
     void on_start();
     void on_pause();
     void on_restart();

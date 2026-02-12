@@ -1,38 +1,74 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
-#pragma once
-#include "app/view/Interface.h"
 
-enum class SimSpeed;
-enum class CellColor;
+#include <functional>
+#include <gtkmm/drawingarea.h>
+#include <gtkmm/gestureclick.h>
+#include <gtkmm/eventcontrollerscroll.h>
+#include <gtkmm/eventcontrollermotion.h>
+
+class World;
+class Cell;
 
 class Controller
 {
 public:
-    explicit Controller(World& world);
+    Controller(World& world, Gtk::DrawingArea& drawing_area);
 
-    // Simulation control
-    void start();
-    void pause();
-    void restart();
-    void generate();
+    // Getters for rendering
+    double get_camera_x() const { return camera_x; }
+    double get_camera_y() const { return camera_y; }
+    double get_zoom() const { return zoom; }
+    int get_cell_size() const { return cell_size; }
 
-    // Editor / UI actions
-    void set_speed(SimSpeed speed);
-    void set_color(CellColor color);
+    // World access for Interface
+    World& get_world() { return world; }
+    const World& get_world() const { return world; }
 
-    SimSpeed speed() const;
-    CellColor color() const;
-
-    // Called by View
-    void paint_at(double wx, double wy);
+    // Callback to trigger redraws
+    void set_redraw_callback(std::function<void()> callback);
 
 private:
     World& world;
+    Gtk::DrawingArea& drawing_area;
 
-    // SimSpeed speed_ = SimSpeed::X1;
-    // CellColor color_ = CellColor::White;
-    // bool running_ = false;
+    // Camera state
+    int cell_size = 16;
+    double camera_x = 0.0;
+    double camera_y = 0.0;
+    double zoom = 1.0;
+
+    // Drag state
+    double drag_start_x = 0.0;
+    double drag_start_y = 0.0;
+    double camera_start_x = 0.0;
+    double camera_start_y = 0.0;
+
+    // Mouse tracking
+    double mouse_x = 0.0;
+    double mouse_y = 0.0;
+
+    // Event controllers
+    Glib::RefPtr<Gtk::GestureClick> click_controller;
+    Glib::RefPtr<Gtk::EventControllerScroll> scroll_controller;
+    Glib::RefPtr<Gtk::EventControllerMotion> motion_controller;
+
+    // Redraw callback
+    std::function<void()> redraw_callback;
+
+    // Setup event handlers
+    void setup_event_handlers();
+
+    // Event handlers
+    void on_click(int n_press, double mx, double my);
+    void on_release(int n_press, double mx, double my);
+    void on_drag_begin(double start_x, double start_y);
+    void on_drag_update(double offset_x, double offset_y);
+    bool on_scroll(double dx, double dy);
+
+    // Helper methods
+    void zoom_at(double mx, double my, double dy);
+    void trigger_redraw();
 };
 
-#endif //CONTROLLER_H
+#endif
