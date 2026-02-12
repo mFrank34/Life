@@ -36,29 +36,39 @@ class Manager
     std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>> neighbour_cells;
 
     // neighbor edge cases
-    void find_neighbour(const std::array<long long, 8>& keys,
-                        const std::unordered_map<long long, Chunk>& map);
+    void find_neighbour(
+        const std::array<long long, 8>& keys,
+        const std::unordered_map<long long, Chunk>& map
+    );
 
     void generate_missing_neighbour();
 
-    void get_neighbours_edge_case(std::unordered_map<long long, Chunk>& selected_world,
-                                  int SIZE);
+    void get_neighbours_edge_case(
+        std::unordered_map<long long, Chunk>& selected_world,
+        int SIZE
+    );
 
-    static auto halo_bridge(Chunk& buffer,
-                            const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells,
-                            int size,
-                            haloDirection dir) -> void;
+    static auto halo_bridge(
+        Chunk& buffer,
+        const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells,
+        int size,
+        haloDirection dir
+    ) -> void;
 
     // constructing a halo chunk
-    static void construct_halo(Chunk& buffer,
-                               Chunk& selected,
-                               const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells);
+    static void construct_halo(
+        Chunk& buffer,
+        Chunk& selected,
+        const std::vector<std::pair<int, std::vector<std::reference_wrapper<Cell>>>>& cells
+    );
 
     // chunk updater function
     // selected is one currently being change
-    static void chunk_update(Chunk& haloBuffer,
-                             Chunk& next,
-                             const Chunk& current);
+    static void chunk_update(
+        Chunk& haloBuffer,
+        Chunk& next,
+        const Chunk& current
+    );
 
 public:
     Manager(World& world, Rules& rules);
@@ -66,6 +76,7 @@ public:
     ~Manager() = default;
 
     void update();
+
 };
 
 #endif

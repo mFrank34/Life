@@ -5,7 +5,7 @@
 #include <gtkmm.h>
 
 // custom class
-#include "controller/Manager.h"
+#include "../world/Manager.h"
 #include "rules/Rules.h"
 #include "world/Debug.h"
 
