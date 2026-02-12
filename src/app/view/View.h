@@ -25,10 +25,10 @@ enum class CellColor
     White
 };
 
-class Interface : public Gtk::Box
+class View : public Gtk::Box
 {
 public:
-    Interface(Controller& controller, Manager& manager);
+    View(Controller& controller, Manager& manager);
 
 private:
     Controller& controller;

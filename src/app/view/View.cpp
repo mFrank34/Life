@@ -1,10 +1,10 @@
-#include "Interface.h"
+#include "View.h"
 #include "world/World.h"
 #include "world/structure/Chunk.h"
 #include <algorithm>
 #include <cmath>
 
-Interface::Interface(Controller& controller, Manager& manager)
+View::View(Controller& controller, Manager& manager)
     : Gtk::Box(Gtk::Orientation::VERTICAL),
       controller(controller),
       manager(manager)
@@ -28,7 +28,7 @@ Interface::Interface(Controller& controller, Manager& manager)
     drawing_area.set_vexpand(true);
     drawing_area.set_focusable(true);
     drawing_area.set_can_target(true);
-    drawing_area.set_draw_func(sigc::mem_fun(*this, &Interface::on_draw));
+    drawing_area.set_draw_func(sigc::mem_fun(*this, &View::on_draw));
     overlay.set_child(drawing_area);
 
     // Controller handles all event setup
@@ -51,13 +51,13 @@ Interface::Interface(Controller& controller, Manager& manager)
     left_panel.append(btn_white);
 
     btn_blue.signal_clicked().connect(
-        sigc::bind(sigc::mem_fun(*this, &Interface::on_color), CellColor::Blue));
+        sigc::bind(sigc::mem_fun(*this, &View::on_color), CellColor::Blue));
     btn_red.signal_clicked().connect(
-        sigc::bind(sigc::mem_fun(*this, &Interface::on_color), CellColor::Red));
+        sigc::bind(sigc::mem_fun(*this, &View::on_color), CellColor::Red));
     btn_green.signal_clicked().connect(
-        sigc::bind(sigc::mem_fun(*this, &Interface::on_color), CellColor::Green));
+        sigc::bind(sigc::mem_fun(*this, &View::on_color), CellColor::Green));
     btn_white.signal_clicked().connect(
-        sigc::bind(sigc::mem_fun(*this, &Interface::on_color), CellColor::White));
+        sigc::bind(sigc::mem_fun(*this, &View::on_color), CellColor::White));
 
     // --- RIGHT PANEL (speed controls) ---
     right_panel.set_halign(Gtk::Align::END);
@@ -82,13 +82,13 @@ Interface::Interface(Controller& controller, Manager& manager)
     right_panel.append(btn_speed_8);
 
     btn_speed_1.signal_clicked().connect(
-        sigc::bind(sigc::mem_fun(*this, &Interface::on_speed), SimSpeed::X1));
+        sigc::bind(sigc::mem_fun(*this, &View::on_speed), SimSpeed::X1));
     btn_speed_2.signal_clicked().connect(
-        sigc::bind(sigc::mem_fun(*this, &Interface::on_speed), SimSpeed::X2));
+        sigc::bind(sigc::mem_fun(*this, &View::on_speed), SimSpeed::X2));
     btn_speed_4.signal_clicked().connect(
-        sigc::bind(sigc::mem_fun(*this, &Interface::on_speed), SimSpeed::X4));
+        sigc::bind(sigc::mem_fun(*this, &View::on_speed), SimSpeed::X4));
     btn_speed_8.signal_clicked().connect(
-        sigc::bind(sigc::mem_fun(*this, &Interface::on_speed), SimSpeed::X8));
+        sigc::bind(sigc::mem_fun(*this, &View::on_speed), SimSpeed::X8));
 
     // --- BOTTOM CONTROLS ---
     bottom_controls.set_margin(8);
@@ -115,19 +115,19 @@ Interface::Interface(Controller& controller, Manager& manager)
     bottom_controls.append(btn_export);
     bottom_controls.append(btn_settings);
 
-    btn_start.signal_clicked().connect(sigc::mem_fun(*this, &Interface::on_start));
-    btn_pause.signal_clicked().connect(sigc::mem_fun(*this, &Interface::on_pause));
-    btn_restart.signal_clicked().connect(sigc::mem_fun(*this, &Interface::on_restart));
-    btn_generate.signal_clicked().connect(sigc::mem_fun(*this, &Interface::on_generate));
-    btn_rule_editor.signal_clicked().connect(sigc::mem_fun(*this, &Interface::on_rule_editor));
-    btn_import.signal_clicked().connect(sigc::mem_fun(*this, &Interface::on_import));
-    btn_export.signal_clicked().connect(sigc::mem_fun(*this, &Interface::on_export));
-    btn_settings.signal_clicked().connect(sigc::mem_fun(*this, &Interface::on_settings));
+    btn_start.signal_clicked().connect(sigc::mem_fun(*this, &View::on_start));
+    btn_pause.signal_clicked().connect(sigc::mem_fun(*this, &View::on_pause));
+    btn_restart.signal_clicked().connect(sigc::mem_fun(*this, &View::on_restart));
+    btn_generate.signal_clicked().connect(sigc::mem_fun(*this, &View::on_generate));
+    btn_rule_editor.signal_clicked().connect(sigc::mem_fun(*this, &View::on_rule_editor));
+    btn_import.signal_clicked().connect(sigc::mem_fun(*this, &View::on_import));
+    btn_export.signal_clicked().connect(sigc::mem_fun(*this, &View::on_export));
+    btn_settings.signal_clicked().connect(sigc::mem_fun(*this, &View::on_settings));
 }
 
 // --- DRAWING (uses controller for everything) ---
 
-void Interface::on_draw(
+void View::on_draw(
     const Cairo::RefPtr<Cairo::Context>& cr,
     int width,
     int height
@@ -189,7 +189,7 @@ void Interface::on_draw(
     create_Grid(cr, width, height, 1);
 }
 
-void Interface::create_Grid(
+void View::create_Grid(
     const Cairo::RefPtr<Cairo::Context>& cr,
     int width,
     int height,
@@ -241,50 +241,50 @@ void Interface::create_Grid(
 
 // --- BUTTON CALLBACKS (stubs for now) ---
 
-void Interface::on_start()
+void View::on_start()
 {
 }
 
-void Interface::on_pause()
+void View::on_pause()
 {
 }
 
-void Interface::on_restart()
+void View::on_restart()
 {
 }
 
-void Interface::on_generate()
+void View::on_generate()
 {
 }
 
-void Interface::on_rule_editor()
+void View::on_rule_editor()
 {
 }
 
-void Interface::on_import()
+void View::on_import()
 {
 }
 
-void Interface::on_export()
+void View::on_export()
 {
 }
 
-void Interface::on_settings()
+void View::on_settings()
 {
 }
 
-void Interface::on_speed(SimSpeed speed)
+void View::on_speed(SimSpeed speed)
 {
 }
 
-void Interface::update_speed_ui()
+void View::update_speed_ui()
 {
 }
 
-void Interface::on_color(CellColor color)
+void View::on_color(CellColor color)
 {
 }
 
-void Interface::update_color_ui()
+void View::update_color_ui()
 {
 }

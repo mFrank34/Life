@@ -29,7 +29,7 @@ target_include_directories(LifeCore PUBLIC
 add_executable(Life
         src/app/App.cpp
         src/app/controller/Controller.cpp
-        src/app/view/Interface.cpp
+        src/app/view/View.cpp
         src/world/Manager.cpp
 )
 
