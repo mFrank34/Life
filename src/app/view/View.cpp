@@ -1,23 +1,40 @@
+// View.h
 #include "View.h"
+#include "app/controller/Controller.h"
 #include "world/World.h"
 #include "world/structure/Chunk.h"
-#include <algorithm>
 #include <cmath>
 
-View::View(Controller& controller, Manager& manager)
-    : Gtk::Box(Gtk::Orientation::VERTICAL),
-      controller(controller),
-      manager(manager)
+View::View()
+    : Gtk::Box(Gtk::Orientation::VERTICAL)
 {
     set_hexpand(true);
     set_vexpand(true);
 
-    // Setup controller callback to trigger redraws
-    controller.set_redraw_callback([this]()
-    {
-        drawing_area.queue_draw();
-    });
+    setup_ui();
+}
 
+void View::set_controller(Controller* ctrl)
+{
+    controller = ctrl;
+
+    if (controller)
+    {
+        // Setup controller callback to trigger redraws
+        controller->set_redraw_callback([this]()
+        {
+            drawing_area.queue_draw();
+        });
+    }
+}
+
+void View::set_manager(Manager* mgr)
+{
+    manager = mgr;
+}
+
+void View::setup_ui()
+{
     // --- OVERLAY ---
     overlay.set_hexpand(true);
     overlay.set_vexpand(true);
@@ -30,8 +47,6 @@ View::View(Controller& controller, Manager& manager)
     drawing_area.set_can_target(true);
     drawing_area.set_draw_func(sigc::mem_fun(*this, &View::on_draw));
     overlay.set_child(drawing_area);
-
-    // Controller handles all event setup
 
     // --- LEFT PANEL (colour selection) ---
     left_panel.set_halign(Gtk::Align::START);
@@ -125,7 +140,7 @@ View::View(Controller& controller, Manager& manager)
     btn_settings.signal_clicked().connect(sigc::mem_fun(*this, &View::on_settings));
 }
 
-// --- DRAWING (uses controller for everything) ---
+// --- DRAWING (with null checks) ---
 
 void View::on_draw(
     const Cairo::RefPtr<Cairo::Context>& cr,
@@ -133,15 +148,17 @@ void View::on_draw(
     int height
 )
 {
-    double camera_x = controller.get_camera_x();
-    double camera_y = controller.get_camera_y();
-    double zoom = controller.get_zoom();
-    int cell_size = controller.get_cell_size();
+    if (!controller)
+        return; // Can't draw without controller
+
+    double camera_x = controller->get_camera_x();
+    double camera_y = controller->get_camera_y();
+    double zoom = controller->get_zoom();
+    int cell_size = controller->get_cell_size();
 
     // Get world data through controller
-    auto& world = controller.get_world();
+    auto& world = controller->get_world();
 
-    // TODO create more cell types to application to render like blue, green and red cells
     cr->scale(zoom, zoom);
     cr->translate(-camera_x, -camera_y);
 
@@ -161,12 +178,10 @@ void View::on_draw(
 
                 if (type == 'w')
                 {
-                    // wall cell
                     cr->set_source_rgba(1.0, 1.0, 1.0, 1.0);
                 }
                 else
                 {
-                    // default cell
                     cr->set_source_rgba(
                         even ? 0.8 : 0.4,
                         0.4,
@@ -185,7 +200,6 @@ void View::on_draw(
             }
         }
     }
-    // draw grid last
     create_Grid(cr, width, height, 1);
 }
 
@@ -196,16 +210,16 @@ void View::create_Grid(
     int size
 ) const
 {
-    double camera_x = controller.get_camera_x();
-    double camera_y = controller.get_camera_y();
-    double zoom = controller.get_zoom();
-    int cell_size = controller.get_cell_size();
+    if (!controller)
+        return;
 
-    // grid spacing in screen pixels
+    double camera_x = controller->get_camera_x();
+    double camera_y = controller->get_camera_y();
+    double zoom = controller->get_zoom();
+    int cell_size = controller->get_cell_size();
+
     double screen_step = (size * cell_size) * zoom;
 
-    // TODO remove the limit on grid when the zoom is fixed
-    // too small to be meaningful
     if (screen_step < 5.0)
         return;
 
@@ -239,52 +253,82 @@ void View::create_Grid(
     cr->stroke();
 }
 
-// --- BUTTON CALLBACKS (stubs for now) ---
+// --- BUTTON CALLBACKS ---
 
 void View::on_start()
 {
+    if (controller)
+    {
+        // controller->start_simulation();
+    }
 }
 
 void View::on_pause()
 {
+    if (controller)
+    {
+        // controller->pause_simulation();
+    }
 }
 
 void View::on_restart()
 {
+    if (controller)
+    {
+        // controller->restart_simulation();
+    }
 }
 
 void View::on_generate()
 {
+    if (controller)
+    {
+        // controller->generate_world();
+    }
 }
 
 void View::on_rule_editor()
 {
+    // Open rule editor dialog
 }
 
 void View::on_import()
 {
+    // Open file dialog
 }
 
 void View::on_export()
 {
+    // Open save dialog
 }
 
 void View::on_settings()
 {
+    // Open settings dialog
 }
 
 void View::on_speed(SimSpeed speed)
 {
+    if (controller)
+    {
+        // controller->set_simulation_speed(speed);
+    }
 }
 
 void View::update_speed_ui()
 {
+    // Update which speed button appears active
 }
 
 void View::on_color(CellColor color)
 {
+    if (controller)
+    {
+        // controller->set_selected_color(color);
+    }
 }
 
 void View::update_color_ui()
 {
+    // Update which color button appears active
 }

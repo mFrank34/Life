@@ -6,7 +6,7 @@
 
 void run()
 {
-    View& View;
+    View& View();
 
     Model& Model;
 

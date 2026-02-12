@@ -5,8 +5,7 @@
 #include <gtkmm.h>
 #include <gtkmm/drawingarea.h>
 
-#include "app/controller/Controller.h"
-
+class Controller;
 class Manager;
 
 enum class SimSpeed
@@ -28,11 +27,16 @@ enum class CellColor
 class View : public Gtk::Box
 {
 public:
-    View(Controller& controller, Manager& manager);
+    View();
+    ~View() = default;
+
+    // MVC setup - set controller after construction
+    void set_controller(Controller* ctrl);
+    void set_manager(Manager* mgr);
 
 private:
-    Controller& controller;
-    Manager& manager;
+    Controller* controller = nullptr;
+    Manager* manager = nullptr;
 
     // UI components
     Gtk::Overlay overlay;
@@ -86,6 +90,9 @@ private:
 
     void on_color(CellColor color);
     void update_color_ui();
+
+    // Helper to initialize UI components
+    void setup_ui();
 };
 
 #endif
