@@ -5,7 +5,7 @@
 #include <chrono>
 #include "View.h"
 #include "world/World.h"
-#include "Settings.h"
+#include "app/Settings.h"
 
 enum class SimSpeed
 {
@@ -23,81 +23,86 @@ enum class CellColor
     White
 };
 
-class WorldBase; // Forward declaration
+class World; // Forward declaration
 
-class Interface : public Gtk::Box
+
+namespace app::window
 {
-public:
-    Interface(WorldBase& world, Settings& settings);
+    class Interface : public Gtk::Box
+    {
+    public:
+        Interface(World& world, Settings& settings);
 
-    void start_simulation();
-    void pause_simulation();
-    void set_speed(SimSpeed speed);
+        void start_simulation();
+        void pause_simulation();
+        void set_speed(SimSpeed speed);
 
-    // Signal emitted when user wants to change storage type
-    sigc::signal<void(StorageType)> signal_storage_changed;
+        // Signal emitted when user wants to change storage type
+        sigc::signal<void(StorageType)> signal_storage_changed;
 
-private:
-    WorldBase& world;
-    Settings& settings;
-    View view;
+    private:
+        World& world;
+        Settings& settings;
+        View view;
 
-    // Overlay structure
-    Gtk::Overlay overlay;
+        // Overlay structure
+        Gtk::Overlay overlay;
 
-    // Left panel - color selection
-    Gtk::Box left_panel{Gtk::Orientation::VERTICAL};
-    Gtk::Button btn_blue;
-    Gtk::Button btn_red;
-    Gtk::Button btn_green;
-    Gtk::Button btn_white;
+        // Left panel - color selection
+        Gtk::Box left_panel{Gtk::Orientation::VERTICAL};
+        Gtk::Button btn_blue;
+        Gtk::Button btn_red;
+        Gtk::Button btn_green;
+        Gtk::Button btn_white;
 
-    // Right panel - speed controls
-    Gtk::Box right_panel{Gtk::Orientation::VERTICAL};
-    Gtk::Button btn_speed_1;
-    Gtk::Button btn_speed_2;
-    Gtk::Button btn_speed_4;
-    Gtk::Button btn_speed_8;
+        // Right panel - speed controls
+        Gtk::Box right_panel{Gtk::Orientation::VERTICAL};
+        Gtk::Button btn_speed_1;
+        Gtk::Button btn_speed_2;
+        Gtk::Button btn_speed_4;
+        Gtk::Button btn_speed_8;
 
-    // Bottom controls
-    Gtk::Box bottom_controls{Gtk::Orientation::HORIZONTAL};
-    Gtk::Button btn_start;
-    Gtk::Button btn_pause;
-    Gtk::Button btn_restart;
-    Gtk::Button btn_generate;
-    Gtk::Button btn_rule_editor;
-    Gtk::Button btn_import;
-    Gtk::Button btn_export;
-    Gtk::Button btn_settings;
+        // Bottom controls
+        Gtk::Box bottom_controls{Gtk::Orientation::HORIZONTAL};
+        Gtk::Button btn_start;
+        Gtk::Button btn_pause;
+        Gtk::Button btn_restart;
+        Gtk::Button btn_generate;
+        Gtk::Button btn_rule_editor;
+        Gtk::Button btn_import;
+        Gtk::Button btn_export;
+        Gtk::Button btn_settings;
 
-    // Simulation
-    bool on_tick();
-    sigc::connection sim_timer;
-    bool is_running = false;
-    SimSpeed current_speed = SimSpeed::X1;
-    CellColor current_color = CellColor::Blue;
-    std::chrono::steady_clock::time_point last_tick;
+        // Simulation
+        bool on_tick();
+        sigc::connection sim_timer;
+        bool is_running = false;
+        SimSpeed current_speed = SimSpeed::X1;
+        CellColor current_color = CellColor::Blue;
+        std::chrono::steady_clock::time_point last_tick;
 
-    int get_interval_ms() const;
+        int get_interval_ms() const;
 
-    // Event handlers
-    void on_start();
-    void on_pause();
-    void on_restart();
-    void on_generate();
-    void on_rule_editor();
-    void on_import();
-    void on_export();
-    void on_settings();
-    void on_speed(SimSpeed speed);
-    void on_color(CellColor color);
+        // Event handlers
+        void on_start();
+        void on_pause();
+        void on_restart();
+        void on_generate();
+        void on_rule_editor();
+        void on_import();
+        void on_export();
+        void on_settings();
+        void on_speed(SimSpeed speed);
+        void on_color(CellColor color);
 
-    // UI updates
-    void update_speed_ui();
-    void update_color_ui();
+        // UI updates
+        void update_speed_ui();
+        void update_color_ui();
 
-    // Settings dialog
-    void show_settings_dialog();
+        // Settings dialog
+        void show_settings_dialog();
+    };
 };
+
 
 #endif // INTERFACE_H

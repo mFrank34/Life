@@ -1,7 +1,6 @@
-// gtk
+// App.cpp
+
 #include <gtkmm.h>
-#include "app/Settings.h"
-#include "app/simulation/Simulation.h"
 #include "app/window/Window.h"
 
 int main(int argc, char* argv[])
