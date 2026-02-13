@@ -30,7 +30,7 @@ add_library(LifeCore
 
     src/app/simulation/Simulation.cpp
     src/app/window/Interface.cpp
-    src/app/window/MainWindow.cpp
+        src/app/window/Window.cpp
     src/app/window/View.cpp
 )
 

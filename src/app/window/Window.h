@@ -1,22 +1,23 @@
-// MainWindows.h
+// Windows.h
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef WINDOW_H
+#define WINDOW_H
 
 #include <gtkmm/window.h>
 #include "app/simulation/Simulation.h"
 #include "app/Settings.h"
 
-class MainWindow : public Gtk::Window
+class Window : public Gtk::Window
 {
 public:
-    MainWindow();
+    Window();
 
 private:
     Settings settings;
     Simulation simulation;
+    Interface interface;
 
     sigc::connection sim_timer;
 };
 
-#endif // MAINWINDOW_H
+#endif // WINDOW_H
