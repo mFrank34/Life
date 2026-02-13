@@ -1,37 +1,15 @@
-#include <iostream>
-#include <string>
-
 // gtk
 #include <gtkmm.h>
-
-// custom class
-#include "../world/Manager.h"
-#include "rules/Rules.h"
-
-// storage containers
-#include "world/World.h"
-#include "world/storage/Sparse.h"
-
-// UI
-#include "window/Interface.h"
-
-#include "Settings.h"
+#include "app/Settings.h"
 #include "app/simulation/Simulation.h"
+#include "app/window/MainWindow.h"
 
 int main(int argc, char* argv[])
 {
-    auto app = Gtk::Application::create();
+    auto app = Gtk::Application::create("com.example.simulation");
 
-    Settings settings;
-    Simulation sim(settings);
+    MainWindow window;
+    window.present(); // <-- show window
 
-    Gtk::Window main_window;
-    main_window.set_title("Simulation");
-
-    Glib::signal_timeout().connect(
-        sigc::mem_fun(sim, &Simulation::tick),
-        1000 / settings.tick_rate
-    );
-
-    return app->run(interface());
+    return app->run(); // <-- no arguments
 }

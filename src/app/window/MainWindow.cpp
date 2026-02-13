@@ -1,8 +1,7 @@
-//
-// Created by frank on 13/02/2026.
-//
+// MainWindow.cpp
 
 #include "MainWindow.h"
+#include <glibmm/main.h>
 
 // app/MainWindow.cpp
 MainWindow::MainWindow()
