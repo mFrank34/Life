@@ -3,8 +3,7 @@
 Model::Model()
     : cache(32, 16),
       sparse(32),
-      unordered(1),
-      manager()
+      unordered(1)
 {
 }
 
@@ -25,9 +24,4 @@ Sparse& Model::getSparse()
 Unordered& Model::getUnordered()
 {
     return unordered;
-}
-
-Manager& Model::getManager()
-{
-    return manager;
 }

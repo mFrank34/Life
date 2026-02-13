@@ -6,9 +6,15 @@
 
 void run()
 {
-    View& View();
+    Model model;
+    View view;
 
-    Model& Model;
+    Controller controller(model, view.getDrawingArea());
 
-    Controller& Controller(View, Model);
+    view.setController(&controller);
+
+    controller.set_redraw_callback([&view]()
+    {
+        view.queue_draw();
+    });
 };

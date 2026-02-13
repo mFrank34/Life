@@ -1,12 +1,20 @@
-// View.h
+// View.cpp
 #include "View.h"
 #include "app/controller/Controller.h"
 #include "world/World.h"
 #include "world/structure/Chunk.h"
+#include "app/controller/Controller.h"
 #include <cmath>
 
+
+/**
+ * Creates constructor
+ */
 View::View()
-    : Gtk::Box(Gtk::Orientation::VERTICAL)
+    : Gtk::Box(Gtk::Orientation::VERTICAL),
+      controller(nullptr),
+      current_speed(SimSpeed::X1),
+      current_color(CellColor::BLUE)
 {
     set_hexpand(true);
     set_vexpand(true);
@@ -14,25 +22,19 @@ View::View()
     setup_ui();
 }
 
-void View::set_controller(Controller* ctrl)
-{
-    controller = ctrl;
 
-    if (controller)
-    {
-        // Setup controller callback to trigger redraws
-        controller->set_redraw_callback([this]()
-        {
-            drawing_area.queue_draw();
-        });
-    }
+/**
+ * Setting the controller of the application
+ * @param controller the module controller that controls the interactions
+ */
+void View::setController(Controller* controller)
+{
+    this->controller = controller;
 }
 
-void View::set_manager(Manager* mgr)
-{
-    manager = mgr;
-}
-
+/**
+ * A system to generate a gui for application and create all buttons and drawing zone
+ */
 void View::setup_ui()
 {
     // --- OVERLAY ---
@@ -66,13 +68,13 @@ void View::setup_ui()
     left_panel.append(btn_white);
 
     btn_blue.signal_clicked().connect(
-        sigc::bind(sigc::mem_fun(*this, &View::on_color), CellColor::Blue));
+        sigc::bind(sigc::mem_fun(*this, &View::on_color), CellColor::BLUE));
     btn_red.signal_clicked().connect(
-        sigc::bind(sigc::mem_fun(*this, &View::on_color), CellColor::Red));
+        sigc::bind(sigc::mem_fun(*this, &View::on_color), CellColor::RED));
     btn_green.signal_clicked().connect(
-        sigc::bind(sigc::mem_fun(*this, &View::on_color), CellColor::Green));
+        sigc::bind(sigc::mem_fun(*this, &View::on_color), CellColor::GREEN));
     btn_white.signal_clicked().connect(
-        sigc::bind(sigc::mem_fun(*this, &View::on_color), CellColor::White));
+        sigc::bind(sigc::mem_fun(*this, &View::on_color), CellColor::WHITE));
 
     // --- RIGHT PANEL (speed controls) ---
     right_panel.set_halign(Gtk::Align::END);
@@ -140,8 +142,12 @@ void View::setup_ui()
     btn_settings.signal_clicked().connect(sigc::mem_fun(*this, &View::on_settings));
 }
 
-// --- DRAWING (with null checks) ---
-
+/**
+ * Main drawing function - renders the world
+ * @param cr Cairo context for drawing
+ * @param width Window width
+ * @param height Window height
+ */
 void View::on_draw(
     const Cairo::RefPtr<Cairo::Context>& cr,
     int width,
@@ -149,39 +155,54 @@ void View::on_draw(
 )
 {
     if (!controller)
-        return; // Can't draw without controller
+        return;
 
     double camera_x = controller->get_camera_x();
     double camera_y = controller->get_camera_y();
     double zoom = controller->get_zoom();
     int cell_size = controller->get_cell_size();
 
-    // Get world data through controller
-    auto& world = controller->get_world();
-
     cr->scale(zoom, zoom);
     cr->translate(-camera_x, -camera_y);
 
+    auto& world = controller->get_world();
     auto& data = world.get_world();
+
     for (const auto& [key, chunk] : data)
     {
         bool even = ((chunk.get_CX() + chunk.get_CY()) % 2 == 0);
-
         for (int cy = 0; cy < chunk.get_size(); cy++)
         {
             for (int cx = 0; cx < chunk.get_size(); cx++)
             {
                 int wx = chunk.get_CX() * chunk.get_size() + cx;
                 int wy = chunk.get_CY() * chunk.get_size() + cy;
-
                 char type = world.get_cell(wx, wy).get_type();
 
+                // Color based on cell type
                 if (type == 'w')
                 {
+                    // wall cell (white)
                     cr->set_source_rgba(1.0, 1.0, 1.0, 1.0);
+                }
+                else if (type == 'b')
+                {
+                    // blue cell
+                    cr->set_source_rgba(0.2, 0.4, 1.0, 1.0);
+                }
+                else if (type == 'r')
+                {
+                    // red cell
+                    cr->set_source_rgba(1.0, 0.2, 0.2, 1.0);
+                }
+                else if (type == 'g')
+                {
+                    // green cell
+                    cr->set_source_rgba(0.2, 1.0, 0.2, 1.0);
                 }
                 else
                 {
+                    // default cell (checkered pattern)
                     cr->set_source_rgba(
                         even ? 0.8 : 0.4,
                         0.4,
@@ -200,15 +221,24 @@ void View::on_draw(
             }
         }
     }
+
+    // draw grid last
     create_Grid(cr, width, height, 1);
 }
 
+/**
+ * System to generate a grid for the game grid
+ * @param cr the grid references to draw too
+ * @param width size of grid
+ * @param height size of grid
+ * @param size size of the spacing of the cells
+ */
 void View::create_Grid(
     const Cairo::RefPtr<Cairo::Context>& cr,
     int width,
     int height,
     int size
-) const
+)
 {
     if (!controller)
         return;
@@ -235,7 +265,7 @@ void View::create_Grid(
     int start_y = std::floor(top / step) * step;
     int end_y = std::ceil(bottom / step) * step;
 
-    cr->set_source_rgba(83, 83, 83, 0.5);
+    cr->set_source_rgba(0.325, 0.325, 0.325, 0.5);
     cr->set_line_width(1.0 / zoom);
 
     for (int x = start_x; x <= end_x; x += step)
@@ -253,82 +283,132 @@ void View::create_Grid(
     cr->stroke();
 }
 
+
 // --- BUTTON CALLBACKS ---
 
 void View::on_start()
 {
-    if (controller)
-    {
-        // controller->start_simulation();
-    }
+    // TODO: Implement start logic
 }
 
 void View::on_pause()
 {
-    if (controller)
-    {
-        // controller->pause_simulation();
-    }
+    // TODO: Implement pause logic
 }
 
 void View::on_restart()
 {
-    if (controller)
-    {
-        // controller->restart_simulation();
-    }
+    // TODO: Implement restart logic
 }
 
 void View::on_generate()
 {
-    if (controller)
-    {
-        // controller->generate_world();
-    }
+    // TODO: Implement generate logic
 }
 
 void View::on_rule_editor()
 {
-    // Open rule editor dialog
+    // TODO: Implement rule editor logic
 }
 
 void View::on_import()
 {
-    // Open file dialog
+    // TODO: Implement import logic
 }
 
 void View::on_export()
 {
-    // Open save dialog
+    // TODO: Implement export logic
 }
 
 void View::on_settings()
 {
-    // Open settings dialog
+    // TODO: Implement settings logic
 }
 
 void View::on_speed(SimSpeed speed)
 {
-    if (controller)
-    {
-        // controller->set_simulation_speed(speed);
-    }
+    current_speed = speed;
+    update_speed_ui();
+    // TODO: Apply speed to simulation
 }
 
 void View::update_speed_ui()
 {
-    // Update which speed button appears active
+    // Remove active class from all buttons
+    btn_speed_1.remove_css_class("active");
+    btn_speed_2.remove_css_class("active");
+    btn_speed_4.remove_css_class("active");
+    btn_speed_8.remove_css_class("active");
+
+    // Add active class to selected button
+    switch (current_speed)
+    {
+    case SimSpeed::X1:
+        btn_speed_1.add_css_class("active");
+        break;
+    case SimSpeed::X2:
+        btn_speed_2.add_css_class("active");
+        break;
+    case SimSpeed::X4:
+        btn_speed_4.add_css_class("active");
+        break;
+    case SimSpeed::X8:
+        btn_speed_8.add_css_class("active");
+        break;
+    }
 }
 
 void View::on_color(CellColor color)
 {
+    current_color = color;
+    update_color_ui();
+
+    // Update the controller's current cell type
     if (controller)
     {
-        // controller->set_selected_color(color);
+        char type = '0';
+        switch (color)
+        {
+        case CellColor::BLUE:
+            type = 'b';
+            break;
+        case CellColor::RED:
+            type = 'r';
+            break;
+        case CellColor::GREEN:
+            type = 'g';
+            break;
+        case CellColor::WHITE:
+            type = 'w';
+            break;
+        }
+        controller->set_current_cell_type(type);
     }
 }
 
 void View::update_color_ui()
 {
-    // Update which color button appears active
+    // Remove active class from all buttons
+    btn_blue.remove_css_class("active");
+    btn_red.remove_css_class("active");
+    btn_green.remove_css_class("active");
+    btn_white.remove_css_class("active");
+
+    // Add active class to selected button
+    switch (current_color)
+    {
+    case CellColor::BLUE:
+        btn_blue.add_css_class("active");
+        break;
+    case CellColor::RED:
+        btn_red.add_css_class("active");
+        break;
+    case CellColor::GREEN:
+        btn_green.add_css_class("active");
+        break;
+    case CellColor::WHITE:
+        btn_white.add_css_class("active");
+        break;
+    }
 }

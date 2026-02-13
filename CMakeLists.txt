@@ -6,6 +6,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(BUILD_TESTS "Build tests" ON)
 
+# GTK4 - MUST BE BEFORE add_library
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GTKMM REQUIRED gtkmm-4.0)
+
 # Core library
 add_library(LifeCore
         src/world/World.cpp
@@ -18,32 +22,30 @@ add_library(LifeCore
         src/world/storage/Unordered.cpp
 
         src/rules/Rules.cpp
+
+        # MVC Files
+        src/app/App.cpp
+        src/app/model/Model.cpp
+        src/app/view/View.cpp
+        src/app/controller/Controller.cpp
 )
 
 target_include_directories(LifeCore PUBLIC
         ${CMAKE_SOURCE_DIR}/src
+        ${GTKMM_INCLUDE_DIRS}
 )
+
+target_compile_options(LifeCore PUBLIC ${GTKMM_CFLAGS_OTHER})
+target_link_directories(LifeCore PUBLIC ${GTKMM_LIBRARY_DIRS})
+target_link_libraries(LifeCore PUBLIC ${GTKMM_LIBRARIES})
 
 
 # Executable
 add_executable(Life
-        src/app/App.cpp
-        src/app/controller/Controller.cpp
-        src/app/view/View.cpp
-        src/world/Manager.cpp
+        src/launcher/main.cpp
 )
 
 target_link_libraries(Life PRIVATE LifeCore)
-
-
-# GTK4 (app only)
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(GTKMM REQUIRED gtkmm-4.0)
-
-target_include_directories(Life PRIVATE ${GTKMM_INCLUDE_DIRS})
-target_compile_options(Life PRIVATE ${GTKMM_CFLAGS_OTHER})
-target_link_directories(Life PRIVATE ${GTKMM_LIBRARY_DIRS})
-target_link_libraries(Life PRIVATE ${GTKMM_LIBRARIES})
 
 
 # Resources

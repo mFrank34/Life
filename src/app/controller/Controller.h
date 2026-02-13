@@ -7,13 +7,14 @@
 #include <gtkmm/eventcontrollerscroll.h>
 #include <gtkmm/eventcontrollermotion.h>
 
+class Model;
 class World;
 class Cell;
 
 class Controller
 {
 public:
-    Controller(World& world, Gtk::DrawingArea& drawing_area);
+    Controller(Model& model, Gtk::DrawingArea& drawing_area);
 
     // Getters for rendering
     double get_camera_x() const { return camera_x; }
@@ -21,15 +22,23 @@ public:
     double get_zoom() const { return zoom; }
     int get_cell_size() const { return cell_size; }
 
-    // World access for Interface
-    World& get_world() { return world; }
-    const World& get_world() const { return world; }
+    // Model access for View
+    Model& get_model() { return model; }
+    const Model& get_model() const { return model; }
+
+    // World access - currently returns cache, can be extended later for switching
+    World& get_world();
+    const World& get_world() const;
+
+    // Cell type management
+    void set_current_cell_type(char type) { current_cell_type = type; }
+    char get_current_cell_type() const { return current_cell_type; }
 
     // Callback to trigger redraws
     void set_redraw_callback(std::function<void()> callback);
 
 private:
-    World& world;
+    Model& model;
     Gtk::DrawingArea& drawing_area;
 
     // Camera state
@@ -37,6 +46,9 @@ private:
     double camera_x = 0.0;
     double camera_y = 0.0;
     double zoom = 1.0;
+
+    // Current cell type to place
+    char current_cell_type = 'w';
 
     // Drag state
     double drag_start_x = 0.0;

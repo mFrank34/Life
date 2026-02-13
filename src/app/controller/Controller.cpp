@@ -1,14 +1,29 @@
+// Controller.cpp
+
 #include "Controller.h"
+#include "app/model/Model.h"
 #include "world/World.h"
 #include <gtkmm/gesturedrag.h>
 #include <algorithm>
 #include <cmath>
 
-Controller::Controller(World& world, Gtk::DrawingArea& drawing_area)
-    : world(world),
+Controller::Controller(Model& model, Gtk::DrawingArea& drawing_area)
+    : model(model),
       drawing_area(drawing_area)
 {
     setup_event_handlers();
+}
+
+World& Controller::get_world()
+{
+    // For now, just use cache. Can extend later for switching between storage types
+    return model.getCache();
+}
+
+const World& Controller::get_world() const
+{
+    // For now, just use cache. Can extend later for switching between storage types
+    return model.getCache();
 }
 
 void Controller::setup_event_handlers()
@@ -70,12 +85,13 @@ void Controller::on_click(int, double mx, double my)
     int cx = world_x / cell_size;
     int cy = world_y / cell_size;
 
-    auto& cell = world.get_cell(cx, cy);
+    auto& cell = get_world().get_cell(cx, cy);
 
-    if (cell.get_type() == 'w')
-        cell.set_type('0'); // unselect
+    // If clicking on the same type, clear it; otherwise set to current type
+    if (cell.get_type() == current_cell_type)
+        cell.set_type('0'); // clear cell
     else
-        cell.set_type('w'); // place wall
+        cell.set_type(current_cell_type); // place current color
 
     trigger_redraw();
 }

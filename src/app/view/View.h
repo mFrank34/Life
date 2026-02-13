@@ -1,28 +1,15 @@
-#ifndef INTERFACE_H
-#define INTERFACE_H
-
 #pragma once
+#ifndef VIEW_H
+#define VIEW_H
+
 #include <gtkmm.h>
 #include <gtkmm/drawingarea.h>
 
+// Consistent enum names
+enum class CellColor { BLUE, RED, GREEN, WHITE };
+enum class SimSpeed { X1 = 1, X2 = 2, X4 = 4, X8 = 8 };
+
 class Controller;
-class Manager;
-
-enum class SimSpeed
-{
-    X1 = 1,
-    X2 = 2,
-    X4 = 4,
-    X8 = 8
-};
-
-enum class CellColor
-{
-    Blue,
-    Red,
-    Green,
-    White
-};
 
 class View : public Gtk::Box
 {
@@ -30,13 +17,18 @@ public:
     View();
     ~View() = default;
 
-    // MVC setup - set controller after construction
-    void set_controller(Controller* ctrl);
-    void set_manager(Manager* mgr);
+    // Setting the controller
+    void setController(Controller* controller);
+
+    // Access to drawing area for Controller setup
+    Gtk::DrawingArea& getDrawingArea() { return drawing_area; }
 
 private:
     Controller* controller = nullptr;
-    Manager* manager = nullptr;
+
+    // Current state
+    CellColor current_color = CellColor::WHITE;
+    SimSpeed current_speed = SimSpeed::X1;
 
     // UI components
     Gtk::Overlay overlay;
@@ -45,7 +37,7 @@ private:
     // Drawing handler
     void on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int w, int h);
     void create_Grid(const Cairo::RefPtr<Cairo::Context>& cr,
-                     int width, int height, int size) const;
+                     int width, int height, int size);
 
     // Bottom controls
     Gtk::Box bottom_controls{Gtk::Orientation::HORIZONTAL};
@@ -95,4 +87,4 @@ private:
     void setup_ui();
 };
 
-#endif
+#endif // VIEW_H
