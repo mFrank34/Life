@@ -5,7 +5,6 @@
 #include <gtkmm.h>
 
 #include "View.h"
-#include "app/controller/Controller.h"
 
 class World;
 class Manager;

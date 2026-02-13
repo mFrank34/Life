@@ -4,7 +4,7 @@
 #define MAINWINDOW_H
 
 #include <gtkmm/window.h>
-#include "simulation/Simulation.h"
+#include "app/simulation/Simulation.h"
 #include "app/Settings.h"
 
 class MainWindow : public Gtk::Window
