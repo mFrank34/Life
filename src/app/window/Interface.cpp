@@ -1,12 +1,14 @@
 #include "Interface.h"
 #include "View.h"
 #include "world/World.h"
-#include "../../world/Manager.h"
+#include <iostream>
 
-Interface::Interface(World& world)
+Interface::Interface(WorldBase& world, Settings& settings)
     : Gtk::Box(Gtk::Orientation::VERTICAL),
       world(world),
-      view(world)
+      settings(settings),
+      view(world),
+      last_tick(std::chrono::steady_clock::now())
 {
     set_hexpand(true);
     set_vexpand(true);
@@ -109,55 +111,287 @@ Interface::Interface(World& world)
     btn_import.signal_clicked().connect(sigc::mem_fun(*this, &Interface::on_import));
     btn_export.signal_clicked().connect(sigc::mem_fun(*this, &Interface::on_export));
     btn_settings.signal_clicked().connect(sigc::mem_fun(*this, &Interface::on_settings));
+
+    // Initialize UI state
+    update_speed_ui();
+    update_color_ui();
 }
 
+// ========== SIMULATION ==========
 
-// TODO Build application interactions for application Section Pretty please michael! thanks your the best
+bool Interface::on_tick()
+{
+    auto now = std::chrono::steady_clock::now();
+    std::chrono::duration<double> delta = now - last_tick;
+    last_tick = now;
+
+    double dt = delta.count();
+
+    // Update world
+    world.update(dt);
+
+    // Trigger view redraw
+    view.queue_draw();
+
+    return true; // Keep timer running
+}
+
+void Interface::start_simulation()
+{
+    if (!is_running)
+    {
+        is_running = true;
+        last_tick = std::chrono::steady_clock::now();
+
+        sim_timer = Glib::signal_timeout().connect(
+            sigc::mem_fun(*this, &Interface::on_tick),
+            get_interval_ms()
+        );
+    }
+}
+
+void Interface::pause_simulation()
+{
+    if (is_running)
+    {
+        is_running = false;
+        sim_timer.disconnect();
+    }
+}
+
+void Interface::set_speed(SimSpeed speed)
+{
+    current_speed = speed;
+
+    // If running, restart timer with new interval
+    if (is_running)
+    {
+        sim_timer.disconnect();
+        sim_timer = Glib::signal_timeout().connect(
+            sigc::mem_fun(*this, &Interface::on_tick),
+            get_interval_ms()
+        );
+    }
+
+    update_speed_ui();
+}
+
+int Interface::get_interval_ms() const
+{
+    const int base_interval = 16; // ~60 FPS
+
+    switch (current_speed)
+    {
+    case SimSpeed::X1: return base_interval;
+    case SimSpeed::X2: return base_interval / 2;
+    case SimSpeed::X4: return base_interval / 4;
+    case SimSpeed::X8: return base_interval / 8;
+    default: return base_interval;
+    }
+}
+
+// ========== EVENT HANDLERS ==========
 
 void Interface::on_start()
 {
+    start_simulation();
+    std::cout << "Simulation started" << std::endl;
 }
 
 void Interface::on_pause()
 {
+    pause_simulation();
+    std::cout << "Simulation paused" << std::endl;
 }
 
 void Interface::on_restart()
 {
+    pause_simulation();
+    world.reset();
+    view.queue_draw();
+    std::cout << "Simulation restarted" << std::endl;
 }
 
 void Interface::on_generate()
 {
+    std::cout << "Generate clicked" << std::endl;
+    // TODO: Open generation dialog or generate random world
 }
 
 void Interface::on_rule_editor()
 {
+    std::cout << "Rule editor clicked" << std::endl;
+    // TODO: Open rule editor dialog
 }
 
 void Interface::on_import()
 {
+    std::cout << "Import clicked" << std::endl;
+    // TODO: Open file dialog to import world/rules
 }
 
 void Interface::on_export()
 {
+    std::cout << "Export clicked" << std::endl;
+    // TODO: Open file dialog to export world/rules
 }
 
 void Interface::on_settings()
 {
+    show_settings_dialog();
 }
 
 void Interface::on_speed(SimSpeed speed)
 {
-}
-
-void Interface::update_speed_ui()
-{
+    set_speed(speed);
+    std::cout << "Speed changed to: ";
+    switch (speed)
+    {
+    case SimSpeed::X1: std::cout << "x1";
+        break;
+    case SimSpeed::X2: std::cout << "x2";
+        break;
+    case SimSpeed::X4: std::cout << "x4";
+        break;
+    case SimSpeed::X8: std::cout << "x8";
+        break;
+    }
+    std::cout << std::endl;
 }
 
 void Interface::on_color(CellColor color)
 {
+    current_color = color;
+    update_color_ui();
+
+    std::cout << "Color changed to: ";
+    switch (color)
+    {
+    case CellColor::Blue: std::cout << "Blue";
+        break;
+    case CellColor::Red: std::cout << "Red";
+        break;
+    case CellColor::Green: std::cout << "Green";
+        break;
+    case CellColor::White: std::cout << "White";
+        break;
+    }
+    std::cout << std::endl;
+}
+
+// ========== UI UPDATES ==========
+
+void Interface::update_speed_ui()
+{
+    // Remove "active" class from all speed buttons
+    btn_speed_1.remove_css_class("active");
+    btn_speed_2.remove_css_class("active");
+    btn_speed_4.remove_css_class("active");
+    btn_speed_8.remove_css_class("active");
+
+    // Add "active" class to current speed button
+    switch (current_speed)
+    {
+    case SimSpeed::X1: btn_speed_1.add_css_class("active");
+        break;
+    case SimSpeed::X2: btn_speed_2.add_css_class("active");
+        break;
+    case SimSpeed::X4: btn_speed_4.add_css_class("active");
+        break;
+    case SimSpeed::X8: btn_speed_8.add_css_class("active");
+        break;
+    }
 }
 
 void Interface::update_color_ui()
 {
+    // Remove "active" class from all color buttons
+    btn_blue.remove_css_class("active");
+    btn_red.remove_css_class("active");
+    btn_green.remove_css_class("active");
+    btn_white.remove_css_class("active");
+
+    // Add "active" class to current color button
+    switch (current_color)
+    {
+    case CellColor::Blue: btn_blue.add_css_class("active");
+        break;
+    case CellColor::Red: btn_red.add_css_class("active");
+        break;
+    case CellColor::Green: btn_green.add_css_class("active");
+        break;
+    case CellColor::White: btn_white.add_css_class("active");
+        break;
+    }
+}
+
+// ========== SETTINGS DIALOG ==========
+
+void Interface::show_settings_dialog()
+{
+    auto dialog = new Gtk::Dialog("Settings", *dynamic_cast<Gtk::Window*>(get_root()), true);
+    dialog->set_default_size(400, 300);
+
+    auto content = dialog->get_content_area();
+
+    // Storage type selection
+    auto storage_box = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL);
+    storage_box->set_margin(12);
+    storage_box->set_spacing(12);
+
+    auto storage_label = Gtk::make_managed<Gtk::Label>("Storage Type:");
+    storage_box->append(*storage_label);
+
+    auto storage_dropdown = Gtk::make_managed<Gtk::DropDown>();
+    auto string_list = Gtk::StringList::create({"Sparse", "Cache", "Unordered"});
+    storage_dropdown->set_model(string_list);
+
+    // Set current selection
+    switch (settings.storage_type)
+    {
+    case StorageType::Sparse: storage_dropdown->set_selected(0);
+        break;
+    case StorageType::Cache: storage_dropdown->set_selected(1);
+        break;
+    case StorageType::Unordered: storage_dropdown->set_selected(2);
+        break;
+    }
+
+    storage_box->append(*storage_dropdown);
+    content->append(*storage_box);
+
+    // Add other settings here...
+
+    // Buttons
+    dialog->add_button("Cancel", Gtk::ResponseType::CANCEL);
+    dialog->add_button("Apply", Gtk::ResponseType::APPLY);
+
+    dialog->signal_response().connect([this, dialog, storage_dropdown](int response)
+    {
+        if (response == Gtk::ResponseType::APPLY)
+        {
+            // Get selected storage type
+            StorageType new_type;
+            switch (storage_dropdown->get_selected())
+            {
+            case 0: new_type = StorageType::Sparse;
+                break;
+            case 1: new_type = StorageType::Cache;
+                break;
+            case 2: new_type = StorageType::Unordered;
+                break;
+            default: new_type = StorageType::Sparse;
+            }
+
+            // Emit signal to change storage type (Window will handle recreation)
+            if (new_type != settings.storage_type)
+            {
+                signal_storage_changed.emit(new_type);
+            }
+        }
+
+        delete dialog;
+    });
+
+    dialog->show();
 }

@@ -1,13 +1,25 @@
-// Settings.h
-
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-struct Settings
+enum class StorageType
 {
+    Sparse,
+    Cache,
+    Unordered
+};
+
+class Settings
+{
+public:
+    // World configuration
+    StorageType storage_type = StorageType::Sparse;
+
+    // Simulation
     int tick_rate = 60;
-    double sim_speed = 1.0;
-    bool paused = false;
+
+    // Display
+    bool show_grid = true;
+    float zoom = 1.0f;
 };
 
 #endif // SETTINGS_H
