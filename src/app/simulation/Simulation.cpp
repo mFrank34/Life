@@ -2,11 +2,14 @@
 #include "Simulation.h"
 #include <gtkmm.h>
 #include <chrono>
+#include <iostream>
 
 Simulation::Simulation(Settings& settings)
-    : settings(settings)
+    : settings(settings),
+      last(std::chrono::steady_clock::now())
 {
 }
+
 
 bool Simulation::tick()
 {
@@ -14,10 +17,8 @@ bool Simulation::tick()
     std::chrono::duration<double> delta = now - last;
     last = now;
 
-    double dt = delta.count(); // seconds
-
-    // simulation step using dt
-    g_print("dt = %f\n", dt);
+    double dt = delta.count();
+    std::cout << "dt = " << dt << std::endl;
 
     return true;
-};
+}
