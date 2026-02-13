@@ -9,7 +9,6 @@ option(BUILD_TESTS "Build tests" ON)
 # Core library
 add_library(LifeCore
         src/world/World.cpp
-        src/world/Debug.cpp
 
         src/world/structure/Cell.cpp
         src/world/structure/Chunk.cpp
@@ -31,7 +30,7 @@ add_executable(Life
         src/app/App.cpp
         src/app/controller/Controller.cpp
         src/app/view/Interface.cpp
-        src/app/controller/Manager.cpp
+        src/world/Manager.cpp
         src/app/view/View.cpp
 )
 
