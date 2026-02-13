@@ -1,12 +1,11 @@
 #include "Interface.h"
 #include "View.h"
 #include "world/World.h"
-#include "app/controller/Manager.h"
+#include "../../world/Manager.h"
 
-Interface::Interface(World& world, Manager& manager)
+Interface::Interface(World& world)
     : Gtk::Box(Gtk::Orientation::VERTICAL),
       world(world),
-      manager(manager),
       view(world)
 {
     set_hexpand(true);

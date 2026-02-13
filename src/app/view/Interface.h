@@ -30,11 +30,10 @@ enum class CellColor
 class Interface : public Gtk::Box
 {
 public:
-    Interface(World& world, Manager& manager);
+    Interface(World& world);
 
 private:
     World& world;
-    Manager& manager;
 
     // UI owner
     Gtk::Overlay overlay;

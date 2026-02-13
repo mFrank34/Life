@@ -5,7 +5,7 @@
 #include <gtkmm.h>
 
 // custom class
-#include "controller/Manager.h"
+#include "../world/Manager.h"
 #include "rules/Rules.h"
 #include "world/Debug.h"
 
@@ -71,7 +71,7 @@ int run_interface()
         window->set_title("Conway's Game of Life");
         window->set_default_size(800, 600);
 
-        auto ui = Gtk::make_managed<Interface>(world, life);
+        auto ui = Gtk::make_managed<Interface>(world);
         window->set_child(*ui);
 
         app->add_window(*window);
