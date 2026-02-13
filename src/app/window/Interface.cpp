@@ -30,6 +30,11 @@ namespace app::window
         left_panel.set_spacing(6);
         overlay.add_overlay(left_panel);
 
+        btn_blue.set_label("BLUE");
+        btn_red.set_label("RED");
+        btn_green.set_label("GREEN");
+        btn_white.set_label("WHITE");
+
         btn_blue.add_css_class("color-btn");
         btn_red.add_css_class("color-btn");
         btn_green.add_css_class("color-btn");

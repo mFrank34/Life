@@ -1,24 +1,29 @@
-// Simulation.h
 #include "Simulation.h"
-#include <gtkmm.h>
-#include <chrono>
-#include <iostream>
 
-Simulation::Simulation(Settings& settings)
-    : settings(settings),
-      last(std::chrono::steady_clock::now())
+Simulation::Simulation(World& world)
+    : world(world)
 {
 }
 
-
-bool Simulation::tick()
+void Simulation::start()
 {
-    auto now = std::chrono::steady_clock::now();
-    std::chrono::duration<double> delta = now - last;
-    last = now;
+    running = true;
+}
 
-    double dt = delta.count();
-    std::cout << "dt = " << dt << std::endl;
+void Simulation::stop()
+{
+    running = false;
+}
 
-    return true;
+bool Simulation::is_running() const
+{
+    return running;
+}
+
+void Simulation::tick(float delta)
+{
+    if (!running)
+        return;
+
+    world.tick(delta);
 }

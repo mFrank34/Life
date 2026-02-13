@@ -1,24 +1,22 @@
-// Simulation.h
-
-#pragma once
 #ifndef SIMULATION_H
 #define SIMULATION_H
 
-#include <chrono>
-
-class Settings;
+#include "world/World.h"
 
 class Simulation
 {
 public:
-    Simulation(Settings& settings);
+    explicit Simulation(World& world);
 
-    bool tick();
+    void start();
+    void stop();
+    void tick(float delta);
+
+    bool is_running() const;
 
 private:
-    std::chrono::steady_clock::time_point last;
-    Settings& settings;
+    World& world;
+    bool running = false;
 };
 
-
-#endif // SIMULATION_H
+#endif
