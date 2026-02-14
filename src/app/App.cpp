@@ -8,7 +8,6 @@
 int main(int argc, char* argv[])
 {
     std::cout<< "Application Life Running" << std::endl;
-
-    auto app = Gtk::Application::create("com.example.simulation");
+    auto app = Gtk::Application::create("app.life.simulation");
     return app->make_window_and_run<Window>(argc, argv);
 }
