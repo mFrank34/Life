@@ -1,14 +1,13 @@
 #include "app/window/Interface.h"
-#include "world/World.h"
 
 namespace app::window
 {
-    Interface::Interface(World& world, Settings& settings, Simulation& simulation)
+    Interface::Interface(World& world, View& view, Settings& settings, Simulation& simulation)
         : Gtk::Box(Gtk::Orientation::VERTICAL)
           , world(world)
           , settings(settings)
           , simulation(simulation)
-          , view(world)
+          , view(view)
     {
         set_hexpand(true);
         set_vexpand(true);

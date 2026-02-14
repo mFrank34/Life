@@ -160,7 +160,6 @@ void Manager::chunk_update(Chunk& haloBuffer,
 Manager::Manager(Rules& rules)
     : rules(rules)
 {
-    std::cout << "manager created" << std::endl;
 }
 
 void Manager::attach_world(World& world)
