@@ -1,8 +1,21 @@
 #include "Simulation.h"
 
-Simulation::Simulation(World& world)
-    : world(world)
+Simulation::Simulation()
+    : manager(rules)
 {
+}
+
+void Simulation::attach_world(World& world)
+{
+    this->world = &world;
+    manager.attach_world(world);
+}
+
+void Simulation::tick(float delta)
+{
+    if (!this->isRunning() || !world)
+        return;
+    manager.update();
 }
 
 void Simulation::start()
@@ -10,20 +23,17 @@ void Simulation::start()
     running = true;
 }
 
-void Simulation::stop()
+void Simulation::pause()
 {
     running = false;
 }
 
-bool Simulation::is_running() const
+void Simulation::set_speed(float speed)
 {
-    return running;
+    // TODO: Create a speed changer that changed the speed which simulation happens with
 }
 
-void Simulation::tick(float delta)
+bool Simulation::isRunning() const
 {
-    if (!running)
-        return;
-
-    world.tick(delta);
+    return running;
 }

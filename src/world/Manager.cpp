@@ -28,7 +28,7 @@ void Manager::generate_missing_neighbour()
 {
     for (auto [id, key] : missing_neighbour)
     {
-        world.get_chunk(key);
+        world->get_chunk(key);
         active_neighbour.emplace_back(id, key);
     }
 }
@@ -157,23 +157,28 @@ void Manager::chunk_update(Chunk& haloBuffer,
     }
 }
 
-Manager::Manager(World& world, Rules& rules)
-    : world(world), rules(rules)
+Manager::Manager(Rules& rules)
+    : rules(rules)
 {
     std::cout << "manager created" << std::endl;
 }
 
+void Manager::attach_world(World& world)
+{
+    this->world = &world;
+}
+
 void Manager::update()
 {
-    auto& world_data = world.get_world();
-    auto& next_data = world.get_next_world();
+    auto& world_data = world->get_world();
+    auto& next_data = world->get_next_world();
 
     // --- Phase 0: Ensure Sync between both worlds
     std::vector<long long> to_create;
 
     for (auto& [key, chunk] : world_data)
     {
-        auto keys = world.get_neighbour_key(key);
+        auto keys = world->get_neighbour_key(key);
         for (long long nkey : keys)
         {
             if (!world_data.contains(nkey))
@@ -182,7 +187,7 @@ void Manager::update()
     }
 
     for (long long key : to_create)
-        world.get_chunk(key);
+        world->get_chunk(key);
 
     // --- Phase 1: compute next stage of game ---
 
@@ -190,7 +195,7 @@ void Manager::update()
     {
         const int size = chunk.get_size();
 
-        auto keys = world.get_neighbour_key(key);
+        auto keys = world->get_neighbour_key(key);
         find_neighbour(keys, world_data);
 
         get_neighbours_edge_case(world_data, size);
@@ -214,5 +219,6 @@ void Manager::update()
     }
 
     // --- Phase 2: commit changes ---
-    world.swap_world();
+    world->swap_world();
+    world->unload();
 }

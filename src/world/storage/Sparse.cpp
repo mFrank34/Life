@@ -61,6 +61,11 @@ std::unordered_map<long long, Chunk>& Sparse::get_next_world()
     return nextWorld;
 }
 
+void Sparse::tick(float delta)
+{
+
+}
+
 void Sparse::swap_world()
 {
     world.swap(nextWorld);

@@ -17,75 +17,69 @@ pkg_check_modules(GTKMM REQUIRED IMPORTED_TARGET gtkmm-4.0)
 # Core library
 # --------------------------------------------------
 add_library(LifeCore
-    src/world/World.cpp
+        src/world/World.cpp
+        src/world/Manager.cpp
 
-    src/world/structure/Cell.cpp
-    src/world/structure/Chunk.cpp
+        src/world/structure/Cell.cpp
+        src/world/structure/Chunk.cpp
 
-    src/world/storage/Cache.cpp
-    src/world/storage/Sparse.cpp
-    src/world/storage/Unordered.cpp
+        src/world/storage/Cache.cpp
+        src/world/storage/Sparse.cpp
+        src/world/storage/Unordered.cpp
 
-    src/rules/Rules.cpp
 
-    src/app/simulation/Simulation.cpp
-    src/app/window/Interface.cpp
+        src/rules/Rules.cpp
+
+        src/app/simulation/Simulation.cpp
+        src/app/window/Interface.cpp
         src/app/window/Window.cpp
-    src/app/window/View.cpp
+        src/app/window/View.cpp
 )
 
 target_include_directories(LifeCore
-    PUBLIC
+        PUBLIC
         ${CMAKE_SOURCE_DIR}/src
 )
 
 # GTK is REQUIRED by LifeCore
 target_link_libraries(LifeCore
-    PUBLIC PkgConfig::GTKMM
+        PUBLIC PkgConfig::GTKMM
 )
 
-# --------------------------------------------------
 # Executable
-# --------------------------------------------------
 add_executable(Life
-    src/app/App.cpp
+        src/app/App.cpp
 )
 
 target_link_libraries(Life
-    PRIVATE LifeCore
+        PRIVATE LifeCore
 )
 
-# --------------------------------------------------
+
 # Resources
-# --------------------------------------------------
 file(COPY
-    ${CMAKE_SOURCE_DIR}/src/resources
-    DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+        ${CMAKE_SOURCE_DIR}/src/resources
+        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-# --------------------------------------------------
 # Tests
-# --------------------------------------------------
 if (BUILD_TESTS)
     include(CTest)
     enable_testing()
     add_subdirectory(tests)
 endif ()
 
-# --------------------------------------------------
 # Install
-# --------------------------------------------------
 install(TARGETS Life
-    RUNTIME DESTINATION bin
+        RUNTIME DESTINATION bin
 )
 
 install(DIRECTORY src/resources
-    DESTINATION share/Life
+        DESTINATION share/Life
 )
 
-# --------------------------------------------------
+
 # Packaging
-# --------------------------------------------------
 include(InstallRequiredSystemLibraries)
 
 set(CPACK_PACKAGE_NAME "Life")
