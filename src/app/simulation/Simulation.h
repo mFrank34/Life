@@ -1,22 +1,30 @@
 #ifndef SIMULATION_H
 #define SIMULATION_H
 
+#include "world/Manager.h"
 #include "world/World.h"
 
 class Simulation
 {
 public:
-    explicit Simulation(World& world);
+    Simulation();
+    ~Simulation() = default;
 
-    void start();
-    void stop();
+    void attach_world(World& world);
     void tick(float delta);
 
-    bool is_running() const;
+    void start();
+    void pause();
+    void set_speed(float speed);
+
+    bool isRunning() const;
 
 private:
-    World& world;
-    bool running = false;
+    World* world = nullptr;
+    Rules rules;
+    Manager manager;
+
+    bool running = true;
 };
 
 #endif

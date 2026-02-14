@@ -16,14 +16,17 @@ public:
     // unloads chunks in memory by removing them.
     void unload() override;
     // get world entities
-    Cell &get_cell(int gx, int gy) override;
-    Chunk &get_chunk(int gx, int gy) override;
-    Chunk &get_chunk(long long key) override;
+    Cell& get_cell(int gx, int gy) override;
+    Chunk& get_chunk(int gx, int gy) override;
+    Chunk& get_chunk(long long key) override;
     void swap_world() override;
 
     // returning world data
     std::unordered_map<long long, Chunk>& get_world() override;
     std::unordered_map<long long, Chunk>& get_next_world() override;
+
+    // tick system
+    void tick(float delta) override;
 
 private:
     const int CHUNK_SIZE;

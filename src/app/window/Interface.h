@@ -2,10 +2,10 @@
 #define INTERFACE_H
 
 #include <gtkmm.h>
-#include <chrono>
+
 #include "View.h"
-#include "world/World.h"
 #include "app/Settings.h"
+#include "app/simulation/Simulation.h"
 
 enum class SimSpeed
 {
@@ -23,67 +23,46 @@ enum class CellColor
     White
 };
 
-class World; // Forward declaration
-
+class World;
 
 namespace app::window
 {
     class Interface : public Gtk::Box
     {
     public:
-        Interface(World& world, Settings& settings);
-
-        void start_simulation();
-        void pause_simulation();
-        void set_speed(SimSpeed speed);
+        Interface(World& world, Settings& settings, Simulation& simulation);
 
         // Signal emitted when user wants to change storage type
         sigc::signal<void(StorageType)> signal_storage_changed;
 
     private:
+        // References (non-owning)
         World& world;
         Settings& settings;
+        Simulation& simulation;
+
+        // View
         View view;
 
-        // Overlay structure
+        // Layout
         Gtk::Overlay overlay;
 
-        // Left panel - color selection
         Gtk::Box left_panel{Gtk::Orientation::VERTICAL};
-        Gtk::Button btn_blue;
-        Gtk::Button btn_red;
-        Gtk::Button btn_green;
-        Gtk::Button btn_white;
-
-        // Right panel - speed controls
         Gtk::Box right_panel{Gtk::Orientation::VERTICAL};
-        Gtk::Button btn_speed_1;
-        Gtk::Button btn_speed_2;
-        Gtk::Button btn_speed_4;
-        Gtk::Button btn_speed_8;
-
-        // Bottom controls
         Gtk::Box bottom_controls{Gtk::Orientation::HORIZONTAL};
-        Gtk::Button btn_start;
-        Gtk::Button btn_pause;
-        Gtk::Button btn_restart;
-        Gtk::Button btn_generate;
-        Gtk::Button btn_rule_editor;
-        Gtk::Button btn_import;
-        Gtk::Button btn_export;
-        Gtk::Button btn_settings;
 
-        // Simulation
-        bool on_tick();
-        sigc::connection sim_timer;
-        bool is_running = false;
+        // Buttons
+        Gtk::Button btn_blue, btn_red, btn_green, btn_white;
+        Gtk::Button btn_speed_1, btn_speed_2, btn_speed_4, btn_speed_8;
+        Gtk::Button btn_start, btn_pause, btn_restart;
+        Gtk::Button btn_generate, btn_rule_editor;
+        Gtk::Button btn_import, btn_export, btn_settings;
+
+        // State (UI-only)
         SimSpeed current_speed = SimSpeed::X1;
         CellColor current_color = CellColor::Blue;
-        std::chrono::steady_clock::time_point last_tick;
 
-        int get_interval_ms() const;
-
-        // Event handlers
+        // Handlers
         void on_start();
         void on_pause();
         void on_restart();
@@ -95,14 +74,11 @@ namespace app::window
         void on_speed(SimSpeed speed);
         void on_color(CellColor color);
 
-        // UI updates
+        // UI helpers
         void update_speed_ui();
         void update_color_ui();
-
-        // Settings dialog
         void show_settings_dialog();
     };
-};
+}
 
-
-#endif // INTERFACE_H
+#endif

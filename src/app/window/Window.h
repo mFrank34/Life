@@ -7,6 +7,7 @@
 #include "app/window/Interface.h"
 #include "world/World.h"
 #include "app/Settings.h"
+#include "app/simulation/Simulation.h"
 
 class Window : public Gtk::Window
 {
@@ -15,8 +16,11 @@ public:
 
 private:
     void initialize();
+    bool on_tick();
 
     Settings settings;
+    Simulation simulation = Simulation();
+
     std::unique_ptr<World> world;
     std::unique_ptr<app::window::Interface> interface;
 };

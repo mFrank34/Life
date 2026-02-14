@@ -25,7 +25,7 @@ class Manager
     static constexpr int CHUNK_OFF_SET = 2;
 
     // rules and world objects
-    World& world;
+    World* world = nullptr;
     Rules& rules;
 
     // finding out chunks that active
@@ -61,9 +61,11 @@ class Manager
                              const Chunk& current);
 
 public:
-    Manager(World& world, Rules& rules);
+    Manager(Rules& rules);
 
     ~Manager() = default;
+
+    void attach_world(World& world);
 
     void update();
 };
