@@ -3,13 +3,22 @@ project(Life LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 option(BUILD_TESTS "Build tests" ON)
 
+# --------------------------------------------------
+# GTKMM 4 (must come before targets that use it)
+# --------------------------------------------------
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GTKMM REQUIRED IMPORTED_TARGET gtkmm-4.0)
+
+# --------------------------------------------------
 # Core library
+# --------------------------------------------------
 add_library(LifeCore
         src/world/World.cpp
-        src/world/Debug.cpp
+        src/world/Manager.cpp
 
         src/world/structure/Cell.cpp
         src/world/structure/Chunk.cpp
@@ -18,39 +27,40 @@ add_library(LifeCore
         src/world/storage/Sparse.cpp
         src/world/storage/Unordered.cpp
 
+
         src/rules/Rules.cpp
+
+        src/app/simulation/Simulation.cpp
+        src/app/window/Interface.cpp
+        src/app/window/Window.cpp
+        src/app/window/View.cpp
 )
 
-target_include_directories(LifeCore PUBLIC
+target_include_directories(LifeCore
+        PUBLIC
         ${CMAKE_SOURCE_DIR}/src
 )
 
+# GTK is REQUIRED by LifeCore
+target_link_libraries(LifeCore
+        PUBLIC PkgConfig::GTKMM
+)
 
 # Executable
 add_executable(Life
         src/app/App.cpp
-        src/app/controller/Controller.cpp
-        src/app/view/Interface.cpp
-        src/app/controller/Manager.cpp
-        src/app/view/View.cpp
 )
 
-target_link_libraries(Life PRIVATE LifeCore)
-
-
-# GTK4 (app only)
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(GTKMM REQUIRED gtkmm-4.0)
-
-target_include_directories(Life PRIVATE ${GTKMM_INCLUDE_DIRS})
-target_compile_options(Life PRIVATE ${GTKMM_CFLAGS_OTHER})
-target_link_directories(Life PRIVATE ${GTKMM_LIBRARY_DIRS})
-target_link_libraries(Life PRIVATE ${GTKMM_LIBRARIES})
+target_link_libraries(Life
+        PRIVATE LifeCore
+)
 
 
 # Resources
-file(COPY ${CMAKE_SOURCE_DIR}/src/resources
-        DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY
+        ${CMAKE_SOURCE_DIR}/src/resources
+        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+)
 
 # Tests
 if (BUILD_TESTS)
@@ -68,6 +78,7 @@ install(DIRECTORY src/resources
         DESTINATION share/Life
 )
 
+
 # Packaging
 include(InstallRequiredSystemLibraries)
 
@@ -79,7 +90,6 @@ set(CPACK_PACKAGE_VERSION "1.0.0")
 
 set(CPACK_RPM_PACKAGE_LICENSE "MIT")
 set(CPACK_RPM_PACKAGE_GROUP "Applications")
-set(CPACK_RPM_PACKAGE_ARCHITECTURE ${CMAKE_SYSTEM_PROCESSOR})
 set(CPACK_RPM_PACKAGE_REQUIRES "gtkmm4")
 
 set(CPACK_PACKAGING_INSTALL_PREFIX "/usr")

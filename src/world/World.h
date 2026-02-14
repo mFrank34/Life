@@ -18,9 +18,9 @@ public:
 
     // Core functions for other map systems
     virtual void unload() = 0;
-    virtual Chunk &get_chunk(int global_x, int global_y) = 0;
-    virtual Chunk &get_chunk(long long key) = 0;
-    virtual Cell &get_cell(int global_x, int global_y) = 0;
+    virtual Chunk& get_chunk(int global_x, int global_y) = 0;
+    virtual Chunk& get_chunk(long long key) = 0;
+    virtual Cell& get_cell(int global_x, int global_y) = 0;
 
     // world data
     virtual std::unordered_map<long long, Chunk>& get_world() = 0;
@@ -32,6 +32,9 @@ public:
 
     // World information
     std::string get_type() const;
+
+    // tick system
+    virtual void tick(float delta) = 0;
 
 protected:
     static constexpr int KEY_LENGTH = 32;

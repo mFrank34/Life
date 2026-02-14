@@ -8,7 +8,7 @@
 #include "world/structure/Chunk.h"
 
 View::View(World& world)
-    : world(world)
+    : world(&world)
 {
     set_hexpand(true);
     set_vexpand(true);
@@ -71,7 +71,7 @@ void View::on_draw(
     cr->scale(zoom, zoom);
     cr->translate(-camera_x, -camera_y);
 
-    auto& data = world.get_world();
+    auto& data = world->get_world();
     for (const auto& [key, chunk] : data)
     {
         bool even = ((chunk.get_CX() + chunk.get_CY()) % 2 == 0);
@@ -83,7 +83,7 @@ void View::on_draw(
                 int wx = chunk.get_CX() * chunk.get_size() + cx;
                 int wy = chunk.get_CY() * chunk.get_size() + cy;
 
-                char type = world.get_cell(wx, wy).get_type();
+                char type = world->get_cell(wx, wy).get_type();
 
                 if (type == 'w')
                 {
@@ -100,7 +100,6 @@ void View::on_draw(
                         1.0
                     );
                 }
-
                 cr->rectangle(
                     wx * cell_size,
                     wy * cell_size,
@@ -123,7 +122,7 @@ void View::on_click(int, double mx, double my)
     int cx = world_x / cell_size;
     int cy = world_y / cell_size;
 
-    auto& cell = world.get_cell(cx, cy);
+    auto& cell = world->get_cell(cx, cy);
 
     if (cell.get_type() == 'w')
         cell.set_type('0'); // unselect

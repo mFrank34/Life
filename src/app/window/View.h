@@ -14,7 +14,7 @@ public:
     View(World& world);
 
 private:
-    World& world;
+    World* world;
 
     int cell_size = 16;
 
