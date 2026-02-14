@@ -21,10 +21,12 @@ void Window::initialize()
 {
     world = std::make_unique<Sparse>(32);
 
+    view = std::make_unique<View>(*world);
+
     simulation.attach_world(*world);
     simulation.pause();
 
-    interface = std::make_unique<app::window::Interface>(*world, settings, simulation);
+    interface = std::make_unique<app::window::Interface>(*world, *view,  settings, simulation);
     set_child(*interface);
 }
 
@@ -34,5 +36,7 @@ bool Window::on_tick()
         return true;
 
     simulation.tick(0.016f);
+    view->queue_draw();
+
     return true;
 }
