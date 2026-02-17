@@ -1,3 +1,9 @@
+/*
+ * File: Manager.h
+ * Author: Michael Franks
+ * Description:
+ */
+
 #pragma once
 #ifndef MANAGER_H
 #define MANAGER_H

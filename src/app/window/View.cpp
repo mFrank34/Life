@@ -1,3 +1,9 @@
+/*
+ * File: View.cpp
+ * Author: Michael Franks
+ * Description:
+ */
+
 #include "View.h"
 
 #include <gtkmm/gesturedrag.h>

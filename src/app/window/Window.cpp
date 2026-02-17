@@ -1,3 +1,9 @@
+/*
+ * File: Window.cpp
+ * Author: Michael Franks
+ * Description:
+ */
+
 #include "Window.h"
 #include "app/window/Interface.h"
 #include "world/storage/Sparse.h"

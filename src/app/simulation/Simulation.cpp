@@ -1,3 +1,9 @@
+/*
+ * File: Simulation.cpp
+ * Author: Michael Franks
+ * Description:
+ */
+
 #include "Simulation.h"
 
 Simulation::Simulation()

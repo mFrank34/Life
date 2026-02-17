@@ -1,3 +1,9 @@
+/*
+ * File: World.h
+ * Author: Michael Franks
+ * Description:
+ */
+
 #pragma once
 #ifndef WORLD_H
 #define WORLD_H

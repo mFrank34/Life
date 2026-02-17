@@ -1,3 +1,9 @@
+/*
+ * File: Settings.h
+ * Author: Michael Franks
+ * Description:
+ */
+
 #ifndef SETTINGS_H
 #define SETTINGS_H
 

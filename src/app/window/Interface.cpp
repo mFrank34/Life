@@ -1,3 +1,9 @@
+/*
+ * File: Interface.cpp
+ * Author: Michael Franks
+ * Description:
+ */
+
 #include "app/window/Interface.h"
 
 namespace app::window

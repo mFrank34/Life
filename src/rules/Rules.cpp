@@ -1,3 +1,9 @@
+/*
+ * File: Rules.cpp
+ * Author: Michael Franks
+ * Description:
+ */
+
 #include "Rules.h"
 
 Rules::Rules() = default;

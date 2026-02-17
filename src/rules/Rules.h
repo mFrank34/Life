@@ -1,3 +1,9 @@
+/*
+ * File: Rules.h
+ * Author: Michael Franks
+ * Description:
+ */
+
 #ifndef LIFE_H
 #define LIFE_H
 

@@ -1,3 +1,9 @@
+/*
+ * File: Sparse.cpp
+ * Author: Michael Franks
+ * Description:
+ */
+
 #include "Sparse.h"
 #include "world/structure/Chunk.h"
 #include "world/World.h"

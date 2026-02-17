@@ -1,3 +1,9 @@
+/*
+ * File: Simulation.h
+ * Author: Michael Franks
+ * Description:
+ */
+
 #ifndef SIMULATION_H
 #define SIMULATION_H
 
