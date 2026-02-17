@@ -1,7 +1,7 @@
 /*
  * File: Window.h
  * Author: Michael Franks
- * Description:
+ * Description: Application window for controlling application
  */
 
 #ifndef WINDOW_H

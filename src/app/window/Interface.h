@@ -1,7 +1,7 @@
 /*
  * File: Interface.h
  * Author: Michael Franks
- * Description:
+ * Description: interface buttons and menu
  */
 
 #ifndef INTERFACE_H

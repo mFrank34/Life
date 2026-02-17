@@ -1,7 +1,7 @@
 /*
  * File: Settings.h
  * Author: Michael Franks
- * Description:
+ * Description: settings for application
  */
 
 #ifndef SETTINGS_H

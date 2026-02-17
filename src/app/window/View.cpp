@@ -1,7 +1,7 @@
 /*
  * File: View.cpp
  * Author: Michael Franks
- * Description:
+ * Description: world view
  */
 
 #include "View.h"
