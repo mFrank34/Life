@@ -35,6 +35,8 @@ add_library(LifeCore
         src/app/window/View.cpp
 
         src/threading/Scheduler.cpp
+
+        src/utility/Logger.cpp
 )
 
 target_include_directories(LifeCore

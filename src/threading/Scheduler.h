@@ -15,6 +15,8 @@
 #include <vector>
 #include <atomic>
 
+#include "utility/Logger.h"
+
 class Scheduler
 {
 public:
