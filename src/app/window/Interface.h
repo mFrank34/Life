@@ -1,3 +1,9 @@
+/*
+ * File: Interface.h
+ * Author: Michael Franks
+ * Description:
+ */
+
 #ifndef INTERFACE_H
 #define INTERFACE_H
 

@@ -1,3 +1,9 @@
+/*
+ * File: Manager.cpp
+ * Author: Michael Franks
+ * Description:
+ */
+
 #include "Manager.h"
 #include "rules/Rules.h"
 #include "world/World.h"

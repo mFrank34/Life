@@ -1,3 +1,9 @@
+/*
+ * File: Unordered.h
+ * Author: Michael Franks
+ * Description:
+ */
+
 #pragma once
 #ifndef UNORDERED_H
 #define UNORDERED_H

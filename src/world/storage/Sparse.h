@@ -1,3 +1,9 @@
+/*
+ * File: Sparse.h
+ * Author: Michael Franks
+ * Description:
+ */
+
 #pragma once
 #ifndef SPARSE_H
 #define SPARSE_H

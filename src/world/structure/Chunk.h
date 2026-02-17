@@ -1,3 +1,9 @@
+/*
+ * File: Chunk.h
+ * Author: Michael Franks
+ * Description:
+ */
+
 #ifndef LIFE_CHUNK_H
 #define LIFE_CHUNK_H
 

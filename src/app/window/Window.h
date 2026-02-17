@@ -1,3 +1,9 @@
+/*
+ * File: Window.h
+ * Author: Michael Franks
+ * Description:
+ */
+
 #ifndef WINDOW_H
 #define WINDOW_H
 

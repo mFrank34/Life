@@ -1,3 +1,9 @@
+/*
+ * File: Cell.cpp
+ * Author: Michael Franks
+ * Description:
+ */
+
 #include "Cell.h"
 
 // constructor

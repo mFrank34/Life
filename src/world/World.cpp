@@ -1,3 +1,9 @@
+/*
+ * File: World.cpp
+ * Author: Michael Franks
+ * Description:
+ */
+
 #include "World.h"
 
 #include <array>

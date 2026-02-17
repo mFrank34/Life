@@ -1,3 +1,9 @@
+/*
+ * File: Chunk.cpp
+ * Author: Michael Franks
+ * Description:
+ */
+
 #include "world/structure/Chunk.h"
 #include <array>
 

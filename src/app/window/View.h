@@ -1,3 +1,9 @@
+/*
+ * File: View.h
+ * Author: Michael Franks
+ * Description:
+ */
+
 #ifndef VIEW_H
 #define VIEW_H
 
