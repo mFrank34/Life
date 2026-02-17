@@ -1,8 +1,6 @@
 /*
  * File: Unordered.h
  * Author: Michael Franks
- * Created: 2026-02-17
- * Last Edited: 2026-02-10
  * Description:
  */
 
