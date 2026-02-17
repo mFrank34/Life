@@ -13,6 +13,7 @@ Scheduler::Scheduler(size_t num_threads)
     {
         workers.emplace_back([this, i] { worker(i); });
     }
+    Logger::info("Create Thread Pool");
 }
 
 Scheduler::~Scheduler()
@@ -31,6 +32,8 @@ Scheduler::~Scheduler()
             worker.join();
         }
     }
+
+    Logger::info("Destroy Thread Pool");
 }
 
 int Scheduler::get_active_tasks() const
@@ -51,6 +54,7 @@ int Scheduler::get_pending_tasks() const
 
 void Scheduler::worker(int id)
 {
+    Logger::info("Thread Pool Worker Created with id: " + std::to_string(id));
     while (true)
     {
         std::function<void()> task;
