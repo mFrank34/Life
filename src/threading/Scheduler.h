@@ -1,7 +1,7 @@
 /*
- * File: Scheduler.h
+* File: Scheduler.h
  * Author: Michael Franks
- * Description:
+ * Description: Thread-safe task scheduler
  */
 
 #ifndef SCHEDULER_H
@@ -13,6 +13,7 @@
 #include <queue>
 #include <thread>
 #include <vector>
+#include <atomic>
 
 class Scheduler
 {
@@ -20,6 +21,7 @@ public:
     Scheduler(size_t num_threads);
     ~Scheduler();
 
+    // Add a new task to the scheduler
     template <typename F>
     void enqueue(F&& task)
     {
@@ -27,7 +29,7 @@ public:
             std::unique_lock<std::mutex> lock(queue_mtx);
             tasks.emplace(std::forward<F>(task));
         }
-        cv.notify_all();
+        cv.notify_one(); // wake one worker
     }
 
     int get_active_tasks() const;
@@ -37,18 +39,14 @@ public:
 private:
     void worker(int id);
 
-    // list of workers
     std::vector<std::thread> workers;
     std::queue<std::function<void()>> tasks;
 
-    // function mtx size
-    std::mutex queue_mtx;
+    mutable std::mutex queue_mtx; // mutable so const functions can lock
     std::condition_variable cv;
 
-    // state
     bool stop;
 
-    // task completion
     std::atomic<int> active_tasks;
     std::atomic<int> completed_tasks;
 };
