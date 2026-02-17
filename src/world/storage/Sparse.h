@@ -1,3 +1,11 @@
+/*
+ * File: Sparse.h
+ * Author: Michael Franks
+ * Created: 2026-02-17
+ * Last Edited: 2026-02-14
+ * Description:
+ */
+
 #pragma once
 #ifndef SPARSE_H
 #define SPARSE_H

@@ -1,3 +1,11 @@
+/*
+ * File: Settings.h
+ * Author: Michael Franks
+ * Created: 2026-02-17
+ * Last Edited: 2026-02-13
+ * Description:
+ */
+
 #ifndef SETTINGS_H
 #define SETTINGS_H
 

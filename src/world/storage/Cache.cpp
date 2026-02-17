@@ -1,3 +1,11 @@
+/*
+ * File: Cache.cpp
+ * Author: Michael Franks
+ * Created: 2026-02-17
+ * Last Edited: 2026-02-10
+ * Description:
+ */
+
 #include "Cache.h"
 #include "world/World.h"
 #include <utility>

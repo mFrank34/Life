@@ -1,3 +1,11 @@
+/*
+ * File: Window.h
+ * Author: Michael Franks
+ * Created: 2026-02-17
+ * Last Edited: 2026-02-14
+ * Description:
+ */
+
 #ifndef WINDOW_H
 #define WINDOW_H
 

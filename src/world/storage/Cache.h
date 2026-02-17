@@ -1,3 +1,11 @@
+/*
+ * File: Cache.h
+ * Author: Michael Franks
+ * Created: 2026-02-17
+ * Last Edited: 2026-02-10
+ * Description:
+ */
+
 #pragma once
 #ifndef CACHE_H
 #define CACHE_H

@@ -1,3 +1,11 @@
+/*
+ * File: Unordered.cpp
+ * Author: Michael Franks
+ * Created: 2026-02-17
+ * Last Edited: 2026-02-10
+ * Description:
+ */
+
 #include "Unordered.h"
 #include <unordered_map>
 #include <vector>
