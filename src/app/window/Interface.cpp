@@ -1,7 +1,7 @@
 /*
  * File: Interface.cpp
  * Author: Michael Franks
- * Description:
+ * Description: interface buttons
  */
 
 #include "app/window/Interface.h"

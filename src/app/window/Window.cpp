@@ -1,7 +1,7 @@
 /*
  * File: Window.cpp
  * Author: Michael Franks
- * Description:
+ * Description: Application Runtime for whole app
  */
 
 #include "Window.h"

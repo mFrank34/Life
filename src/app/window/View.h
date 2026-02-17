@@ -1,7 +1,7 @@
 /*
  * File: View.h
  * Author: Michael Franks
- * Description:
+ * Description: world view
  */
 
 #ifndef VIEW_H

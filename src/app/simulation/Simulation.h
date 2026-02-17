@@ -1,7 +1,7 @@
 /*
  * File: Simulation.h
  * Author: Michael Franks
- * Description:
+ * Description: tick system for runtime, telling app what to do each tick
  */
 
 #ifndef SIMULATION_H

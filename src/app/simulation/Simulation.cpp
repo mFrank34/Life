@@ -1,7 +1,7 @@
 /*
  * File: Simulation.cpp
  * Author: Michael Franks
- * Description:
+ * Description: body to simulation tick system and telling what to do... and so on
  */
 
 #include "Simulation.h"
