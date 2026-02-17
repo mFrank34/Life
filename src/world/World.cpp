@@ -1,3 +1,11 @@
+/*
+ * File: World.cpp
+ * Author: Michael Franks
+ * Created: 2026-02-17
+ * Last Edited: 2026-02-13
+ * Description:
+ */
+
 #include "World.h"
 
 #include <array>

@@ -1,3 +1,11 @@
+/*
+ * File: View.h
+ * Author: Michael Franks
+ * Created: 2026-02-17
+ * Last Edited: 2026-02-14
+ * Description:
+ */
+
 #ifndef VIEW_H
 #define VIEW_H
 

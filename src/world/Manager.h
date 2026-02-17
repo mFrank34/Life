@@ -1,3 +1,11 @@
+/*
+ * File: Manager.h
+ * Author: Michael Franks
+ * Created: 2026-02-17
+ * Last Edited: 2026-02-14
+ * Description:
+ */
+
 #pragma once
 #ifndef MANAGER_H
 #define MANAGER_H

@@ -1,3 +1,11 @@
+/*
+ * File: Cell.cpp
+ * Author: Michael Franks
+ * Created: 2026-02-17
+ * Last Edited: 2026-02-10
+ * Description:
+ */
+
 #include "Cell.h"
 
 // constructor
