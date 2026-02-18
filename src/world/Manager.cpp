@@ -6,15 +6,13 @@
 
 #include "Manager.h"
 
-#include <algorithm>
-
 #include "rules/Rules.h"
 #include "world/World.h"
 #include "world/structure/Chunk.h"
 
 #include <functional>
-#include <map>
 #include <ranges>
+#include <algorithm>
 
 std::vector<Manager::Neighbour> Manager::find_neighbour(
     const std::array<long long, 8>& keys,
@@ -187,14 +185,18 @@ void Manager::attach_world(World& world)
     this->world = &world;
 }
 
+void Manager::attach_scheduler(Scheduler& scheduler)
+{
+    this->scheduler = &scheduler;
+}
+
 void Manager::update()
 {
     auto& world_data = world->get_world();
     auto& next_data = world->get_stepped_world();
 
-    // --- Phase 0: Ensure Sync between both worlds
+    // --- Phase 0: Ensure all neighbour chunks exist ---
     std::vector<long long> to_create;
-
     for (auto& [key, chunk] : world_data)
     {
         auto keys = world->get_neighbour_key(key);
@@ -206,35 +208,34 @@ void Manager::update()
     }
 
     for (long long key : to_create)
-        world->get_chunk(key);
+        world->get_chunk(key); // ensures neighbour chunks exist
 
-    // --- Phase 1: compute next stage of game ---
+    // --- Phase 1: compute next stage of world ---
+    int size = world->get_size();
 
     for (auto& [key, chunk] : world_data)
     {
-        const int size = chunk.get_size();
-
+        const int chunk_size = chunk.get_size();
         auto keys = world->get_neighbour_key(key);
-        find_neighbour(keys, world_data);
 
-        get_edge_case(world_data, size);
+        // Find neighbours and edge cells
+        std::vector<Neighbour> neighbours = find_neighbour(keys, world_data);
+        std::vector<NeighbourCell> edge_cells = get_edge_case(neighbours, chunk_size);
 
-        Chunk halo(chunk.get_CX(), chunk.get_CY(), size + 2);
-        construct_halo(halo, chunk, neighbour_cells);
+        // Build halo and compute next step
+        Chunk halo = build_halo(chunk, edge_cells);
+        Chunk processed = chunk_update(halo);
 
-        // ensure nextWorld chunk exists
-        if (!next_data.contains(key))
-        {
-            next_data.try_emplace(
-                key,
-                chunk.get_CX(),
-                chunk.get_CY(),
-                size
-            );
-        }
+        // Ensure next_data has this chunk
+        Chunk& next = next_data.try_emplace(
+            key,
+            chunk.get_CX(),
+            chunk.get_CY(),
+            chunk_size
+        ).first->second;
 
-        Chunk& next = next_data.at(key);
-        chunk_update(halo, next, chunk);
+        // Copy processed data into next world
+        next = std::move(processed);
     }
 
     // --- Phase 2: commit changes ---

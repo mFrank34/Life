@@ -8,24 +8,17 @@
 #ifndef MANAGER_H
 #define MANAGER_H
 
-#include <map>
-
 #include "world/World.h"
 #include "world/structure/Chunk.h"
 #include "rules/Rules.h"
-
-enum class haloDirection
-{
-    Import,
-    Export
-};
+#include "threading/Scheduler.h"
 
 class Manager
 {
 private:
     /* Class Settings and connected objects */
     World* world = nullptr;
-
+    Scheduler* scheduler = nullptr;
     Rules& rules;
 
     static constexpr int CHUNK_OFF_SET = 2;
@@ -124,6 +117,12 @@ public:
      * @param world world container
      */
     void attach_world(World& world);
+
+    /**
+     * attaches scheduler
+     * @param scheduler class scheduler
+     */
+    void attach_scheduler(Scheduler& scheduler);
 
     /**
      * Updates the world and process the next step
