@@ -11,9 +11,8 @@
 
 // Constructor
 Cache::Cache(const int size, const int max)
-    : World("Cache Map"), CHUNK_SIZE(size), max_active(max)
+    : World("Cache Map", size), max_active(max)
 {
-
 }
 
 // Remove empty chunks
@@ -58,26 +57,11 @@ Chunk& Cache::get_chunk(const long long key)
         key, cx, cy, CHUNK_SIZE
     );
 
-    nextWorld.try_emplace(
+    step.try_emplace(
         key, cx, cy, CHUNK_SIZE
     );
 
     return w_it->second;
-}
-
-std::unordered_map<long long, Chunk>& Cache::get_world()
-{
-    return world;
-}
-
-std::unordered_map<long long, Chunk>& Cache::get_next_world()
-{
-    return nextWorld;
-}
-
-void Cache::swap_world()
-{
-    world.swap(nextWorld);
 }
 
 Chunk& Cache::get_cached_chunk(const int gx, const int gy)
