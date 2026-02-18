@@ -13,6 +13,7 @@
 #include <functional>
 #include <ranges>
 #include <algorithm>
+#include <glibmm/main.h>
 
 std::vector<Manager::Neighbour> Manager::find_neighbour(
     const std::array<long long, 8>& keys,
@@ -192,6 +193,11 @@ void Manager::attach_scheduler(Scheduler& scheduler)
 
 void Manager::update()
 {
+    // Only allow one update at a time
+    bool expected = false;
+    if (!update_in_progress.compare_exchange_strong(expected, true))
+        return; // skip if another update is running
+
     auto& world_data = world->get_world();
     auto& next_data = world->get_stepped_world();
 
@@ -208,37 +214,52 @@ void Manager::update()
     }
 
     for (long long key : to_create)
-        world->get_chunk(key); // ensures neighbour chunks exist
+        world->get_chunk(key);
 
-    // --- Phase 1: compute next stage of world ---
-    int size = world->get_size();
+    // --- Phase 1: Parallel chunk processing ---
+    std::atomic<int> tasks_remaining(static_cast<int>(world_data.size()));
+    std::mutex next_mtx;
 
     for (auto& [key, chunk] : world_data)
     {
-        const int chunk_size = chunk.get_size();
-        auto keys = world->get_neighbour_key(key);
+        scheduler->enqueue([this, &world_data, &next_data, &tasks_remaining, &next_mtx, key]()
+        {
+            const Chunk& chunk_ref = world_data.at(key);
+            const int chunk_size = chunk_ref.get_size();
 
-        // Find neighbours and edge cells
-        std::vector<Neighbour> neighbours = find_neighbour(keys, world_data);
-        std::vector<NeighbourCell> edge_cells = get_edge_case(neighbours, chunk_size);
+            // Build halo and update chunk
+            auto neighbour_keys = world->get_neighbour_key(key);
+            auto neighbours = find_neighbour(neighbour_keys, world_data);
+            auto edge_cells = get_edge_case(neighbours, chunk_size);
+            Chunk halo = build_halo(const_cast<Chunk&>(chunk_ref), edge_cells);
+            Chunk processed = chunk_update(halo);
 
-        // Build halo and compute next step
-        Chunk halo = build_halo(chunk, edge_cells);
-        Chunk processed = chunk_update(halo);
+            // Thread-safe write to next_data
+            {
+                std::lock_guard<std::mutex> lock(next_mtx);
+                Chunk& next_chunk = next_data.try_emplace(
+                    key,
+                    chunk_ref.get_CX(),
+                    chunk_ref.get_CY(),
+                    chunk_size
+                ).first->second;
 
-        // Ensure next_data has this chunk
-        Chunk& next = next_data.try_emplace(
-            key,
-            chunk.get_CX(),
-            chunk.get_CY(),
-            chunk_size
-        ).first->second;
+                next_chunk = std::move(processed);
+            }
 
-        // Copy processed data into next world
-        next = std::move(processed);
+            // Decrement counter; schedule commit safely on GTK main thread
+            if (--tasks_remaining == 0)
+            {
+                Glib::signal_idle().connect_once([this]()
+                {
+                    // Phase 2: commit changes (main thread safe)
+                    world->swap_world();
+                    world->unload();
+
+                    // Release update lock
+                    update_in_progress = false;
+                });
+            }
+        });
     }
-
-    // --- Phase 2: commit changes ---
-    world->swap_world();
-    world->unload();
 }
