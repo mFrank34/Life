@@ -25,11 +25,6 @@ public:
     Cell& get_cell(int gx, int gy) override;
     Chunk& get_chunk(int gx, int gy) override;
     Chunk& get_chunk(long long key) override;
-    void swap_world() override;
-
-    // tick system
-    void tick(float delta) override;
-
 };
 
 #endif
