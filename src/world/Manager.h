@@ -22,6 +22,7 @@ private:
     Rules& rules;
 
     static constexpr int CHUNK_OFF_SET = 2;
+    std::atomic<bool> update_in_progress = false;
 
     enum class Cardinal
     {
