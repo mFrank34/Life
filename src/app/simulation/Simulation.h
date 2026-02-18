@@ -8,6 +8,7 @@
 #define SIMULATION_H
 
 #include "world/Manager.h"
+#include "threading/Scheduler.h"
 #include "world/World.h"
 
 class Simulation
@@ -16,7 +17,9 @@ public:
     Simulation();
     ~Simulation() = default;
 
+    void attach_scheduler(Scheduler& scheduler);
     void attach_world(World& world);
+
     void tick(float delta);
 
     void start();
@@ -27,6 +30,8 @@ public:
 
 private:
     World* world = nullptr;
+    Scheduler* scheduler = nullptr;
+
     Rules rules;
     Manager manager;
 
