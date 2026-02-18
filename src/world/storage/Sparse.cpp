@@ -9,7 +9,7 @@
 #include "world/World.h"
 
 Sparse::Sparse(const int size)
-    : World("Sparse Map"), CHUNK_SIZE(size) {}
+    : World("Sparse Map", size) {}
 
 void Sparse::unload()
 {
@@ -49,31 +49,9 @@ Chunk& Sparse::get_chunk(const long long key)
         key, cx, cy, CHUNK_SIZE
     );
 
-    nextWorld.try_emplace(
+    step.try_emplace(
         key, cx, cy, CHUNK_SIZE
     );
 
     return w_it->second;
-}
-
-
-std::unordered_map<long long, Chunk>& Sparse::get_world()
-{
-    return world;
-}
-
-std::unordered_map<long long, Chunk>& Sparse::get_next_world()
-{
-    return nextWorld;
-}
-
-void Sparse::tick(float delta)
-{
-
-}
-
-void Sparse::swap_world()
-{
-    world.swap(nextWorld);
-    nextWorld.clear();
 }
