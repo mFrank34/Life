@@ -11,18 +11,11 @@ Simulation::Simulation()
 {
 }
 
-void Simulation::attach_scheduler(Scheduler& scheduler)
-{
-    this->scheduler = &scheduler;
-    manager.attach_scheduler(scheduler);
-}
-
 void Simulation::attach_world(World& world)
 {
     this->world = &world;
     manager.attach_world(world);
 }
-
 
 void Simulation::tick(float delta)
 {
