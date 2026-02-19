@@ -7,7 +7,6 @@
 #include "Window.h"
 #include "app/window/Interface.h"
 #include "world/storage/Sparse.h"
-#include "threading/Scheduler.h"
 
 using namespace app::window;
 
@@ -26,13 +25,10 @@ Window::Window()
 
 void Window::initialize()
 {
-    unsigned int num_threads = std::thread::hardware_concurrency();
-
-    scheduler = std::make_unique<Scheduler>(num_threads);
     world = std::make_unique<Sparse>(32);
+
     view = std::make_unique<View>(*world);
 
-    simulation.attach_scheduler(*scheduler);
     simulation.attach_world(*world);
     simulation.pause();
 

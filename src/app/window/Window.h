@@ -30,7 +30,6 @@ private:
     // application resources for life
     std::unique_ptr<World> world;
     std::unique_ptr<View> view;
-    std::unique_ptr<Scheduler> scheduler;
     std::unique_ptr<app::window::Interface> interface;
 };
 
