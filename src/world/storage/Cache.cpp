@@ -1,7 +1,7 @@
 /*
  * File: Cache.cpp
  * Author: Michael Franks
- * Description:
+ * Description: Cache Storage Container
  */
 
 #include "Cache.h"
@@ -23,6 +23,12 @@ void Cache::unload()
         return !pair.second.is_populated();
     });
     active.clear();
+    cached_keys.clear();
+}
+
+void Cache::clear_world()
+{
+    world.clear();
     cached_keys.clear();
 }
 

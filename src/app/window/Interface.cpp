@@ -5,6 +5,7 @@
  */
 
 #include "app/window/Interface.h"
+#include "utility/Logger.h"
 
 namespace app::window
 {
@@ -97,6 +98,7 @@ namespace app::window
 
         btn_start.set_label("Start");
         btn_pause.set_label("Pause");
+        btn_step.set_label("Step");
         btn_restart.set_label("Restart");
         btn_generate.set_label("Generate");
         btn_rule_editor.set_label("Rule Editor");
@@ -106,6 +108,7 @@ namespace app::window
 
         bottom_controls.append(btn_start);
         bottom_controls.append(btn_pause);
+        bottom_controls.append(btn_step);
         bottom_controls.append(btn_restart);
         bottom_controls.append(btn_generate);
         bottom_controls.append(btn_rule_editor);
@@ -115,6 +118,7 @@ namespace app::window
 
         btn_start.signal_clicked().connect(sigc::mem_fun(*this, &Interface::on_start));
         btn_pause.signal_clicked().connect(sigc::mem_fun(*this, &Interface::on_pause));
+        btn_step.signal_clicked().connect(sigc::mem_fun(*this, &Interface::on_step));
         btn_restart.signal_clicked().connect(sigc::mem_fun(*this, &Interface::on_restart));
         btn_generate.signal_clicked().connect(sigc::mem_fun(*this, &Interface::on_generate));
         btn_rule_editor.signal_clicked().connect(sigc::mem_fun(*this, &Interface::on_rule_editor));
@@ -135,9 +139,14 @@ namespace app::window
         simulation.pause();
     }
 
+    void Interface::on_step()
+    {
+        simulation.step();
+    }
+
     void Interface::on_restart()
     {
-        simulation.pause();
+        simulation.clear();
         view.queue_draw();
     }
 

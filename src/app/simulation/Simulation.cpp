@@ -29,9 +29,19 @@ void Simulation::start()
     running = true;
 }
 
+void Simulation::step()
+{
+    manager.update();
+}
+
 void Simulation::pause()
 {
     running = false;
+}
+
+void Simulation::clear()
+{
+    world->clear_world();
 }
 
 void Simulation::set_speed(float speed)

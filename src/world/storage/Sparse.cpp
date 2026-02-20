@@ -9,21 +9,30 @@
 #include "world/World.h"
 
 Sparse::Sparse(const int size)
-    : World("Sparse Map", size) {}
+    : World("Sparse Map", size)
+{
+}
 
 void Sparse::unload()
 {
-    std::erase_if(world, [](auto &pair)
-                  { return !pair.second.is_populated(); });
+    std::erase_if(world, [](auto& pair)
+    {
+        return !pair.second.is_populated();
+    });
 }
 
-Cell &Sparse::get_cell(const int gx, const int gy)
+void Sparse::clear_world()
 {
-    Chunk &chunk = get_chunk(gx, gy);
+    world.clear();
+}
+
+Cell& Sparse::get_cell(const int gx, const int gy)
+{
+    Chunk& chunk = get_chunk(gx, gy);
     return chunk.get_cell(
         chunk.get_LX(gx),
         chunk.get_LY(gy)
-        );
+    );
 }
 
 Chunk& Sparse::get_chunk(const int gx, const int gy)

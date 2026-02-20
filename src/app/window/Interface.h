@@ -58,7 +58,7 @@ namespace app::window
         // Buttons
         Gtk::Button btn_blue, btn_red, btn_green, btn_white;
         Gtk::Button btn_speed_1, btn_speed_2, btn_speed_4, btn_speed_8;
-        Gtk::Button btn_start, btn_pause, btn_restart;
+        Gtk::Button btn_start, btn_pause, btn_step, btn_restart;
         Gtk::Button btn_generate, btn_rule_editor;
         Gtk::Button btn_import, btn_export, btn_settings;
 
@@ -69,6 +69,7 @@ namespace app::window
         // Handlers
         void on_start();
         void on_pause();
+        void on_step();
         void on_restart();
         void on_generate();
         void on_rule_editor();

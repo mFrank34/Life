@@ -25,7 +25,7 @@ public:
 
     // Core functions for other map systems
     virtual void unload() = 0;
-
+    virtual void clear_world() = 0;
     virtual Chunk& get_chunk(int global_x, int global_y) = 0;
     virtual Chunk& get_chunk(long long key) = 0;
     virtual Cell& get_cell(int global_x, int global_y) = 0;

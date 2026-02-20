@@ -22,6 +22,11 @@ void Unordered::unload()
     });
 }
 
+void Unordered::clear_world()
+{
+    world.clear();
+}
+
 Cell& Unordered::get_cell(const int global_x, const int global_y)
 {
     Chunk& chunk = get_chunk(global_x, global_y);
