@@ -36,14 +36,13 @@ namespace app::window
     class Interface : public Gtk::Box
     {
     public:
-        Interface(World& world, View& view, Settings& settings, Simulation& simulation);
+        Interface(View& view, Settings& settings, Simulation& simulation);
 
         // Signal emitted when user wants to change storage type
         sigc::signal<void(StorageType)> signal_storage_changed;
 
     private:
         // References (non-owning)
-        World& world;
         View& view;
         Settings& settings;
         Simulation& simulation;

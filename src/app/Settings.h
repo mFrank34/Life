@@ -4,6 +4,7 @@
  * Description: settings for application
  */
 
+#pragma once
 #ifndef SETTINGS_H
 #define SETTINGS_H
 

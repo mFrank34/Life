@@ -174,6 +174,10 @@ Chunk Manager::chunk_update(const Chunk& halo)
     return next;
 }
 
+Chunk Manager::thread_chunk_update(const Chunk& halo)
+{
+}
+
 
 Manager::Manager(Rules& rules)
     : rules(rules)
@@ -211,12 +215,16 @@ void Manager::update()
     for (auto& [key, chunk] : world_data)
     {
         const int size = chunk.get_size();
-
-        auto keys = world->get_neighbour_key(key);
-        auto neighbours = find_neighbour(keys, world_data);
-        auto edge_cells = get_edge_case(neighbours, size);
-        Chunk halo = build_halo(chunk, edge_cells);
-        Chunk next = chunk_update(halo);
+        Chunk next = chunk_update(build_halo(
+                chunk,
+                get_edge_case(
+                    find_neighbour(
+                        world->get_neighbour_key(key),
+                        world_data),
+                    size
+                )
+            )
+        );
 
         next_step.insert_or_assign(key, std::move(next));
     }
