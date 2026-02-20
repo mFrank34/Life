@@ -1,26 +1,32 @@
 /*
  * File: View.h
  * Author: Michael Franks
- * Description:
+ * Description: world view
  */
 
 #ifndef VIEW_H
 #define VIEW_H
 
+#include <giomm/settings.h>
 #include <gtkmm/drawingarea.h>
 #include <gtkmm/gestureclick.h>
 #include <gtkmm/eventcontrollerscroll.h>
 #include <gtkmm/eventcontrollermotion.h>
+
+#include "app/Settings.h"
+#include "app/simulation/Simulation.h"
 
 class World;
 
 class View : public Gtk::DrawingArea
 {
 public:
-    View(World& world);
+    View(World& world, Simulation& simulation, Settings& settings);
 
 private:
     World* world;
+    Simulation& simulation;
+    Settings& settings;
 
     int cell_size = 16;
 
@@ -54,9 +60,11 @@ private:
     bool on_scroll(double dx, double dy);
     void zoom_at(double mx, double my, double dy);
 
-    void create_Grid(const Cairo::RefPtr<Cairo::Context>& cr,
-                     int width, int height,
-                     int size) const;
+    void create_Grid(
+        const Cairo::RefPtr<Cairo::Context>& cr,
+        int width, int height,
+        int size
+    ) const;
 };
 
 #endif

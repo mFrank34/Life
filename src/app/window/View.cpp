@@ -1,7 +1,7 @@
 /*
  * File: View.cpp
  * Author: Michael Franks
- * Description:
+ * Description: world view
  */
 
 #include "View.h"
@@ -9,12 +9,15 @@
 #include <gtkmm/gesturedrag.h>
 #include <algorithm>
 #include <cmath>
+#include <giomm/settings.h>
 
+#include "app/Settings.h"
+#include "app/simulation/Simulation.h"
 #include "world/World.h"
 #include "world/structure/Chunk.h"
 
-View::View(World& world)
-    : world(&world)
+View::View(World& world, Simulation& simulation, Settings& settings)
+    : world(&world), simulation(simulation), settings(settings)
 {
     set_hexpand(true);
     set_vexpand(true);
@@ -122,6 +125,7 @@ void View::on_draw(
 
 void View::on_click(int, double mx, double my)
 {
+    simulation.pause();
     double world_x = camera_x + mx / zoom;
     double world_y = camera_y + my / zoom;
 

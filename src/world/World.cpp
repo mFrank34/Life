@@ -1,17 +1,32 @@
 /*
  * File: World.cpp
  * Author: Michael Franks
- * Description:
+ * Description: Base class container for world-class
  */
 
 #include "World.h"
-
 #include <array>
 
 
-World::World(const std::string_view& world_type)
+World::World(const std::string_view& TYPE, const int CHUNK_SIZE)
+    : TYPE(TYPE), CHUNK_SIZE(CHUNK_SIZE)
 {
-    this->world_type = world_type;
+}
+
+std::unordered_map<long long, Chunk>& World::get_world()
+{
+    return world;
+}
+
+std::unordered_map<long long, Chunk>& World::get_stepped_world()
+{
+    return step;
+}
+
+void World::swap_world()
+{
+    world.swap(step);
+    step.clear();
 }
 
 std::array<long long, 8> World::get_neighbour_key(long long key) const
@@ -31,7 +46,16 @@ std::array<long long, 8> World::get_neighbour_key(long long key) const
 
 std::string World::get_type() const
 {
-    return world_type;
+    return TYPE;
+}
+
+int World::get_size() const
+{
+    return CHUNK_SIZE;
+}
+
+void World::tick(float delta)
+{
 }
 
 // protected

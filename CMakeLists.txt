@@ -7,15 +7,11 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 option(BUILD_TESTS "Build tests" ON)
 
-# --------------------------------------------------
 # GTKMM 4 (must come before targets that use it)
-# --------------------------------------------------
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GTKMM REQUIRED IMPORTED_TARGET gtkmm-4.0)
 
-# --------------------------------------------------
 # Core library
-# --------------------------------------------------
 add_library(LifeCore
         src/world/World.cpp
         src/world/Manager.cpp

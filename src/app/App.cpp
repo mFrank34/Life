@@ -1,7 +1,7 @@
 /*
  * File: App.cpp
  * Author: Michael Franks
- * Description:
+ * Description: Application Entry Point
  */
 
 // App.cpp
