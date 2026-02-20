@@ -8,10 +8,11 @@
 #include <unordered_map>
 #include <vector>
 
-Unordered::Unordered(const int size)
-    : World("Unordered Map"), CHUNK_SIZE(size)
+Unordered::Unordered()
+    : World("Unordered Map", 1)
 {
 }
+
 
 void Unordered::unload()
 {
@@ -19,6 +20,11 @@ void Unordered::unload()
     {
         return !pair.second.is_populated();
     });
+}
+
+void Unordered::clear_world()
+{
+    world.clear();
 }
 
 Cell& Unordered::get_cell(const int global_x, const int global_y)
@@ -53,22 +59,7 @@ Chunk& Unordered::get_chunk(const long long key)
         world.try_emplace(key, cx, cy, CHUNK_SIZE);
 
     // Mirror creation in next world
-    nextWorld.try_emplace(key, cx, cy, CHUNK_SIZE);
+    step.try_emplace(key, cx, cy, CHUNK_SIZE);
 
     return it->second;
-}
-
-std::unordered_map<long long, Chunk>& Unordered::get_world()
-{
-    return world; // std::unordered_map<long long, Chunk>
-}
-
-std::unordered_map<long long, Chunk>& Unordered::get_next_world()
-{
-    return nextWorld;
-}
-
-void Unordered::swap_world()
-{
-    world.swap(nextWorld);
 }

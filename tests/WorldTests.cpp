@@ -8,7 +8,7 @@ Debug global_debug;
 // Minimal concrete subclass for testing
 class TestWorld : public World {
 public:
-    TestWorld(const std::string& type) : World(type) {}
+    TestWorld(const std::string& type) : container(type) {}
 
     void unload() override {}
 

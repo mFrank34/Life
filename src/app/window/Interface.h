@@ -1,7 +1,7 @@
 /*
  * File: Interface.h
  * Author: Michael Franks
- * Description:
+ * Description: interface buttons and menu
  */
 
 #ifndef INTERFACE_H
@@ -36,14 +36,13 @@ namespace app::window
     class Interface : public Gtk::Box
     {
     public:
-        Interface(World& world, View& view, Settings& settings, Simulation& simulation);
+        Interface(View& view, Settings& settings, Simulation& simulation);
 
         // Signal emitted when user wants to change storage type
         sigc::signal<void(StorageType)> signal_storage_changed;
 
     private:
         // References (non-owning)
-        World& world;
         View& view;
         Settings& settings;
         Simulation& simulation;
@@ -58,7 +57,7 @@ namespace app::window
         // Buttons
         Gtk::Button btn_blue, btn_red, btn_green, btn_white;
         Gtk::Button btn_speed_1, btn_speed_2, btn_speed_4, btn_speed_8;
-        Gtk::Button btn_start, btn_pause, btn_restart;
+        Gtk::Button btn_start, btn_pause, btn_step, btn_restart;
         Gtk::Button btn_generate, btn_rule_editor;
         Gtk::Button btn_import, btn_export, btn_settings;
 
@@ -69,6 +68,7 @@ namespace app::window
         // Handlers
         void on_start();
         void on_pause();
+        void on_step();
         void on_restart();
         void on_generate();
         void on_rule_editor();

@@ -1,7 +1,7 @@
 /*
  * File: Simulation.cpp
  * Author: Michael Franks
- * Description:
+ * Description: body to simulation tick system and telling what to do... and so on
  */
 
 #include "Simulation.h"
@@ -29,9 +29,19 @@ void Simulation::start()
     running = true;
 }
 
+void Simulation::step()
+{
+    manager.update();
+}
+
 void Simulation::pause()
 {
     running = false;
+}
+
+void Simulation::clear()
+{
+    world->clear_world();
 }
 
 void Simulation::set_speed(float speed)

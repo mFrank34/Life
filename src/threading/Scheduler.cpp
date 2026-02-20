@@ -36,6 +36,16 @@ Scheduler::~Scheduler()
     Logger::info("Destroy Thread Pool");
 }
 
+void Scheduler::wait_for_group()
+{
+    std::unique_lock<std::mutex> lock(group_mtx);
+
+    group_cv.wait(lock, [this]()
+    {
+        return group_tasks.load(std::memory_order_acquire) == 0;
+    });
+}
+
 int Scheduler::get_active_tasks() const
 {
     return active_tasks.load();
@@ -57,13 +67,16 @@ void Scheduler::worker(int id)
     Logger::info("Thread Pool Worker Created with id: " + std::to_string(id));
     while (true)
     {
-        std::function<void()> task;
+        std::function < void() > task;
 
         {
             std::unique_lock<std::mutex> lock(queue_mtx);
             cv.wait(lock, [this] { return stop || !tasks.empty(); });
 
-            if (stop && tasks.empty())
+            if (stop&& tasks
+            .
+            empty()
+            )
             {
                 break; // exit thread
             }

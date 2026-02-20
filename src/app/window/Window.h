@@ -1,7 +1,7 @@
 /*
  * File: Window.h
  * Author: Michael Franks
- * Description:
+ * Description: Application window for controlling application
  */
 
 #ifndef WINDOW_H
@@ -14,6 +14,7 @@
 #include "world/World.h"
 #include "app/Settings.h"
 #include "app/simulation/Simulation.h"
+#include "threading/Scheduler.h"
 
 class Window : public Gtk::Window
 {
@@ -25,6 +26,7 @@ private:
     bool on_tick();
 
     Settings settings;
+    Scheduler scheduler = Scheduler(std::thread::hardware_concurrency());
     Simulation simulation = Simulation();
 
     // application resources for life

@@ -1,7 +1,7 @@
 /*
  * File: Simulation.h
  * Author: Michael Franks
- * Description:
+ * Description: tick system for runtime, telling app what to do each tick
  */
 
 #ifndef SIMULATION_H
@@ -20,7 +20,11 @@ public:
     void tick(float delta);
 
     void start();
+    void step();
     void pause();
+
+    void clear();
+
     void set_speed(float speed);
 
     bool isRunning() const;
