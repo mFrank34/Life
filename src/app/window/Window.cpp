@@ -5,6 +5,8 @@
  */
 
 #include "Window.h"
+#include "app/Settings.h"
+
 #include "app/window/Interface.h"
 #include "world/storage/Cache.h"
 #include "world/storage/Sparse.h"
@@ -28,12 +30,12 @@ Window::Window()
 void Window::initialize()
 {
     world = std::make_unique<Sparse>(32);
-    view = std::make_unique<View>(*world);
+    view = std::make_unique<View>(*world, simulation, settings);
 
     simulation.attach_world(*world);
-    simulation.pause();
+    simulation.start();
 
-    interface = std::make_unique<app::window::Interface>(*world, *view, settings, simulation);
+    interface = std::make_unique<app::window::Interface>(*view, settings, simulation);
     set_child(*interface);
 }
 
