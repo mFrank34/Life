@@ -22,6 +22,8 @@ public:
     ~Cache() = default;
 
     void unload() override;
+    void clear_world() override;
+
     // world entities
     Cell& get_cell(int gx, int gy) override;
     Chunk& get_chunk(int gx, int gy) override;

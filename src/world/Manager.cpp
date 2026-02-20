@@ -7,14 +7,12 @@
 #include "Manager.h"
 
 #include <algorithm>
+#include <functional>
 
 #include "rules/Rules.h"
 #include "world/World.h"
 #include "world/structure/Chunk.h"
 
-#include <functional>
-#include <map>
-#include <ranges>
 
 std::vector<Manager::Neighbour> Manager::find_neighbour(
     const std::array<long long, 8>& keys,
@@ -187,12 +185,13 @@ void Manager::attach_world(World& world)
     this->world = &world;
 }
 
+// TODO: split into 3 smaller task for threading
 void Manager::update()
 {
     auto& world_data = world->get_world();
-    auto& next_data = world->get_stepped_world();
+    auto& next_step = world->get_stepped_world();
 
-    // --- Phase 0: Ensure Sync between both worlds
+    // --- Phase 0: Ensure chunks exist in worlds ---
     std::vector<long long> to_create;
 
     for (auto& [key, chunk] : world_data)
@@ -208,36 +207,21 @@ void Manager::update()
     for (long long key : to_create)
         world->get_chunk(key);
 
-    // --- Phase 1: compute next stage of game ---
-
+    // --- Phase 1: Compute next generation ---
     for (auto& [key, chunk] : world_data)
     {
         const int size = chunk.get_size();
 
         auto keys = world->get_neighbour_key(key);
-        find_neighbour(keys, world_data);
+        auto neighbours = find_neighbour(keys, world_data);
+        auto edge_cells = get_edge_case(neighbours, size);
+        Chunk halo = build_halo(chunk, edge_cells);
+        Chunk next = chunk_update(halo);
 
-        get_edge_case(world_data, size);
-
-        Chunk halo(chunk.get_CX(), chunk.get_CY(), size + 2);
-        construct_halo(halo, chunk, neighbour_cells);
-
-        // ensure nextWorld chunk exists
-        if (!next_data.contains(key))
-        {
-            next_data.try_emplace(
-                key,
-                chunk.get_CX(),
-                chunk.get_CY(),
-                size
-            );
-        }
-
-        Chunk& next = next_data.at(key);
-        chunk_update(halo, next, chunk);
+        next_step.insert_or_assign(key, std::move(next));
     }
 
-    // --- Phase 2: commit changes ---
+    // --- Phase 2: Commit changes ---
     world->swap_world();
     world->unload();
 }

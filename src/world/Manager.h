@@ -29,26 +29,37 @@ private:
     Rules& rules;
 
     static constexpr int CHUNK_OFF_SET = 2;
-    std::atomic<bool> update_in_progress = false;
 
+    /**
+     * Cardinal direction store
+     */
     enum class Cardinal
     {
         N, NE, E, SE,
         S, SW, W, NW
     };
 
+    /**
+     * custom structor for storing direction and keys
+     */
     struct Neighbour
     {
         Cardinal direction;
         long long key;
     };
 
+    /**
+     * system to store direction and cells
+     */
     struct NeighbourCell
     {
         Cardinal direction;
         std::vector<std::reference_wrapper<Cell>> cells;
     };
 
+    /**
+     * halo table columns
+     */
     struct HaloTable
     {
         int startX, startY;
@@ -56,6 +67,9 @@ private:
         int count;
     };
 
+    /**
+     * the complete table for halo map
+     */
     struct HaloMap
     {
         Cardinal direction;
@@ -110,6 +124,15 @@ private:
      * @return returns the next step in
      */
     Chunk chunk_update(const Chunk& halo);
+
+    /* Threading Function  */
+
+    /**
+     * Thread safe chunk update
+     * @param halo primed chunk for compute
+     * @return processed chunk
+     */
+    Chunk thread_chunk_update(const Chunk& halo);
 
 public:
     /**

@@ -20,7 +20,11 @@ public:
     void tick(float delta);
 
     void start();
+    void step();
     void pause();
+
+    void clear();
+
     void set_speed(float speed);
 
     bool isRunning() const;

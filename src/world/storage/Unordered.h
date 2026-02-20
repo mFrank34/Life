@@ -21,6 +21,7 @@ public:
 
     // remove all empty chunks from world data
     void unload() override;
+    void clear_world() override;
 
     // world entities
     Cell& get_cell(int global_x, int global_y) override;
