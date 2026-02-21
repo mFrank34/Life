@@ -5,6 +5,7 @@
  */
 
 #include "app/window/Interface.h"
+#include "app/window/panels/SettingPanel.h"
 #include "utility/Logger.h"
 
 namespace app::window
@@ -147,16 +148,41 @@ namespace app::window
 
     void Interface::on_generate()
     {
+        if (!generate_panel)
+        {
+            auto* window = dynamic_cast<Gtk::Window*>(get_root());
+            if (!window)
+                return;
+            generate_panel = std::make_unique<GeneratePanel>(*window, settings);
+        }
+        generate_panel->present();
     }
 
     void Interface::on_rule_editor()
     {
+        if (!rule_panel)
+        {
+            auto* window = dynamic_cast<Gtk::Window*>(get_root());
+            if (!window)
+                return;
+
+            rule_panel = std::make_unique<RulePanel>(*window, settings);
+        }
+        rule_panel->present();
     }
 
     void Interface::on_settings()
     {
-    }
+        if (!settings_panel)
+        {
+            auto* window = dynamic_cast<Gtk::Window*>(get_root());
+            if (!window)
+                return;
 
+            settings_panel = std::make_unique<SettingPanel>(*window, settings);
+        }
+        settings_panel->present();
+    }
 
     // ===== UI helpers =====
 

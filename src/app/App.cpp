@@ -4,8 +4,6 @@
  * Description: Application Entry Point
  */
 
-// App.cpp
-
 #include <gtkmm.h>
 #include <iostream>
 
