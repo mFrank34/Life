@@ -13,7 +13,7 @@
 class Simulation
 {
 public:
-    Simulation();
+    Simulation(Scheduler& scheduler);
     ~Simulation() = default;
 
     void attach_world(World& world);
@@ -31,6 +31,8 @@ public:
 
 private:
     World* world = nullptr;
+    Scheduler* scheduler = nullptr;
+
     Rules rules;
     Manager manager;
 
