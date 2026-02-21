@@ -8,27 +8,25 @@
 #ifndef MANAGER_H
 #define MANAGER_H
 
-#include <map>
-
 #include "world/World.h"
 #include "world/structure/Chunk.h"
 #include "rules/Rules.h"
-
-enum class haloDirection
-{
-    Import,
-    Export
-};
+#include "threading/Scheduler.h"
 
 class Manager
 {
 private:
     /* Class Settings and connected objects */
     World* world = nullptr;
-
+    Scheduler& scheduler;
     Rules& rules;
 
     static constexpr int CHUNK_OFF_SET = 2;
+
+    /* Thread-safe result accumulation */
+    using ChunkResult = std::pair<long long, Chunk>;
+    std::vector<ChunkResult> results;
+    std::mutex result_mtx;
 
     /**
      * Cardinal direction store
@@ -40,7 +38,7 @@ private:
     };
 
     /**
-     * custom structor for storing direction and keys
+     * Stores a direction and the key of the neighbouring chunk
      */
     struct Neighbour
     {
@@ -49,16 +47,19 @@ private:
     };
 
     /**
-     * system to store direction and cells
+     * Stores a direction and OWNED copies of the relevant border cells.
+     * Using owned Cell values (not references) makes this safe to pass
+     * across thread boundaries without any lifetime concerns.
      */
     struct NeighbourCell
     {
         Cardinal direction;
-        std::vector<std::reference_wrapper<Cell>> cells;
+        std::vector<Cell> cells; // owned copies, not reference_wrappers
     };
 
     /**
-     * halo table columns
+     * Halo table columns — describes how to map one neighbour direction
+     * into the halo buffer.
      */
     struct HaloTable
     {
@@ -68,7 +69,7 @@ private:
     };
 
     /**
-     * the complete table for halo map
+     * A complete entry in the halo lookup table.
      */
     struct HaloMap
     {
@@ -76,13 +77,25 @@ private:
         HaloTable table;
     };
 
-    /* Functions to update the world system (below) */
+    /**
+     * All data a worker thread needs to process one chunk.
+     * Every field is self-contained — no pointers into shared structures.
+     */
+    struct ChunkWork
+    {
+        long long key;
+        Chunk chunk_copy; // snapshot of the chunk
+        std::vector<NeighbourCell> neighbour_cells; // owned border cells
+        int size; // chunk size at capture time
+    };
+
+    /* ------------------------------------------------------------------ */
+    /*  Internal helpers (all called on the main thread before scheduling) */
+    /* ------------------------------------------------------------------ */
 
     /**
-     * search world for chunks and creates missing
-     * @param keys keys to be sort after
-     * @param map the world
-     * @return list of direction and keys of chunks
+     * Returns Neighbour descriptors for the 8 surrounding chunks.
+     * Called on the main thread only.
      */
     std::vector<Neighbour> find_neighbour(
         const std::array<long long, 8>& keys,
@@ -90,67 +103,47 @@ private:
     );
 
     /**
-     * System to get the cells around the selected chunk though keys
-     * @param neighbours chunks that are needed by the system
-     * @param SIZE size of the current world
-     * @return direction and cells from other chunks
+     * Collects and COPIES the border cells from each neighbouring chunk.
+     * Called on the main thread only; returns owned Cell values so the
+     * result is safe to move into a worker thread.
      */
     std::vector<NeighbourCell> get_edge_case(
-        std::vector<Neighbour> neighbours,
+        const std::vector<Neighbour>& neighbours,
         int SIZE
     );
 
     /**
-     * create a halo map though a table with different size
-     * @param size size of chunk
-     * @return decision map
+     * Builds the halo-index lookup table for a given chunk size.
      */
     static std::array<HaloMap, 8> build_table(int size);
 
     /**
-     * build a new halo chunk with data given
-     * @param selected the chunk that needs to be processed
-     * @param neighbours the surrounding neighbors
-     * @return new halo chunk
+     * Builds a (size+2)×(size+2) halo chunk from a snapshot and its
+     * pre-collected border cells.  Called from worker threads.
      */
     Chunk build_halo(
         Chunk& selected,
-        const std::vector<NeighbourCell>& neighbours
+        const std::vector<NeighbourCell>& neighbours,
+        int size
     );
 
     /**
-     * Updates a chunk with the rules set
-     * @param halo buffered chunk
-     * @return returns the next step in
+     * Applies Conway's rules to the halo chunk and returns the next
+     * generation.  Called from worker threads.
      */
-    Chunk chunk_update(const Chunk& halo);
-
-    /* Threading Function  */
-
-    /**
-     * Thread safe chunk update
-     * @param halo primed chunk for compute
-     * @return processed chunk
-     */
-    Chunk thread_chunk_update(const Chunk& halo);
+    Chunk chunk_update(const Chunk& halo, int size);
 
 public:
-    /**
-     * Creates a manager with a rule set
-     * @param rules conway's rules
-     */
-    Manager(Rules& rules);
-
+    Manager(Rules& rules, Scheduler& scheduler);
     ~Manager() = default;
 
     /**
-     * attaches a world to the manager
-     * @param world world container
+     * Attaches a world to the manager.
      */
     void attach_world(World& world);
 
     /**
-     * Updates the world and process the next step
+     * Advances the world by one generation.
      */
     void update();
 };

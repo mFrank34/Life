@@ -6,8 +6,8 @@
 
 #include "Simulation.h"
 
-Simulation::Simulation()
-    : manager(rules)
+Simulation::Simulation(Scheduler& scheduler)
+    : manager(rules, scheduler)
 {
 }
 
@@ -17,11 +17,19 @@ void Simulation::attach_world(World& world)
     manager.attach_world(world);
 }
 
+
 void Simulation::tick(float delta)
 {
     if (!this->isRunning() || !world)
         return;
-    manager.update();
+
+    accumulator += delta;
+
+    if (accumulator >= step_interval)
+    {
+        manager.update();
+        accumulator -= step_interval; // subtract rather than reset to avoid drift
+    }
 }
 
 void Simulation::start()
@@ -31,7 +39,8 @@ void Simulation::start()
 
 void Simulation::step()
 {
-    manager.update();
+    if (!running)
+        manager.update();
 }
 
 void Simulation::pause()
@@ -44,9 +53,9 @@ void Simulation::clear()
     world->clear_world();
 }
 
-void Simulation::set_speed(float speed)
+void Simulation::set_speed(float generations_per_second)
 {
-    // TODO: Create a speed changer that changed the speed which simulation happens with
+    step_interval = 1.0f / generations_per_second;
 }
 
 bool Simulation::isRunning() const
