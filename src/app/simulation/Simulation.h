@@ -25,7 +25,7 @@ public:
 
     void clear();
 
-    void set_speed(float speed);
+    void set_speed(float generations_per_second);
 
     bool isRunning() const;
 
@@ -37,6 +37,9 @@ private:
     Manager manager;
 
     bool running = true;
+
+    float accumulator = 0.0f;
+    float step_interval = 0.1f;
 };
 
 #endif
