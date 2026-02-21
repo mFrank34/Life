@@ -1,23 +1,30 @@
 /*
  * File: Cell.h
  * Author: Michael Franks
- * Description:
+ * Description: cell entry
  */
 
 #pragma once
 #ifndef CELL_H
 #define CELL_H
 
+enum class CellType
+{
+    Blue, Red, Green, White, Empty
+};
+
 class Cell
 {
-    char type;
+    CellType type;
     bool alive;
+
 public:
     Cell();
-    Cell(char type);
-    char get_type() const;
+    Cell(CellType type);
+
+    CellType get_type() const;
     bool is_alive() const;
-    void set_type(char new_type);
+    void set_type(CellType type);
     void set_alive(bool is_alive);
     void update_cell();
     ~Cell() = default;

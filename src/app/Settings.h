@@ -8,6 +8,8 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+#include "world/structure/Cell.h"
+
 enum class StorageType
 {
     Sparse, Cache, Unordered
@@ -25,6 +27,7 @@ public:
     // Display
     bool show_grid = true;
     float zoom = 1.0f;
+    CellType colour = CellType::White;
 };
 
 #endif // SETTINGS_H

@@ -6,7 +6,6 @@
 
 #include "app/window/Interface.h"
 #include "app/window/panels/SettingPanel.h"
-#include "utility/Logger.h"
 
 namespace app::window
 {
@@ -184,4 +183,9 @@ namespace app::window
         settings_panel->present();
     }
 
+    void Interface::change_color(CellType& change) const
+    {
+    }
+
+    /* Interface helpers */
 }

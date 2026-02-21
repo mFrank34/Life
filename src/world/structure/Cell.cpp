@@ -7,16 +7,16 @@
 #include "Cell.h"
 
 // constructor
-Cell::Cell() : type(0), alive(false)
+Cell::Cell() : type(CellType::Empty), alive(false)
 {
-} ;
+};
 
-Cell::Cell(char input_type) : type(input_type)
+Cell::Cell(CellType type) : type(type)
 {
     update_cell();
 };
 
-char Cell::get_type() const
+CellType Cell::get_type() const
 {
     // returns the type of current cell
     return type;
@@ -28,7 +28,7 @@ bool Cell::is_alive() const
     return alive;
 };
 
-void Cell::set_type(char new_type)
+void Cell::set_type(CellType new_type)
 {
     // setting the type of alive
     this->type = new_type;
@@ -43,17 +43,21 @@ void Cell::set_alive(const bool is_alive)
 
 void Cell::update_cell()
 {
-    // TODO Create more cell types for application like green, blue and red
-    switch (type)
+    switch (static_cast<CellType>(type))
     {
-    case '0':
+    case CellType::Empty:
         alive = false;
-        break; // empty cell
-    case 'w':
+        break;
+
+    case CellType::White:
+    case CellType::Green:
+    case CellType::Blue:
+    case CellType::Red:
         alive = true;
-        break; // white cell
+        break;
+
     default:
         alive = false;
-        break; // default cell type
+        break;
     }
 }
