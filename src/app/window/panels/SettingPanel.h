@@ -18,7 +18,7 @@ public:
 
 private:
     Settings& settings;
-    Gtk::Box content { Gtk::Orientation::VERTICAL };
+    Gtk::Box content{Gtk::Orientation::VERTICAL};
 };
 
 #endif // SETTING_PANEL_H
