@@ -6,8 +6,8 @@
 
 #include "Simulation.h"
 
-Simulation::Simulation()
-    : manager(rules)
+Simulation::Simulation(Scheduler& scheduler)
+    : manager(rules, scheduler)
 {
 }
 
@@ -16,6 +16,7 @@ void Simulation::attach_world(World& world)
     this->world = &world;
     manager.attach_world(world);
 }
+
 
 void Simulation::tick(float delta)
 {

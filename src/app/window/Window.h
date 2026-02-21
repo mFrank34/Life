@@ -27,7 +27,7 @@ private:
 
     Settings settings;
     Scheduler scheduler = Scheduler(std::thread::hardware_concurrency());
-    Simulation simulation = Simulation();
+    Simulation simulation = Simulation(scheduler);
 
     // application resources for life
     std::unique_ptr<World> world;
