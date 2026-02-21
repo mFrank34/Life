@@ -28,7 +28,8 @@ public:
     bool show_grid = true;
     bool debug = false;
     float zoom = 1.0f;
-    CellType colour = CellType::Blue;
+
+    CellType colour = CellType::White;
 };
 
 #endif // SETTINGS_H
