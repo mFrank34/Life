@@ -74,11 +74,6 @@ namespace app::window
         void on_generate();
         void on_rule_editor();
         void on_settings();
-
-        // UI helpers
-        void update_speed_ui();
-        void update_color_ui();
-        void show_settings_dialog();
     };
 }
 
