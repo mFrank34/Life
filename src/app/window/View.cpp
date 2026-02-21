@@ -132,22 +132,22 @@ void View::on_draw(
                     continue;
                 }
 
-                char type = world->get_cell(wx, wy).get_type();
+                CellType type = world->get_cell(wx, wy).get_type();
                 switch (type)
                 {
-                case 'w': // white
+                case CellType::White:
                     cr->set_source_rgba(1.0, 1.0, 1.0, 1.0);
                     break;
 
-                case 'g': // green
+                case CellType::Green:
                     cr->set_source_rgba(0.2, 0.8, 0.2, 1.0);
                     break;
 
-                case 'b': // blue
+                case CellType::Blue:
                     cr->set_source_rgba(0.2, 0.4, 0.9, 1.0);
                     break;
 
-                case 'r': // red
+                case CellType::Red:
                     cr->set_source_rgba(0.9, 0.2, 0.2, 1.0);
                     break;
 
@@ -181,10 +181,10 @@ void View::on_click(int, double mx, double my)
 
     auto& cell = world->get_cell(cx, cy);
 
-    if (cell.get_type() == 'w')
-        cell.set_type('0'); // unselect
+    if (cell.get_type() == CellType::White)
+        cell.set_type(CellType::Empty); // unselect
     else
-        cell.set_type('w'); // place wall
+        cell.set_type(CellType::White); // place wall
 
     queue_draw();
 }

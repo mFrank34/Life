@@ -21,11 +21,6 @@ enum class SimSpeed
     X1, X2, X4, X8
 };
 
-enum class CellColor
-{
-    Blue, Red, Green, White
-};
-
 class World;
 
 namespace app::window
@@ -34,9 +29,6 @@ namespace app::window
     {
     public:
         Interface(View& view, Settings& settings, Simulation& simulation);
-
-        // Signal emitted when user wants to change storage type
-        sigc::signal<void(StorageType)> signal_storage_changed;
 
     private:
         // References (non-owning)
@@ -58,7 +50,7 @@ namespace app::window
 
         // State (UI-only)
         SimSpeed current_speed = SimSpeed::X1;
-        CellColor current_color = CellColor::White;
+        CellType current_color = CellType::White;
 
         // Panels
         std::unique_ptr<GeneratePanel> generate_panel;
@@ -74,6 +66,9 @@ namespace app::window
         void on_generate();
         void on_rule_editor();
         void on_settings();
+
+        /* Interface helpers */
+        void change_color(CellType& change) const;
     };
 }
 

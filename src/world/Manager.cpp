@@ -186,9 +186,9 @@ Chunk Manager::chunk_update(const Chunk& halo, int size)
             Cell& out = next.get_cell(x, y);
 
             if (alive && (live < 2 || live > 3))
-                out.set_type('0');
+                out.set_type(CellType::Empty);
             else if (!alive && live == 3)
-                out.set_type('w');
+                out.set_type(CellType::White);
             else
                 out.set_type(halo.get_cell(bx, by).get_type());
         }
