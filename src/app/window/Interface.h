@@ -50,7 +50,6 @@ namespace app::window
 
         // State (UI-only)
         SimSpeed current_speed = SimSpeed::X1;
-        CellType current_color = CellType::White;
 
         // Panels
         std::unique_ptr<GeneratePanel> generate_panel;

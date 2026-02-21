@@ -169,7 +169,6 @@ Chunk Manager::build_halo(
     return buffer;
 }
 
-// TODO: make fixes too this
 Chunk Manager::chunk_update(const Chunk& halo, int size)
 {
     Chunk next(halo.get_CX(), halo.get_CY(), size);
@@ -182,43 +181,25 @@ Chunk Manager::chunk_update(const Chunk& halo, int size)
             const int by = y + 1;
 
             const Cell& current = halo.get_cell(bx, by);
-            const bool alive = current.is_alive();
             const CellType type = current.get_type();
-
             Cell& out = next.get_cell(x, y);
+            const Count count = halo.neighbour_count(bx, by);
 
-            // Count neighbors by color
-            Count count = halo.neighbour_count(bx, by);
-            int totalAlive = count.blue + count.green + count.red + count.white;
-
-            if (alive)
+            if (current.is_alive())
             {
-                // Survival per color
                 switch (type)
                 {
                 case CellType::White:
-                    if (totalAlive < 2 || totalAlive > 3)
-                        out.set_type(CellType::Empty);
-                    else
-                        out.set_type(CellType::White);
+                    out.set_type(rules.white.survives(count.white) ? CellType::White : CellType::Empty);
                     break;
                 case CellType::Blue:
-                    if (count.blue != 4)
-                        out.set_type(CellType::Empty);
-                    else
-                        out.set_type(CellType::Blue);
+                    out.set_type(rules.blue.survives(count.blue) ? CellType::Blue : CellType::Empty);
                     break;
                 case CellType::Green:
-                    if (count.green != 6)
-                        out.set_type(CellType::Empty);
-                    else
-                        out.set_type(CellType::Green);
+                    out.set_type(rules.green.survives(count.green) ? CellType::Green : CellType::Empty);
                     break;
                 case CellType::Red:
-                    if (count.red != 8)
-                        out.set_type(CellType::Empty);
-                    else
-                        out.set_type(CellType::Red);
+                    out.set_type(rules.red.survives(count.red) ? CellType::Red : CellType::Empty);
                     break;
                 default:
                     out.set_type(CellType::Empty);
@@ -227,28 +208,11 @@ Chunk Manager::chunk_update(const Chunk& halo, int size)
             }
             else
             {
-                // Dead cell — check for birth
-                if (totalAlive == 3)
-                {
-                    // Classic Conway birth for white
-                    out.set_type(CellType::White);
-                }
-                else if (count.blue == 5)
-                {
-                    out.set_type(CellType::Blue);
-                }
-                else if (count.green == 7)
-                {
-                    out.set_type(CellType::Green);
-                }
-                else if (count.red == 9)
-                {
-                    out.set_type(CellType::Red);
-                }
-                else
-                {
-                    out.set_type(CellType::Empty); // stays dead
-                }
+                if (rules.white.births(count.white)) out.set_type(CellType::White);
+                else if (rules.blue.births(count.blue)) out.set_type(CellType::Blue);
+                else if (rules.green.births(count.green)) out.set_type(CellType::Green);
+                else if (rules.red.births(count.red)) out.set_type(CellType::Red);
+                else out.set_type(CellType::Empty);
             }
         }
     }
