@@ -12,6 +12,9 @@
 #include "View.h"
 #include "app/Settings.h"
 #include "app/simulation/Simulation.h"
+#include "panels/GeneratePanel.h"
+#include "panels/RulePanel.h"
+#include "panels/SettingPanel.h"
 
 enum class SimSpeed
 {
@@ -43,7 +46,6 @@ namespace app::window
 
         // Layout
         Gtk::Overlay overlay;
-
         Gtk::Box left_panel{Gtk::Orientation::VERTICAL};
         Gtk::Box bottom_controls{Gtk::Orientation::HORIZONTAL};
 
@@ -57,6 +59,11 @@ namespace app::window
         // State (UI-only)
         SimSpeed current_speed = SimSpeed::X1;
         CellColor current_color = CellColor::White;
+
+        // Panels
+        std::unique_ptr<GeneratePanel> generate_panel;
+        std::unique_ptr<RulePanel> rule_panel;
+        std::unique_ptr<SettingPanel> settings_panel;
 
         // Handlers
         void on_start() const;

@@ -10,9 +10,7 @@
 
 enum class StorageType
 {
-    Sparse,
-    Cache,
-    Unordered
+    Sparse, Cache, Unordered
 };
 
 class Settings

@@ -33,12 +33,12 @@ add_library(LifeCore
         src/threading/Scheduler.cpp
 
         src/utility/Logger.cpp
-        src/app/window/panels/SettingView.cpp
-        src/app/window/panels/SettingView.h
-        src/app/window/panels/GenerateView.cpp
-        src/app/window/panels/GenerateView.h
-        src/app/window/panels/RuleView.cpp
-        src/app/window/panels/RuleView.h
+        src/app/window/panels/SettingPanel.cpp
+        src/app/window/panels/SettingPanel.h
+        src/app/window/panels/GeneratePanel.cpp
+        src/app/window/panels/GeneratePanel.h
+        src/app/window/panels/RulePanel.cpp
+        src/app/window/panels/RulePanel.h
 )
 
 target_include_directories(LifeCore
