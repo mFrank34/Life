@@ -1,31 +1,27 @@
 /*
  * File: Rules.h
  * Author: Michael Franks
- * Description:
+ * Description: Conways rules set with some extra systems
  */
 
-#ifndef LIFE_H
-#define LIFE_H
+#ifndef RULES_H
+#define RULES_H
 
-#include "vector"
+struct Rule
+{
+    int survival_min;
+    int survival_max;
+    int birth_min;
+    int birth_max;
+};
 
 class Rules
 {
 public:
-    Rules();
-
-    // rules
-    bool underpopulation(int c) const;
-    bool survival(int c) const;
-    bool overpopulation(int c) const;
-    bool reproduction(int c) const;
-
-    ~Rules();
-
-private:
-    // limits 
-    int limit = 3;
-    int min = 2;
+    Rule blue = {4, 4, 5, 5};
+    Rule green = {6, 6, 7, 7};
+    Rule red = {8, 8, 9, 9};
+    Rule white = {2, 3, 3, 3};
 };
 
-#endif
+#endif // RULES_H

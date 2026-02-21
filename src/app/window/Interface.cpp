@@ -48,14 +48,18 @@ namespace app::window
         left_panel.append(btn_green);
         left_panel.append(btn_white);
 
-        // btn_blue.signal_clicked().connect(
-        //     sigc::bind(sigc::mem_fun(*this, &Interface::on_color), CellColor::Blue));
-        // btn_red.signal_clicked().connect(
-        //     sigc::bind(sigc::mem_fun(*this, &Interface::on_color), CellColor::Red));
-        // btn_green.signal_clicked().connect(
-        //     sigc::bind(sigc::mem_fun(*this, &Interface::on_color), CellColor::Green));
-        // btn_white.signal_clicked().connect(
-        //     sigc::bind(sigc::mem_fun(*this, &Interface::on_color), CellColor::White));
+        auto connect_color = [this](Gtk::Button& btn, CellType color)
+        {
+            btn.signal_clicked().connect([this, color]()
+            {
+                change_color(color);
+            });
+        };
+
+        connect_color(btn_blue, CellType::Blue);
+        connect_color(btn_red, CellType::Red);
+        connect_color(btn_green, CellType::Green);
+        connect_color(btn_white, CellType::White);
 
         // --- BOTTOM CONTROLS ---
         bottom_controls.set_margin(8);
@@ -183,8 +187,10 @@ namespace app::window
         settings_panel->present();
     }
 
-    void Interface::change_color(CellType& change) const
+    void Interface::change_color(const CellType& change)
     {
+        Logger::info("Color has changed");
+        settings.colour = change;
     }
 
     /* Interface helpers */

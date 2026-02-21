@@ -9,9 +9,12 @@
 
 
 Chunk::Chunk(const int cx, const int cy, const int cs)
-    : chunk_x(cx), chunk_y(cy), size(cs), cells(size * size) {
-    for (int y = 0; y < size; y++) {
-        for (int x = 0; x < size; x++) {
+    : chunk_x(cx), chunk_y(cy), size(cs), cells(size * size)
+{
+    for (int y = 0; y < size; y++)
+    {
+        for (int x = 0; x < size; x++)
+        {
             get_cell(x, y).set_type(CellType::Empty);
         }
     }
@@ -79,22 +82,39 @@ int Chunk::populated_amt() const
     return lives_cell;
 }
 
-int Chunk::neighbour_count(const int cx, const int cy) const
+// TODO: change for counting different cell types around a cell
+Count Chunk::neighbour_count(const int cx, const int cy) const
 {
     using Offset = std::array<int, 2>;
     using Offsets = std::array<Offset, 8>;
 
-    static const Offsets offsets = {{
-        {{-1, -1}}, {{ 0, -1}}, {{ 1, -1}},
-        {{-1,  0}},             {{ 1,  0}},
-        {{-1,  1}}, {{ 0,  1}}, {{ 1,  1}}
-    }};
+    static const Offsets offsets = {
+        {
+            {{-1, -1}}, {{0, -1}}, {{1, -1}},
+            {{-1, 0}}, {{1, 0}},
+            {{-1, 1}}, {{0, 1}}, {{1, 1}}
+        }
+    };
 
-    int count = 0;
-    for (const auto &offset : offsets) // connects
-        if (get_cell(cx + offset[0], cy + offset[1]).is_alive())
-            count++; //counting the alive cells
-    return count;
+    Count counts;
+    for (const auto& offset : offsets)
+    {
+        const Cell& neighbor = get_cell(cx + offset[0], cy + offset[1]);
+        if (!neighbor.is_alive()) continue;
+
+        switch (neighbor.get_type())
+        {
+        case CellType::Blue: counts.blue++;
+            break;
+        case CellType::Green: counts.green++;
+            break;
+        case CellType::Red: counts.red++;
+            break;
+        case CellType::White: counts.white++;
+        default: break;
+        }
+    }
+    return counts;
 }
 
 int Chunk::get_size() const

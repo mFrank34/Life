@@ -23,8 +23,6 @@ add_library(LifeCore
         src/world/storage/Sparse.cpp
         src/world/storage/Unordered.cpp
 
-        src/rules/Rules.cpp
-
         src/app/simulation/Simulation.cpp
         src/app/window/Interface.cpp
         src/app/window/Window.cpp
