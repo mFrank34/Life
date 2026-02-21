@@ -68,7 +68,7 @@ namespace app::window
         void on_settings();
 
         /* Interface helpers */
-        void change_color(CellType& change) const;
+        void change_color(const CellType& change);
     };
 }
 

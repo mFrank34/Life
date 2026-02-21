@@ -10,6 +10,14 @@
 #include <vector>
 #include "Cell.h"
 
+struct Count
+{
+    int white = 0;
+    int blue = 0;
+    int green = 0;
+    int red = 0;
+};
+
 class Chunk
 {
 public:
@@ -36,13 +44,14 @@ public:
     Cell& get_cell(int index);
 
     // cell data
-    const std::vector<Cell>& get_cells() const ;
+    const std::vector<Cell>& get_cells() const;
 
     // lookup
     bool is_populated() const;
     int populated_amt() const;
-    int neighbour_count(int cx, int cy) const;
+    Count neighbour_count(int cx, int cy) const;
     int get_size() const;
+
 private:
     int chunk_x, chunk_y, size;
     std::vector<Cell> cells;

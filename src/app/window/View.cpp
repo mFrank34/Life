@@ -114,6 +114,7 @@ void View::on_draw(
 
         bool even = ((chunk.get_CX() + chunk.get_CY()) % 2 == 0);
 
+
         for (int cy = 0; cy < chunk.get_size(); cy++)
         {
             for (int cx = 0; cx < chunk.get_size(); cx++)
@@ -181,10 +182,10 @@ void View::on_click(int, double mx, double my)
 
     auto& cell = world->get_cell(cx, cy);
 
-    if (cell.get_type() == CellType::White)
-        cell.set_type(CellType::Empty); // unselect
+    if (cell.get_type() == settings.colour)
+        cell.set_type(CellType::Empty);
     else
-        cell.set_type(CellType::White); // place wall
+        cell.set_type(settings.colour);
 
     queue_draw();
 }
