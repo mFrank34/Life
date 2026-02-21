@@ -13,7 +13,7 @@
 class Simulation
 {
 public:
-    Simulation();
+    Simulation(Scheduler& scheduler);
     ~Simulation() = default;
 
     void attach_world(World& world);
@@ -25,16 +25,21 @@ public:
 
     void clear();
 
-    void set_speed(float speed);
+    void set_speed(float generations_per_second);
 
     bool isRunning() const;
 
 private:
     World* world = nullptr;
+    Scheduler* scheduler = nullptr;
+
     Rules rules;
     Manager manager;
 
     bool running = true;
+
+    float accumulator = 0.0f;
+    float step_interval = 0.1f;
 };
 
 #endif

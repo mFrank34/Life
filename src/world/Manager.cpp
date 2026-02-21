@@ -1,18 +1,23 @@
 /*
  * File: Manager.cpp
  * Author: Michael Franks
- * Description: updates the world and system need to update a system
+ * Description: updates the world; thread-safe implementation.
+ *
+ * Thread safety strategy
+ * ─────────────────────
+ * All access to the shared World (get_chunk, get_size, map iteration) is
+ * confined to the main thread in a pre-phase.  Worker threads receive a
+ * self-contained ChunkWork value that owns every piece of data it needs,
+ * so no synchronization is required inside the hot path.
  */
 
 #include "Manager.h"
 
 #include <algorithm>
-#include <functional>
 
 #include "rules/Rules.h"
 #include "world/World.h"
 #include "world/structure/Chunk.h"
-
 
 std::vector<Manager::Neighbour> Manager::find_neighbour(
     const std::array<long long, 8>& keys,
@@ -20,70 +25,87 @@ std::vector<Manager::Neighbour> Manager::find_neighbour(
 )
 {
     std::vector<Neighbour> neighbours;
+    neighbours.reserve(8);
+
     for (int i = 0; i < 8; ++i)
     {
         Cardinal dir = static_cast<Cardinal>(i);
         long long key = keys[i];
 
+        // Ensure the chunk exists in the world (main thread only).
         if (!map.contains(key))
             world->get_chunk(key);
 
-        neighbours.emplace_back(dir, key);
-        neighbours.emplace_back(dir, key);
+        neighbours.push_back({dir, key});
     }
     return neighbours;
 }
 
 std::vector<Manager::NeighbourCell> Manager::get_edge_case(
-    std::vector<Neighbour> neighbours,
+    const std::vector<Neighbour>& neighbours,
     const int SIZE
 )
 {
     std::vector<NeighbourCell> neighbour_cells;
-    for (auto [dir, key] : neighbours)
+    neighbour_cells.reserve(neighbours.size());
+
+    for (const auto& [dir, key] : neighbours)
     {
-        auto& neighbour = world->get_chunk(key);
-        std::vector<std::reference_wrapper<Cell>> cells;
+        // All world access happens here on the main thread.
+        const Chunk& neighbour = world->get_chunk(key);
+        std::vector<Cell> cells; // ← owned copies, not references
 
         switch (dir)
         {
         case Cardinal::N:
+            cells.reserve(SIZE);
             for (int x = 0; x < SIZE; ++x)
-                cells.emplace_back(neighbour.get_cell(x, SIZE - 1));
+                cells.push_back(neighbour.get_cell(x, SIZE - 1));
             break;
+
         case Cardinal::NE:
-            cells.emplace_back(neighbour.get_cell(0, SIZE - 1));
+            cells.push_back(neighbour.get_cell(0, SIZE - 1));
             break;
+
         case Cardinal::E:
+            cells.reserve(SIZE);
             for (int y = 0; y < SIZE; ++y)
-                cells.emplace_back(neighbour.get_cell(0, y));
+                cells.push_back(neighbour.get_cell(0, y));
             break;
+
         case Cardinal::SE:
-            cells.emplace_back(neighbour.get_cell(0, 0));
+            cells.push_back(neighbour.get_cell(0, 0));
             break;
+
         case Cardinal::S:
+            cells.reserve(SIZE);
             for (int x = 0; x < SIZE; ++x)
-                cells.emplace_back(neighbour.get_cell(x, 0));
+                cells.push_back(neighbour.get_cell(x, 0));
             break;
+
         case Cardinal::SW:
-            cells.emplace_back(neighbour.get_cell(SIZE - 1, 0));
+            cells.push_back(neighbour.get_cell(SIZE - 1, 0));
             break;
+
         case Cardinal::W:
+            cells.reserve(SIZE);
             for (int y = 0; y < SIZE; ++y)
-                cells.emplace_back(neighbour.get_cell(SIZE - 1, y));
+                cells.push_back(neighbour.get_cell(SIZE - 1, y));
             break;
+
         case Cardinal::NW:
-            cells.emplace_back(neighbour.get_cell(SIZE - 1, SIZE - 1));
+            cells.push_back(neighbour.get_cell(SIZE - 1, SIZE - 1));
             break;
         }
 
-        neighbour_cells.emplace_back(dir, std::move(cells));
+        neighbour_cells.push_back({dir, std::move(cells)});
     }
     return neighbour_cells;
 }
 
 std::array<Manager::HaloMap, 8> Manager::build_table(int size)
 {
+    // Built fresh each call so it correctly reflects the current size.
     return {
         {
             {Cardinal::N, {1, 0, 1, 0, size}},
@@ -100,24 +122,24 @@ std::array<Manager::HaloMap, 8> Manager::build_table(int size)
 
 Chunk Manager::build_halo(
     Chunk& selected,
-    const std::vector<NeighbourCell>& neighbours
+    const std::vector<NeighbourCell>& neighbours,
+    int size
 )
 {
-    const int size = world->get_size();
     constexpr int halo = 1;
 
     Chunk buffer(selected.get_CX(), selected.get_CY(), size + CHUNK_OFF_SET);
 
-    // 1. Copy inner chunk
+    // 1. Copy inner chunk into the halo buffer.
     for (int y = 0; y < size; ++y)
         for (int x = 0; x < size; ++x)
             buffer.get_cell(x + halo, y + halo)
                   .set_type(selected.get_cell(x, y).get_type());
 
-    // 2. Build halo lookup table
-    static std::array<HaloMap, 8> halo_table = build_table(size);
+    // 2. Build the halo lookup table for this size (not static — size varies).
+    const std::array<HaloMap, 8> halo_table = build_table(size);
 
-    // 3. Import neighbour cells
+    // 3. Import neighbour border cells into the halo fringe.
     for (const NeighbourCell& neighbour : neighbours)
     {
         auto it = std::find_if(
@@ -139,16 +161,16 @@ Chunk Manager::build_halo(
             const int bx = h.startX + h.stepX * i;
             const int by = h.startY + h.stepY * i;
 
+            // neighbour.cells holds owned Cell copies — no shared state.
             buffer.get_cell(bx, by)
-                  .set_type(neighbour.cells[i].get().get_type());
+                  .set_type(neighbour.cells[i].get_type());
         }
     }
     return buffer;
 }
 
-Chunk Manager::chunk_update(const Chunk& halo)
+Chunk Manager::chunk_update(const Chunk& halo, int size)
 {
-    const int size = world->get_size();
     Chunk next(halo.get_CX(), halo.get_CY(), size);
 
     for (int y = 0; y < size; ++y)
@@ -174,13 +196,8 @@ Chunk Manager::chunk_update(const Chunk& halo)
     return next;
 }
 
-Chunk Manager::thread_chunk_update(const Chunk& halo)
-{
-}
-
-
-Manager::Manager(Rules& rules)
-    : rules(rules)
+Manager::Manager(Rules& rules, Scheduler& scheduler)
+    : rules(rules), scheduler(scheduler)
 {
 }
 
@@ -189,47 +206,88 @@ void Manager::attach_world(World& world)
     this->world = &world;
 }
 
-// TODO: split into 3 smaller task for threading
 void Manager::update()
 {
     auto& world_data = world->get_world();
     auto& next_step = world->get_stepped_world();
 
-    // --- Phase 0: Ensure chunks exist in worlds ---
-    std::vector<long long> to_create;
-
-    for (auto& [key, chunk] : world_data)
+    /* --- Phase 0: ensure all neighbour chunks exist --- */
     {
-        auto keys = world->get_neighbour_key(key);
-        for (long long nkey : keys)
+        std::vector<long long> to_create;
+
+        for (auto& [key, chunk] : world_data)
         {
-            if (!world_data.contains(nkey))
-                to_create.push_back(nkey);
+            for (long long nkey : world->get_neighbour_key(key))
+                if (!world_data.contains(nkey))
+                    to_create.push_back(nkey);
         }
+
+        for (long long key : to_create)
+            world->get_chunk(key);
     }
 
-    for (long long key : to_create)
-        world->get_chunk(key);
+    /* --- Phase 0.5: collect all work on the main thread ---
+     *  find_neighbor / get_edge_case both touch the World.  We do this
+     *  entirely before any threads are spawned so that:
+     *    • no concurrent mutation of world_data can occur, and
+     *    • the ChunkWork values passed to threads own their data outright.
+     */
+    const int size = world->get_size(); // snapshot once
 
-    // --- Phase 1: Compute next generation ---
+    std::vector<ChunkWork> work_items;
+    work_items.reserve(world_data.size());
+
     for (auto& [key, chunk] : world_data)
     {
-        const int size = chunk.get_size();
-        Chunk next = chunk_update(build_halo(
-                chunk,
-                get_edge_case(
-                    find_neighbour(
-                        world->get_neighbour_key(key),
-                        world_data),
-                    size
-                )
-            )
-        );
+        auto neighbour_keys = world->get_neighbour_key(key);
+        auto neighbours = find_neighbour(neighbour_keys, world_data);
+        auto neighbour_cells = get_edge_case(neighbours, size);
 
-        next_step.insert_or_assign(key, std::move(next));
+        work_items.push_back({
+            key,
+            chunk, // copy (snapshot)
+            std::move(neighbour_cells),
+            size
+        });
     }
 
-    // --- Phase 2: Commit changes ---
+    /* --- Phase 1: parallel update — threads touch no shared state --- */
+    results.reserve(work_items.size());
+
+    for (auto& work : work_items)
+    {
+        scheduler.enqueue_grouped(
+            // Capture work by value so each lambda is fully self-contained.
+            [this, work = std::move(work)]() mutable
+            {
+                Chunk new_chunk =
+                    chunk_update(
+                        build_halo(
+                            work.chunk_copy,
+                            work.neighbour_cells,
+                            work.size
+                        ),
+                        work.size
+                    );
+
+                {
+                    std::lock_guard<std::mutex> lock(result_mtx);
+                    results.emplace_back(work.key, std::move(new_chunk));
+                }
+            }
+        );
+    }
+
+    /* --- Phase 1.1: wait for all workers --- */
+    scheduler.wait_for_group();
+
+    /* --- Phase 1.2: commit thread results --- */
+    for (auto& [key, chunk] : results)
+        next_step.insert_or_assign(key, std::move(chunk));
+
+    results.clear();
+
+    /* --- Phase 2: swap and unload --- */
     world->swap_world();
     world->unload();
 }
