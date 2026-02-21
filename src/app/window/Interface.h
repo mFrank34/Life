@@ -15,18 +15,12 @@
 
 enum class SimSpeed
 {
-    X1,
-    X2,
-    X4,
-    X8
+    X1, X2, X4, X8
 };
 
 enum class CellColor
 {
-    Blue,
-    Red,
-    Green,
-    White
+    Blue, Red, Green, White
 };
 
 class World;
@@ -51,32 +45,28 @@ namespace app::window
         Gtk::Overlay overlay;
 
         Gtk::Box left_panel{Gtk::Orientation::VERTICAL};
-        Gtk::Box right_panel{Gtk::Orientation::VERTICAL};
         Gtk::Box bottom_controls{Gtk::Orientation::HORIZONTAL};
 
         // Buttons
         Gtk::Button btn_blue, btn_red, btn_green, btn_white;
-        Gtk::Button btn_speed_1, btn_speed_2, btn_speed_4, btn_speed_8;
+        Gtk::Button btn_speed;
         Gtk::Button btn_start, btn_pause, btn_step, btn_restart;
         Gtk::Button btn_generate, btn_rule_editor;
-        Gtk::Button btn_import, btn_export, btn_settings;
+        Gtk::Button btn_settings;
 
         // State (UI-only)
         SimSpeed current_speed = SimSpeed::X1;
-        CellColor current_color = CellColor::Blue;
+        CellColor current_color = CellColor::White;
 
         // Handlers
-        void on_start();
-        void on_pause();
-        void on_step();
-        void on_restart();
+        void on_start() const;
+        void on_pause() const;
+        void on_step() const;
+        void on_restart() const;
+        void on_speed_cycle();
         void on_generate();
         void on_rule_editor();
-        void on_import();
-        void on_export();
         void on_settings();
-        void on_speed(SimSpeed speed);
-        void on_color(CellColor color);
 
         // UI helpers
         void update_speed_ui();
