@@ -184,33 +184,4 @@ namespace app::window
         settings_panel->present();
     }
 
-    // ===== UI helpers =====
-
-    void Interface::update_speed_ui()
-    {
-    }
-
-    void Interface::update_color_ui()
-    {
-        btn_blue.remove_css_class("active");
-        btn_red.remove_css_class("active");
-        btn_green.remove_css_class("active");
-        btn_white.remove_css_class("active");
-
-        switch (current_color)
-        {
-        case CellColor::Blue: btn_blue.add_css_class("active");
-            break;
-        case CellColor::Red: btn_red.add_css_class("active");
-            break;
-        case CellColor::Green: btn_green.add_css_class("active");
-            break;
-        case CellColor::White: btn_white.add_css_class("active");
-            break;
-        }
-    }
-
-    void Interface::show_settings_dialog()
-    {
-    }
 }

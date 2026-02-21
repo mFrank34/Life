@@ -11,7 +11,7 @@ GeneratePanel::GeneratePanel(Gtk::Window& parent, Settings& settings)
 {
     set_transient_for(parent);
     set_modal(false);
-    set_title("Settings");
+    set_title("Generator");
     set_default_size(800, 600);
 
     content.set_margin(12);
