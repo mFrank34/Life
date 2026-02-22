@@ -31,7 +31,7 @@ public:
     Rule white = {2, 3, 3, 3};
     Rule blue = {3, 4, 5, 5};
     Rule green = {5, 6, 7, 7};
-    Rule red = {6, 7, 8, 8};
+    Rule red = {7, 7, 2, 2};
 };
 
 #endif // RULES_H

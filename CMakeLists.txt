@@ -31,17 +31,20 @@ add_library(LifeCore
         src/threading/Scheduler.cpp
 
         src/utility/Logger.cpp
+
         src/app/window/panels/SettingPanel.cpp
         src/app/window/panels/SettingPanel.h
         src/app/window/panels/GeneratePanel.cpp
         src/app/window/panels/GeneratePanel.h
         src/app/window/panels/RulePanel.cpp
         src/app/window/panels/RulePanel.h
+        src/profiler/ProfileStats.h
 )
 
 target_include_directories(LifeCore
         PUBLIC
         ${CMAKE_SOURCE_DIR}/src
+        ${CMAKE_SOURCE_DIR}/include
 )
 
 # GTK is REQUIRED by LifeCore
