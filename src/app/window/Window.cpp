@@ -24,6 +24,7 @@ Window::Window()
         16
     );
 
+    Logger::info("Project Life Initialized");
     initialize();
 }
 
