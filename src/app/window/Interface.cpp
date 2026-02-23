@@ -170,6 +170,8 @@ namespace app::window
                 return;
 
             rule_panel = std::make_unique<RulePanel>(*window, settings);
+            // ensure transient is set after parent is realized
+            rule_panel->set_transient_for(*window);
         }
         rule_panel->present();
     }

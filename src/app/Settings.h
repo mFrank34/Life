@@ -8,6 +8,7 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+#include "rules/Rules.h"
 #include "world/structure/Cell.h"
 
 enum class StorageType
@@ -23,6 +24,7 @@ public:
 
     // Simulation
     int tick_rate = 60;
+    Rules rules;
 
     // Display
     bool show_grid = true;
