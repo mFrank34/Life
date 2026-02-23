@@ -21,7 +21,7 @@ public:
     ~RulePanel() = default;
 
 private:
-    void build_grid(
+    static void build_grid(
         Gtk::Grid& grid,
         std::array<Gtk::SpinButton, 4>& cells
     );
@@ -32,14 +32,14 @@ private:
         int row_index
     );
 
-    void load_row(
+    static void load_row(
         const Rule& rule,
         std::array<Gtk::SpinButton, 4>& cells
     );
 
     void load_rules();
 
-    void save_row(
+    static void save_row(
         Rule& rule,
         std::array<Gtk::SpinButton, 4>& cells
     );
