@@ -6,8 +6,10 @@
 
 #include "Simulation.h"
 
-Simulation::Simulation(Scheduler& scheduler)
-    : manager(rules, scheduler)
+#include "app/Settings.h"
+
+Simulation::Simulation(Scheduler& scheduler, Settings& settings)
+    : manager(settings.rules, scheduler)
 {
 }
 
@@ -28,7 +30,8 @@ void Simulation::tick(float delta)
     if (accumulator >= step_interval)
     {
         manager.update();
-        accumulator -= step_interval; // subtract rather than reset to avoid drift
+        // subtract rather than reset to avoid drift
+        accumulator -= step_interval;
     }
 }
 

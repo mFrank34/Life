@@ -7,13 +7,14 @@
 #ifndef SIMULATION_H
 #define SIMULATION_H
 
+#include "app/Settings.h"
 #include "world/Manager.h"
 #include "world/World.h"
 
 class Simulation
 {
 public:
-    Simulation(Scheduler& scheduler);
+    Simulation(Scheduler& scheduler, Settings& settings);
     ~Simulation() = default;
 
     void attach_world(World& world);

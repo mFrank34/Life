@@ -29,9 +29,9 @@ class Rules
 {
 public:
     Rule white = {2, 3, 3, 3};
-    Rule blue = {3, 4, 5, 5};
-    Rule green = {5, 6, 7, 7};
-    Rule red = {7, 7, 2, 2};
+    Rule blue = {3, 4, 4, 4};
+    Rule green = {4, 5, 5, 5};
+    Rule red = {5, 6, 6, 6};
 };
 
 #endif // RULES_H
