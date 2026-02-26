@@ -1,5 +1,5 @@
 /*
- * File: Sparse.h
+* File: Sparse.h
  * Author: Michael Franks
  * Description:
  */
@@ -8,25 +8,23 @@
 #ifndef SPARSE_H
 #define SPARSE_H
 
-#include <unordered_map>
-
 #include "world/World.h"
-#include "world/structure/Chunk.h"
-#include "world/structure/Cell.h"
+#include <shared_mutex>
 
-class Sparse final : public World
+class Sparse : public World
 {
 public:
     Sparse(int size);
 
-    // unloads chunks in memory by removing them.
-    void unload() override;
-    void clear_world() override;
-
-    // get world entities
-    Cell& get_cell(int gx, int gy) override;
+    Cell&  get_cell(int gx, int gy) override;
     Chunk& get_chunk(int gx, int gy) override;
     Chunk& get_chunk(long long key) override;
+
+    void unload()      override;
+    void clear_world() override;
+
+private:
+    mutable std::shared_mutex chunk_mtx;
 };
 
 #endif
