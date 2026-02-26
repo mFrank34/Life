@@ -17,6 +17,7 @@ void Simulation::attach_world(World& world)
 {
     this->world = &world;
     manager.attach_world(world);
+    generator.attach_world(world);
 }
 
 
@@ -63,6 +64,8 @@ void Simulation::set_speed(float generations_per_second)
 
 void Simulation::generate(GeneratorRequest request)
 {
+    pause();
+    generator.GenerateRequest(request);
 }
 
 bool Simulation::isRunning() const
