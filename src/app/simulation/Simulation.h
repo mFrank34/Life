@@ -39,6 +39,7 @@ private:
 
     Rules rules;
     Manager manager;
+    Generator generator;
 
     bool running = true;
 

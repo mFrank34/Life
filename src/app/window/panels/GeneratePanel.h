@@ -17,14 +17,16 @@
 #include <gtkmm/label.h>
 #include <gtkmm/spinbutton.h>
 
+#include "app/simulation/Simulation.h"
+
 class GeneratePanel : public Gtk::Dialog
 {
 public:
-    GeneratePanel(Gtk::Window& parent, Settings& settings);
-    ~GeneratePanel() = default;
+    GeneratePanel(Gtk::Window& parent, Settings& settings, Simulation& simulation);
 
 private:
     Settings& settings;
+    Simulation& simulation;
     Gtk::Box content{Gtk::Orientation::VERTICAL};
 
     Gtk::Grid grid;

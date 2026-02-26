@@ -1,14 +1,15 @@
 /*
  * File: GeneratePanel.cpp
  * Author: Michael Franks
- * Description: system to generate random patten across a multable chunks
+ * Description: system to generate random patten across a multiple chunks
  */
 
 #include "GeneratePanel.h"
 
-GeneratePanel::GeneratePanel(Gtk::Window& parent, Settings& settings)
+GeneratePanel::GeneratePanel(Gtk::Window& parent, Settings& settings, Simulation& simulation)
     : Gtk::Dialog("Generator", parent)
       , settings(settings)
+      , simulation(simulation)
 {
     set_transient_for(parent);
     set_modal(true);
@@ -102,6 +103,6 @@ void GeneratePanel::on_generate_clicked()
     request.use_blue = blue_cb.get_active();
     request.use_green = green_cb.get_active();
 
-
+    simulation.generate(request);
     hide();
 }

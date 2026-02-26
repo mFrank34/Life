@@ -8,6 +8,9 @@
 #define GENERATOR_H
 #include <string>
 
+#include "World.h"
+#include "threading/Scheduler.h"
+
 
 /**
  * Request for generator
@@ -27,8 +30,13 @@ struct GeneratorRequest
 class Generator
 {
 public:
+    Generator(Scheduler& scheduler);
+
+    void attach_world(World& world);
 
 private:
+    World* world = nullptr;
+    Scheduler& scheduler;
 };
 
 
