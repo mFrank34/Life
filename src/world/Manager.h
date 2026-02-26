@@ -21,6 +21,9 @@ private:
     Scheduler& scheduler;
     Rules& rules;
 
+    std::atomic<bool> updating{false};
+    std::function<void()> on_complete;
+
     static constexpr int CHUNK_OFF_SET = 2;
 
     /* Thread-safe result accumulation */
@@ -89,9 +92,7 @@ private:
         int size; // chunk size at capture time
     };
 
-    /* ------------------------------------------------------------------ */
     /*  Internal helpers (all called on the main thread before scheduling) */
-    /* ------------------------------------------------------------------ */
 
     /**
      * Returns Neighbour descriptors for the 8 surrounding chunks.

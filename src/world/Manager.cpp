@@ -231,86 +231,92 @@ void Manager::attach_world(World& world)
 
 void Manager::update()
 {
+    // Don't start a new tick if the previous one hasn't finished
+    if (updating.load()) return;
+    updating = true;
+
     auto& world_data = world->get_world();
-    auto& next_step = world->get_stepped_world();
 
     /* --- Phase 0: ensure all neighbour chunks exist --- */
     {
         std::vector<long long> to_create;
 
         for (auto& [key, chunk] : world_data)
-        {
             for (long long nkey : world->get_neighbour_key(key))
                 if (!world_data.contains(nkey))
                     to_create.push_back(nkey);
-        }
 
         for (long long key : to_create)
             world->get_chunk(key);
     }
 
-    /* --- Phase 0.5: collect all work on the main thread ---
-     *  find_neighbor / get_edge_case both touch the World.  We do this
-     *  entirely before any threads are spawned so that:
-     *    • no concurrent mutation of world_data can occur, and
-     *    • the ChunkWork values passed to threads own their data outright.
-     */
-    const int size = world->get_size(); // snapshot once
+    /* --- Phase 0.5: collect all work on the main thread --- */
+    const int size = world->get_size();
 
-    std::vector<ChunkWork> work_items;
-    work_items.reserve(world_data.size());
+    auto work_items = std::make_shared<std::vector<ChunkWork>>();
+    work_items->reserve(world_data.size());
 
     for (auto& [key, chunk] : world_data)
     {
+        // Skip empty chunks — they can't change
+        if (!chunk.is_populated()) continue;
+
         auto neighbour_keys = world->get_neighbour_key(key);
         auto neighbours = find_neighbour(neighbour_keys, world_data);
         auto neighbour_cells = get_edge_case(neighbours, size);
 
-        work_items.push_back({
-            key,
-            chunk, // copy (snapshot)
-            std::move(neighbour_cells),
-            size
-        });
+        work_items->push_back({key, chunk, std::move(neighbour_cells), size});
     }
 
-    /* --- Phase 1: parallel update — threads touch no shared state --- */
-    results.reserve(work_items.size());
+    if (work_items->empty())
+    {
+        updating = false;
+        return;
+    }
 
-    for (auto& work : work_items)
+    /* --- Phase 1: parallel update — no shared state in hot path --- */
+    auto results = std::make_shared<std::vector<std::pair<long long, Chunk>>>();
+    auto results_mtx = std::make_shared<std::mutex>();
+    auto remaining = std::make_shared<std::atomic<int>>((int)work_items->size());
+    auto world_ptr = world;
+
+    results->reserve(work_items->size());
+
+    for (auto& work : *work_items)
     {
         scheduler.enqueue_grouped(
-            // Capture work by value so each lambda is fully self-contained.
-            [this, work = std::move(work)]() mutable
+            [this, work = std::move(work), results, results_mtx, remaining, world_ptr]() mutable
             {
-                Chunk new_chunk =
-                    chunk_update(
-                        build_halo(
-                            work.chunk_copy,
-                            work.neighbour_cells,
-                            work.size
-                        ),
-                        work.size
-                    );
+                Chunk new_chunk = chunk_update(
+                    build_halo(work.chunk_copy, work.neighbour_cells, work.size),
+                    work.size
+                );
 
                 {
-                    std::lock_guard<std::mutex> lock(result_mtx);
-                    results.emplace_back(work.key, std::move(new_chunk));
+                    std::lock_guard lock(*results_mtx);
+                    results->emplace_back(work.key, std::move(new_chunk));
+                }
+
+                // Last thread to finish commits results and swaps — main thread never blocks
+                if (remaining->fetch_sub(1) == 1)
+                {
+                    {
+                        std::lock_guard lock(*results_mtx);
+                        auto& next_step = world_ptr->get_stepped_world();
+                        for (auto& [key, chunk] : *results)
+                            next_step.insert_or_assign(key, std::move(chunk));
+                    }
+
+                    {
+                        std::unique_lock lock(world_ptr->world_mtx);
+                        world_ptr->swap_world();
+                        world_ptr->unload();
+                    }
+
+                    updating = false;
                 }
             }
         );
     }
-
-    /* --- Phase 1.1: wait for all workers --- */
-    scheduler.wait_for_group();
-
-    /* --- Phase 1.2: commit thread results --- */
-    for (auto& [key, chunk] : results)
-        next_step.insert_or_assign(key, std::move(chunk));
-
-    results.clear();
-
-    /* --- Phase 2: swap and unload --- */
-    world->swap_world();
-    world->unload();
+    // No wait_for_group() — returns immediately, UI stays responsive
 }
