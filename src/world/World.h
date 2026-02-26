@@ -11,6 +11,7 @@
 #include <unordered_map>
 #include <array>
 #include <memory>
+#include <shared_mutex>
 #include <string>
 
 #include "world/structure/Chunk.h"
@@ -46,10 +47,14 @@ public:
     // tick system
     virtual void tick(float delta);
 
+    mutable std::shared_mutex world_mtx;
+
 protected:
     const int CHUNK_SIZE;
     const std::string TYPE;
     static constexpr int KEY_LENGTH = 32;
+
+
 
     /* Shared World state */
     std::unordered_map<long long, Chunk> world;

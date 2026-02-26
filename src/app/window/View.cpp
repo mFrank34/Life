@@ -84,6 +84,8 @@ void View::on_draw(
     int height
 ) const
 {
+    std::shared_lock lock(world->world_mtx);
+
     cr->scale(zoom, zoom);
     cr->translate(-camera_x, -camera_y);
 
@@ -94,23 +96,25 @@ void View::on_draw(
 
     auto& data = world->get_world();
 
+    // Batch rectangles per color to minimize Cairo state changes and fill calls
+    struct RGBA
+    {
+        double r, g, b, a;
+    };
+    std::unordered_map<uint8_t, std::vector<std::tuple<float, float, float, float>>> batches;
+
     for (const auto& [key, chunk] : data)
     {
-        int chunk_size_px =
-            chunk.get_size() * cell_size;
+        int chunk_size_px = chunk.get_size() * cell_size;
+        int chunk_x_px = chunk.get_CX() * chunk_size_px;
+        int chunk_y_px = chunk.get_CY() * chunk_size_px;
 
-        int chunk_x_px =
-            chunk.get_CX() * chunk_size_px;
-        int chunk_y_px =
-            chunk.get_CY() * chunk_size_px;
-
+        // Chunk-level frustum cull
         if (chunk_x_px + chunk_size_px < view_left ||
             chunk_x_px > view_right ||
             chunk_y_px + chunk_size_px < view_top ||
             chunk_y_px > view_bottom)
-        {
             continue;
-        }
 
         bool even = ((chunk.get_CX() + chunk.get_CY()) % 2 == 0);
 
@@ -118,54 +122,38 @@ void View::on_draw(
         {
             for (int cx = 0; cx < chunk.get_size(); cx++)
             {
+                // Use chunk directly — no map lookup
+                const Cell& cell = chunk.get_cell(cx, cy);
+
                 int wx = chunk.get_CX() * chunk.get_size() + cx;
                 int wy = chunk.get_CY() * chunk.get_size() + cy;
 
                 float cell_x = wx * cell_size;
                 float cell_y = wy * cell_size;
 
-                if (cell_x + cell_size < view_left ||
-                    cell_x > view_right ||
-                    cell_y + cell_size < view_top ||
-                    cell_y > view_bottom)
-                {
-                    continue;
-                }
-
-                CellType type = world->get_cell(wx, wy).get_type();
-                switch (type)
-                {
-                case CellType::White:
-                    cr->set_source_rgba(1.0, 1.0, 1.0, 1.0);
-                    break;
-
-                case CellType::Green:
-                    cr->set_source_rgba(0.2, 0.8, 0.2, 1.0);
-                    break;
-
-                case CellType::Blue:
-                    cr->set_source_rgba(0.2, 0.4, 0.9, 1.0);
-                    break;
-
-                case CellType::Red:
-                    cr->set_source_rgba(0.9, 0.2, 0.2, 1.0);
-                    break;
-
-                default:
-                    cr->set_source_rgba(
-                        even ? 0.8 : 0.4,
-                        0.4,
-                        even ? 0.4 : 0.8,
-                        1.0
-                    );
-                    break;
-                }
-
-                cr->rectangle(cell_x, cell_y, cell_size, cell_size);
-                cr->fill();
+                // Batch by cell type
+                uint8_t type = static_cast<uint8_t>(cell.get_type());
+                batches[type].emplace_back(cell_x, cell_y, cell_size, cell_size);
             }
         }
     }
+
+    // Draw each color batch in one pass
+    auto draw_batch = [&](uint8_t type, double r, double g, double b, double a)
+    {
+        auto it = batches.find(type);
+        if (it == batches.end()) return;
+
+        cr->set_source_rgba(r, g, b, a);
+        for (auto& [x, y, w, h] : it->second)
+            cr->rectangle(x, y, w, h);
+        cr->fill();
+    };
+
+    draw_batch(static_cast<uint8_t>(CellType::White), 1.0, 1.0, 1.0, 1.0);
+    draw_batch(static_cast<uint8_t>(CellType::Blue), 0.2, 0.4, 0.9, 1.0);
+    draw_batch(static_cast<uint8_t>(CellType::Green), 0.2, 0.8, 0.2, 1.0);
+    draw_batch(static_cast<uint8_t>(CellType::Red), 0.9, 0.2, 0.2, 1.0);
 
     create_Grid(cr, width, height, 1);
 }
