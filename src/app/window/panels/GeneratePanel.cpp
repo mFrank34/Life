@@ -96,7 +96,7 @@ void GeneratePanel::on_generate_clicked()
 {
     GeneratorRequest request;
     request.seed = seed_entry.get_text();
-    request.radius = radius_spin.get_numeric();
+    request.radius = (int)radius_spin.get_value();
 
     request.use_white = white_cb.get_active();
     request.use_red = red_cb.get_active();
