@@ -25,9 +25,9 @@ struct GeneratorRequest
     int radius = 0; // optional radius; default will be half world size
 
     bool use_white = false;
-    bool use_red   = false;
+    bool use_red = false;
     bool use_green = false;
-    bool use_blue  = false;
+    bool use_blue = false;
 };
 
 class Generator

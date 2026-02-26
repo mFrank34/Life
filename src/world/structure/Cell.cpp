@@ -1,63 +1,30 @@
 /*
- * File: Cell.cpp
+* File: Cell.cpp
  * Author: Michael Franks
  * Description:
  */
 
 #include "Cell.h"
 
-// constructor
-Cell::Cell() : type(CellType::Empty), alive(false)
+Cell::Cell() : type(static_cast<uint8_t>(CellType::Empty))
 {
-};
+}
 
-Cell::Cell(CellType type) : type(type)
+Cell::Cell(CellType t) : type(static_cast<uint8_t>(t))
 {
-    update_cell();
-};
+}
 
 CellType Cell::get_type() const
 {
-    // returns the type of current cell
-    return type;
-};
+    return static_cast<CellType>(type);
+}
 
 bool Cell::is_alive() const
 {
-    // sends back the alive type
-    return alive;
-};
-
-void Cell::set_type(CellType new_type)
-{
-    // setting the type of alive
-    this->type = new_type;
-    update_cell();
+    return type != static_cast<uint8_t>(CellType::Empty);
 }
 
-void Cell::set_alive(const bool is_alive)
+void Cell::set_type(CellType t)
 {
-    // setting the alive state
-    this->alive = is_alive;
-}
-
-void Cell::update_cell()
-{
-    switch (static_cast<CellType>(type))
-    {
-    case CellType::Empty:
-        alive = false;
-        break;
-
-    case CellType::White:
-    case CellType::Green:
-    case CellType::Blue:
-    case CellType::Red:
-        alive = true;
-        break;
-
-    default:
-        alive = false;
-        break;
-    }
+    type = static_cast<uint8_t>(t);
 }
