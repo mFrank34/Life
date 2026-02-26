@@ -1,7 +1,7 @@
 /*
  * File: ProfileStats
  * Author: Michael Franks 
- * Description: a block of data for capturing application data
+ * Description: a block of data for capturing application performance at runtime
  */
 
 #ifndef PROFILE_STATS_H

@@ -39,6 +39,8 @@ add_library(LifeCore
         src/app/window/panels/RulePanel.cpp
         src/app/window/panels/RulePanel.h
         src/profiler/ProfileStats.h
+        src/world/Generator.cpp
+        src/world/Generator.h
 )
 
 target_include_directories(LifeCore

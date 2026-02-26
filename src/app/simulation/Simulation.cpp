@@ -5,7 +5,6 @@
  */
 
 #include "Simulation.h"
-
 #include "app/Settings.h"
 
 Simulation::Simulation(Scheduler& scheduler, Settings& settings)
@@ -59,6 +58,10 @@ void Simulation::clear()
 void Simulation::set_speed(float generations_per_second)
 {
     step_interval = 1.0f / generations_per_second;
+}
+
+void Simulation::generate(GeneratorRequest request)
+{
 }
 
 bool Simulation::isRunning() const
