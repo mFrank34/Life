@@ -156,7 +156,7 @@ namespace app::window
             auto* window = dynamic_cast<Gtk::Window*>(get_root());
             if (!window)
                 return;
-            generate_panel = std::make_unique<GeneratePanel>(*window, settings);
+            generate_panel = std::make_unique<GeneratePanel>(*window, settings, simulation);
         }
         generate_panel->present();
     }

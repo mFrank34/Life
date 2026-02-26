@@ -8,7 +8,8 @@
 #include "app/Settings.h"
 
 Simulation::Simulation(Scheduler& scheduler, Settings& settings)
-    : manager(settings.rules, scheduler)
+    : manager(settings.rules, scheduler),
+      generator(scheduler)
 {
 }
 
