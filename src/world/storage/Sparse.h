@@ -16,11 +16,11 @@ class Sparse : public World
 public:
     Sparse(int size);
 
-    Cell&  get_cell(int gx, int gy) override;
+    Cell& get_cell(int gx, int gy) override;
     Chunk& get_chunk(int gx, int gy) override;
     Chunk& get_chunk(long long key) override;
 
-    void unload()      override;
+    void unload() override;
     void clear_world() override;
 
 private:
