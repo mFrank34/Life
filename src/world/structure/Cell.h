@@ -1,5 +1,5 @@
 /*
- * File: Cell.h
+* File: Cell.h
  * Author: Michael Franks
  * Description: cell entry
  */
@@ -8,15 +8,16 @@
 #ifndef CELL_H
 #define CELL_H
 
-enum class CellType
+#include <cstdint>
+
+enum class CellType : uint8_t
 {
     Blue, Red, Green, White, Empty
 };
 
 class Cell
 {
-    CellType type;
-    bool alive;
+    uint8_t type;
 
 public:
     Cell();
@@ -25,8 +26,6 @@ public:
     CellType get_type() const;
     bool is_alive() const;
     void set_type(CellType type);
-    void set_alive(bool is_alive);
-    void update_cell();
     ~Cell() = default;
 };
 
