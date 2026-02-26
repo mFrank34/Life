@@ -8,6 +8,7 @@
 #define SIMULATION_H
 
 #include "app/Settings.h"
+#include "world/Generator.h"
 #include "world/Manager.h"
 #include "world/World.h"
 
@@ -27,6 +28,8 @@ public:
     void clear();
 
     void set_speed(float generations_per_second);
+
+    void generate(GeneratorRequest request);
 
     bool isRunning() const;
 
