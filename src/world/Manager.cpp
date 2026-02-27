@@ -258,8 +258,21 @@ void Manager::update()
 
     for (auto& [key, chunk] : world_data)
     {
-        // Skip empty chunks — they can't change
-        if (!chunk.is_populated()) continue;
+        // Skip chunks with no alive cells AND no populated neighbours
+        if (!chunk.is_populated())
+        {
+            bool has_populated_neighbour = false;
+            for (long long nkey : world->get_neighbour_key(key))
+            {
+                auto it = world_data.find(nkey);
+                if (it != world_data.end() && it->second.is_populated())
+                {
+                    has_populated_neighbour = true;
+                    break;
+                }
+            }
+            if (!has_populated_neighbour) continue;
+        }
 
         auto neighbour_keys = world->get_neighbour_key(key);
         auto neighbours = find_neighbour(neighbour_keys, world_data);
@@ -296,15 +309,23 @@ void Manager::update()
                     std::lock_guard lock(*results_mtx);
                     results->emplace_back(work.key, std::move(new_chunk));
                 }
-
-                // Last thread to finish commits results and swaps — main thread never blocks
+                // Last thread to finish commits results and swaps
                 if (remaining->fetch_sub(1) == 1)
                 {
                     {
                         std::lock_guard lock(*results_mtx);
                         auto& next_step = world_ptr->get_stepped_world();
+
+                        // Commit updated chunks
                         for (auto& [key, chunk] : *results)
                             next_step.insert_or_assign(key, std::move(chunk));
+
+                        // Carry over any chunks that were skipped (empty, not processed)
+                        // so they don't vanish after the swap
+                        auto& world_data = world_ptr->get_world();
+                        for (auto& [key, chunk] : world_data)
+                            if (!next_step.contains(key))
+                                next_step.insert_or_assign(key, chunk);
                     }
 
                     {
@@ -318,5 +339,4 @@ void Manager::update()
             }
         );
     }
-    // No wait_for_group() — returns immediately, UI stays responsive
 }
