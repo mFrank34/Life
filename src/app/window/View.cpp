@@ -97,10 +97,6 @@ void View::on_draw(
     auto& data = world->get_world();
 
     // Batch rectangles per color to minimize Cairo state changes and fill calls
-    struct RGBA
-    {
-        double r, g, b, a;
-    };
     std::unordered_map<uint8_t, std::vector<std::tuple<float, float, float, float>>> batches;
 
     for (const auto& [key, chunk] : data)
@@ -116,13 +112,10 @@ void View::on_draw(
             chunk_y_px > view_bottom)
             continue;
 
-        bool even = ((chunk.get_CX() + chunk.get_CY()) % 2 == 0);
-
         for (int cy = 0; cy < chunk.get_size(); cy++)
         {
             for (int cx = 0; cx < chunk.get_size(); cx++)
             {
-                // Use chunk directly — no map lookup
                 const Cell& cell = chunk.get_cell(cx, cy);
 
                 int wx = chunk.get_CX() * chunk.get_size() + cx;
@@ -131,7 +124,6 @@ void View::on_draw(
                 float cell_x = wx * cell_size;
                 float cell_y = wy * cell_size;
 
-                // Batch by cell type
                 uint8_t type = static_cast<uint8_t>(cell.get_type());
                 batches[type].emplace_back(cell_x, cell_y, cell_size, cell_size);
             }
@@ -155,6 +147,44 @@ void View::on_draw(
     draw_batch(static_cast<uint8_t>(CellType::Green), 0.2, 0.8, 0.2, 1.0);
     draw_batch(static_cast<uint8_t>(CellType::Red), 0.9, 0.2, 0.2, 1.0);
 
+    // Chunk debug overlay
+    if (true)
+    {
+        cr->set_line_width(2.0 / zoom);
+
+        for (const auto& [key, chunk] : data)
+        {
+            int chunk_size_px = chunk.get_size() * cell_size;
+            int chunk_x_px = chunk.get_CX() * chunk_size_px;
+            int chunk_y_px = chunk.get_CY() * chunk_size_px;
+
+            if (chunk_x_px + chunk_size_px < view_left ||
+                chunk_x_px > view_right ||
+                chunk_y_px + chunk_size_px < view_top ||
+                chunk_y_px > view_bottom)
+                continue;
+
+            // Yellow border
+            cr->set_source_rgba(1.0, 1.0, 0.0, 0.6);
+            cr->rectangle(chunk_x_px, chunk_y_px, chunk_size_px, chunk_size_px);
+            cr->stroke();
+
+            // Coordinate label
+            if (zoom > 0.3)
+            {
+                cr->set_source_rgba(1.0, 1.0, 0.0, 1.0);
+                cr->set_font_size(8.0 / zoom);
+                cr->move_to(chunk_x_px + 2.0 / zoom, chunk_y_px + 10.0 / zoom);
+
+                std::string label =
+                    "(" + std::to_string(chunk.get_CX()) +
+                    "," + std::to_string(chunk.get_CY()) + ")";
+
+                cr->show_text(label);
+            }
+        }
+    }
+
     create_Grid(cr, width, height, 1);
 }
 
@@ -164,8 +194,9 @@ void View::on_click(int, double mx, double my)
     double world_x = camera_x + mx / zoom;
     double world_y = camera_y + my / zoom;
 
-    int cx = world_x / cell_size;
-    int cy = world_y / cell_size;
+    // floor instead of truncate — correct for negative coordinates
+    int cx = static_cast<int>(std::floor(world_x / cell_size));
+    int cy = static_cast<int>(std::floor(world_y / cell_size));
 
     auto& cell = world->get_cell(cx, cy);
 
@@ -176,7 +207,6 @@ void View::on_click(int, double mx, double my)
 
     queue_draw();
 }
-
 
 void View::on_release(int, double, double)
 {

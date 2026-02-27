@@ -55,7 +55,6 @@ protected:
     static constexpr int KEY_LENGTH = 32;
 
 
-
     /* Shared World state */
     std::unordered_map<long long, Chunk> world;
     std::unordered_map<long long, Chunk> step;
