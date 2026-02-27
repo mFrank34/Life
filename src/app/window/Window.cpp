@@ -30,7 +30,7 @@ Window::Window()
 
 void Window::initialize()
 {
-    world = std::make_unique<Sparse>(32);
+    world = std::make_unique<Cache>(16, 64);
     view = std::make_unique<View>(*world, simulation, settings);
 
     simulation.attach_world(*world);

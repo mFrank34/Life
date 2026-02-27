@@ -37,6 +37,7 @@ private:
 
     // chunk store
     std::unordered_map<long long, Chunk*> active;
+    mutable std::mutex cache_mtx;
 };
 
 #endif

@@ -1,10 +1,12 @@
 /*
- * File: Unordered.cpp
+* File: Unordered.cpp
  * Author: Michael Franks
  * Description:
  */
 
 #include "Unordered.h"
+
+#include <mutex>
 #include <unordered_map>
 #include <vector>
 
@@ -13,9 +15,9 @@ Unordered::Unordered()
 {
 }
 
-
 void Unordered::unload()
 {
+    std::unique_lock lock(world_mtx);
     std::erase_if(world, [](auto& pair)
     {
         return !pair.second.is_populated();
@@ -24,42 +26,49 @@ void Unordered::unload()
 
 void Unordered::clear_world()
 {
+    std::unique_lock lock(world_mtx);
     world.clear();
 }
 
 Cell& Unordered::get_cell(const int global_x, const int global_y)
 {
     Chunk& chunk = get_chunk(global_x, global_y);
-    // Convert to local coordinates
-    const int local_x = chunk.get_LX(global_x);
-    const int local_y = chunk.get_LY(global_y);
-    // hand over cell in vector
-    return chunk.get_cell(local_x, local_y);
+
+    std::shared_lock lock(world_mtx);
+    return chunk.get_cell(
+        chunk.get_LX(global_x),
+        chunk.get_LY(global_y)
+    );
 }
 
 Chunk& Unordered::get_chunk(const int gx, const int gy)
 {
     const int cx = floor_div(gx, CHUNK_SIZE);
     const int cy = floor_div(gy, CHUNK_SIZE);
-    const long long key = generate_key(cx, cy);
-    return get_chunk(key);
+    return get_chunk(generate_key(cx, cy));
 }
 
 Chunk& Unordered::get_chunk(const long long key)
 {
-    // Fast path: already exists
-    if (auto it = world.find(key); it != world.end())
+    // Fast path — shared lock for existing chunk
+    {
+        std::shared_lock lock(world_mtx);
+        auto it = world.find(key);
+        if (it != world.end())
+            return it->second;
+    }
+
+    // Slow path — exclusive lock for insertion
+    std::unique_lock lock(world_mtx);
+
+    // Check again in case another thread inserted while we waited
+    auto it = world.find(key);
+    if (it != world.end())
         return it->second;
 
-    // Decode chunk coordinates
     auto [cx, cy] = decode_key(key);
+    auto [w_it, _] = world.try_emplace(key, cx, cy, CHUNK_SIZE);
+    // Don't pre-create in step — let the update system handle it
 
-    // Create in current world
-    auto [it, inserted] =
-        world.try_emplace(key, cx, cy, CHUNK_SIZE);
-
-    // Mirror creation in next world
-    step.try_emplace(key, cx, cy, CHUNK_SIZE);
-
-    return it->second;
+    return w_it->second;
 }
