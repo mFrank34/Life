@@ -331,8 +331,8 @@ void Manager::update()
                     {
                         std::unique_lock lock(world_ptr->world_mtx);
                         world_ptr->swap_world();
-                        world_ptr->unload();
                     }
+                    world_ptr->unload();
 
                     updating = false;
                 }

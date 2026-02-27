@@ -11,8 +11,8 @@ SettingPanel::SettingPanel(Gtk::Window& parent, Settings& settings)
 {
     set_transient_for(parent);
     set_modal(false);
+    set_resizable(false);
     set_title("Settings");
-    set_default_size(800, 600);
 
     content.set_margin(12);
     content.set_spacing(12);
