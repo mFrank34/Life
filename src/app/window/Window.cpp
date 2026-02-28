@@ -5,7 +5,7 @@
  */
 
 #include "Window.h"
-#include "app/Settings.h"
+#include "app/Global.h"
 
 #include "app/window/Interface.h"
 #include "world/storage/Cache.h"

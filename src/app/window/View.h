@@ -13,7 +13,7 @@
 #include <gtkmm/eventcontrollerscroll.h>
 #include <gtkmm/eventcontrollermotion.h>
 
-#include "app/Settings.h"
+#include "app/Global.h"
 #include "app/simulation/Simulation.h"
 
 class World;
@@ -21,12 +21,12 @@ class World;
 class View : public Gtk::DrawingArea
 {
 public:
-    View(World& world, Simulation& simulation, Settings& settings);
+    View(World& world, Simulation& simulation, Global& settings);
 
 private:
     World* world;
     Simulation& simulation;
-    Settings& settings;
+    Global& settings;
 
     int cell_size = 16;
 

@@ -16,7 +16,7 @@ enum class StorageType
     Sparse, Cache, Unordered
 };
 
-class Settings
+class Global
 {
 public:
     // World configuration

@@ -6,7 +6,7 @@
 
 #include "GeneratePanel.h"
 
-GeneratePanel::GeneratePanel(Gtk::Window& parent, Settings& settings, Simulation& simulation)
+GeneratePanel::GeneratePanel(Gtk::Window& parent, Global& settings, Simulation& simulation)
     : Gtk::Dialog("Generator", parent)
       , settings(settings)
       , simulation(simulation)

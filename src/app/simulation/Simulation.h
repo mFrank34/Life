@@ -7,7 +7,7 @@
 #ifndef SIMULATION_H
 #define SIMULATION_H
 
-#include "app/Settings.h"
+#include "app/Global.h"
 #include "world/Generator.h"
 #include "world/Manager.h"
 #include "world/World.h"
@@ -15,7 +15,7 @@
 class Simulation
 {
 public:
-    Simulation(Scheduler& scheduler, Settings& settings);
+    Simulation(Scheduler& scheduler, Global& settings);
     ~Simulation() = default;
 
     void attach_world(World& world);

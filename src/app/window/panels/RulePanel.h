@@ -12,12 +12,12 @@
 #include <gtkmm/label.h>
 #include <gtkmm/spinbutton.h>
 
-#include "app/Settings.h"
+#include "app/Global.h"
 
 class RulePanel : public Gtk::Dialog
 {
 public:
-    RulePanel(Gtk::Window& parent, Settings& settings);
+    RulePanel(Gtk::Window& parent, Global& settings);
     ~RulePanel() = default;
 
 private:
@@ -46,7 +46,7 @@ private:
 
     void apply_rules();
 
-    Settings& settings;
+    Global& settings;
     Gtk::Box content{Gtk::Orientation::VERTICAL};
     Gtk::Box rules{Gtk::Orientation::VERTICAL, 12};
     Gtk::Grid grid;

@@ -9,7 +9,7 @@
 
 namespace app::window
 {
-    Interface::Interface(View& view, Settings& settings, Simulation& simulation)
+    Interface::Interface(View& view, Global& settings, Simulation& simulation)
         : Gtk::Box(Gtk::Orientation::VERTICAL)
           , settings(settings)
           , simulation(simulation)
