@@ -9,6 +9,7 @@
 #include <vector>
 #include <atomic>
 
+#include "profiler/Profiler.h"
 #include "utility/Logger.h"
 
 class Scheduler
@@ -37,7 +38,17 @@ public:
 
         enqueue([this, task = std::forward<F>(task)]() mutable
         {
+            auto start = std::chrono::high_resolution_clock::now();
+
             task();
+
+            auto end = std::chrono::high_resolution_clock::now();
+            double ms = std::chrono::duration<double, std::milli>(end - start).count();
+
+            // Get a stable numeric thread ID
+            static std::atomic<int> counter{0};
+            thread_local int tid = counter++;
+            Perf::Profiler::get().record_task(tid, ms);
 
             if (group_tasks.fetch_sub(1, std::memory_order_acq_rel) == 1)
             {

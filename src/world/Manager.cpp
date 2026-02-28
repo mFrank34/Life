@@ -15,6 +15,7 @@
 
 #include <algorithm>
 
+#include "profiler/Profiler.h"
 #include "rules/Rules.h"
 #include "world/World.h"
 #include "world/structure/Chunk.h"
@@ -235,6 +236,8 @@ void Manager::update()
     if (updating.load()) return;
     updating = true;
 
+    Perf::Profiler::get().begin_update();
+
     auto& world_data = world->get_world();
 
     /* --- Phase 0: ensure all neighbour chunks exist --- */
@@ -332,7 +335,15 @@ void Manager::update()
                         std::unique_lock lock(world_ptr->world_mtx);
                         world_ptr->swap_world();
                     }
+
                     world_ptr->unload();
+
+                    // Record profiler stats
+                    Perf::Profiler::get().end_update();
+                    auto& wd = world_ptr->get_world();
+                    int chunk_size = world_ptr->get_size();
+                    unsigned long mem = wd.size() * chunk_size * chunk_size * sizeof(uint8_t);
+                    Perf::Profiler::get().record((int)wd.size(), mem);
 
                     updating = false;
                 }
