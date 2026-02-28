@@ -13,6 +13,7 @@
 
 #include "app/Settings.h"
 #include "app/simulation/Simulation.h"
+#include "profiler/Profiler.h"
 #include "world/World.h"
 #include "world/structure/Chunk.h"
 
@@ -84,6 +85,7 @@ void View::on_draw(
     int height
 ) const
 {
+    Perf::Profiler::get().begin_render();
     std::shared_lock lock(world->world_mtx);
 
     cr->scale(zoom, zoom);
@@ -128,6 +130,7 @@ void View::on_draw(
                 batches[type].emplace_back(cell_x, cell_y, cell_size, cell_size);
             }
         }
+        Perf::Profiler::get().end_render();
     }
 
     // Draw each color batch in one pass
