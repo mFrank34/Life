@@ -12,7 +12,7 @@
 
 #include "app/window/Interface.h"
 #include "world/World.h"
-#include "app/Settings.h"
+#include "app/Global.h"
 #include "app/simulation/Simulation.h"
 #include "threading/Scheduler.h"
 
@@ -25,7 +25,7 @@ private:
     void initialize();
     bool on_tick();
 
-    Settings settings;
+    Global settings;
     Scheduler scheduler = Scheduler(std::thread::hardware_concurrency());
     Simulation simulation = Simulation(scheduler, settings);
 

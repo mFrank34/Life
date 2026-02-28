@@ -10,7 +10,7 @@
 #include <gtkmm.h>
 
 #include "View.h"
-#include "app/Settings.h"
+#include "app/Global.h"
 #include "app/simulation/Simulation.h"
 #include "panels/GeneratePanel.h"
 #include "panels/RulePanel.h"
@@ -28,12 +28,12 @@ namespace app::window
     class Interface : public Gtk::Box
     {
     public:
-        Interface(View& view, Settings& settings, Simulation& simulation);
+        Interface(View& view, Global& settings, Simulation& simulation);
 
     private:
         // References (non-owning)
         View& view;
-        Settings& settings;
+        Global& settings;
         Simulation& simulation;
 
         // Layout

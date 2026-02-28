@@ -7,17 +7,17 @@
 #ifndef SETTING_PANEL_H
 #define SETTING_PANEL_H
 
-#include "app/Settings.h"
+#include "app/Global.h"
 #include <gtkmm/dialog.h>
 
 class SettingPanel : public Gtk::Dialog
 {
 public:
-    SettingPanel(Gtk::Window& parent, Settings& settings);
+    SettingPanel(Gtk::Window& parent, Global& settings);
     ~SettingPanel() = default;
 
 private:
-    Settings& settings;
+    Global& settings;
     Gtk::Box content{Gtk::Orientation::VERTICAL};
 };
 

@@ -8,7 +8,7 @@
 
 #include "rules/Rules.h"
 
-RulePanel::RulePanel(Gtk::Window& parent, Settings& settings)
+RulePanel::RulePanel(Gtk::Window& parent, Global& settings)
     : Gtk::Dialog("Rule Editor", parent)
       , settings(settings)
 {

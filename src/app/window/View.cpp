@@ -11,13 +11,13 @@
 #include <cmath>
 #include <giomm/settings.h>
 
-#include "app/Settings.h"
+#include "app/Global.h"
 #include "app/simulation/Simulation.h"
 #include "profiler/Profiler.h"
 #include "world/World.h"
 #include "world/structure/Chunk.h"
 
-View::View(World& world, Simulation& simulation, Settings& settings)
+View::View(World& world, Simulation& simulation, Global& settings)
     : world(&world), simulation(simulation), settings(settings)
 {
     set_hexpand(true);

@@ -10,7 +10,7 @@
 #include "world/Generator.h"
 
 #include <gtkmm/checkbutton.h>
-#include "app/Settings.h"
+#include "app/Global.h"
 #include <gtkmm/dialog.h>
 #include <gtkmm/entry.h>
 #include <gtkmm/grid.h>
@@ -22,10 +22,10 @@
 class GeneratePanel : public Gtk::Dialog
 {
 public:
-    GeneratePanel(Gtk::Window& parent, Settings& settings, Simulation& simulation);
+    GeneratePanel(Gtk::Window& parent, Global& settings, Simulation& simulation);
 
 private:
-    Settings& settings;
+    Global& settings;
     Simulation& simulation;
     Gtk::Box content{Gtk::Orientation::VERTICAL};
 

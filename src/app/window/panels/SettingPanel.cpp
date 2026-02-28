@@ -6,7 +6,7 @@
 
 #include "SettingPanel.h"
 
-SettingPanel::SettingPanel(Gtk::Window& parent, Settings& settings)
+SettingPanel::SettingPanel(Gtk::Window& parent, Global& settings)
     : settings(settings)
 {
     set_transient_for(parent);

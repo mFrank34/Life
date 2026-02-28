@@ -5,9 +5,9 @@
  */
 
 #include "Simulation.h"
-#include "app/Settings.h"
+#include "app/Global.h"
 
-Simulation::Simulation(Scheduler& scheduler, Settings& settings)
+Simulation::Simulation(Scheduler& scheduler, Global& settings)
     : manager(settings.rules, scheduler),
       generator(scheduler)
 {
