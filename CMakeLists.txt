@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project(Life LANGUAGES CXX)
+project(Life VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -7,7 +7,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 option(BUILD_TESTS "Build tests" ON)
 
-# GTKMM 4 (must come before targets that use it)
+# GTKMM 4
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GTKMM REQUIRED IMPORTED_TARGET gtkmm-4.0)
 
@@ -50,7 +50,6 @@ target_include_directories(LifeCore
         ${CMAKE_SOURCE_DIR}/include
 )
 
-# GTK is REQUIRED by LifeCore
 target_link_libraries(LifeCore
         PUBLIC PkgConfig::GTKMM
 )
@@ -64,12 +63,12 @@ target_link_libraries(Life
         PRIVATE LifeCore
 )
 
-
-# Resources
-file(COPY
-        ${CMAKE_SOURCE_DIR}/src/resources
-        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
-)
+# Strip binary in Release
+if (CMAKE_BUILD_TYPE STREQUAL "Release")
+    add_custom_command(TARGET Life POST_BUILD
+            COMMAND ${CMAKE_STRIP} $<TARGET_FILE:Life>
+    )
+endif ()
 
 # Tests
 if (BUILD_TESTS)
@@ -79,14 +78,7 @@ if (BUILD_TESTS)
 endif ()
 
 # Install
-install(TARGETS Life
-        RUNTIME DESTINATION bin
-)
-
-install(DIRECTORY src/resources
-        DESTINATION share/Life
-)
-
+install(TARGETS Life RUNTIME DESTINATION bin)
 
 # Packaging
 include(InstallRequiredSystemLibraries)
@@ -95,16 +87,20 @@ set(CPACK_PACKAGE_NAME "Life")
 set(CPACK_PACKAGE_VENDOR "Frank")
 set(CPACK_PACKAGE_CONTACT "mffranks34@gmail.com")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Life GTK4 Application")
-set(CPACK_PACKAGE_VERSION "1.0.0")
+set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
+set(CPACK_PACKAGING_INSTALL_PREFIX "/usr")
 
 set(CPACK_RPM_PACKAGE_LICENSE "MIT")
 set(CPACK_RPM_PACKAGE_GROUP "Applications")
-set(CPACK_RPM_PACKAGE_REQUIRES "gtkmm4")
+set(CPACK_RPM_PACKAGE_REQUIRES "gtkmm4.0")
 
-set(CPACK_PACKAGING_INSTALL_PREFIX "/usr")
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libgtkmm-4.0-1")
+set(CPACK_DEBIAN_PACKAGE_SECTION "games")
 
 if (WIN32)
     set(CPACK_GENERATOR "ZIP")
+elseif (EXISTS "/etc/debian_version")
+    set(CPACK_GENERATOR "DEB")
 else ()
     set(CPACK_GENERATOR "RPM")
 endif ()
