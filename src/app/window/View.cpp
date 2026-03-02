@@ -287,7 +287,7 @@ void View::create_Grid(
     int start_y = std::floor(top / step) * step;
     int end_y = std::ceil(bottom / step) * step;
 
-    cr->set_source_rgba(83, 83, 83, 0.5);
+    cr->set_source_rgba(0.3, 0.3, 0.3, 0.4);
     cr->set_line_width(1.0 / zoom);
 
     for (int x = start_x; x <= end_x; x += step)
