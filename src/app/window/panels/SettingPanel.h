@@ -9,18 +9,14 @@
 #define SETTINGPANEL_H
 
 #include <gtkmm.h>
-#include <functional>
+#include <thread>
 
-#include "app/Global.h"
-#include "app/simulation/Simulation.h"
+class Global;
+class Simulation;
 
 class SettingPanel : public Gtk::Dialog
 {
 public:
-    // Callbacks
-    std::function<void(const std::string& type, int chunk_size)> on_world_changed;
-    std::function<void()> on_benchmark_start;
-
     SettingPanel(Gtk::Window& parent, Global& settings, Simulation& simulation);
 
 private:
@@ -40,6 +36,10 @@ private:
     // Chunk size
     Gtk::Label chunk_label{"Chunk Size"};
     Gtk::SpinButton chunk_spin;
+
+    // Debug overlay
+    Gtk::Label debug_label{"Debug Overlay"};
+    Gtk::Switch debug_switch;
 
     // Buttons
     Gtk::Box button_box{Gtk::Orientation::HORIZONTAL};

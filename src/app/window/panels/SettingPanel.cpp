@@ -52,6 +52,19 @@ SettingPanel::SettingPanel(Gtk::Window& parent, Global& settings, Simulation& si
     grid.attach(chunk_label, 0, 1);
     grid.attach(chunk_spin, 1, 1);
 
+    // ---- Debug overlay toggle ----
+    debug_label.set_xalign(0.0f);
+    debug_switch.set_active(settings.debug);
+    debug_switch.set_halign(Gtk::Align::START);
+
+    debug_switch.property_active().signal_changed().connect([this]()
+    {
+        this->settings.debug = debug_switch.get_active();
+    });
+
+    grid.attach(debug_label, 0, 2);
+    grid.attach(debug_switch, 1, 2);
+
     // ---- Buttons ----
     apply_button.set_hexpand(true);
     apply_button.signal_clicked().connect(
@@ -88,7 +101,10 @@ void SettingPanel::on_apply_clicked()
     std::string type = selected ? selected->get_string() : "Sparse";
     int chunk_size = (int)chunk_spin.get_value();
 
-    // Swap world via Global
+    simulation.pause();
+    while (simulation.is_updating())
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
     if (type == "Sparse")
         settings.set_world(std::make_unique<Sparse>(chunk_size));
     else if (type == "Cache")
@@ -109,12 +125,10 @@ void SettingPanel::on_benchmark_clicked()
     std::string type = selected ? selected->get_string() : "Sparse";
     int chunk_size = (int)chunk_spin.get_value();
 
-    // Pause and wait for any in-progress update to finish before swapping
     simulation.pause();
     while (simulation.is_updating())
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
-    // Swap world
     if (type == "Sparse")
         settings.set_world(std::make_unique<Sparse>(chunk_size));
     else if (type == "Cache")
