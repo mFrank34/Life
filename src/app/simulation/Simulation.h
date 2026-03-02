@@ -12,13 +12,17 @@
 #include "world/Manager.h"
 #include "world/World.h"
 
+class View;
+
 class Simulation
 {
 public:
-    Simulation(Scheduler& scheduler, Global& settings);
+    Simulation(Scheduler& scheduler, Global& global);
     ~Simulation() = default;
 
     void attach_world(World& world);
+    void attach_view(View& view);
+
     void tick(float delta);
 
     void start();
@@ -33,13 +37,17 @@ public:
 
     bool isRunning() const;
 
+    void set_world(World* world);
+
 private:
     World* world = nullptr;
     Scheduler* scheduler = nullptr;
+    View* view = nullptr;
 
     Rules rules;
     Manager manager;
     Generator generator;
+
 
     bool running = true;
 

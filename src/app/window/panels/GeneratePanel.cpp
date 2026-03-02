@@ -58,7 +58,7 @@ GeneratePanel::GeneratePanel(Gtk::Window& parent, Global& settings, Simulation& 
     // ---- Radius ----
     radius_label.set_xalign(0.0f);
 
-    radius_spin.set_range(1, 512);
+    radius_spin.set_range(1, 128);
     radius_spin.set_increments(1, 5);
     radius_spin.set_digits(0);
     radius_spin.set_numeric(true);

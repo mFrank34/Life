@@ -9,8 +9,7 @@
 
 #include "app/window/Interface.h"
 #include "world/storage/Cache.h"
-#include "world/storage/Sparse.h"
-#include "world/storage/Unordered.h"
+
 
 using namespace app::window;
 
@@ -30,12 +29,18 @@ Window::Window()
 
 void Window::initialize()
 {
-    world = std::make_unique<Cache>(16, 64);
-    view = std::make_unique<View>(*world, simulation, settings);
+    // 1. Set up world first
+    settings.set_world(std::make_unique<Cache>(32, 64));
 
-    simulation.attach_world(*world);
+    // 2. Create view before simulation since simulation needs it
+    view = std::make_unique<View>(*settings.get_world(), simulation, settings);
+
+    // 3. Attach world and view to simulation
+    simulation.attach_world(*settings.get_world());
+    simulation.attach_view(*view);
     simulation.start();
 
+    // 4. Build UI
     interface = std::make_unique<app::window::Interface>(*view, settings, simulation);
     set_child(*interface);
 }

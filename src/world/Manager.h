@@ -147,6 +147,9 @@ public:
      * Advances the world by one generation.
      */
     void update();
+
+
+    bool is_updating();
 };
 
 #endif

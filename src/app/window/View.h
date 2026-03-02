@@ -7,21 +7,22 @@
 #ifndef VIEW_H
 #define VIEW_H
 
-#include <giomm/settings.h>
 #include <gtkmm/drawingarea.h>
 #include <gtkmm/gestureclick.h>
 #include <gtkmm/eventcontrollerscroll.h>
 #include <gtkmm/eventcontrollermotion.h>
 
 #include "app/Global.h"
-#include "app/simulation/Simulation.h"
 
 class World;
+class Simulation;
 
 class View : public Gtk::DrawingArea
 {
 public:
     View(World& world, Simulation& simulation, Global& settings);
+
+    void attach_world(World& world);
 
 private:
     World* world;

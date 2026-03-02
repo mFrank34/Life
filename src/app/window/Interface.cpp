@@ -184,7 +184,7 @@ namespace app::window
             if (!window)
                 return;
 
-            settings_panel = std::make_unique<SettingPanel>(*window, settings);
+            settings_panel = std::make_unique<SettingPanel>(*window, settings, simulation);
         }
         settings_panel->present();
     }

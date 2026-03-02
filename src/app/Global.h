@@ -1,5 +1,5 @@
 /*
- * File: Settings.h
+* File: Settings.h
  * Author: Michael Franks
  * Description: settings for application
  */
@@ -8,19 +8,26 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+#include <memory>
 #include "rules/Rules.h"
 #include "world/structure/Cell.h"
-
-enum class StorageType
-{
-    Sparse, Cache, Unordered
-};
+#include "world/World.h"
 
 class Global
 {
 public:
-    // World configuration
-    StorageType storage_type = StorageType::Sparse;
+    // World
+    std::unique_ptr<World> world;
+
+    void set_world(std::unique_ptr<World> new_world)
+    {
+        world = std::move(new_world);
+    }
+
+    World* get_world() const
+    {
+        return world.get();
+    }
 
     // Simulation
     int tick_rate = 60;

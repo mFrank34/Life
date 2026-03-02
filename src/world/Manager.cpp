@@ -351,3 +351,8 @@ void Manager::update()
         );
     }
 }
+
+bool Manager::is_updating()
+{
+    return updating;
+}

@@ -300,3 +300,8 @@ void View::create_Grid(
 
     cr->stroke();
 }
+
+void View::attach_world(World& world)
+{
+    this->world = &world;
+}

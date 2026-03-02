@@ -6,9 +6,10 @@
 
 #include "Simulation.h"
 #include "app/Global.h"
+#include "app/window/View.h"
 
-Simulation::Simulation(Scheduler& scheduler, Global& settings)
-    : manager(settings.rules, scheduler),
+Simulation::Simulation(Scheduler& scheduler, Global& global)
+    : manager(global.rules, scheduler),
       generator(scheduler)
 {
 }
@@ -18,6 +19,12 @@ void Simulation::attach_world(World& world)
     this->world = &world;
     manager.attach_world(world);
     generator.attach_world(world);
+    if (view) view->attach_world(world);
+}
+
+void Simulation::attach_view(View& view)
+{
+    this->view = &view;
 }
 
 
@@ -71,4 +78,16 @@ void Simulation::generate(GeneratorRequest request)
 bool Simulation::isRunning() const
 {
     return running;
+}
+
+void Simulation::set_world(World* new_world)
+{
+    pause();
+
+    // Wait for any in-progress update to finish
+    while (manager.is_updating())
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+
+    world = new_world;
+    attach_world(*world);
 }
