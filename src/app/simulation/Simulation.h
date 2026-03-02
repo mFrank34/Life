@@ -41,7 +41,8 @@ public:
 
     void start_benchmark(
         GeneratorRequest& request,
-        const std::string& output_path = "profile.json"
+        const std::string& output_path,
+        bool record_tasks
     );
 
     bool is_benchmarking() const { return benchmarking; }
@@ -66,6 +67,7 @@ private:
     bool benchmarking = false;
     float benchmark_elapsed = 0.0f;
     float benchmark_duration = 120.0f; // 2 minutes
+    std::chrono::high_resolution_clock::time_point benchmark_start;
     std::string benchmark_output = "profile.json";
 };
 

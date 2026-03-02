@@ -18,7 +18,7 @@ Sparse::Sparse(const int size)
 
 void Sparse::unload()
 {
-    std::unique_lock lock(chunk_mtx);
+    std::unique_lock lock(world_mtx);
     std::erase_if(world, [](auto& pair)
     {
         return !pair.second.is_populated();
@@ -27,7 +27,7 @@ void Sparse::unload()
 
 void Sparse::clear_world()
 {
-    std::unique_lock lock(chunk_mtx);
+    std::unique_lock lock(world_mtx);
     world.clear();
 }
 
@@ -36,7 +36,7 @@ Cell& Sparse::get_cell(const int gx, const int gy)
     Chunk& chunk = get_chunk(gx, gy);
 
     // Shared lock for reading cell — multiple threads can read simultaneously
-    std::shared_lock lock(chunk_mtx);
+    std::shared_lock lock(world_mtx);
     return chunk.get_cell(
         chunk.get_LX(gx),
         chunk.get_LY(gy)
@@ -54,14 +54,14 @@ Chunk& Sparse::get_chunk(const long long key)
 {
     // Fast path — shared lock for existing chunk
     {
-        std::shared_lock lock(chunk_mtx);
+        std::shared_lock lock(world_mtx);
         auto it = world.find(key);
         if (it != world.end())
             return it->second;
     }
 
     // Slow path — exclusive lock for insertion
-    std::unique_lock lock(chunk_mtx);
+    std::unique_lock lock(world_mtx);
 
     // Check again in case another thread inserted while we waited
     auto it = world.find(key);

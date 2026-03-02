@@ -31,15 +31,30 @@ void Simulation::tick(float delta)
 {
     if (!world) return;
 
-    // Benchmark timing
     if (benchmarking)
     {
-        benchmark_elapsed += delta;
+        auto now = std::chrono::high_resolution_clock::now();
+        benchmark_elapsed = std::chrono::duration<float>(
+            now - benchmark_start
+        ).count();
+
         if (benchmark_elapsed >= benchmark_duration)
         {
             benchmarking = false;
             pause();
+
+            Perf::Profiler::get().stop_recording();
+
+            while (manager.is_updating())
+                std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
             Perf::Profiler::get().dump(benchmark_output);
+            Perf::Profiler::get().set_record_tasks(true); // reset for next run
+            Perf::Profiler::get().start_recording();
+
+            world->clear_world();
+            Logger::info("benchmark complete — saved to " + benchmark_output);
+
             return;
         }
     }
@@ -105,15 +120,21 @@ void Simulation::set_world(World* new_world)
     attach_world(*world);
 }
 
-void Simulation::start_benchmark(GeneratorRequest& request, const std::string& output_path)
+void Simulation::start_benchmark(GeneratorRequest& request, const std::string& output_path, bool record_tasks)
 {
     benchmark_output = output_path;
     benchmark_elapsed = 0.0f;
-    benchmarking = true;
+    benchmarking = false;
 
-    // Generate initial pattern then start
+    Perf::Profiler::get().clear();
+    Perf::Profiler::get().set_record_tasks(record_tasks); // false for Unordered
+
+    if (world) world->clear_world();
+
     generator.GenerateRequest(request, [this]()
     {
+        benchmark_start = std::chrono::high_resolution_clock::now();
+        benchmarking = true;
         start();
     });
 }

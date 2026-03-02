@@ -140,14 +140,16 @@ void SettingPanel::on_benchmark_clicked()
 
     GeneratorRequest request;
     request.seed = "benchmark";
-    request.radius = 64;
+    request.radius = 8;
     request.use_white = true;
     request.use_red = true;
     request.use_blue = true;
     request.use_green = true;
 
     std::string filename = "profile_" + type + ".json";
-    simulation.start_benchmark(request, filename);
+
+    bool record_tasks = (type != "Unordered");
+    simulation.start_benchmark(request, filename, record_tasks);
 
     hide();
 }

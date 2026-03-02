@@ -8,6 +8,7 @@
 #ifndef PROFILER_H
 #define PROFILER_H
 
+#include <atomic>
 #include <chrono>
 #include <mutex>
 #include <string>
@@ -80,7 +81,6 @@ namespace Perf
          */
         void record(int total_chunks, unsigned long memory_bytes);
 
-
         /**
          * collects data from a thread
          * @param thread_id name of thread
@@ -88,11 +88,19 @@ namespace Perf
          */
         void record_task(int thread_id, double duration_ms);
 
+        void stop_recording();
+
+        void start_recording();
+
+        void set_record_tasks(bool value);
+
         /**
          * dump data to a json for analysis
          * @param path location where that needs to be stored
          */
         void dump(const std::string& path);
+
+        void clear();
 
     private:
         Profiler() = default;
@@ -105,6 +113,9 @@ namespace Perf
 
         std::chrono::high_resolution_clock::time_point update_start;
         std::chrono::high_resolution_clock::time_point render_start;
+
+        std::atomic<bool> recording{true};
+        std::atomic<bool> record_tasks_enabled{true};
 
         double last_update_ms = 0.0;
         double last_render_ms = 0.0;

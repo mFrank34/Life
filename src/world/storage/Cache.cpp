@@ -43,7 +43,8 @@ void Cache::clear_world()
 
 Cell& Cache::get_cell(const int gx, const int gy)
 {
-    Chunk& chunk = get_cached_chunk(gx, gy);
+    // Bypass LRU cache for direct cell access — use get_chunk directly
+    Chunk& chunk = get_chunk(gx, gy);
 
     std::shared_lock lock(world_mtx);
     return chunk.get_cell(
