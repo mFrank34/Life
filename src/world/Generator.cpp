@@ -35,7 +35,7 @@ static uint32_t makeSeed(const std::string& str)
 
 // ---------------- Generator Implementation ----------------
 
-void Generator::GenerateRequest(GeneratorRequest& request)
+void Generator::GenerateRequest(GeneratorRequest& request, std::function<void()> on_complete)
 {
     if (!world) return;
 
@@ -44,7 +44,6 @@ void Generator::GenerateRequest(GeneratorRequest& request)
     long long radius = request.radius > 0 ? request.radius : 8;
     long long radiusInCells = radius * chunkSize;
 
-    // Scale spacing with radius so iteration count stays ~200k regardless of size
     int gridSpacing = std::max(8, (int)(radiusInCells / 512));
 
     struct ColorJob
@@ -59,10 +58,15 @@ void Generator::GenerateRequest(GeneratorRequest& request)
     if (request.use_green) jobs.push_back({"green", CellType::Green});
     if (request.use_blue) jobs.push_back({"blue", CellType::Blue});
 
-    if (jobs.empty()) return;
+    if (jobs.empty())
+    {
+        if (on_complete) on_complete();
+        return;
+    }
 
     auto world_ptr = world;
     auto seed = request.seed;
+    auto remaining = std::make_shared<std::atomic<int>>((int)jobs.size());
 
     for (auto& job : jobs)
     {
@@ -76,14 +80,11 @@ void Generator::GenerateRequest(GeneratorRequest& request)
             {
                 for (long long gy = -radiusInCells; gy <= radiusInCells; gy += gridSpacing)
                 {
-                    // Skip outside circle
                     if (gx * gx + gy * gy > radiusInCells * radiusInCells) continue;
 
-                    // Jitter cluster origin
                     long long cx = gx + jitter(rng);
                     long long cy = gy + jitter(rng);
 
-                    // Write 5 cells per cluster directly to world
                     for (int i = 0; i < 5; i++)
                     {
                         long long x = cx + clusterDist(rng);
@@ -92,6 +93,10 @@ void Generator::GenerateRequest(GeneratorRequest& request)
                     }
                 }
             }
+
+            // Last job to finish calls the callback
+            if (remaining->fetch_sub(1) == 1)
+                if (on_complete) on_complete();
         });
     }
 }

@@ -92,7 +92,7 @@ void SettingPanel::on_apply_clicked()
     if (type == "Sparse")
         settings.set_world(std::make_unique<Sparse>(chunk_size));
     else if (type == "Cache")
-        settings.set_world(std::make_unique<Cache>(chunk_size, 512));
+        settings.set_world(std::make_unique<Cache>(chunk_size, 256));
     else if (type == "Unordered")
         settings.set_world(std::make_unique<Unordered>());
 
@@ -107,26 +107,33 @@ void SettingPanel::on_benchmark_clicked()
     );
 
     std::string type = selected ? selected->get_string() : "Sparse";
-    int chunk_size = (int)chunk_spin.get_value();
+    int chunk_size   = (int)chunk_spin.get_value();
 
-    // Apply world first
+    // Pause and wait for any in-progress update to finish before swapping
+    simulation.pause();
+    while (simulation.is_updating())
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
+    // Swap world
     if (type == "Sparse")
         settings.set_world(std::make_unique<Sparse>(chunk_size));
     else if (type == "Cache")
-        settings.set_world(std::make_unique<Cache>(chunk_size, 64));
+        settings.set_world(std::make_unique<Cache>(chunk_size, 256));
     else if (type == "Unordered")
         settings.set_world(std::make_unique<Unordered>());
 
     simulation.attach_world(*settings.get_world());
-    simulation.start();
 
-    // Run for 2 minutes then dump profiler data
-    Glib::signal_timeout().connect([this, type]() -> bool
-    {
-        simulation.pause();
-        Perf::Profiler::get().dump("profile_" + type + ".json");
-        return false; // don't repeat
-    }, 2 * 60 * 1000);
+    GeneratorRequest request;
+    request.seed      = "benchmark";
+    request.radius    = 64;
+    request.use_white = true;
+    request.use_red   = true;
+    request.use_blue  = true;
+    request.use_green = true;
+
+    std::string filename = "profile_" + type + ".json";
+    simulation.start_benchmark(request, filename);
 
     hide();
 }

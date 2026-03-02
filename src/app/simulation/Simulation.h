@@ -39,6 +39,15 @@ public:
 
     void set_world(World* world);
 
+    void start_benchmark(
+        GeneratorRequest& request,
+        const std::string& output_path = "profile.json"
+    );
+
+    bool is_benchmarking() const { return benchmarking; }
+
+    bool is_updating();
+
 private:
     World* world = nullptr;
     Scheduler* scheduler = nullptr;
@@ -48,11 +57,16 @@ private:
     Manager manager;
     Generator generator;
 
-
     bool running = true;
 
     float accumulator = 0.0f;
     float step_interval = 0.1f;
+
+    // Benchmark
+    bool benchmarking = false;
+    float benchmark_elapsed = 0.0f;
+    float benchmark_duration = 120.0f; // 2 minutes
+    std::string benchmark_output = "profile.json";
 };
 
 #endif

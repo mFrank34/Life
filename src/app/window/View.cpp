@@ -85,6 +85,8 @@ void View::on_draw(
     int height
 ) const
 {
+    if (!world) return;
+
     Perf::Profiler::get().begin_render();
     std::shared_lock lock(world->world_mtx);
 
@@ -103,7 +105,7 @@ void View::on_draw(
 
     for (const auto& [key, chunk] : data)
     {
-        int chunk_size_px = chunk.get_size() * cell_size;
+        int chunk_size_px = world->get_size() * cell_size;
         int chunk_x_px = chunk.get_CX() * chunk_size_px;
         int chunk_y_px = chunk.get_CY() * chunk_size_px;
 

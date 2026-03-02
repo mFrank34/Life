@@ -22,7 +22,8 @@ struct Location
 struct GeneratorRequest
 {
     std::string seed;
-    int radius = 0; // optional radius; default will be half world size
+    int radius = 0;
+    int point_count = 0; // 0 = use default scaling
 
     bool use_white = false;
     bool use_red = false;
@@ -38,13 +39,11 @@ public:
     void attach_world(World& world);
 
     // Main entry point to generate points/colors in the world
-    void GenerateRequest(GeneratorRequest& request);
+    void GenerateRequest(GeneratorRequest& request, std::function<void()> on_complete = nullptr);
 
 private:
     World* world = nullptr;
     Scheduler& scheduler;
-
-    // Note: scatterInRadius is implemented as a static free function in cpp
 };
 
 #endif // GENERATOR_H

@@ -27,19 +27,32 @@ void Simulation::attach_view(View& view)
     this->view = &view;
 }
 
-
 void Simulation::tick(float delta)
 {
-    if (!this->isRunning() || !world)
-        return;
+    if (!world) return;
+
+    // Benchmark timing
+    if (benchmarking)
+    {
+        benchmark_elapsed += delta;
+        if (benchmark_elapsed >= benchmark_duration)
+        {
+            benchmarking = false;
+            pause();
+            Perf::Profiler::get().dump(benchmark_output);
+            return;
+        }
+    }
+
+    if (!isRunning()) return;
 
     accumulator += delta;
-
     if (accumulator >= step_interval)
     {
         manager.update();
-        // subtract rather than reset to avoid drift
         accumulator -= step_interval;
+        if (accumulator > step_interval)
+            accumulator = 0.0f;
     }
 }
 
@@ -90,4 +103,22 @@ void Simulation::set_world(World* new_world)
 
     world = new_world;
     attach_world(*world);
+}
+
+void Simulation::start_benchmark(GeneratorRequest& request, const std::string& output_path)
+{
+    benchmark_output = output_path;
+    benchmark_elapsed = 0.0f;
+    benchmarking = true;
+
+    // Generate initial pattern then start
+    generator.GenerateRequest(request, [this]()
+    {
+        start();
+    });
+}
+
+bool Simulation::is_updating()
+{
+    return manager.is_updating();
 }
