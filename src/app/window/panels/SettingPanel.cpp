@@ -107,7 +107,7 @@ void SettingPanel::on_benchmark_clicked()
     );
 
     std::string type = selected ? selected->get_string() : "Sparse";
-    int chunk_size   = (int)chunk_spin.get_value();
+    int chunk_size = (int)chunk_spin.get_value();
 
     // Pause and wait for any in-progress update to finish before swapping
     simulation.pause();
@@ -125,11 +125,11 @@ void SettingPanel::on_benchmark_clicked()
     simulation.attach_world(*settings.get_world());
 
     GeneratorRequest request;
-    request.seed      = "benchmark";
-    request.radius    = 64;
+    request.seed = "benchmark";
+    request.radius = 64;
     request.use_white = true;
-    request.use_red   = true;
-    request.use_blue  = true;
+    request.use_red = true;
+    request.use_blue = true;
     request.use_green = true;
 
     std::string filename = "profile_" + type + ".json";

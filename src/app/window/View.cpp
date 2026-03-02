@@ -32,28 +32,23 @@ View::View(World& world, Simulation& simulation, Global& settings)
     click_controller->signal_pressed().connect(
         sigc::mem_fun(*this, &View::on_click)
     );
-
     click_controller->signal_released().connect(
         sigc::mem_fun(*this, &View::on_release)
     );
-
     add_controller(click_controller);
 
     // drag (RMB)
     auto drag = Gtk::GestureDrag::create();
     drag->set_button(3);
-
     drag->signal_drag_begin().connect(
         sigc::mem_fun(*this, &View::on_drag_begin)
     );
-
     drag->signal_drag_update().connect(
         sigc::mem_fun(*this, &View::on_drag_update)
     );
-
     add_controller(drag);
 
-    // motion (track mouse position — REQUIRED for GTK4 zoom)
+    // motion
     motion_controller = Gtk::EventControllerMotion::create();
     motion_controller->signal_motion().connect(
         [this](double x, double y)
@@ -62,21 +57,24 @@ View::View(World& world, Simulation& simulation, Global& settings)
             mouse_y = y;
         }
     );
-
     add_controller(motion_controller);
 
-    // scroll (zoom)
+    // scroll
     scroll_controller = Gtk::EventControllerScroll::create();
     scroll_controller->set_flags(
         Gtk::EventControllerScroll::Flags::VERTICAL
     );
-
     scroll_controller->signal_scroll().connect(
         sigc::mem_fun(*this, &View::on_scroll),
         false
     );
-
     add_controller(scroll_controller);
+}
+
+void View::attach_world(World& new_world)
+{
+    std::lock_guard lock(world_ptr_mtx);
+    world = &new_world;
 }
 
 void View::on_draw(
@@ -85,10 +83,16 @@ void View::on_draw(
     int height
 ) const
 {
-    if (!world) return;
+    // Safely read world pointer
+    World* w = nullptr;
+    {
+        std::lock_guard lock(world_ptr_mtx);
+        w = world;
+    }
+    if (!w) return;
 
     Perf::Profiler::get().begin_render();
-    std::shared_lock lock(world->world_mtx);
+    std::shared_lock lock(w->world_mtx);
 
     cr->scale(zoom, zoom);
     cr->translate(-camera_x, -camera_y);
@@ -98,18 +102,17 @@ void View::on_draw(
     float view_right = camera_x + (width / zoom);
     float view_bottom = camera_y + (height / zoom);
 
-    auto& data = world->get_world();
+    auto& data = w->get_world();
 
     // Batch rectangles per color to minimize Cairo state changes and fill calls
     std::unordered_map<uint8_t, std::vector<std::tuple<float, float, float, float>>> batches;
 
     for (const auto& [key, chunk] : data)
     {
-        int chunk_size_px = world->get_size() * cell_size;
+        int chunk_size_px = w->get_size() * cell_size;
         int chunk_x_px = chunk.get_CX() * chunk_size_px;
         int chunk_y_px = chunk.get_CY() * chunk_size_px;
 
-        // Chunk-level frustum cull
         if (chunk_x_px + chunk_size_px < view_left ||
             chunk_x_px > view_right ||
             chunk_y_px + chunk_size_px < view_top ||
@@ -132,7 +135,6 @@ void View::on_draw(
                 batches[type].emplace_back(cell_x, cell_y, cell_size, cell_size);
             }
         }
-        Perf::Profiler::get().end_render();
     }
 
     // Draw each color batch in one pass
@@ -142,8 +144,8 @@ void View::on_draw(
         if (it == batches.end()) return;
 
         cr->set_source_rgba(r, g, b, a);
-        for (auto& [x, y, w, h] : it->second)
-            cr->rectangle(x, y, w, h);
+        for (auto& [x, y, ww, h] : it->second)
+            cr->rectangle(x, y, ww, h);
         cr->fill();
     };
 
@@ -153,7 +155,7 @@ void View::on_draw(
     draw_batch(static_cast<uint8_t>(CellType::Red), 0.9, 0.2, 0.2, 1.0);
 
     // Chunk debug overlay
-    if (true)
+    if (settings.debug)
     {
         cr->set_line_width(2.0 / zoom);
 
@@ -169,12 +171,10 @@ void View::on_draw(
                 chunk_y_px > view_bottom)
                 continue;
 
-            // Yellow border
             cr->set_source_rgba(1.0, 1.0, 0.0, 0.6);
             cr->rectangle(chunk_x_px, chunk_y_px, chunk_size_px, chunk_size_px);
             cr->stroke();
 
-            // Coordinate label
             if (zoom > 0.3)
             {
                 cr->set_source_rgba(1.0, 1.0, 0.0, 1.0);
@@ -191,19 +191,26 @@ void View::on_draw(
     }
 
     create_Grid(cr, width, height, 1);
+    Perf::Profiler::get().end_render(); // end of full draw
 }
 
 void View::on_click(int, double mx, double my)
 {
+    World* w = nullptr;
+    {
+        std::lock_guard lock(world_ptr_mtx);
+        w = world;
+    }
+    if (!w) return;
+
     simulation.pause();
     double world_x = camera_x + mx / zoom;
     double world_y = camera_y + my / zoom;
 
-    // floor instead of truncate — correct for negative coordinates
     int cx = static_cast<int>(std::floor(world_x / cell_size));
     int cy = static_cast<int>(std::floor(world_y / cell_size));
 
-    auto& cell = world->get_cell(cx, cy);
+    auto& cell = w->get_cell(cx, cy);
 
     if (cell.get_type() == settings.colour)
         cell.set_type(CellType::Empty);
@@ -240,7 +247,6 @@ bool View::on_scroll(double, double dy)
 
 void View::zoom_at(double mx, double my, double dy)
 {
-    // TODO Fix the zoom limiting section and fix bug with placement of cells when moving zoom location
     double zoom_factor = std::pow(1.1, -dy);
     double new_zoom = std::clamp(zoom * zoom_factor, 0.2, 5.0);
 
@@ -257,7 +263,6 @@ void View::zoom_at(double mx, double my, double dy)
     queue_draw();
 }
 
-
 void View::create_Grid(
     const Cairo::RefPtr<Cairo::Context>& cr,
     int width,
@@ -265,11 +270,8 @@ void View::create_Grid(
     int size
 ) const
 {
-    // grid spacing in screen pixels
     double screen_step = (size * cell_size) * zoom;
 
-    // TODO remove the limit on grid when the zoom is fixed
-    // too small to be meaningful
     if (screen_step < 5.0)
         return;
 
@@ -301,9 +303,4 @@ void View::create_Grid(
     }
 
     cr->stroke();
-}
-
-void View::attach_world(World& world)
-{
-    this->world = &world;
 }

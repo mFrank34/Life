@@ -31,6 +31,8 @@ private:
 
     int cell_size = 16;
 
+    mutable std::mutex world_ptr_mtx;
+
     // camera (world space)
     double camera_x = 0.0;
     double camera_y = 0.0;
