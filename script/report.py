@@ -6,8 +6,8 @@ Description: Generates a PDF report with graphs and summary from profile JSON da
 
 Folder structure expected:
   output/
-    c32_r8/raw/profile_cache_c32_r8.json
-    c32_r8/raw/profile_sparse_c32_r8.json
+    c32_r8/profile_cache_c32_r8.json
+    c32_r8/profile_sparse_c32_r8.json
     ...
 
 Usage:
