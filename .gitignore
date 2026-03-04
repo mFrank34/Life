@@ -26,4 +26,4 @@ Life.exe
 Thumbs.db
 
 # Logs
-*.log
+*.logscript/raw/**/profile_*.json
