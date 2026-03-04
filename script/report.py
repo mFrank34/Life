@@ -20,6 +20,7 @@ import io
 import json
 import os
 import sys
+import re
 
 import matplotlib
 import numpy as np
@@ -88,11 +89,11 @@ def extract_world_type(path):
 
 
 def extract_config(path):
-    """Extract config label like c32_r8 from path."""
-    parts = Path(path).parts
-    for p in parts:
-        if p.startswith("c") and "_r" in p:
-            return p
+    """Extract config label like c32_r16 from path or filename."""
+    full = str(path)
+    match = re.search(r'c\d+_r\d+', full)
+    if match:
+        return match.group(0)
     return Path(path).stem
 
 
