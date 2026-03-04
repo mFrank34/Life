@@ -140,7 +140,7 @@ void SettingPanel::on_benchmark_clicked()
 
     GeneratorRequest request;
     request.seed = "benchmark";
-    request.radius = 8;
+    request.radius = 64;
     request.use_white = true;
     request.use_red = true;
     request.use_blue = true;
