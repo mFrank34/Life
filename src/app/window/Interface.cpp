@@ -115,6 +115,7 @@ namespace app::window
 
     void Interface::on_restart() const
     {
+        simulation.pause();
         simulation.clear();
         view.queue_draw();
     }
